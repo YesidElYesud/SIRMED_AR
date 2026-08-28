@@ -1,13 +1,15 @@
 {
   "dependencies": {
     "com.cesium.unity": "file:E:/acur9/Downloads/com.cesium.unity-1.25.0.tgz",
+    "com.febucci.custom-hierarchy": "https://github.com/acur97/unitypackage-custom-hierarchy.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.ide.visualstudio": "2.0.28",
+    "com.unity.mobile.android-logcat": "1.4.7",
     "com.unity.render-pipelines.universal": "17.5.0",
     "com.unity.ugui": "2.5.0",
     "com.unity.xr.arcore": "6.6.1",
     "com.unity.xr.arfoundation": "6.6.1",
-    "com.unity.xr.arkit": "6.5.0",
+    "com.unity.xr.arkit": "6.6.1",
     "com.unity.xr.management": "4.7.0",
     "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.adaptiveperformance": "1.0.0",

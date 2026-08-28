@@ -2,6 +2,7 @@
   <Project Path="Google.XR.ARCoreExtensions.Editor.csproj" />
   <Project Path="Google.XR.ARCoreExtensions.GeospatialCreator.Editor.csproj" />
   <Project Path="Google.XR.ARCoreExtensions.csproj" />
+  <Project Path="Febucci.HierarchyIcons.csproj" />
   <Project Path="Google.XR.ARCoreExtensions.GeospatialCreator.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />

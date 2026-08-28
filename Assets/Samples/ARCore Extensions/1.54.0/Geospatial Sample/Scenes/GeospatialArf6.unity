@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 569233391}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5091,15 +5091,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a097dd1babd4b4eaf864f1a4b1bddfe6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.7
+      value: -3249840.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a097dd1babd4b4eaf864f1a4b1bddfe6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1593.5
+      value: -7806771.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a097dd1babd4b4eaf864f1a4b1bddfe6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.5
+      value: 5279718
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a097dd1babd4b4eaf864f1a4b1bddfe6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5163,9 +5163,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 6.151275895622229
-  _longitude: -75.61098705657909
-  _altitude: 1614.500034184195
+  _latitude: 53.38812925389968
+  _longitude: 162.960793915884
+  _altitude: -5901.016634603962
   _altitudeType: 1
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0

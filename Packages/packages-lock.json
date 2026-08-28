@@ -11,6 +11,13 @@
         "com.unity.inputsystem": "1.4.2"
       }
     },
+    "com.febucci.custom-hierarchy": {
+      "version": "https://github.com/acur97/unitypackage-custom-hierarchy.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "e814856a0266f774af12c35ba210ba1372f8b39a"
+    },
     "com.google.ar.core.arfoundation.extensions": {
       "version": "file:com.google.ar.core.arfoundation.extensions",
       "depth": 0,
@@ -84,6 +91,13 @@
       "depth": 1,
       "source": "builtin",
       "dependencies": {}
+    },
+    "com.unity.mobile.android-logcat": {
+      "version": "1.4.7",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
     },
     "com.unity.nuget.mono-cecil": {
       "version": "1.11.6",
@@ -201,13 +215,13 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.arkit": {
-      "version": "6.5.0",
+      "version": "6.6.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.xr.core-utils": "2.2.2",
         "com.unity.xr.management": "4.4.0",
-        "com.unity.xr.arfoundation": "6.5.0",
+        "com.unity.xr.arfoundation": "6.6.1",
         "com.unity.editorcoroutines": "1.0.0"
       },
       "url": "https://packages.unity.com"
