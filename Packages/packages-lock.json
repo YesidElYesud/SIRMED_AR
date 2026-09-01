@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.cesium.unity": {
-      "version": "file:E:/acur9/Downloads/com.cesium.unity-1.25.0.tgz",
+      "version": "file:C:/Users/Yesud/Downloads/com.cesium.unity-1.25.0.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
