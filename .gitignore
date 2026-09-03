@@ -72,3 +72,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 CLAUDE.md
+/eso_BackUpThisFolder_ButDontShipItWithYourGame
+/Geospatial_Demo_BurstDebugInformation_DoNotShip
+eso-0.0.1-v1-IL2CPP.symbols.zip

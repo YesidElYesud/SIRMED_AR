@@ -48,6 +48,7 @@ namespace SIRMED.Geospatial
         public Text ExportSummaryText;
         public Button ShowExportButton;
         public Button CloseExportButton;
+        public Button CopyExportButton;
         public Button ClearAllButton;
 
         // Same thresholds used by the Geospatial sample: below these, EarthManager's pose is
@@ -68,6 +69,7 @@ namespace SIRMED.Geospatial
         private bool _enablingGeospatial;
         private float _configurePrepareTime = 3f;
         private IEnumerator _startLocationService;
+        private Coroutine _exportSummaryFlash;
 
         private string PersistentFilePath =>
             Path.Combine(Application.persistentDataPath, PersistentFileName);
@@ -96,6 +98,7 @@ namespace SIRMED.Geospatial
             ConfirmCancelButton.onClick.AddListener(OnConfirmCancelClicked);
             ShowExportButton.onClick.AddListener(OnShowExportClicked);
             CloseExportButton.onClick.AddListener(() => ExportPanel.SetActive(false));
+            CopyExportButton.onClick.AddListener(OnCopyExportClicked);
             ClearAllButton.onClick.AddListener(OnClearAllClicked);
 
             _isLocalizing = true;
@@ -208,14 +211,41 @@ namespace SIRMED.Geospatial
             _pendingPose = pose;
             _hasPendingCapture = true;
 
+            Debug.Log($"[HotspotDebug] Anchor created. trackingState={anchor.trackingState}, " +
+                $"worldPos={anchor.transform.position}, HotspotMarkerPrefab null={HotspotMarkerPrefab == null}");
+
             if (HotspotMarkerPrefab != null)
             {
-                Instantiate(HotspotMarkerPrefab, anchor.transform);
+                GameObject markerGO = Instantiate(HotspotMarkerPrefab, anchor.transform);
+                Debug.Log($"[HotspotDebug] Marker instantiated: name={markerGO.name}, " +
+                    $"activeInHierarchy={markerGO.activeInHierarchy}, " +
+                    $"worldPos={markerGO.transform.position}, localPos={markerGO.transform.localPosition}");
+                StartCoroutine(LogAnchorStateAfterDelay(anchor, markerGO));
             }
 
             ConfirmLabelInput.text = $"Hotspot {_records.Count + 1:00}";
             ConfirmDetailsText.text = FormatPose(pose);
             ConfirmPanel.SetActive(true);
+        }
+
+        private IEnumerator LogAnchorStateAfterDelay(ARGeospatialAnchor anchor, GameObject markerGO)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                yield return new WaitForSeconds(1f);
+                if (anchor == null)
+                {
+                    Debug.Log("[HotspotDebug] Anchor was destroyed before delayed check.");
+                    yield break;
+                }
+
+                Debug.Log($"[HotspotDebug] +{i + 1}s trackingState={anchor.trackingState}, " +
+                    $"anchorWorldPos={anchor.transform.position}, " +
+                    $"markerActive={(markerGO != null ? markerGO.activeInHierarchy.ToString() : "null")}, " +
+                    $"markerWorldPos={(markerGO != null ? markerGO.transform.position.ToString() : "null")}, " +
+                    $"cameraPos={Camera.main.transform.position}, " +
+                    $"distanceToCamera={(markerGO != null ? Vector3.Distance(markerGO.transform.position, Camera.main.transform.position).ToString("F2") : "n/a")}");
+            }
         }
 
         private void OnConfirmAcceptClicked()
@@ -272,6 +302,24 @@ namespace SIRMED.Geospatial
             ExportTextField.caretPosition = 0;
         }
 
+        private void OnCopyExportClicked()
+        {
+            GUIUtility.systemCopyBuffer = ExportTextField.text;
+            if (_exportSummaryFlash != null)
+            {
+                StopCoroutine(_exportSummaryFlash);
+            }
+
+            _exportSummaryFlash = StartCoroutine(FlashExportSummary("¡Copiado al portapapeles!"));
+        }
+
+        private IEnumerator FlashExportSummary(string message)
+        {
+            ExportSummaryText.text = message;
+            yield return new WaitForSeconds(1.5f);
+            RefreshExportSummary();
+        }
+
         private void OnClearAllClicked()
         {
             foreach (var anchorObject in _anchorObjects)
@@ -299,10 +347,18 @@ namespace SIRMED.Geospatial
         private string BuildExportText()
         {
             var sb = new StringBuilder();
-            sb.AppendLine("SIRMED_AR - Hotspot Survey Export");
+            sb.AppendLine("=== SIRMED_AR - Hotspot Survey ===");
             sb.AppendLine($"Generado: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
-            sb.AppendLine($"Total: {_records.Count}");
+            sb.AppendLine($"Total de hotspots: {_records.Count}");
             sb.AppendLine();
+
+            for (int i = 0; i < _records.Count; i++)
+            {
+                sb.AppendLine(_records[i].ToReadableBlock(i + 1));
+                sb.AppendLine();
+            }
+
+            sb.AppendLine("=== CSV (para pegar en Excel/Sheets) ===");
             sb.AppendLine(HotspotRecord.CsvHeader);
             foreach (var record in _records)
             {
