@@ -60,7 +60,7 @@ namespace SIRMED.Geospatial
         private readonly List<HotspotRecord> _records = new List<HotspotRecord>();
         private readonly List<GameObject> _anchorObjects = new List<GameObject>();
 
-        private ARAnchor _pendingAnchor;
+        private ARGeospatialAnchor _pendingAnchor;
         private GeospatialPose _pendingPose;
         private bool _hasPendingCapture;
 
