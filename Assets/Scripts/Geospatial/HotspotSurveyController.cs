@@ -299,10 +299,18 @@ namespace SIRMED.Geospatial
         private string BuildExportText()
         {
             var sb = new StringBuilder();
-            sb.AppendLine("SIRMED_AR - Hotspot Survey Export");
+            sb.AppendLine("=== SIRMED_AR - Hotspot Survey ===");
             sb.AppendLine($"Generado: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
-            sb.AppendLine($"Total: {_records.Count}");
+            sb.AppendLine($"Total de hotspots: {_records.Count}");
             sb.AppendLine();
+
+            for (int i = 0; i < _records.Count; i++)
+            {
+                sb.AppendLine(_records[i].ToReadableBlock(i + 1));
+                sb.AppendLine();
+            }
+
+            sb.AppendLine("=== CSV (para pegar en Excel/Sheets) ===");
             sb.AppendLine(HotspotRecord.CsvHeader);
             foreach (var record in _records)
             {

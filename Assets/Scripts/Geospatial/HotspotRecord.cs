@@ -38,5 +38,19 @@ namespace SIRMED.Geospatial
                 OrientationYawAccuracy.ToString("F1", culture),
                 CapturedAtUtc);
         }
+
+        public string ToReadableBlock(int index)
+        {
+            return
+                $"--- Hotspot {index:00} ---\n" +
+                $"Nombre: {Label}\n" +
+                $"Latitud: {Latitude.ToString("F6", CultureInfo.InvariantCulture)}°\n" +
+                $"Longitud: {Longitude.ToString("F6", CultureInfo.InvariantCulture)}°\n" +
+                $"Altitud: {Altitude.ToString("F2", CultureInfo.InvariantCulture)} m\n" +
+                $"Precisión horizontal: {HorizontalAccuracy.ToString("F2", CultureInfo.InvariantCulture)} m\n" +
+                $"Precisión vertical: {VerticalAccuracy.ToString("F2", CultureInfo.InvariantCulture)} m\n" +
+                $"Precisión de orientación (yaw): {OrientationYawAccuracy.ToString("F1", CultureInfo.InvariantCulture)}°\n" +
+                $"Capturado (UTC): {CapturedAtUtc}";
+        }
     }
 }
