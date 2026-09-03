@@ -48,6 +48,7 @@ namespace SIRMED.Geospatial
         public Text ExportSummaryText;
         public Button ShowExportButton;
         public Button CloseExportButton;
+        public Button CopyExportButton;
         public Button ClearAllButton;
 
         // Same thresholds used by the Geospatial sample: below these, EarthManager's pose is
@@ -68,6 +69,7 @@ namespace SIRMED.Geospatial
         private bool _enablingGeospatial;
         private float _configurePrepareTime = 3f;
         private IEnumerator _startLocationService;
+        private Coroutine _exportSummaryFlash;
 
         private string PersistentFilePath =>
             Path.Combine(Application.persistentDataPath, PersistentFileName);
@@ -96,6 +98,7 @@ namespace SIRMED.Geospatial
             ConfirmCancelButton.onClick.AddListener(OnConfirmCancelClicked);
             ShowExportButton.onClick.AddListener(OnShowExportClicked);
             CloseExportButton.onClick.AddListener(() => ExportPanel.SetActive(false));
+            CopyExportButton.onClick.AddListener(OnCopyExportClicked);
             ClearAllButton.onClick.AddListener(OnClearAllClicked);
 
             _isLocalizing = true;
@@ -270,6 +273,24 @@ namespace SIRMED.Geospatial
             ExportPanel.SetActive(true);
             ExportTextField.Select();
             ExportTextField.caretPosition = 0;
+        }
+
+        private void OnCopyExportClicked()
+        {
+            GUIUtility.systemCopyBuffer = ExportTextField.text;
+            if (_exportSummaryFlash != null)
+            {
+                StopCoroutine(_exportSummaryFlash);
+            }
+
+            _exportSummaryFlash = StartCoroutine(FlashExportSummary("¡Copiado al portapapeles!"));
+        }
+
+        private IEnumerator FlashExportSummary(string message)
+        {
+            ExportSummaryText.text = message;
+            yield return new WaitForSeconds(1.5f);
+            RefreshExportSummary();
         }
 
         private void OnClearAllClicked()
