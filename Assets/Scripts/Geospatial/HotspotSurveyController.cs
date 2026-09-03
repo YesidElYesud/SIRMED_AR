@@ -260,7 +260,6 @@ namespace SIRMED.Geospatial
             }
 
             _pendingAnchor = null;
-            _pendingMarker = null;
             _hasPendingCapture = false;
             ConfirmPanel.SetActive(false);
         }
