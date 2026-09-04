@@ -71,11 +71,6 @@ namespace SIRMED.Geospatial
         private IEnumerator _startLocationService;
         private Coroutine _exportSummaryFlash;
 
-        private ARGeospatialAnchor _debugAnchor;
-        private GameObject _debugMarker;
-        private float _debugUntilTime;
-        private GameObject _sanityCube;
-
         private string PersistentFilePath =>
             Path.Combine(Application.persistentDataPath, PersistentFileName);
 
@@ -93,29 +88,6 @@ namespace SIRMED.Geospatial
             {
                 cameraManager.requestedBackgroundRenderingMode = CameraBackgroundRenderingMode.BeforeOpaques;
             }
-
-            _sanityCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            _sanityCube.name = "SanityCheckCube (siempre 3m enfrente de la cámara)";
-            Destroy(_sanityCube.GetComponent<Collider>());
-            Shader alwaysOnTopShader = Shader.Find("Custom/AlwaysOnTop");
-            if (alwaysOnTopShader != null)
-            {
-                var sanityMaterial = new Material(alwaysOnTopShader);
-                sanityMaterial.SetColor("_Color", Color.red);
-                _sanityCube.GetComponent<MeshRenderer>().material = sanityMaterial;
-            }
-            else
-            {
-                Shader unlitShader = Shader.Find("Universal Render Pipeline/Unlit");
-                if (unlitShader != null)
-                {
-                    var sanityMaterial = new Material(unlitShader);
-                    sanityMaterial.SetColor("_BaseColor", Color.red);
-                    _sanityCube.GetComponent<MeshRenderer>().material = sanityMaterial;
-                }
-            }
-
-            _sanityCube.transform.localScale = Vector3.one * 0.5f;
         }
 
         public void OnEnable()
@@ -154,13 +126,6 @@ namespace SIRMED.Geospatial
 
         public void Update()
         {
-            if (Camera.main != null && _sanityCube != null)
-            {
-                _sanityCube.transform.position =
-                    Camera.main.transform.position + (Camera.main.transform.forward * 3f);
-                _sanityCube.transform.rotation = Camera.main.transform.rotation;
-            }
-
             if (Session == null || EarthManager == null || ArCoreExtensions == null)
             {
                 return;
@@ -228,8 +193,7 @@ namespace SIRMED.Geospatial
                 "Confirma o descarta el punto antes de tocar de nuevo." :
                 "Toca la pantalla para capturar un hotspot en tu ubicación actual.";
 
-            StatusText.text = Time.time < _debugUntilTime ?
-                BuildDebugInfo() : FormatPose(pose);
+            StatusText.text = FormatPose(pose);
 
             if (!_hasPendingCapture &&
                 Input.touchCount > 0 &&
@@ -254,52 +218,14 @@ namespace SIRMED.Geospatial
             _pendingPose = pose;
             _hasPendingCapture = true;
 
-            GameObject markerGO = null;
             if (HotspotMarkerPrefab != null)
             {
-                markerGO = Instantiate(HotspotMarkerPrefab, anchor.transform);
+                Instantiate(HotspotMarkerPrefab, anchor.transform);
             }
-
-            _debugAnchor = anchor;
-            _debugMarker = markerGO;
-            _debugUntilTime = Time.time + 120f;
 
             ConfirmLabelInput.text = $"Hotspot {_records.Count + 1:00}";
-            ConfirmDetailsText.text = FormatPose(pose) + "\n\n" + BuildDebugInfo();
+            ConfirmDetailsText.text = FormatPose(pose);
             ConfirmPanel.SetActive(true);
-        }
-
-        private string BuildDebugInfo()
-        {
-            if (_debugAnchor == null)
-            {
-                return "DEBUG: sin ancla activa.";
-            }
-
-            bool markerExists = _debugMarker != null;
-            string visibility = "n/a";
-            float distance = -1f;
-
-            if (markerExists)
-            {
-                Transform cam = Camera.main.transform;
-                Vector3 toMarker = _debugMarker.transform.position - cam.position;
-                distance = toMarker.magnitude;
-                float angle = Vector3.Angle(cam.forward, toMarker);
-                visibility = angle < (Camera.main.fieldOfView / 2f) ?
-                    $"DENTRO del campo de visión ({angle:F0}°)" :
-                    $"FUERA del campo de visión ({angle:F0}° respecto al frente de la cámara)";
-            }
-
-            return "--- DEBUG ---\n" +
-                $"HotspotMarkerPrefab asignado: {HotspotMarkerPrefab != null}\n" +
-                $"Marcador instanciado: {markerExists}\n" +
-                $"Marcador activo: {(markerExists ? _debugMarker.activeInHierarchy.ToString() : "n/a")}\n" +
-                $"Ancla trackingState: {_debugAnchor.trackingState}\n" +
-                $"Posición del ancla (mundo): {_debugAnchor.transform.position}\n" +
-                $"Posición del marcador (mundo): {(markerExists ? _debugMarker.transform.position.ToString() : "n/a")}\n" +
-                $"Distancia a la cámara: {(markerExists ? distance.ToString("F2") + " m" : "n/a")}\n" +
-                $"Visibilidad: {visibility}";
         }
 
         private void OnConfirmAcceptClicked()
