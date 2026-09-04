@@ -87,6 +87,13 @@ namespace SIRMED.Geospatial
             Screen.orientation = ScreenOrientation.Portrait;
             Application.targetFrameRate = 60;
 
+            ARCameraManager cameraManager = Camera.main != null ?
+                Camera.main.GetComponent<ARCameraManager>() : null;
+            if (cameraManager != null)
+            {
+                cameraManager.requestedBackgroundRenderingMode = CameraBackgroundRenderingMode.BeforeOpaques;
+            }
+
             _sanityCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
             _sanityCube.name = "SanityCheckCube (siempre 3m enfrente de la cámara)";
             Destroy(_sanityCube.GetComponent<Collider>());
