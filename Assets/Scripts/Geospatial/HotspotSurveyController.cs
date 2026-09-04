@@ -218,11 +218,6 @@ namespace SIRMED.Geospatial
             _pendingPose = pose;
             _hasPendingCapture = true;
 
-            if (HotspotMarkerPrefab != null)
-            {
-                Instantiate(HotspotMarkerPrefab, anchor.transform);
-            }
-
             ConfirmLabelInput.text = $"Hotspot {_records.Count + 1:00}";
             ConfirmDetailsText.text = FormatPose(pose);
             ConfirmPanel.SetActive(true);
@@ -247,6 +242,11 @@ namespace SIRMED.Geospatial
                 OrientationYawAccuracy = _pendingPose.OrientationYawAccuracy,
                 CapturedAtUtc = DateTime.UtcNow.ToString("O"),
             };
+
+            if (HotspotMarkerPrefab != null)
+            {
+                Instantiate(HotspotMarkerPrefab, _pendingAnchor.transform);
+            }
 
             _records.Add(record);
             _anchorObjects.Add(_pendingAnchor.gameObject);
