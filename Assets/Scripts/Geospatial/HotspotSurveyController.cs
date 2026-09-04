@@ -81,6 +81,13 @@ namespace SIRMED.Geospatial
             Screen.autorotateToPortraitUpsideDown = false;
             Screen.orientation = ScreenOrientation.Portrait;
             Application.targetFrameRate = 60;
+
+            ARCameraManager cameraManager = Camera.main != null ?
+                Camera.main.GetComponent<ARCameraManager>() : null;
+            if (cameraManager != null)
+            {
+                cameraManager.requestedBackgroundRenderingMode = CameraBackgroundRenderingMode.BeforeOpaques;
+            }
         }
 
         public void OnEnable()
@@ -211,41 +218,9 @@ namespace SIRMED.Geospatial
             _pendingPose = pose;
             _hasPendingCapture = true;
 
-            Debug.Log($"[HotspotDebug] Anchor created. trackingState={anchor.trackingState}, " +
-                $"worldPos={anchor.transform.position}, HotspotMarkerPrefab null={HotspotMarkerPrefab == null}");
-
-            if (HotspotMarkerPrefab != null)
-            {
-                GameObject markerGO = Instantiate(HotspotMarkerPrefab, anchor.transform);
-                Debug.Log($"[HotspotDebug] Marker instantiated: name={markerGO.name}, " +
-                    $"activeInHierarchy={markerGO.activeInHierarchy}, " +
-                    $"worldPos={markerGO.transform.position}, localPos={markerGO.transform.localPosition}");
-                StartCoroutine(LogAnchorStateAfterDelay(anchor, markerGO));
-            }
-
             ConfirmLabelInput.text = $"Hotspot {_records.Count + 1:00}";
             ConfirmDetailsText.text = FormatPose(pose);
             ConfirmPanel.SetActive(true);
-        }
-
-        private IEnumerator LogAnchorStateAfterDelay(ARGeospatialAnchor anchor, GameObject markerGO)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                yield return new WaitForSeconds(1f);
-                if (anchor == null)
-                {
-                    Debug.Log("[HotspotDebug] Anchor was destroyed before delayed check.");
-                    yield break;
-                }
-
-                Debug.Log($"[HotspotDebug] +{i + 1}s trackingState={anchor.trackingState}, " +
-                    $"anchorWorldPos={anchor.transform.position}, " +
-                    $"markerActive={(markerGO != null ? markerGO.activeInHierarchy.ToString() : "null")}, " +
-                    $"markerWorldPos={(markerGO != null ? markerGO.transform.position.ToString() : "null")}, " +
-                    $"cameraPos={Camera.main.transform.position}, " +
-                    $"distanceToCamera={(markerGO != null ? Vector3.Distance(markerGO.transform.position, Camera.main.transform.position).ToString("F2") : "n/a")}");
-            }
         }
 
         private void OnConfirmAcceptClicked()
@@ -267,6 +242,11 @@ namespace SIRMED.Geospatial
                 OrientationYawAccuracy = _pendingPose.OrientationYawAccuracy,
                 CapturedAtUtc = DateTime.UtcNow.ToString("O"),
             };
+
+            if (HotspotMarkerPrefab != null)
+            {
+                Instantiate(HotspotMarkerPrefab, _pendingAnchor.transform);
+            }
 
             _records.Add(record);
             _anchorObjects.Add(_pendingAnchor.gameObject);
