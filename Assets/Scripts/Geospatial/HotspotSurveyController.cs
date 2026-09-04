@@ -224,7 +224,7 @@ namespace SIRMED.Geospatial
 
             _debugAnchor = anchor;
             _debugMarker = markerGO;
-            _debugUntilTime = Time.time + 15f;
+            _debugUntilTime = Time.time + 120f;
 
             ConfirmLabelInput.text = $"Hotspot {_records.Count + 1:00}";
             ConfirmDetailsText.text = FormatPose(pose) + "\n\n" + BuildDebugInfo();
@@ -239,8 +239,19 @@ namespace SIRMED.Geospatial
             }
 
             bool markerExists = _debugMarker != null;
-            float distance = markerExists ?
-                Vector3.Distance(_debugMarker.transform.position, Camera.main.transform.position) : -1f;
+            string visibility = "n/a";
+            float distance = -1f;
+
+            if (markerExists)
+            {
+                Transform cam = Camera.main.transform;
+                Vector3 toMarker = _debugMarker.transform.position - cam.position;
+                distance = toMarker.magnitude;
+                float angle = Vector3.Angle(cam.forward, toMarker);
+                visibility = angle < (Camera.main.fieldOfView / 2f) ?
+                    $"DENTRO del campo de visión ({angle:F0}°)" :
+                    $"FUERA del campo de visión ({angle:F0}° respecto al frente de la cámara)";
+            }
 
             return "--- DEBUG ---\n" +
                 $"HotspotMarkerPrefab asignado: {HotspotMarkerPrefab != null}\n" +
@@ -249,7 +260,8 @@ namespace SIRMED.Geospatial
                 $"Ancla trackingState: {_debugAnchor.trackingState}\n" +
                 $"Posición del ancla (mundo): {_debugAnchor.transform.position}\n" +
                 $"Posición del marcador (mundo): {(markerExists ? _debugMarker.transform.position.ToString() : "n/a")}\n" +
-                $"Distancia a la cámara: {(markerExists ? distance.ToString("F2") + " m" : "n/a")}";
+                $"Distancia a la cámara: {(markerExists ? distance.ToString("F2") + " m" : "n/a")}\n" +
+                $"Visibilidad: {visibility}";
         }
 
         private void OnConfirmAcceptClicked()
