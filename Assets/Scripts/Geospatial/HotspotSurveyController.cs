@@ -71,6 +71,10 @@ namespace SIRMED.Geospatial
         private IEnumerator _startLocationService;
         private Coroutine _exportSummaryFlash;
 
+        private ARGeospatialAnchor _debugAnchor;
+        private GameObject _debugMarker;
+        private float _debugUntilTime;
+
         private string PersistentFilePath =>
             Path.Combine(Application.persistentDataPath, PersistentFileName);
 
@@ -186,7 +190,8 @@ namespace SIRMED.Geospatial
                 "Confirma o descarta el punto antes de tocar de nuevo." :
                 "Toca la pantalla para capturar un hotspot en tu ubicación actual.";
 
-            StatusText.text = FormatPose(pose);
+            StatusText.text = Time.time < _debugUntilTime ?
+                BuildDebugInfo() : FormatPose(pose);
 
             if (!_hasPendingCapture &&
                 Input.touchCount > 0 &&
@@ -211,41 +216,40 @@ namespace SIRMED.Geospatial
             _pendingPose = pose;
             _hasPendingCapture = true;
 
-            Debug.Log($"[HotspotDebug] Anchor created. trackingState={anchor.trackingState}, " +
-                $"worldPos={anchor.transform.position}, HotspotMarkerPrefab null={HotspotMarkerPrefab == null}");
-
+            GameObject markerGO = null;
             if (HotspotMarkerPrefab != null)
             {
-                GameObject markerGO = Instantiate(HotspotMarkerPrefab, anchor.transform);
-                Debug.Log($"[HotspotDebug] Marker instantiated: name={markerGO.name}, " +
-                    $"activeInHierarchy={markerGO.activeInHierarchy}, " +
-                    $"worldPos={markerGO.transform.position}, localPos={markerGO.transform.localPosition}");
-                StartCoroutine(LogAnchorStateAfterDelay(anchor, markerGO));
+                markerGO = Instantiate(HotspotMarkerPrefab, anchor.transform);
             }
 
+            _debugAnchor = anchor;
+            _debugMarker = markerGO;
+            _debugUntilTime = Time.time + 15f;
+
             ConfirmLabelInput.text = $"Hotspot {_records.Count + 1:00}";
-            ConfirmDetailsText.text = FormatPose(pose);
+            ConfirmDetailsText.text = FormatPose(pose) + "\n\n" + BuildDebugInfo();
             ConfirmPanel.SetActive(true);
         }
 
-        private IEnumerator LogAnchorStateAfterDelay(ARGeospatialAnchor anchor, GameObject markerGO)
+        private string BuildDebugInfo()
         {
-            for (int i = 0; i < 5; i++)
+            if (_debugAnchor == null)
             {
-                yield return new WaitForSeconds(1f);
-                if (anchor == null)
-                {
-                    Debug.Log("[HotspotDebug] Anchor was destroyed before delayed check.");
-                    yield break;
-                }
-
-                Debug.Log($"[HotspotDebug] +{i + 1}s trackingState={anchor.trackingState}, " +
-                    $"anchorWorldPos={anchor.transform.position}, " +
-                    $"markerActive={(markerGO != null ? markerGO.activeInHierarchy.ToString() : "null")}, " +
-                    $"markerWorldPos={(markerGO != null ? markerGO.transform.position.ToString() : "null")}, " +
-                    $"cameraPos={Camera.main.transform.position}, " +
-                    $"distanceToCamera={(markerGO != null ? Vector3.Distance(markerGO.transform.position, Camera.main.transform.position).ToString("F2") : "n/a")}");
+                return "DEBUG: sin ancla activa.";
             }
+
+            bool markerExists = _debugMarker != null;
+            float distance = markerExists ?
+                Vector3.Distance(_debugMarker.transform.position, Camera.main.transform.position) : -1f;
+
+            return "--- DEBUG ---\n" +
+                $"HotspotMarkerPrefab asignado: {HotspotMarkerPrefab != null}\n" +
+                $"Marcador instanciado: {markerExists}\n" +
+                $"Marcador activo: {(markerExists ? _debugMarker.activeInHierarchy.ToString() : "n/a")}\n" +
+                $"Ancla trackingState: {_debugAnchor.trackingState}\n" +
+                $"Posición del ancla (mundo): {_debugAnchor.transform.position}\n" +
+                $"Posición del marcador (mundo): {(markerExists ? _debugMarker.transform.position.ToString() : "n/a")}\n" +
+                $"Distancia a la cámara: {(markerExists ? distance.ToString("F2") + " m" : "n/a")}";
         }
 
         private void OnConfirmAcceptClicked()
