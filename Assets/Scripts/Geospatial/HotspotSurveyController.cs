@@ -90,12 +90,22 @@ namespace SIRMED.Geospatial
             _sanityCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
             _sanityCube.name = "SanityCheckCube (siempre 3m enfrente de la cámara)";
             Destroy(_sanityCube.GetComponent<Collider>());
-            Shader unlitShader = Shader.Find("Universal Render Pipeline/Unlit");
-            if (unlitShader != null)
+            Shader alwaysOnTopShader = Shader.Find("Custom/AlwaysOnTop");
+            if (alwaysOnTopShader != null)
             {
-                var sanityMaterial = new Material(unlitShader);
-                sanityMaterial.SetColor("_BaseColor", Color.red);
+                var sanityMaterial = new Material(alwaysOnTopShader);
+                sanityMaterial.SetColor("_Color", Color.red);
                 _sanityCube.GetComponent<MeshRenderer>().material = sanityMaterial;
+            }
+            else
+            {
+                Shader unlitShader = Shader.Find("Universal Render Pipeline/Unlit");
+                if (unlitShader != null)
+                {
+                    var sanityMaterial = new Material(unlitShader);
+                    sanityMaterial.SetColor("_BaseColor", Color.red);
+                    _sanityCube.GetComponent<MeshRenderer>().material = sanityMaterial;
+                }
             }
 
             _sanityCube.transform.localScale = Vector3.one * 0.5f;
