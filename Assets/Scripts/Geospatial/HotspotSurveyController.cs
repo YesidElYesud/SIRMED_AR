@@ -74,6 +74,7 @@ namespace SIRMED.Geospatial
         private ARGeospatialAnchor _debugAnchor;
         private GameObject _debugMarker;
         private float _debugUntilTime;
+        private GameObject _sanityCube;
 
         private string PersistentFilePath =>
             Path.Combine(Application.persistentDataPath, PersistentFileName);
@@ -85,6 +86,19 @@ namespace SIRMED.Geospatial
             Screen.autorotateToPortraitUpsideDown = false;
             Screen.orientation = ScreenOrientation.Portrait;
             Application.targetFrameRate = 60;
+
+            _sanityCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            _sanityCube.name = "SanityCheckCube (siempre 3m enfrente de la cámara)";
+            Destroy(_sanityCube.GetComponent<Collider>());
+            Shader unlitShader = Shader.Find("Universal Render Pipeline/Unlit");
+            if (unlitShader != null)
+            {
+                var sanityMaterial = new Material(unlitShader);
+                sanityMaterial.SetColor("_BaseColor", Color.red);
+                _sanityCube.GetComponent<MeshRenderer>().material = sanityMaterial;
+            }
+
+            _sanityCube.transform.localScale = Vector3.one * 0.5f;
         }
 
         public void OnEnable()
@@ -123,6 +137,13 @@ namespace SIRMED.Geospatial
 
         public void Update()
         {
+            if (Camera.main != null && _sanityCube != null)
+            {
+                _sanityCube.transform.position =
+                    Camera.main.transform.position + (Camera.main.transform.forward * 3f);
+                _sanityCube.transform.rotation = Camera.main.transform.rotation;
+            }
+
             if (Session == null || EarthManager == null || ArCoreExtensions == null)
             {
                 return;
