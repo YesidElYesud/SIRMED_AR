@@ -641,7 +641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: CesiumForUnity::CesiumForUnity.Cesium3DTileset
   _showCreditsOnScreen: 1
   _tilesetSource: 1
-  _url: https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyCe7o12T8XwWp9duPvGF4aYXWzBr4bRSRE
+  _url: https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyD6ZhWHGhrDSiK5uV9uCItS31860YocoyI
   _ionAssetID: 0
   _ionAccessToken: 
   _ionServer: {fileID: 11400000, guid: d310e385519e42d43b948772162e8824, type: 2}
@@ -2081,9 +2081,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 6.190488
-  _longitude: -75.651443
-  _altitude: 1764.82
+  _latitude: 6.190488000007959
+  _longitude: -75.65144300000755
+  _altitude: 1764.8200000328943
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -2235,9 +2235,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 6.190764
-  _longitude: -75.651011
-  _altitude: 1770.92
+  _latitude: 6.190764000000711
+  _longitude: -75.65101100000129
+  _altitude: 1770.9199999170378
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
