@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/HotspotSurvey.unity
-    guid: eb432f203391d89e860ef8de232bd122
+    path: Assets/Scenes/SantaRita_CoreTest.unity
+    guid: b797bf1051fcf8f4380c8ac406945073
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 9ef37b6f075f1007a8c8ed48d2f5770b, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: c93f3394cd008cb95a529f7dc76d60f0, type: 2}

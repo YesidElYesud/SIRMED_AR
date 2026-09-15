@@ -1,0 +1,376 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &83046602342107598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2022655615826996635}
+  - component: {fileID: 6169024265861012582}
+  m_Layer: 0
+  m_Name: VisualEffectsStageController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2022655615826996635
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83046602342107598}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3567654600318729271}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6169024265861012582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83046602342107598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24224d5630ee22478e156b48354887c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Managers.VisualEffectsStageController
+  stageConfigs:
+  - stageName: Intro
+    ambientMode: 0
+    ambientColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    ambientIntensity: 1
+    ambientSkyColor: {r: 0.5, g: 0.7, b: 1, a: 1}
+    ambientEquatorColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
+    ambientGroundColor: {r: 0.2, g: 0.2, b: 0.1, a: 1}
+    sunColor: {r: 1, g: 0.95, b: 0.85, a: 1}
+    sunIntensity: 1
+    enableFog: 0
+    fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    fogDensity: 0.02
+    postProcessVolume: {fileID: 0}
+    ppFadeDuration: 1
+    particlesToPlay: []
+    particlesToStop: []
+    transitionDuration: 1
+  - stageName: Etapa1
+    ambientMode: 0
+    ambientColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    ambientIntensity: 1
+    ambientSkyColor: {r: 0.5, g: 0.7, b: 1, a: 1}
+    ambientEquatorColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
+    ambientGroundColor: {r: 0.2, g: 0.2, b: 0.1, a: 1}
+    sunColor: {r: 1, g: 0.95, b: 0.85, a: 1}
+    sunIntensity: 1
+    enableFog: 0
+    fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    fogDensity: 0.02
+    postProcessVolume: {fileID: 0}
+    ppFadeDuration: 1
+    particlesToPlay: []
+    particlesToStop: []
+    transitionDuration: 1.5
+  - stageName: Etapa2
+    ambientMode: 0
+    ambientColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    ambientIntensity: 0.8
+    ambientSkyColor: {r: 0.5, g: 0.7, b: 1, a: 1}
+    ambientEquatorColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
+    ambientGroundColor: {r: 0.2, g: 0.2, b: 0.1, a: 1}
+    sunColor: {r: 0.9, g: 0.9, b: 0.95, a: 1}
+    sunIntensity: 0.7
+    enableFog: 1
+    fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    fogDensity: 0.01
+    postProcessVolume: {fileID: 0}
+    ppFadeDuration: 1
+    particlesToPlay: []
+    particlesToStop: []
+    transitionDuration: 2
+  - stageName: Etapa3
+    ambientMode: 0
+    ambientColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    ambientIntensity: 0.5
+    ambientSkyColor: {r: 0.5, g: 0.7, b: 1, a: 1}
+    ambientEquatorColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
+    ambientGroundColor: {r: 0.2, g: 0.2, b: 0.1, a: 1}
+    sunColor: {r: 0.7, g: 0.75, b: 0.9, a: 1}
+    sunIntensity: 0.4
+    enableFog: 1
+    fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    fogDensity: 0.03
+    postProcessVolume: {fileID: 0}
+    ppFadeDuration: 1
+    particlesToPlay: []
+    particlesToStop: []
+    transitionDuration: 1
+  - stageName: Etapa4
+    ambientMode: 0
+    ambientColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    ambientIntensity: 0.3
+    ambientSkyColor: {r: 0.5, g: 0.7, b: 1, a: 1}
+    ambientEquatorColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
+    ambientGroundColor: {r: 0.2, g: 0.2, b: 0.1, a: 1}
+    sunColor: {r: 0.5, g: 0.55, b: 0.7, a: 1}
+    sunIntensity: 0.25
+    enableFog: 1
+    fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    fogDensity: 0.05
+    postProcessVolume: {fileID: 0}
+    ppFadeDuration: 1
+    particlesToPlay: []
+    particlesToStop: []
+    transitionDuration: 0.8
+  - stageName: Etapa5
+    ambientMode: 0
+    ambientColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    ambientIntensity: 0.9
+    ambientSkyColor: {r: 0.5, g: 0.7, b: 1, a: 1}
+    ambientEquatorColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
+    ambientGroundColor: {r: 0.2, g: 0.2, b: 0.1, a: 1}
+    sunColor: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+    sunIntensity: 0.8
+    enableFog: 0
+    fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    fogDensity: 0.02
+    postProcessVolume: {fileID: 0}
+    ppFadeDuration: 1
+    particlesToPlay: []
+    particlesToStop: []
+    transitionDuration: 2.5
+  sunLight: {fileID: 0}
+  debugLogs: 0
+--- !u!1 &1927297311288322440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5548323965353862293}
+  - component: {fileID: 7997589438648957638}
+  m_Layer: 0
+  m_Name: CinematicManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5548323965353862293
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927297311288322440}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3567654600318729271}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7997589438648957638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927297311288322440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7217b47500251a4ba0e3b7564a1b07a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.UI.CinematicManager
+  cinematicPanel: {fileID: 0}
+  videoDisplay: {fileID: 0}
+  loadingText: {fileID: 0}
+  skipButton: {fileID: 0}
+  videoPlayer: {fileID: 0}
+  renderWidth: 1280
+  renderHeight: 720
+  skipIfNoContent: 1
+--- !u!1 &3382581864106950513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3291007785217620521}
+  - component: {fileID: 4821048044547448061}
+  m_Layer: 0
+  m_Name: StageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3291007785217620521
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3382581864106950513}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3567654600318729271}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4821048044547448061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3382581864106950513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 875d22d5de33a4248a40b0b070756cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Managers.StageManager
+  stageConfigs:
+  - stageName: 
+    objectsToActivate: []
+    objectsToDeactivate: []
+  - stageName: 
+    objectsToActivate: []
+    objectsToDeactivate: []
+  - stageName: 
+    objectsToActivate: []
+    objectsToDeactivate: []
+  - stageName: 
+    objectsToActivate: []
+    objectsToDeactivate: []
+  - stageName: 
+    objectsToActivate: []
+    objectsToDeactivate: []
+  - stageName: 
+    objectsToActivate: []
+    objectsToDeactivate: []
+  startStage: 0
+  debugLogs: 1
+--- !u!1 &3860911849651240637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3241694815983827310}
+  - component: {fileID: 1748105708957985346}
+  m_Layer: 0
+  m_Name: AudioStageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3241694815983827310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3860911849651240637}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3567654600318729271}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1748105708957985346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3860911849651240637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5f50e414dd25946b93453a0d6045d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Managers.AudioStageManager
+  stageAudios:
+  - stageName: Intro
+    clip: {fileID: 0}
+    volume: 0.4
+    fadeTime: 1
+  - stageName: Etapa1
+    clip: {fileID: 0}
+    volume: 0.5
+    fadeTime: 1.5
+  - stageName: Etapa2
+    clip: {fileID: 0}
+    volume: 0.5
+    fadeTime: 1.5
+  - stageName: Etapa3
+    clip: {fileID: 0}
+    volume: 0.7
+    fadeTime: 0.8
+  - stageName: Etapa4
+    clip: {fileID: 0}
+    volume: 0.8
+    fadeTime: 0.5
+  - stageName: Etapa5
+    clip: {fileID: 0}
+    volume: 0.5
+    fadeTime: 2
+  sourceA: {fileID: 0}
+  sourceB: {fileID: 0}
+  sourceSFX: {fileID: 0}
+  masterVolume: 1
+--- !u!1 &4635060345867713210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3567654600318729271}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3567654600318729271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4635060345867713210}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 177.78394, y: -0.00004, z: 2174.7834}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3241694815983827310}
+  - {fileID: 3291007785217620521}
+  - {fileID: 2022655615826996635}
+  - {fileID: 5548323965353862293}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
