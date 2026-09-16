@@ -28,10 +28,9 @@ namespace SIRMED.Gameplay.Hotspots
     /// replayButton, ActivateReplayButton, ReplaySequence) — en AR real no existe
     /// una cámara virtual que se pueda tomar prestada del jugador. También se
     /// eliminó allowClick/hotspotMaterial (dependían de una malla fija en escena).
-    /// RiskLevelIndicator y EndGamePanel ya están conectados (fase de diálogos/UI).
-    /// La referencia a EvacuationRouteController queda como TODO explícito: ese
-    /// tipo se agrega en la fase de ambiente sin necesidad de tocar esta clase más
-    /// que para añadir la línea de invocación.
+    /// RiskLevelIndicator, EndGamePanel y EvacuationRouteController ya están
+    /// conectados (ClosePanel invoca a este último cuando
+    /// data.activatesEvacuationRoute es true; ver SIRMED.Gameplay.Environment).
     /// </summary>
     [RequireComponent(typeof(Collider))]
     public class HotspotController : MonoBehaviour, IHotspotInteractable
@@ -331,8 +330,8 @@ namespace SIRMED.Gameplay.Hotspots
                 return;
             }
 
-            // TODO Fase 4 (ambiente): cuando exista EvacuationRouteController, si
-            // data.activatesEvacuationRoute es true, mostrar la ruta aquí.
+            if (data != null && data.activatesEvacuationRoute)
+                SIRMED.Gameplay.Environment.EvacuationRouteController.Instance?.Show();
 
             if (data != null && data.advancesStageOnClose)
                 StageManager.Instance?.NextStage();
