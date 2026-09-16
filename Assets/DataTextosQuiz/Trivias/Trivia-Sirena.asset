@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c9d9f53c2b8e04b88a323cdbd1e524, type: 3}
+  m_Name: Trivia-Sirena
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Dialogue.TriviaData
+  question: "\xBFPara qu\xE9 sirve una sirena del SAT?"
+  options:
+  - optionText: Avisar a la comunidad
+    isCorrect: 1
+    feedbackText: "A. Comunica una condici\xF3n de alerta y orienta acciones."
+  - optionText: Medir lluvia
+    isCorrect: 0
+    feedbackText: "A. Comunica una condici\xF3n de alerta y orienta acciones."
+  - optionText: "Alumbrar la v\xEDa"
+    isCorrect: 0
+    feedbackText: "A. Comunica una condici\xF3n de alerta y orienta acciones."
+  answerDelay: 1.5

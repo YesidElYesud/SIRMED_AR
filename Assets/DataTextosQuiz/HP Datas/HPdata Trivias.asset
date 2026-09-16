@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: caccdb802bd40ce42a70a8fa140c26d2, type: 3}
-  m_Name: TestRita01
+  m_Name: HPdata Trivias
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Hotspots.HotspotData
-  title: Hotspot bueno
+  title: Hotspot
   description: "Informaci\xF3n del hotspot."
   icon: {fileID: 0}
   actionType: 0
@@ -27,6 +27,7 @@ MonoBehaviour:
   requiredStage: -1
   headerImage: {fileID: 0}
   riskLevel: 0
+  trivia: {fileID: 11400000, guid: 720069247ef840b4db56f22e81237343, type: 2}
   advancesStageOnClose: 0
   activatesEvacuationRoute: 0
   activatesEndGame: 0
