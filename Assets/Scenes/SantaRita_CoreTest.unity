@@ -414,11 +414,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40a680056b7cdfa409f17927e5d45ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.UI.MinimapController
-  minimapRoot: {fileID: 0}
-  radarArea: {fileID: 0}
-  playerIcon: {fileID: 0}
-  dotsContainer: {fileID: 0}
-  dotPrefab: {fileID: 0}
+  minimapRoot: {fileID: 2078247702}
+  radarArea: {fileID: 1927605410}
+  playerIcon: {fileID: 119302293}
+  dotsContainer: {fileID: 1944202176}
+  dotPrefab: {fileID: 8620593047557653380, guid: bb99827725aeba941aaca5935464ffa9, type: 3}
   worldRange: 60
   clampToEdge: 0
   edgePaddingPx: 6
