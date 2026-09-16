@@ -1,5 +1,6 @@
 namespace SIRMED.Gameplay.Hotspots
 {
+    using System.Collections.Generic;
     using Google.XR.ARCoreExtensions;
     using SIRMED.Managers;
     using SIRMED.UI;
@@ -35,6 +36,16 @@ namespace SIRMED.Gameplay.Hotspots
     [RequireComponent(typeof(Collider))]
     public class HotspotController : MonoBehaviour, IHotspotInteractable
     {
+        // ── Registro global ───────────────────────────────────────────────────────
+        /// <summary>
+        /// Todos los HotspotController actualmente habilitados en escena (respeta
+        /// RefreshStageVisibility: un hotspot fuera de su etapa se desregistra al
+        /// desactivarse). Usado por MinimapController para dibujar los POIs sin que
+        /// cada hotspot necesite conocer al minimapa.
+        /// </summary>
+        private static readonly List<HotspotController> _active = new List<HotspotController>();
+        public static IReadOnlyList<HotspotController> ActiveHotspots => _active;
+
         [Header("Datos del Hotspot")]
         [Tooltip("ScriptableObject con el contenido de este hotspot")]
         public HotspotData data;
@@ -113,8 +124,16 @@ namespace SIRMED.Gameplay.Hotspots
             HotspotPromptButton.Instance?.UnregisterHotspot(this);
         }
 
+        private void OnEnable()
+        {
+            if (!_active.Contains(this))
+                _active.Add(this);
+        }
+
         private void OnDisable()
         {
+            _active.Remove(this);
+
             // Al desactivarse (p.ej. StageManager lo oculta) limpiar el botón de prompt
             HotspotPromptButton.Instance?.UnregisterHotspot(this);
             _isNearby = false;
@@ -137,7 +156,7 @@ namespace SIRMED.Gameplay.Hotspots
         /// todavía tiene la posición autorada en el Editor, que no corresponde a
         /// ninguna ubicación real de la sesión AR en curso.
         /// </summary>
-        private bool IsAnchorReady()
+        public bool IsAnchorReady()
         {
             return transform.parent != null &&
                    transform.parent.GetComponent<ARGeospatialAnchor>() != null;
