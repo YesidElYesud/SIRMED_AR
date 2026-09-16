@@ -67,6 +67,7 @@ namespace SIRMED.Gameplay.Hotspots
         private bool _isNearby = false;
         private bool _isPanelOpen = false;
         private bool _hasBeenVisited = false;
+        private bool _triviaShown = false;
         private Renderer _meshRenderer;
 
         // ── Gizmos en editor ──────────────────────────────────────────────────────
@@ -303,6 +304,14 @@ namespace SIRMED.Gameplay.Hotspots
 
             if (uiPanel != null) uiPanel.Hide();
 
+            if (ShouldShowTrivia())
+            {
+                _triviaShown = true;
+                _isPanelOpen = true; // TriviaPanel llama de vuelta a ClosePanel() al terminar
+                TriviaPanel.Instance.Show(data.trivia, this);
+                return;
+            }
+
             // TODO Fase 4 (ambiente): cuando exista EvacuationRouteController, si
             // data.activatesEvacuationRoute es true, mostrar la ruta aquí.
 
@@ -324,6 +333,22 @@ namespace SIRMED.Gameplay.Hotspots
             // Si el jugador sigue en rango y el hotspot permite re-activación, mostrar el botón
             if (_isNearby && !(_interactOnce && _hasBeenVisited))
                 HotspotPromptButton.Instance?.RegisterHotspot(this);
+        }
+
+        // ── Trivia ────────────────────────────────────────────────────────────────
+        /// <summary>
+        /// True si este hotspot tiene trivia asignada, todavía no se mostró y el
+        /// nivel de riesgo activo no es N4 (GDD: la trivia se limita a momentos
+        /// seguros y nunca debe aparecer durante el desplazamiento de evacuación).
+        /// </summary>
+        private bool ShouldShowTrivia()
+        {
+            if (data == null || data.trivia == null || _triviaShown) return false;
+            if (TriviaPanel.Instance == null) return false;
+
+            bool isEvacuating = RiskLevelIndicator.Instance != null &&
+                                 RiskLevelIndicator.Instance.CurrentLevel == RiskLevel.N4;
+            return !isEvacuating;
         }
 
         // ── Efecto visitado ───────────────────────────────────────────────────────

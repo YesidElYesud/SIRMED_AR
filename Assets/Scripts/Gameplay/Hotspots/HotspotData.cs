@@ -130,6 +130,14 @@ namespace SIRMED.Gameplay.Hotspots
                  "None = badge oculto.")]
         public RiskLevel riskLevel = RiskLevel.None;
 
+        // ── Trivia ────────────────────────────────────────────────────────────────
+        [Header("Trivia (opcional)")]
+        [Tooltip("Si está asignada, se muestra automáticamente al cerrar el panel\n" +
+                 "principal de este hotspot (InfoPanel, diálogo NPC, SIATA o slides).\n" +
+                 "Se omite mientras el nivel de riesgo activo sea N4 (GDD: la trivia\n" +
+                 "no debe competir con la atención necesaria durante la evacuación).")]
+        public TriviaData trivia;
+
         // ── Avance de etapa al cerrar ─────────────────────────────────────────────
         [Header("Avance de Etapa")]
         [Tooltip("Si true, al cerrar este hotspot (o al interactuar con él si es RiskLevelOnly)\n" +
