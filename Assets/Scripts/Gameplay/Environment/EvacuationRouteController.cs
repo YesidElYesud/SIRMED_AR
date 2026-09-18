@@ -115,6 +115,15 @@ namespace SIRMED.Gameplay.Environment
             if (Instance == this) Instance = null;
         }
 
+        // Longitud mínima (m) para aceptar la spline como válida. Justo después de que
+        // ARCore reparenta un waypoint bajo su ARGeospatialAnchor recién resuelto, el
+        // Transform de ese anchor puede tardar uno o más frames en recibir su pose real
+        // trackeada — durante esa ventana wp.transform.position lee (0,0,0) para varios
+        // waypoints a la vez, colapsando la spline a un punto. AllWaypointsReady() ya
+        // pasó (todos reparentados), pero las posiciones aún no son de fiar, así que se
+        // valida la longitud resultante antes de aceptar el build como definitivo.
+        private const float _minValidSplineLength = 1f;
+
         private void Update()
         {
             if (!_built)
@@ -122,6 +131,10 @@ namespace SIRMED.Gameplay.Environment
                 if (AllWaypointsReady())
                 {
                     BuildSpline();
+                    float length = _container.Spline.GetLength();
+                    if (length < _minValidSplineLength)
+                        return; // spline aún degenerada: no se marca _built, se reintenta el siguiente frame
+
                     BuildRibbonMesh();
                     _built = true;
                 }

@@ -23,7 +23,7 @@ MonoBehaviour:
   siataSequence: {fileID: 0}
   infoSlides: []
   infoSlideAdvancesStage: 1
-  triggerRadius: 1
+  triggerRadius: 3
   requiredStage: -1
   headerImage: {fileID: 0}
   riskLevel: 0
