@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: SVGMat 001
-    second: {fileID: 2100000, guid: 8310de3cdb435844b9702e932e36f5f8, type: 2}
+    second: {fileID: 2100000, guid: f4a74ffe5cfaa9c4bb8b22f4de044601, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: SVGMat 002
-    second: {fileID: 2100000, guid: c8520de4bd9493048a0bfd14e2f34efe, type: 2}
+    second: {fileID: 2100000, guid: f00fe7694c6d3b14abc7ed422f733de8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
