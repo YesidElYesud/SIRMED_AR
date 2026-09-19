@@ -132,11 +132,28 @@ namespace SIRMED.Gameplay.Hotspots
 
         // ── Trivia ────────────────────────────────────────────────────────────────
         [Header("Trivia (opcional)")]
-        [Tooltip("Si está asignada, se muestra automáticamente al cerrar el panel\n" +
-                 "principal de este hotspot (InfoPanel, diálogo NPC, SIATA o slides).\n" +
+        [Tooltip("Si está asignada (o triviaPool tiene elementos), este hotspot entra\n" +
+                 "directo a la trivia al activarse, sin mostrar el panel principal.\n" +
                  "Se omite mientras el nivel de riesgo activo sea N4 (GDD: la trivia\n" +
                  "no debe competir con la atención necesaria durante la evacuación).")]
         public TriviaData trivia;
+
+        [Tooltip("Si tiene elementos, se elige una al azar en vez de usar 'trivia'.\n" +
+                 "Útil para que un mismo hotspot no repita siempre la misma pregunta.")]
+        public TriviaData[] triviaPool;
+
+        /// <summary>
+        /// Trivia a mostrar: aleatoria de triviaPool si tiene elementos, si no trivia.
+        /// </summary>
+        public TriviaData GetTriviaToShow()
+        {
+            if (triviaPool != null && triviaPool.Length > 0)
+                return triviaPool[Random.Range(0, triviaPool.Length)];
+            return trivia;
+        }
+
+        /// <summary>True si hay una trivia asignada (fija o en el pool).</summary>
+        public bool HasTrivia => trivia != null || (triviaPool != null && triviaPool.Length > 0);
 
         // ── Avance de etapa al cerrar ─────────────────────────────────────────────
         [Header("Avance de Etapa")]

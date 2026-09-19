@@ -228,6 +228,17 @@ namespace SIRMED.Gameplay.Hotspots
             if (data.riskLevel != RiskLevel.None && RiskLevelIndicator.Instance != null)
                 RiskLevelIndicator.Instance.SetLevel(data.riskLevel);
 
+            // Si tiene trivia, entra directo a ella (sin pasar por InfoPanel/NPC/etc.).
+            // ClosePanel() se encarga de lo que sigue (visitado, ruta, avance de etapa)
+            // cuando la trivia termine y llame de vuelta.
+            if (ShouldShowTrivia())
+            {
+                _triviaShown = true;
+                _isPanelOpen = true;
+                TriviaPanel.Instance.Show(data.GetTriviaToShow(), this);
+                return;
+            }
+
             switch (data.actionType)
             {
                 case HotspotActionType.InfoPanel:
@@ -322,14 +333,6 @@ namespace SIRMED.Gameplay.Hotspots
 
             if (uiPanel != null) uiPanel.Hide();
 
-            if (ShouldShowTrivia())
-            {
-                _triviaShown = true;
-                _isPanelOpen = true; // TriviaPanel llama de vuelta a ClosePanel() al terminar
-                TriviaPanel.Instance.Show(data.trivia, this);
-                return;
-            }
-
             if (data != null && data.activatesEvacuationRoute)
                 SIRMED.Gameplay.Environment.EvacuationRouteController.Instance?.Show();
 
@@ -361,7 +364,7 @@ namespace SIRMED.Gameplay.Hotspots
         /// </summary>
         private bool ShouldShowTrivia()
         {
-            if (data == null || data.trivia == null || _triviaShown) return false;
+            if (data == null || !data.HasTrivia || _triviaShown) return false;
             if (TriviaPanel.Instance == null) return false;
 
             bool isEvacuating = RiskLevelIndicator.Instance != null &&

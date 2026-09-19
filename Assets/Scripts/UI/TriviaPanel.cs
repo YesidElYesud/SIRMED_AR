@@ -10,11 +10,11 @@ namespace SIRMED.UI
     /// <summary>
     /// TriviaPanel — Popup compacto de una pregunta de refuerzo (microtrivia).
     ///
-    /// Disparado automáticamente desde HotspotController.ClosePanel() cuando el
-    /// HotspotData del hotspot recién cerrado tiene un TriviaData asignado. Por
-    /// diseño (GDD §14/§22) nunca se muestra durante N4 — evacuación no debe
-    /// competir con trivias — y siempre aparece DESPUÉS del contenido principal,
-    /// nunca antes.
+    /// Disparado automáticamente desde HotspotController.DispatchAction() cuando el
+    /// HotspotData del hotspot tiene trivia asignada (trivia o triviaPool) — entra
+    /// directo a la trivia, sin mostrar el panel principal (InfoPanel/NPC/SIATA/
+    /// slides) primero. Por diseño (GDD §14/§22) nunca se muestra durante N4 —
+    /// evacuación no debe competir con trivias.
     ///
     /// Reutiliza MultipleChoicePanel (el mismo componente que ya usa SiataCallPanel)
     /// en vez de duplicar la lógica de selección/feedback/reintento.
