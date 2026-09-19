@@ -1,63 +1,37 @@
-// <copyright file="SafeAreaScaler.cs" company="Google LLC">
-//
-// Copyright 2022 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-// </copyright>
-//-----------------------------------------------------------------------
+using UnityEngine;
 
-namespace Google.XR.ARCoreExtensions.Samples.Geospatial
+/// <summary>
+/// A helper component that scale the UI rect to the same size as the safe area.
+/// </summary>
+[RequireComponent(typeof(RectTransform))]
+public class SafeAreaScaler : MonoBehaviour
 {
-    using UnityEngine;
+    private RectTransform rectTransform;
+    private Rect lastSafeArea;
 
-    /// <summary>
-    /// A helper component that scale the UI rect to the same size as the safe area.
-    /// </summary>
-    public class SafeAreaScaler : MonoBehaviour
+    private void Awake()
     {
-        private Rect _screenSafeArea = new Rect(0, 0, 0, 0);
+        rectTransform = GetComponent<RectTransform>();
+    }
 
-        /// <summary>
-        /// Unity's Awake() method.
-        /// </summary>
-        public void Update()
+    private void LateUpdate()
+    {
+        if (lastSafeArea != Screen.safeArea)
         {
-            Rect safeArea;
-            safeArea = Screen.safeArea;
-
-            if (_screenSafeArea != safeArea)
-            {
-                _screenSafeArea = safeArea;
-                MatchRectTransformToSafeArea();
-            }
+            lastSafeArea = Screen.safeArea;
+            Refresh();
         }
+    }
 
-        private void MatchRectTransformToSafeArea()
-        {
-            RectTransform rectTransform = GetComponent<RectTransform>();
-
-            // lower left corner offset
-            Vector2 offsetMin = new Vector2(_screenSafeArea.xMin,
-                Screen.height - _screenSafeArea.yMax);
-
-            // upper right corner offset
-            Vector2 offsetMax = new Vector2(
-                _screenSafeArea.xMax - Screen.width,
-                -_screenSafeArea.yMin);
-
-            rectTransform.offsetMin = offsetMin;
-            rectTransform.offsetMax = offsetMax;
-        }
+    public void Refresh()
+    {
+        Vector2 anchorMin = lastSafeArea.position;
+        Vector2 anchorMax = lastSafeArea.position + lastSafeArea.size;
+        anchorMin.x /= Screen.width;
+        anchorMin.y /= Screen.height;
+        anchorMax.x /= Screen.width;
+        anchorMax.y /= Screen.height;
+        rectTransform.anchorMin = anchorMin;
+        rectTransform.anchorMax = anchorMax;
     }
 }
