@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Android 12+ (API 31+) throttles sensor delivery above 200Hz unless this
+         permission is declared. ARCore's VIO/gyro integration needs full-rate
+         gyro samples; without it, Android may cap the gyroscope and cause
+         gaps like "Gyro samples do not cover 75% of [...]" in ARCore's native
+         logs, which can prevent tracking from ever stabilizing. -->
+    <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS" />
+
+    <!-- Restores the launcher activity Unity normally auto-generates. Once this
+         file exists, Unity's Player Settings enables "Custom Main Manifest" and
+         stops injecting this automatically — without it, the built app has no
+         MAIN/LAUNCHER activity at all (confirmed via Unity's own build error:
+         "DeploymentOperationFailedException: No activity in the manifest with
+         action MAIN and category LAUNCHER."). Content copied verbatim (GameActivity
+         variant only, since Player Settings > Application Entry Point uses
+         UnityPlayerGameActivity) from Unity's own reference template at
+         Editor/Data/PlaybackEngines/AndroidPlayer/Apk/UnityManifest.xml — the
+         android:theme is required, its absence caused a separate crash:
+         "IllegalStateException: You need to use a Theme.AppCompat theme". -->
+    <application>
+        <activity android:name="com.unity3d.player.UnityPlayerGameActivity"
+                  android:exported="true"
+                  android:theme="@style/BaseUnityGameActivityTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
+            <meta-data android:name="android.app.lib_name" android:value="game" />
+        </activity>
+    </application>
+</manifest>
