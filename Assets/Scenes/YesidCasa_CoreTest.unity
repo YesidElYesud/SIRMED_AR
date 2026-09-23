@@ -696,9 +696,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.040096999796871
+  _latitude: 7.04009699979687
   _longitude: -73.83982500003607
-  _altitude: 100.02999998629093
+  _altitude: 100.02999997977167
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -783,7 +783,7 @@ Transform:
   m_GameObject: {fileID: 140181941}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -483.3828, y: -0.010709932, z: 532.72723}
+  m_LocalPosition: {x: -483.3828, y: -0.01070994, z: 532.72723}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7821,6 +7821,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1587000026}
   m_CullTransparentMesh: 0
+--- !u!4 &1625189080 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8926105923228549517, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
+  m_PrefabInstance: {fileID: 2245503807656656256}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1633217207
 GameObject:
   m_ObjectHideFlags: 0
@@ -7970,9 +7975,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.040127859695853
-  _longitude: -73.83980370610331
-  _altitude: 99.12081988248974
+  _latitude: 7.040127860514474
+  _longitude: -73.83980370683366
+  _altitude: 98.05081989616156
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -7987,10 +7992,11 @@ Transform:
   m_GameObject: {fileID: 1647742810}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -481.03, y: -0.92, z: 536.14}
+  m_LocalPosition: {x: -481.03, y: -1.99, z: 536.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1625189080}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1664493016
@@ -10480,7 +10486,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1647742813}
     m_Modifications:
     - target: {fileID: 1788010414478128591, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
       propertyPath: m_Name
@@ -10500,15 +10506,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4969341171502818182, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.54
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4969341171502818182, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.95
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4969341171502818182, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4969341171502818182, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -10540,15 +10546,15 @@ PrefabInstance:
       objectReference: {fileID: 1647742811}
     - target: {fileID: 8926105923228549517, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -482.16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8926105923228549517, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.81
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8926105923228549517, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 535.02
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8926105923228549517, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10556,15 +10562,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8926105923228549517, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8926105923228549517, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8926105923228549517, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8926105923228549517, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10668,7 +10674,6 @@ SceneRoots:
   - {fileID: 86078355}
   - {fileID: 850151907}
   - {fileID: 1897917798}
-  - {fileID: 2245503807656656256}
   - {fileID: 1647742813}
   - {fileID: 467740855}
   - {fileID: 763468432}

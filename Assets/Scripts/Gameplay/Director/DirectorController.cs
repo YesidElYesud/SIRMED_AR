@@ -21,6 +21,17 @@ namespace SIRMED.Gameplay.Director
     /// `visualRoot`/`animator` pueden quedar sin asignar hasta que exista la malla+rig
     /// del personaje — el resto del sistema (reglas, banner, movimiento entre puntos)
     /// funciona igual, solo sin representación visual todavía.
+    ///
+    /// Cambio de arquitectura (sesión 2026-09-23): el spawn en `homeWaypoint` ya NO se
+    /// hace copiando su posición por script en Update() — ese mecanismo nunca llegó a
+    /// funcionar de forma confiable en dispositivo (Awake() ni siquiera llegaba a
+    /// ejecutarse en varias pruebas, sin causa identificable pese a builds limpios).
+    /// En su lugar se adopta el mismo patrón ya probado con los íconos de los hotspots:
+    /// el GameObject `Director` debe ser hijo directo de `homeWaypoint` en la Jerarquía
+    /// (posición local 0,0,0). Así, en cuanto `ARGeospatialCreatorAnchor` reparenta
+    /// `homeWaypoint` bajo su `ARGeospatialAnchor` resuelto, el modelo se mueve solo con
+    /// él — sin ningún polling. `homeWaypoint` se conserva solo por referencia/documentación,
+    /// ya no participa en la lógica de spawn.
     /// </summary>
     public class DirectorController : MonoBehaviour
     {
@@ -41,7 +52,7 @@ namespace SIRMED.Gameplay.Director
         [Tooltip("Todos los puntos por los que el Director puede moverse. DirectorAdviceData.moveToPointId busca aquí por pointId.")]
         public DirectorWaypoint[] waypoints;
 
-        [Tooltip("Punto donde aparece el Director al arrancar la escena (antes de que cualquier regla lo mande a otro lado).")]
+        [Tooltip("Punto donde arranca el Director (informativo — el spawn real ocurre por parentesco en la Jerarquía, ver comentario de clase).")]
         public DirectorWaypoint homeWaypoint;
 
         [Tooltip("Velocidad de caminata en metros/segundo.")]
@@ -52,15 +63,6 @@ namespace SIRMED.Gameplay.Director
 
         // ── Internos ──────────────────────────────────────────────────────────────
         private Coroutine _moveRoutine;
-        private bool _spawned;
-
-        // Igual que el fix de spline degenerada en EvacuationRouteController: justo
-        // después de que ARCore reparenta homeWaypoint bajo su ARGeospatialAnchor recién
-        // resuelto, el Transform de ese anchor puede tardar uno o más frames en recibir
-        // su pose real trackeada — durante esa ventana lee (0,0,0)/cerca del origen de la
-        // sesión AR en vez de la posición real desplazada por GPS. Sin este chequeo el
-        // Director quedaba "spawneado" para siempre en el origen de la sesión.
-        private const float _minSpawnDistanceFromSessionOrigin = 0.5f;
 
         // ── Lifecycle ─────────────────────────────────────────────────────────────
         private void Awake()
@@ -72,37 +74,6 @@ namespace SIRMED.Gameplay.Director
         private void OnDestroy()
         {
             if (Instance == this) Instance = null;
-        }
-
-        private float _nextSpawnLogTime;
-
-        private void Update()
-        {
-            // Spawn diferido: recién se ubica al Director en homeWaypoint cuando ese
-            // anchor resuelve (mismo patrón de espera que EvacuationRouteController).
-            if (_spawned || visualRoot == null || homeWaypoint == null) return;
-
-            if (!homeWaypoint.IsAnchorReady())
-            {
-                if (Time.time >= _nextSpawnLogTime)
-                {
-                    _nextSpawnLogTime = Time.time + 5f;
-                    Debug.Log($"[DirectorDiag] Waiting for homeWaypoint anchor. parent={homeWaypoint.transform.parent}");
-                }
-                return;
-            }
-
-            Vector3 pos = homeWaypoint.transform.position;
-            if (pos.sqrMagnitude < _minSpawnDistanceFromSessionOrigin * _minSpawnDistanceFromSessionOrigin)
-            {
-                // Anchor recién reparentado pero todavía sin pose real trackeada — reintentar
-                // el siguiente frame en vez de aceptar esta lectura transitoria.
-                return;
-            }
-
-            visualRoot.position = pos;
-            _spawned = true;
-            Debug.Log($"[DirectorDiag] Spawned Director at world position {visualRoot.position}");
         }
 
         // ── API pública — consejos ───────────────────────────────────────────────
