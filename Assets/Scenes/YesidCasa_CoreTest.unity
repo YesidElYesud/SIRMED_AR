@@ -409,9 +409,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.04033021143528
-  _longitude: -73.83971100060353
-  _altitude: 98.5606797169894
+  _latitude: 7.040330210281151
+  _longitude: -73.839698446414
+  _altitude: 100.15188642498106
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -426,7 +426,7 @@ Transform:
   m_GameObject: {fileID: 86078352}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -470.78696, y: -1.4813089, z: 558.5185}
+  m_LocalPosition: {x: -469.4, y: 0.11, z: 558.5185}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -698,7 +698,7 @@ MonoBehaviour:
   _altitudeOffset: NaN
   _latitude: 7.040096999796871
   _longitude: -73.83982500003607
-  _altitude: 100.02999998815358
+  _altitude: 100.02999998629093
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -783,7 +783,7 @@ Transform:
   m_GameObject: {fileID: 140181941}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -483.3828, y: -0.01070993, z: 532.72723}
+  m_LocalPosition: {x: -483.3828, y: -0.010709932, z: 532.72723}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4590,9 +4590,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.040248211362473
-  _longitude: -73.83976200063564
-  _altitude: 99.42066851817071
+  _latitude: 7.040248211110834
+  _longitude: -73.83976200041869
+  _altitude: 99.74161419644952
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -4607,7 +4607,7 @@ Transform:
   m_GameObject: {fileID: 793803397}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -476.42197, y: -0.6209457, z: 549.45}
+  m_LocalPosition: {x: -476.42197, y: -0.3, z: 549.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5159,9 +5159,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.040408211684995
-  _longitude: -73.83965800050855
-  _altitude: 98.07069023605436
+  _latitude: 7.0404082105940775
+  _longitude: -73.83964595296794
+  _altitude: 99.55222844332457
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -5176,7 +5176,7 @@ Transform:
   m_GameObject: {fileID: 850151904}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -464.931, y: -1.9716351, z: 567.14465}
+  m_LocalPosition: {x: -463.6, y: -0.49, z: 567.14465}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7970,9 +7970,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.040127859000184
-  _longitude: -73.83980370548265
-  _altitude: 100.03010996058583
+  _latitude: 7.040127859695853
+  _longitude: -73.83980370610331
+  _altitude: 99.12081988248974
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -7987,7 +7987,7 @@ Transform:
   m_GameObject: {fileID: 1647742810}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -481.03, y: -0.010709932, z: 536.14}
+  m_LocalPosition: {x: -481.03, y: -0.92, z: 536.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9396,9 +9396,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.040488211876491
-  _longitude: -73.83961100043629
-  _altitude: 97.66070100758225
+  _latitude: 7.040488210800134
+  _longitude: -73.83960151450849
+  _altitude: 99.07267150748521
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -9413,7 +9413,7 @@ Transform:
   m_GameObject: {fileID: 1897917795}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -459.73798, y: -2.382046, z: 575.992}
+  m_LocalPosition: {x: -458.69, y: -0.97, z: 575.992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10513,6 +10513,18 @@ PrefabInstance:
     - target: {fileID: 4969341171502818182, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7593139436725311355, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7593139436725311355, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7593139436725311355, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8577495209384076753, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
       propertyPath: homeWaypoint

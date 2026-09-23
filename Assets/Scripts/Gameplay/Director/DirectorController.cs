@@ -54,6 +54,14 @@ namespace SIRMED.Gameplay.Director
         private Coroutine _moveRoutine;
         private bool _spawned;
 
+        // Igual que el fix de spline degenerada en EvacuationRouteController: justo
+        // después de que ARCore reparenta homeWaypoint bajo su ARGeospatialAnchor recién
+        // resuelto, el Transform de ese anchor puede tardar uno o más frames en recibir
+        // su pose real trackeada — durante esa ventana lee (0,0,0)/cerca del origen de la
+        // sesión AR en vez de la posición real desplazada por GPS. Sin este chequeo el
+        // Director quedaba "spawneado" para siempre en el origen de la sesión.
+        private const float _minSpawnDistanceFromSessionOrigin = 0.5f;
+
         // ── Lifecycle ─────────────────────────────────────────────────────────────
         private void Awake()
         {
@@ -66,15 +74,35 @@ namespace SIRMED.Gameplay.Director
             if (Instance == this) Instance = null;
         }
 
+        private float _nextSpawnLogTime;
+
         private void Update()
         {
             // Spawn diferido: recién se ubica al Director en homeWaypoint cuando ese
             // anchor resuelve (mismo patrón de espera que EvacuationRouteController).
             if (_spawned || visualRoot == null || homeWaypoint == null) return;
-            if (!homeWaypoint.IsAnchorReady()) return;
 
-            visualRoot.position = homeWaypoint.transform.position;
+            if (!homeWaypoint.IsAnchorReady())
+            {
+                if (Time.time >= _nextSpawnLogTime)
+                {
+                    _nextSpawnLogTime = Time.time + 5f;
+                    Debug.Log($"[DirectorDiag] Waiting for homeWaypoint anchor. parent={homeWaypoint.transform.parent}");
+                }
+                return;
+            }
+
+            Vector3 pos = homeWaypoint.transform.position;
+            if (pos.sqrMagnitude < _minSpawnDistanceFromSessionOrigin * _minSpawnDistanceFromSessionOrigin)
+            {
+                // Anchor recién reparentado pero todavía sin pose real trackeada — reintentar
+                // el siguiente frame en vez de aceptar esta lectura transitoria.
+                return;
+            }
+
+            visualRoot.position = pos;
             _spawned = true;
+            Debug.Log($"[DirectorDiag] Spawned Director at world position {visualRoot.position}");
         }
 
         // ── API pública — consejos ───────────────────────────────────────────────
