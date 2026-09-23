@@ -698,7 +698,7 @@ MonoBehaviour:
   _altitudeOffset: NaN
   _latitude: 7.04009699979687
   _longitude: -73.83982500003607
-  _altitude: 100.02999997977167
+  _altitude: 100.02999997790903
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -7975,9 +7975,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.040127860514474
-  _longitude: -73.83980370683366
-  _altitude: 98.05081989616156
+  _latitude: 7.0404466001821415
+  _longitude: -73.83967527985972
+  _altitude: 96.49284623004496
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -7991,14 +7991,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1647742810}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -481.03, y: -1.99, z: 536.14}
+  m_LocalRotation: {x: -0, y: 0.8800069, z: -0, w: 0.4749609}
+  m_LocalPosition: {x: -466.84, y: -3.55, z: 571.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1625189080}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 123.286, z: 0}
 --- !u!1 &1664493016
 GameObject:
   m_ObjectHideFlags: 0
