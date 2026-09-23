@@ -47,7 +47,7 @@ MonoBehaviour:
   stageConfigs:
   - stageName: Intro
     ambientMode: 0
-    ambientColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    ambientColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     ambientIntensity: 1
     ambientSkyColor: {r: 0.5, g: 0.7, b: 1, a: 1}
     ambientEquatorColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
@@ -64,7 +64,7 @@ MonoBehaviour:
     transitionDuration: 1
   - stageName: Etapa1
     ambientMode: 0
-    ambientColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    ambientColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     ambientIntensity: 1
     ambientSkyColor: {r: 0.5, g: 0.7, b: 1, a: 1}
     ambientEquatorColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
@@ -81,7 +81,7 @@ MonoBehaviour:
     transitionDuration: 1.5
   - stageName: Etapa2
     ambientMode: 0
-    ambientColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    ambientColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     ambientIntensity: 0.8
     ambientSkyColor: {r: 0.5, g: 0.7, b: 1, a: 1}
     ambientEquatorColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
@@ -98,7 +98,7 @@ MonoBehaviour:
     transitionDuration: 2
   - stageName: Etapa3
     ambientMode: 0
-    ambientColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    ambientColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     ambientIntensity: 0.5
     ambientSkyColor: {r: 0.5, g: 0.7, b: 1, a: 1}
     ambientEquatorColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
@@ -115,7 +115,7 @@ MonoBehaviour:
     transitionDuration: 1
   - stageName: Etapa4
     ambientMode: 0
-    ambientColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    ambientColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     ambientIntensity: 0.3
     ambientSkyColor: {r: 0.5, g: 0.7, b: 1, a: 1}
     ambientEquatorColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
@@ -132,7 +132,7 @@ MonoBehaviour:
     transitionDuration: 0.8
   - stageName: Etapa5
     ambientMode: 0
-    ambientColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    ambientColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     ambientIntensity: 0.9
     ambientSkyColor: {r: 0.5, g: 0.7, b: 1, a: 1}
     ambientEquatorColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
