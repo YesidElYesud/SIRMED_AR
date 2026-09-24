@@ -46,6 +46,9 @@ namespace SIRMED.Gameplay.Environment
     {
         public static EvacuationRouteController Instance { get; private set; }
 
+        /// <summary>Se dispara justo antes del auto-ocultamiento por proximidad al punto de encuentro (ver Update). Usado por DirectorAdviceController para la regla "llegada" (GDD Tabla 15/Anexo A).</summary>
+        public event System.Action OnArrivalAtPuntoDeEncuentro;
+
         [Header("Ruta — Waypoints")]
         [Tooltip("GameObjects con RouteWaypoint + ARGeospatialCreatorAnchor, en orden desde el origen hasta el Punto de Encuentro.")]
         public RouteWaypoint[] waypoints;
@@ -146,10 +149,35 @@ namespace SIRMED.Gameplay.Environment
             Vector3 flat = puntoDeEncuentro.position - Camera.main.transform.position;
             flat.y = 0f;
             if (flat.sqrMagnitude <= hideRadius * hideRadius)
+            {
+                OnArrivalAtPuntoDeEncuentro?.Invoke();
                 Hide();
+            }
         }
 
         // ── API pública ───────────────────────────────────────────────────────────
+        /// <summary>True mientras la cinta está visible (o apareciendo/desapareciendo). Usado por DirectorAdviceController para solo evaluar "desvío" mientras la ruta está activa.</summary>
+        public bool IsVisible => _isVisible;
+
+        /// <summary>
+        /// Distancia (m) del punto de mundo dado al punto más cercano sobre la ruta ya
+        /// construida. false si la ruta todavía no se construyó (waypoints sin anclar).
+        /// Usado por DirectorAdviceController para detectar que el jugador se aleja de
+        /// la ruta (GDD Tabla 15: "N4 + usuario se aleja de la ruta").
+        /// </summary>
+        public bool TryGetDistanceToRoute(Vector3 worldPosition, out float distance)
+        {
+            if (!_built)
+            {
+                distance = 0f;
+                return false;
+            }
+
+            float3 localPoint = transform.InverseTransformPoint(worldPosition);
+            distance = SplineUtility.GetNearestPoint(_container.Spline, localPoint, out _, out _);
+            return true;
+        }
+
         public void Show()
         {
             if (!_built || _isVisible) return;
