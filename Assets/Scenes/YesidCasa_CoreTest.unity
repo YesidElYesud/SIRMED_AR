@@ -7274,7 +7274,7 @@ MonoBehaviour:
   Origin: {fileID: 596133977}
   CameraManager: {fileID: 791148985}
   ARCoreExtensionsConfig: {fileID: 11400000, guid: c109cc0d42e3648dca906c2cccaaa763, type: 2}
-  CameraConfigFilter: {fileID: 0}
+  CameraConfigFilter: {fileID: 11400000, guid: 709e361e27fc5744ab0f1b254887b9d1, type: 2}
 --- !u!4 &1476232296
 Transform:
   m_ObjectHideFlags: 0
