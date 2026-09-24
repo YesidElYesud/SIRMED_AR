@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions::Google.XR.ARCoreExtensions.ARCoreExtensionsCameraConfigFilter
   TargetCameraFramerate: 1
   DepthSensorUsage: 3
-  StereoCameraUsage: 3
+  StereoCameraUsage: 2
