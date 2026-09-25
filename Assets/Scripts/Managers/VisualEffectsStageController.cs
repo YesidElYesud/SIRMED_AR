@@ -4,6 +4,7 @@ namespace SIRMED.Managers
     using System.Collections;
     using UnityEngine;
     using UnityEngine.Rendering;
+    using SIRMED.Utils;
 
 #if UNITY_POST_PROCESSING_STACK_V2
     using UnityEngine.Rendering.PostProcessing;
@@ -37,6 +38,13 @@ namespace SIRMED.Managers
     ///   5. (Post-processing) Crear volúmenes globales en escena y asignarlos
     ///      en el campo postProcessVolume de cada etapa. Solo el volumen
     ///      de la etapa activa tendrá weight=1; los demás weight=0.
+    ///
+    /// Convivencia con HDRLightEstimation: si hay uno activo en escena y el
+    /// dispositivo ya entrega estimación de luz real, esta clase deja de
+    /// escribir el sol y el ambiente directamente — en su lugar le pasa
+    /// sunColor/sunIntensity/ambientIntensity como tinte y multiplicadores
+    /// sobre la luz real (SetStageModulation). Intro/Etapa1 (1.0) quedan como
+    /// base neutra = luz real tal cual. Sin estimación, comportamiento de siempre.
     /// </summary>
     public class VisualEffectsStageController : MonoBehaviour
     {
@@ -153,6 +161,13 @@ namespace SIRMED.Managers
         private Coroutine _ppTransitionRoutine;
         private int _currentStageIndex = -1;
 
+        // Valores de sol/ambiente de la etapa actual (lo que se interpola en las
+        // transiciones). No se leen de sunLight porque con HDRLightEstimation
+        // activo la luz contiene estimación real × estos valores.
+        private Color _stageSunColor = Color.white;
+        private float _stageSunIntensity = 1f;
+        private float _stageAmbientIntensity = 1f;
+
         // ── Lifecycle ─────────────────────────────────────────────────────────────
         private void Awake()
         {
@@ -231,6 +246,11 @@ namespace SIRMED.Managers
         // ── Ambient mode ──────────────────────────────────────────────────────────
         private void ApplyAmbientMode(StageVisualConfig config)
         {
+            // El ambiente real (armónicos esféricos) lo pone HDRLightEstimation,
+            // modulado por ambientIntensity vía SetStageModulation.
+            if (HDRLightEstimation.Instance != null && HDRLightEstimation.Instance.ProvidesAmbient)
+                return;
+
             switch (config.ambientMode)
             {
                 case AmbientSourceMode.Trilight:
@@ -349,10 +369,28 @@ namespace SIRMED.Managers
             RenderSettings.fogDensity = config.fogDensity;
             RenderSettings.fogMode = FogMode.ExponentialSquared;
 
-            if (sunLight != null)
+            ApplySunValues(config.sunColor, config.sunIntensity, config.ambientIntensity);
+        }
+
+        /// <summary>
+        /// Aplica sol/ambiente de la etapa: como modulación sobre la luz real si
+        /// HDRLightEstimation está entregando estimación, o directo a sunLight si no.
+        /// </summary>
+        private void ApplySunValues(Color sunColor, float sunIntensity, float ambientIntensity)
+        {
+            _stageSunColor = sunColor;
+            _stageSunIntensity = sunIntensity;
+            _stageAmbientIntensity = ambientIntensity;
+
+            var hdr = HDRLightEstimation.Instance;
+            if (hdr != null)
+                hdr.SetStageModulation(sunColor, sunIntensity, ambientIntensity);
+
+            bool lightDrivenByEstimate = hdr != null && hdr.HasLightEstimate && hdr.TargetLight == sunLight;
+            if (sunLight != null && !lightDrivenByEstimate)
             {
-                sunLight.color = config.sunColor;
-                sunLight.intensity = config.sunIntensity;
+                sunLight.color = sunColor;
+                sunLight.intensity = sunIntensity;
             }
         }
 
@@ -364,8 +402,9 @@ namespace SIRMED.Managers
             // Capturar valores de inicio
             Color startFogColor = RenderSettings.fogColor;
             float startFogDensity = RenderSettings.fogDensity;
-            Color startSunColor = sunLight != null ? sunLight.color : Color.white;
-            float startSunIntensity = sunLight != null ? sunLight.intensity : 1f;
+            Color startSunColor = _stageSunColor;
+            float startSunIntensity = _stageSunIntensity;
+            float startAmbientIntensity = _stageAmbientIntensity;
 
             float endFogDensity = target.enableFog ? target.fogDensity : 0f;
             if (target.enableFog) RenderSettings.fog = true;
@@ -378,11 +417,10 @@ namespace SIRMED.Managers
                 RenderSettings.fogColor = Color.Lerp(startFogColor, target.fogColor, t);
                 RenderSettings.fogDensity = Mathf.Lerp(startFogDensity, endFogDensity, t);
 
-                if (sunLight != null)
-                {
-                    sunLight.color = Color.Lerp(startSunColor, target.sunColor, t);
-                    sunLight.intensity = Mathf.Lerp(startSunIntensity, target.sunIntensity, t);
-                }
+                ApplySunValues(
+                    Color.Lerp(startSunColor, target.sunColor, t),
+                    Mathf.Lerp(startSunIntensity, target.sunIntensity, t),
+                    Mathf.Lerp(startAmbientIntensity, target.ambientIntensity, t));
 
                 yield return null;
             }

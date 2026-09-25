@@ -2557,6 +2557,7 @@ GameObject:
   - component: {fileID: 569233392}
   - component: {fileID: 569233391}
   - component: {fileID: 569233393}
+  - component: {fileID: 569233394}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -2673,6 +2674,20 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &569233394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569233390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb4d53e934a9534c8171a255d954173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Utils.HDRLightEstimation
+  m_CameraManager: {fileID: 791148985}
+  m_Light: {fileID: 569233391}
 --- !u!1001 &571604830
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4441,7 +4456,7 @@ MonoBehaviour:
   m_LightEstimationMode: -1
   m_AutoFocus: 1
   m_ImageStabilization: 0
-  m_LightEstimation: 0
+  m_LightEstimation: 8
   m_FacingDirection: 1
   m_RenderMode: 0
 --- !u!81 &791148986
@@ -10645,6 +10660,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 6169024265861012582, guid: c01953915d86b2042b40e356131176fc, type: 3}
+      propertyPath: sunLight
+      value: 
+      objectReference: {fileID: 569233391}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
