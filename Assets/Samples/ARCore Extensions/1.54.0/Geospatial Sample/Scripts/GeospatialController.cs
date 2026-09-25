@@ -474,7 +474,7 @@ namespace Google.XR.ARCoreExtensions.Samples.Geospatial
             _isReturning = false;
             _enablingGeospatial = false;
             InfoPanel.SetActive(false);
-            GeometryToggle.gameObject.SetActive(false);
+            //GeometryToggle.gameObject.SetActive(false);
             AnchorSettingButton.gameObject.SetActive(false);
             AnchorSettingPanel.gameObject.SetActive(false);
             GeospatialAnchorToggle.gameObject.SetActive(false);
@@ -648,7 +648,7 @@ namespace Google.XR.ARCoreExtensions.Samples.Geospatial
                 {
                     _isLocalizing = true;
                     _localizationPassedTime = 0f;
-                    GeometryToggle.gameObject.SetActive(false);
+                    //GeometryToggle.gameObject.SetActive(false);
                     AnchorSettingButton.gameObject.SetActive(false);
                     AnchorSettingPanel.gameObject.SetActive(false);
                     GeospatialAnchorToggle.gameObject.SetActive(false);
@@ -677,7 +677,7 @@ namespace Google.XR.ARCoreExtensions.Samples.Geospatial
                 // Finished localization.
                 _isLocalizing = false;
                 _localizationPassedTime = 0f;
-                GeometryToggle.gameObject.SetActive(true);
+                //GeometryToggle.gameObject.SetActive(true);
                 AnchorSettingButton.gameObject.SetActive(true);
                 ClearAllButton.gameObject.SetActive(_anchorObjects.Count > 0);
                 SnackBarText.text = _localizationSuccessMessage;
@@ -1401,7 +1401,7 @@ namespace Google.XR.ARCoreExtensions.Samples.Geospatial
                 return;
             }
 
-            GeometryToggle.gameObject.SetActive(false);
+            //GeometryToggle.gameObject.SetActive(false);
             AnchorSettingButton.gameObject.SetActive(false);
             AnchorSettingPanel.gameObject.SetActive(false);
             GeospatialAnchorToggle.gameObject.SetActive(false);

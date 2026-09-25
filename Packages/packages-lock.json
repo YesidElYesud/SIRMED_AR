@@ -211,21 +211,21 @@
       }
     },
     "com.unity.xr.arcore": {
-      "version": "6.6.1",
+      "version": "6.6.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.xr.core-utils": "2.6.0",
         "com.unity.xr.management": "4.4.0",
-        "com.unity.xr.arfoundation": "6.6.1",
+        "com.unity.xr.arfoundation": "6.6.2",
         "com.unity.modules.androidjni": "1.0.0",
         "com.unity.modules.unitywebrequest": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.arfoundation": {
-      "version": "6.6.1",
-      "depth": 0,
+      "version": "6.6.2",
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.ugui": "2.0.0",
@@ -242,13 +242,13 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.arkit": {
-      "version": "6.6.1",
+      "version": "6.6.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.xr.core-utils": "2.2.2",
         "com.unity.xr.management": "4.4.0",
-        "com.unity.xr.arfoundation": "6.6.1",
+        "com.unity.xr.arfoundation": "6.6.2",
         "com.unity.editorcoroutines": "1.0.0"
       },
       "url": "https://packages.unity.com"
@@ -282,6 +282,13 @@
         "com.unity.xr.legacyinputhelpers": "2.1.11"
       },
       "url": "https://packages.unity.com"
+    },
+    "com.yasirkula.ingamedebugconsole": {
+      "version": "https://github.com/yasirkula/UnityIngameDebugConsole.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "73c1d9c582e0b49d63ddcd6efb48b0059f33d43c"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
