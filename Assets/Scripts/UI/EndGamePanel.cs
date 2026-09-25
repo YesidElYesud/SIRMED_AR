@@ -35,6 +35,10 @@ namespace SIRMED.UI
         {
             if (Instance != null && Instance != this) { Destroy(gameObject); return; }
             Instance = this;
+
+            if (restartButton != null)
+                restartButton.onClick.AddListener(Restart);
+
             gameObject.SetActive(false);
         }
 

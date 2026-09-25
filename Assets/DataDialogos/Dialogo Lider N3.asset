@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64322bcf911b1bc41a2a521643cb8e77, type: 3}
+  m_Name: Dialogo Lider N3
+  m_EditorClassIdentifier: 
+  npcName: Lider Comunitario
+  npcPhoto: {fileID: 21300000, guid: 182acf71ddf9c950fa17aa1f5eb640e3, type: 3}
+  dialogueEntries:
+  - text: "Vecino! La situaci\xF3n ha cambiado, estamos en alerta naranja y el nivel
+      de la quebrada ha aumentado, por lo que es importante que te mantengas alejado
+      de las zonas cercanas al cause."
+    audio: {fileID: 8300000, guid: 5cb8ddfa791a4e120a9e3547858852f9, type: 3}
+  - text: "Ya se activ\xF3 la cadena de llamadas con el SIATA y se tom\xF3 la decisi\xF3n
+      de encender la alerta. Si escuchas sonidos intermitentes, significa que debes
+      permanecer en alerta ante un posible incremento del nivel del agua y una eventual
+      evacuaci\xF3n."
+    audio: {fileID: 8300000, guid: adbb5ecd8c15908d08bbaf33f229e208, type: 3}
+  - text: "Te recomiendo consultar el geoportal del SIATA para verificar c\xF3mo
+      se encuentra el nivel de la quebrada. Tambi\xE9n es importante estar atento
+      a las comunicaciones y grupos comunitarios del barrio, donde se comparte informaci\xF3n
+      relevante sobre la situaci\xF3n en el sector."
+    audio: {fileID: 8300000, guid: b92d4e17e7a41f3ebbdc73508989c71f, type: 3}
+  dialogueLines:
+  - "Hola, vecino. La situaci\xF3n ha cambiado, estamos en alerta naranja."
+  - El nivel de la quebrada ha aumentado, por eso es importante que evites zonas
+    cercanas a la quebrada.
+  - "Te recomiendo consultar el Geoportal del SIATA para ver c\xF3mo est\xE1 el nivel
+    de la quebrada y revisar el SIRMED. "
+  - "Mantente preparado y atento a la alarma, ya que podr\xEDamos necesitar evacuar
+    en cualquier momento."
+  npcText: "\xBFQu\xE9 haces ante una alerta de inundaci\xF3n?"
+  options: []
+  advancesStageOnCorrect: 0
+  correctAnswerDelay: 1.5

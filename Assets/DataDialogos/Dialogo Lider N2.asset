@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64322bcf911b1bc41a2a521643cb8e77, type: 3}
+  m_Name: Dialogo Lider N2
+  m_EditorClassIdentifier: 
+  npcName: Lider Comunitario
+  npcPhoto: {fileID: 21300000, guid: 182acf71ddf9c950fa17aa1f5eb640e3, type: 3}
+  dialogueEntries:
+  - text: "Hola, vecino. En este momento estamos en alerta amarilla, as\xED que es
+      importante estar atentos."
+    audio: {fileID: 8300000, guid: c5d7d3a990b5aec8ba6861388485549e, type: 3}
+  - text: "Te recomiendo consultar el Geoportal del SIATA para ver c\xF3mo est\xE1
+      el nivel de la quebrada y revisar el SIRMED. "
+    audio: {fileID: 8300000, guid: 1af03e897ad3f064398cb1170695f52b, type: 3}
+  - text: Mantente informado y preparado ante cualquier cambio en las condiciones.
+    audio: {fileID: 8300000, guid: d86d14237673c9d079d3862a3e4e4bae, type: 3}
+  dialogueLines:
+  - "Hola, vecino. En este momento estamos en alerta amarilla, as\xED que es importante
+    estar atentos."
+  - "Te recomiendo consultar el Geoportal del SIATA para ver c\xF3mo est\xE1 el nivel
+    de la quebrada y revisar el SIRMED. Mantente informado y preparado ante cualquier
+    cambio en las condiciones."
+  npcText: "\xBFQu\xE9 haces ante una alerta de inundaci\xF3n?"
+  options: []
+  advancesStageOnCorrect: 0
+  correctAnswerDelay: 1.5

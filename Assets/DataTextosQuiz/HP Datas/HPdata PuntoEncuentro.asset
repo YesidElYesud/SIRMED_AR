@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caccdb802bd40ce42a70a8fa140c26d2, type: 3}
+  m_Name: HPdata PuntoEncuentro
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Hotspots.HotspotData
+  title: Hotspot
+  description: "Informaci\xF3n del hotspot."
+  icon: {fileID: 0}
+  actionType: 0
+  cinematicClip: {fileID: 0}
+  cinematicUrl: 
+  cinematicAdvancesStage: 0
+  dialogueData: {fileID: 0}
+  siataSequence: {fileID: 0}
+  infoSlides: []
+  infoSlideAdvancesStage: 0
+  triggerRadius: 3
+  requiredStage: -1
+  headerImage: {fileID: 0}
+  riskLevel: 0
+  trivia: {fileID: 0}
+  triviaPool: []
+  advancesStageOnClose: 0
+  activatesEvacuationRoute: 1
+  activatesEndGame: 1
+  endGameRequiredStage: -1
+  isBlinking: 1
+  blinkSpeed: 1.5

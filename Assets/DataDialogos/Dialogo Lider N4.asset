@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64322bcf911b1bc41a2a521643cb8e77, type: 3}
+  m_Name: Dialogo Lider N4
+  m_EditorClassIdentifier: 
+  npcName: Lider Comunitario
+  npcPhoto: {fileID: 21300000, guid: 182acf71ddf9c950fa17aa1f5eb640e3, type: 3}
+  dialogueEntries:
+  - text: "\xA1Vecino! estamos en alerta roja. La quebrada se ha desbordado y ya
+      se presentan inundaciones en el sector, por lo que la situaci\xF3n representa
+      un riesgo para la comunidad."
+    audio: {fileID: 8300000, guid: aa03d18183a9440598ecff9bfd6c1ea2, type: 3}
+  - text: "ya se activ\xF3 la cadena de llamadas con el SIATA, junto con los l\xEDderes
+      comunitarios. Se tom\xF3 la decisi\xF3n de evacuar el barrio de manera inmediata.
+      La sirena ya se encuentra activa de manera continua, lo que indica evacuaci\xF3n."
+    audio: {fileID: 8300000, guid: 94b388bda5fe96fa8b3f1a8edc7025cc, type: 3}
+  - text: "Debes salir de inmediato siguiendo la ruta de evacuaci\xF3n y dirigirte
+      al punto de encuentro m\xE1s cercano. No te detengas en zonas inundadas ni
+      intentes cruzar corrientes de agua."
+    audio: {fileID: 8300000, guid: d7f3a965bc91966bd8406b1599d068d0, type: 3}
+  - text: "Recuerda que puedes consultar el SIATA y el SIRMED, pero en este momento
+      lo m\xE1s importante es proteger tu vida y ponerte a salvo."
+    audio: {fileID: 8300000, guid: 38ab06a854d493473a9be4596548998a, type: 3}
+  dialogueLines:
+  - "\xA1Vecino! Estamos en alerta roja. La quebrada se ha desbordado y hay inundaciones
+    en el sector."
+  - "Debes evacuar de inmediato. Sigue la ruta de evacuaci\xF3n y dir\xEDgete al
+    punto de encuentro m\xE1s cercano. No te detengas en zonas inundadas."
+  - "Recuerda que puedes consultar el SIATA y el SIRMED, pero en este momento lo
+    m\xE1s importante es ponerte a salvo."
+  npcText: "\xBFQu\xE9 haces ante una alerta de inundaci\xF3n?"
+  options: []
+  advancesStageOnCorrect: 0
+  correctAnswerDelay: 1.5
