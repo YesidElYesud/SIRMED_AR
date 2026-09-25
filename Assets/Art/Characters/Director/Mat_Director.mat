@@ -7,13 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Assets/Art/Characters/Director/ExtraDirector.mat
-  m_Name: ExtraDirector
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-=======
-  m_Name: Director
+  m_Name: Mat_Director
   m_Shader: {fileID: -6465566751694194690, guid: d6aa5a6ec62a6c2458f333604f21daba, type: 3}
->>>>>>> Mateo-y-Josue:Assets/Art/Characters/Director/Director.mat
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -139,7 +134,7 @@ Material:
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &1164458809025273353
+--- !u!114 &4574696997119150083
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
