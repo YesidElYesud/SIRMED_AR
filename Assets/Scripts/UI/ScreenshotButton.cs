@@ -25,6 +25,9 @@ namespace SIRMED.UI
     ///   ScreenshotButton        [Button, Image, este script]   ← _captureButton
     ///   ScreenshotFlash         [Image blanca stretch, CanvasGroup alpha 0, sin Raycast Target] ← _flash (opcional)
     ///   ScreenshotToast         [Image + TMP hijo]              ← _savedToast (opcional, inactivo)
+    ///
+    /// Sonido de obturador opcional (_shutterSound): se reproduce en 2D al tocar el
+    /// botón; si no se asigna un AudioSource, se crea uno en este mismo GameObject.
     /// </summary>
     public class ScreenshotButton : MonoBehaviour
     {
@@ -34,11 +37,19 @@ namespace SIRMED.UI
         [Header("Feedback (opcional)")]
         [Tooltip("Destello blanco tras la captura (CanvasGroup sobre una Image blanca a pantalla completa).")]
         [SerializeField] private CanvasGroup _flash;
-        [SerializeField] private float _flashDuration = 0.35f;
+        [Tooltip("Segundos que tarda el destello en desvanecerse.")]
+        [SerializeField] private float _flashDuration = 0.7f;
 
         [Tooltip("Mensaje breve \"Foto guardada\" que se muestra unos segundos tras guardar.")]
         [SerializeField] private GameObject _savedToast;
         [SerializeField] private float _toastDuration = 2f;
+
+        [Header("Sonido (opcional)")]
+        [Tooltip("Clip de obturador que suena al tomar la foto.")]
+        [SerializeField] private AudioClip _shutterSound;
+        [SerializeField, Range(0f, 1f)] private float _shutterVolume = 1f;
+        [Tooltip("Si queda vacío y hay clip, se crea un AudioSource 2D en este GameObject.")]
+        [SerializeField] private AudioSource _audioSource;
 
         [Header("Galería")]
         [Tooltip("Álbum/carpeta donde quedan las fotos en la galería del teléfono.")]
@@ -54,6 +65,14 @@ namespace SIRMED.UI
 
             if (_flash != null) _flash.alpha = 0f;
             if (_savedToast != null) _savedToast.SetActive(false);
+
+            if (_shutterSound != null && _audioSource == null)
+            {
+                _audioSource = gameObject.AddComponent<AudioSource>();
+                _audioSource.playOnAwake = false;
+                _audioSource.loop = false;
+                _audioSource.spatialBlend = 0f; // 2D
+            }
         }
 
         // ── API pública ───────────────────────────────────────────────────────────
@@ -67,6 +86,9 @@ namespace SIRMED.UI
         private IEnumerator CaptureRoutine()
         {
             _busy = true;
+
+            if (_shutterSound != null && _audioSource != null)
+                _audioSource.PlayOneShot(_shutterSound, _shutterVolume);
 
             // Se lee el frame al terminar de componerse (cámara + 3D + UI overlay).
             yield return new WaitForEndOfFrame();

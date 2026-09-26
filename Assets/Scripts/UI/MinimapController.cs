@@ -1,6 +1,7 @@
 namespace SIRMED.UI
 {
     using System.Collections.Generic;
+    using SIRMED.Gameplay.Environment;
     using SIRMED.Gameplay.Hotspots;
     using UnityEngine;
     using UnityEngine.UI;
@@ -27,6 +28,15 @@ namespace SIRMED.UI
     ///           ├── PlayerIcon    ← playerIcon (fijo en el centro, rota con la cámara)
     ///           └── DotsContainer ← dotsContainer (vacío; acá se instancian los DotPrefab)
     ///   DotPrefab (Image)         ← dotPrefab, prefab asignado en el Inspector (no vive en la escena)
+    ///
+    /// Ruta y modo evacuación (GDD Mecánica 1, Tabla 14) — todo opcional:
+    ///   • routeDotPrefab: desde showRouteFromLevel la ruta de EvacuationRouteController
+    ///     se dibuja punteada (un punto cada routeDotSpacing metros).
+    ///   • meetingPointIcon: ícono del punto de encuentro (hijo de RadarArea); se
+    ///     muestra con la ruta y queda pegado al borde cuando está lejos, así siempre
+    ///     indica la dirección hacia la zona segura.
+    ///   • Desde evacuationModeLevel (N4) se ocultan los puntos de hotspots y quedan
+    ///     solo jugador, ruta y punto de encuentro.
     /// </summary>
     public class MinimapController : MonoBehaviour
     {
@@ -60,6 +70,22 @@ namespace SIRMED.UI
         [Tooltip("Margen en píxeles para que el punto no quede pegado justo al borde del radar.")]
         public float edgePaddingPx = 6f;
 
+        [Header("Ruta de evacuación (opcional)")]
+        [Tooltip("Prefab de los puntos que dibujan la ruta. Vacío = no se dibuja la ruta.")]
+        public RectTransform routeDotPrefab;
+
+        [Tooltip("Separación en metros entre puntos de la ruta.")]
+        public float routeDotSpacing = 4f;
+
+        [Tooltip("Desde este nivel se dibujan la ruta y el punto de encuentro (GDD: N2 como aprendizaje).")]
+        public RiskLevel showRouteFromLevel = RiskLevel.N2;
+
+        [Tooltip("Ícono del punto de encuentro, hijo de RadarArea (encima de DotsContainer).")]
+        public RectTransform meetingPointIcon;
+
+        [Tooltip("Desde este nivel se ocultan los puntos de hotspots (modo evacuación).")]
+        public RiskLevel evacuationModeLevel = RiskLevel.N4;
+
         [Header("Colores por nivel de riesgo (opcional)")]
         [Tooltip("Color de respaldo cuando el hotspot no tiene riskLevel o no hay color asignado.")]
         public Color defaultDotColor = Color.white;
@@ -74,6 +100,7 @@ namespace SIRMED.UI
             new Dictionary<HotspotController, RectTransform>();
         private readonly List<HotspotController> _staleBuffer = new List<HotspotController>();
         private bool _visible = true;
+        private readonly List<RectTransform> _routeDots = new List<RectTransform>();
 
         // ── Lifecycle ─────────────────────────────────────────────────────────────
         private void Awake()
@@ -83,6 +110,10 @@ namespace SIRMED.UI
 
             if (dotPrefab != null)
                 dotPrefab.gameObject.SetActive(false);
+            if (routeDotPrefab != null && routeDotPrefab.gameObject.scene.IsValid())
+                routeDotPrefab.gameObject.SetActive(false);
+            if (meetingPointIcon != null)
+                meetingPointIcon.gameObject.SetActive(false);
         }
 
         private void Start()
@@ -102,8 +133,16 @@ namespace SIRMED.UI
         {
             if (!_visible || _playerCamera == null || radarArea == null) return;
 
+            RiskLevel level = RiskLevelIndicator.Instance != null
+                ? RiskLevelIndicator.Instance.CurrentLevel
+                : RiskLevel.None;
+            bool evacuationMode = level != RiskLevel.None && level >= evacuationModeLevel;
+            bool showRoute = level != RiskLevel.None && level >= showRouteFromLevel;
+
             RotatePlayerIcon();
-            RefreshDots();
+            if (evacuationMode) HideAllDots();
+            else RefreshDots();
+            RefreshRoute(showRoute);
         }
 
         // ── API pública ───────────────────────────────────────────────────────────
@@ -193,6 +232,75 @@ namespace SIRMED.UI
 
             _dots[hotspot] = dot;
             return dot;
+        }
+
+        private void HideAllDots()
+        {
+            foreach (var kv in _dots)
+                if (kv.Value != null && kv.Value.gameObject.activeSelf)
+                    kv.Value.gameObject.SetActive(false);
+        }
+
+        // ── Ruta + punto de encuentro ─────────────────────────────────────────────
+        private void RefreshRoute(bool show)
+        {
+            EvacuationRouteController route = EvacuationRouteController.Instance;
+            IReadOnlyList<Vector3> points = null;
+            bool hasRoute = show && route != null && routeDotPrefab != null && dotsContainer != null &&
+                            route.TryGetSampledPoints(routeDotSpacing, out points);
+
+            float radiusPx = radarArea.rect.width * 0.5f;
+            float maxPx = radiusPx - edgePaddingPx;
+            Vector3 camPos = _playerCamera.position;
+
+            int used = 0;
+            if (hasRoute)
+            {
+                foreach (Vector3 p in points)
+                {
+                    Vector2 px = ToRadar(p - camPos, radiusPx);
+                    if (px.magnitude > maxPx) continue; // la ruta solo se dibuja dentro del radar
+                    RectTransform dot = GetRouteDot(used++);
+                    dot.anchoredPosition = px;
+                }
+            }
+            for (int i = used; i < _routeDots.Count; i++)
+                if (_routeDots[i].gameObject.activeSelf) _routeDots[i].gameObject.SetActive(false);
+
+            if (meetingPointIcon == null) return;
+            Transform meeting = route != null ? route.puntoDeEncuentro : null;
+            bool meetingReady = show && meeting != null && IsAnchored(meeting);
+            if (meetingPointIcon.gameObject.activeSelf != meetingReady)
+                meetingPointIcon.gameObject.SetActive(meetingReady);
+            if (!meetingReady) return;
+
+            Vector2 mpx = ToRadar(meeting.position - camPos, radiusPx);
+            if (mpx.magnitude > maxPx) mpx = mpx.normalized * maxPx; // siempre marca la dirección
+            meetingPointIcon.anchoredPosition = mpx;
+        }
+
+        private Vector2 ToRadar(Vector3 worldOffset, float radiusPx) =>
+            new Vector2(worldOffset.x, worldOffset.z) * (radiusPx / worldRange);
+
+        private RectTransform GetRouteDot(int index)
+        {
+            while (_routeDots.Count <= index)
+            {
+                RectTransform dot = Instantiate(routeDotPrefab, dotsContainer);
+                dot.gameObject.name = $"RouteDot_{_routeDots.Count}";
+                dot.SetAsFirstSibling(); // debajo de los puntos de hotspots
+                _routeDots.Add(dot);
+            }
+            RectTransform d = _routeDots[index];
+            if (!d.gameObject.activeSelf) d.gameObject.SetActive(true);
+            return d;
+        }
+
+        private static bool IsAnchored(Transform t)
+        {
+            var hotspot = t.GetComponent<HotspotController>();
+            if (hotspot != null) return hotspot.IsAnchorReady();
+            return t.parent != null && t.parent.GetComponent<Google.XR.ARCoreExtensions.ARGeospatialAnchor>() != null;
         }
 
         private void HideDot(HotspotController hotspot)

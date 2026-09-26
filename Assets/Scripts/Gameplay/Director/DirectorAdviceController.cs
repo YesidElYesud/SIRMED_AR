@@ -117,8 +117,12 @@ namespace SIRMED.Gameplay.Director
             bool isN4 = RiskLevelIndicator.Instance != null &&
                         RiskLevelIndicator.Instance.CurrentLevel == RiskLevel.N4;
 
-            CheckInactivity(isN4);
-            CheckDesvio(isN4);
+            // GDD §24: sin posición confiable no se da orientación crítica. Pasar false
+            // reinicia los temporizadores de ambas reglas, así que al recuperar el
+            // tracking se vuelve a medir desde cero en vez de reaccionar al salto.
+            bool evaluate = isN4 && TrackingStatusBanner.IsPositionReliable;
+            CheckInactivity(evaluate);
+            CheckDesvio(evaluate);
         }
 
         // ── Regla: N4 + inmóvil ───────────────────────────────────────────────────

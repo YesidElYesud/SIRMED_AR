@@ -2,6 +2,8 @@ namespace SIRMED.Gameplay.Environment
 {
     using System.Collections;
     using System.Collections.Generic;
+    using SIRMED.Gameplay.Hotspots;
+    using SIRMED.UI;
     using Unity.Mathematics;
     using UnityEngine;
     using UnityEngine.Splines;
@@ -38,6 +40,11 @@ namespace SIRMED.Gameplay.Environment
     /// API pública: Show()/Hide(), igual firma que el original — se invoca
     /// desde HotspotController.ClosePanel() cuando data.activatesEvacuationRoute
     /// es true.
+    ///
+    /// Además la ruta se muestra sola desde autoShowFromLevel (GDD §13, Tabla 11:
+    /// "se prioriza en N3 y se hace obligatoriamente visible en N4"). Si se baja de
+    /// ese nivel, se oculta salvo que la haya abierto un hotspot. Tras llegar al
+    /// punto de encuentro no se vuelve a mostrar sola hasta bajar de nivel.
     /// </summary>
     [RequireComponent(typeof(SplineContainer))]
     [RequireComponent(typeof(MeshFilter))]
@@ -63,6 +70,10 @@ namespace SIRMED.Gameplay.Environment
 
         [Tooltip("Radio (m) para el auto-ocultamiento.")]
         public float hideRadius = 4f;
+
+        [Header("Visibilidad por nivel de riesgo (GDD §13)")]
+        [Tooltip("Desde este nivel la ruta aparece sola. None = solo la abren los hotspots con activatesEvacuationRoute.")]
+        public RiskLevel autoShowFromLevel = RiskLevel.N3;
 
         [Header("Apariencia")]
         [Tooltip("Ancho de la cinta en metros.")]
@@ -91,6 +102,10 @@ namespace SIRMED.Gameplay.Environment
         private float _currentAlpha;
         private bool _isVisible;
         private bool _built;
+        private bool _shownByHotspot;
+        private bool _arrived;
+        private readonly List<Vector3> _sampledPoints = new List<Vector3>();
+        private float _sampledSpacing = -1f;
 
         // ── Lifecycle ─────────────────────────────────────────────────────────────
         private void Awake()
@@ -144,12 +159,15 @@ namespace SIRMED.Gameplay.Environment
                 return;
             }
 
+            UpdateLevelVisibility();
+
             if (!_isVisible || puntoDeEncuentro == null || Camera.main == null) return;
 
             Vector3 flat = puntoDeEncuentro.position - Camera.main.transform.position;
             flat.y = 0f;
             if (flat.sqrMagnitude <= hideRadius * hideRadius)
             {
+                _arrived = true;
                 OnArrivalAtPuntoDeEncuentro?.Invoke();
                 Hide();
             }
@@ -158,6 +176,35 @@ namespace SIRMED.Gameplay.Environment
         // ── API pública ───────────────────────────────────────────────────────────
         /// <summary>True mientras la cinta está visible (o apareciendo/desapareciendo). Usado por DirectorAdviceController para solo evaluar "desvío" mientras la ruta está activa.</summary>
         public bool IsVisible => _isVisible;
+
+        /// <summary>True una vez que todos los waypoints anclaron y la cinta está construida.</summary>
+        public bool IsBuilt => _built;
+
+        /// <summary>
+        /// Puntos de mundo a lo largo de la ruta, uno cada spacingMeters. Usado por
+        /// MinimapController para dibujar la ruta punteada. false si aún no se construyó.
+        /// La lista devuelta es interna: no modificarla.
+        /// </summary>
+        public bool TryGetSampledPoints(float spacingMeters, out IReadOnlyList<Vector3> points)
+        {
+            points = _sampledPoints;
+            if (!_built) return false;
+
+            spacingMeters = Mathf.Max(0.5f, spacingMeters);
+            if (!Mathf.Approximately(spacingMeters, _sampledSpacing))
+            {
+                _sampledSpacing = spacingMeters;
+                _sampledPoints.Clear();
+                Spline spline = _container.Spline;
+                int count = Mathf.Max(2, Mathf.CeilToInt(spline.GetLength() / spacingMeters) + 1);
+                for (int i = 0; i < count; i++)
+                {
+                    float3 p = spline.EvaluatePosition(i / (float)(count - 1));
+                    _sampledPoints.Add(transform.TransformPoint(new Vector3(p.x, p.y, p.z)));
+                }
+            }
+            return true;
+        }
 
         /// <summary>
         /// Distancia (m) del punto de mundo dado al punto más cercano sobre la ruta ya
@@ -180,6 +227,12 @@ namespace SIRMED.Gameplay.Environment
 
         public void Show()
         {
+            _shownByHotspot = true;
+            ShowInternal();
+        }
+
+        private void ShowInternal()
+        {
             if (!_built || _isVisible) return;
             _isVisible = true;
             _meshRenderer.enabled = true;
@@ -189,10 +242,31 @@ namespace SIRMED.Gameplay.Environment
 
         public void Hide()
         {
+            _shownByHotspot = false;
             if (!_isVisible) return;
             _isVisible = false;
             if (_fadeRoutine != null) StopCoroutine(_fadeRoutine);
             _fadeRoutine = StartCoroutine(FadeRoutine(_currentAlpha, 0f, fadeOutDuration));
+        }
+
+        // ── Visibilidad por nivel ─────────────────────────────────────────────────
+        private void UpdateLevelVisibility()
+        {
+            if (autoShowFromLevel == RiskLevel.None) return;
+
+            RiskLevel level = RiskLevelIndicator.Instance != null
+                ? RiskLevelIndicator.Instance.CurrentLevel
+                : RiskLevel.None;
+            bool wanted = level != RiskLevel.None && level >= autoShowFromLevel;
+
+            if (!wanted)
+            {
+                _arrived = false;
+                if (_isVisible && !_shownByHotspot) Hide();
+                return;
+            }
+
+            if (!_isVisible && !_arrived) ShowInternal();
         }
 
         // ── Anclaje geoespacial ───────────────────────────────────────────────────
