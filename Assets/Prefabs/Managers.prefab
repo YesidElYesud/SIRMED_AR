@@ -57,7 +57,7 @@ MonoBehaviour:
     enableFog: 0
     fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     fogDensity: 0.02
-    postProcessVolume: {fileID: 0}
+    postProcessProfile: {fileID: 0}
     ppFadeDuration: 1
     particlesToPlay: []
     particlesToStop: []
@@ -74,7 +74,7 @@ MonoBehaviour:
     enableFog: 0
     fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     fogDensity: 0.02
-    postProcessVolume: {fileID: 0}
+    postProcessProfile: {fileID: 11400000, guid: 0607f3f4e0664f64bbd95506be49f7ea, type: 2}
     ppFadeDuration: 1
     particlesToPlay: []
     particlesToStop: []
@@ -91,7 +91,7 @@ MonoBehaviour:
     enableFog: 1
     fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     fogDensity: 0.01
-    postProcessVolume: {fileID: 0}
+    postProcessProfile: {fileID: 11400000, guid: 8ee2a598b7719b34a9d124c523022c9b, type: 2}
     ppFadeDuration: 1
     particlesToPlay: []
     particlesToStop: []
@@ -108,7 +108,7 @@ MonoBehaviour:
     enableFog: 1
     fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     fogDensity: 0.03
-    postProcessVolume: {fileID: 0}
+    postProcessProfile: {fileID: 11400000, guid: 627d7307e9509cb4e81ed8f399b65b68, type: 2}
     ppFadeDuration: 1
     particlesToPlay: []
     particlesToStop: []
@@ -125,7 +125,7 @@ MonoBehaviour:
     enableFog: 1
     fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     fogDensity: 0.05
-    postProcessVolume: {fileID: 0}
+    postProcessProfile: {fileID: 11400000, guid: 8a9875fcefd325b40ba79bd0615a8e04, type: 2}
     ppFadeDuration: 1
     particlesToPlay: []
     particlesToStop: []
@@ -142,12 +142,14 @@ MonoBehaviour:
     enableFog: 0
     fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     fogDensity: 0.02
-    postProcessVolume: {fileID: 0}
+    postProcessProfile: {fileID: 0}
     ppFadeDuration: 1
     particlesToPlay: []
     particlesToStop: []
     transitionDuration: 2.5
   sunLight: {fileID: 0}
+  enablePostProcessing: 1
+  volumePriority: 10
   debugLogs: 0
 --- !u!1 &1927297311288322440
 GameObject:

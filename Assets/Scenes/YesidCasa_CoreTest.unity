@@ -314,7 +314,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 24, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &59345034
 MonoBehaviour:
@@ -329,14 +329,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.15, g: 0.85, b: 0.35, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -569,6 +569,31 @@ MonoBehaviour:
   showRouteFromLevel: 2
   meetingPointIcon: {fileID: 59345033}
   evacuationModeLevel: 4
+  categoryStyles:
+  - category: 2
+    color: {r: 0.98, g: 0.78, b: 0.1, a: 1}
+    sprite: {fileID: 0}
+  - category: 3
+    color: {r: 0.65, g: 0.4, b: 0.9, a: 1}
+    sprite: {fileID: 0}
+  - category: 4
+    color: {r: 1, g: 0.55, b: 0.1, a: 1}
+    sprite: {fileID: 0}
+  - category: 8
+    color: {r: 0.15, g: 0.85, b: 0.35, a: 1}
+    sprite: {fileID: 0}
+  - category: 5
+    color: {r: 0.3, g: 0.85, b: 0.95, a: 1}
+    sprite: {fileID: 0}
+  - category: 6
+    color: {r: 0.3283019, g: 0.3283019, b: 0.3283019, a: 1}
+    sprite: {fileID: 0}
+  - category: 7
+    color: {r: 0.95, g: 0.35, b: 0.7, a: 1}
+    sprite: {fileID: 0}
+  - category: 9
+    color: {r: 0.9, g: 0.2, b: 0.2, a: 1}
+    sprite: {fileID: 0}
   defaultDotColor: {r: 0.93962264, g: 0.74403477, b: 0, a: 1}
   colorN1: {r: 0.3, g: 0.8, b: 0.35, a: 1}
   colorN2: {r: 0.95, g: 0.85, b: 0.25, a: 1}
@@ -760,6 +785,7 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 2074323953}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
@@ -776,9 +802,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.04009699979687
+  _latitude: 7.040096999796869
   _longitude: -73.83982500003607
-  _altitude: 100.02999997604638
+  _altitude: 100.02999997511506
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -863,7 +889,7 @@ Transform:
   m_GameObject: {fileID: 140181941}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -483.3828, y: -0.010709944, z: 532.72723}
+  m_LocalPosition: {x: -483.3828, y: -0.010709945, z: 532.72723}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1568,6 +1594,7 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 13387046}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
@@ -1873,6 +1900,7 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 808337800}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
@@ -2056,6 +2084,7 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 1049824809}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
@@ -3356,6 +3385,7 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 1158768275}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
@@ -4632,6 +4662,7 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 1191558459}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
@@ -4778,6 +4809,7 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 1208765156}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
@@ -5253,7 +5285,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1752131892}
   m_Father: {fileID: 141810519}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &791148983
@@ -5593,7 +5626,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1059773553}
   m_Father: {fileID: 1949433358}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5839,6 +5873,7 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 1746172489}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
@@ -6365,6 +6400,7 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 671054013}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
@@ -7206,12 +7242,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1059773552}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1949433358}
+  m_Father: {fileID: 807037179}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8783,6 +8819,7 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 610346195}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
@@ -11121,6 +11158,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1bd3199cb1763714399f28ba8c80dcc3, type: 3}
   m_PrefabInstance: {fileID: 1746172488}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1752131892 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6798293976469075651, guid: 6c5036e0ca15edc4a8c269452b0e3d3c, type: 3}
+  m_PrefabInstance: {fileID: 596636125432449034}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1765425681
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12443,7 +12485,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 807037179}
-  - {fileID: 1059773553}
   m_Father: {fileID: 683091023}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -12659,6 +12700,7 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 815585328}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
@@ -13888,6 +13930,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2107332777}
   m_CullTransparentMesh: 1
+--- !u!1001 &596636125432449034
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 791148982}
+    m_Modifications:
+    - target: {fileID: 6798293976469075651, guid: 6c5036e0ca15edc4a8c269452b0e3d3c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798293976469075651, guid: 6c5036e0ca15edc4a8c269452b0e3d3c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798293976469075651, guid: 6c5036e0ca15edc4a8c269452b0e3d3c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798293976469075651, guid: 6c5036e0ca15edc4a8c269452b0e3d3c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798293976469075651, guid: 6c5036e0ca15edc4a8c269452b0e3d3c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798293976469075651, guid: 6c5036e0ca15edc4a8c269452b0e3d3c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798293976469075651, guid: 6c5036e0ca15edc4a8c269452b0e3d3c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798293976469075651, guid: 6c5036e0ca15edc4a8c269452b0e3d3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798293976469075651, guid: 6c5036e0ca15edc4a8c269452b0e3d3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798293976469075651, guid: 6c5036e0ca15edc4a8c269452b0e3d3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9079468601064407234, guid: 6c5036e0ca15edc4a8c269452b0e3d3c, type: 3}
+      propertyPath: m_Name
+      value: FX_Jugador
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6c5036e0ca15edc4a8c269452b0e3d3c, type: 3}
 --- !u!1001 &2245503807656656256
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 namespace SIRMED.UI
 {
+    using System;
     using System.Collections.Generic;
     using SIRMED.Gameplay.Environment;
     using SIRMED.Gameplay.Hotspots;
@@ -85,6 +86,30 @@ namespace SIRMED.UI
 
         [Tooltip("Desde este nivel se ocultan los puntos de hotspots (modo evacuación).")]
         public RiskLevel evacuationModeLevel = RiskLevel.N4;
+
+        [Serializable]
+        public class CategoryStyle
+        {
+            public HotspotCategory category;
+            public Color color = Color.white;
+            [Tooltip("Opcional: reemplaza el sprite del punto para este tipo.")]
+            public Sprite sprite;
+        }
+
+        [Header("Colores por tipo de hotspot")]
+        [Tooltip("Color (y sprite opcional) del punto según HotspotController.minimapCategory " +
+                 "(Auto = deducido del ícono 3D hijo). Prioridad: tipo → riskLevel del HotspotData → defaultDotColor.")]
+        public CategoryStyle[] categoryStyles =
+        {
+            new CategoryStyle { category = HotspotCategory.Comunitaria,    color = new Color(0.98f, 0.78f, 0.10f) }, // amarillo
+            new CategoryStyle { category = HotspotCategory.Lider,          color = new Color(0.65f, 0.40f, 0.90f) }, // morado
+            new CategoryStyle { category = HotspotCategory.RutaEvacuacion, color = new Color(1.00f, 0.55f, 0.10f) }, // naranja
+            new CategoryStyle { category = HotspotCategory.PuntoEncuentro, color = new Color(0.15f, 0.85f, 0.35f) }, // verde
+            new CategoryStyle { category = HotspotCategory.Clima,          color = new Color(0.30f, 0.85f, 0.95f) }, // cian
+            new CategoryStyle { category = HotspotCategory.Documentos,     color = new Color(0.95f, 0.95f, 0.95f) }, // blanco
+            new CategoryStyle { category = HotspotCategory.Trivia,         color = new Color(0.95f, 0.35f, 0.70f) }, // rosa
+            new CategoryStyle { category = HotspotCategory.Sirena,         color = new Color(0.90f, 0.20f, 0.20f) }, // rojo
+        };
 
         [Header("Colores por nivel de riesgo (opcional)")]
         [Tooltip("Color de respaldo cuando el hotspot no tiene riskLevel o no hay color asignado.")]
@@ -225,9 +250,16 @@ namespace SIRMED.UI
             if (img != null)
             {
                 // Si el hotspot no trae ícono propio, se conserva el sprite por defecto del prefab.
-                if (hotspot.data != null && hotspot.data.icon != null)
+                CategoryStyle style = GetCategoryStyle(hotspot.ResolvedCategory);
+                if (style != null && style.sprite != null)
+                    img.sprite = style.sprite;
+                else if (hotspot.data != null && hotspot.data.icon != null)
                     img.sprite = hotspot.data.icon;
-                img.color = hotspot.data != null ? GetRiskColor(hotspot.data.riskLevel) : defaultDotColor;
+
+                if (style != null)
+                    img.color = style.color;
+                else
+                    img.color = hotspot.data != null ? GetRiskColor(hotspot.data.riskLevel) : defaultDotColor;
             }
 
             _dots[hotspot] = dot;
@@ -307,6 +339,14 @@ namespace SIRMED.UI
         {
             if (_dots.TryGetValue(hotspot, out var dot) && dot != null && dot.gameObject.activeSelf)
                 dot.gameObject.SetActive(false);
+        }
+
+        private CategoryStyle GetCategoryStyle(HotspotCategory category)
+        {
+            if (categoryStyles == null) return null;
+            foreach (var s in categoryStyles)
+                if (s != null && s.category == category) return s;
+            return null;
         }
 
         private Color GetRiskColor(RiskLevel level) => level switch

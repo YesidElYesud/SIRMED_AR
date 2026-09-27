@@ -4,11 +4,8 @@ namespace SIRMED.Managers
     using System.Collections;
     using UnityEngine;
     using UnityEngine.Rendering;
+    using UnityEngine.Rendering.Universal;
     using SIRMED.Utils;
-
-#if UNITY_POST_PROCESSING_STACK_V2
-    using UnityEngine.Rendering.PostProcessing;
-#endif
 
     /// <summary>
     /// VisualEffectsStageController — Iluminación/niebla/partículas por etapa.
@@ -35,9 +32,20 @@ namespace SIRMED.Managers
     ///   2. Adjuntar este script.
     ///   3. Asignar stageConfigs con 6 entradas en el Inspector.
     ///   4. (Opcional) Arrastrar la Directional Light a sunLight.
-    ///   5. (Post-processing) Crear volúmenes globales en escena y asignarlos
-    ///      en el campo postProcessVolume de cada etapa. Solo el volumen
-    ///      de la etapa activa tendrá weight=1; los demás weight=0.
+    ///   5. (Post-processing) Crear un Volume Profile por etapa
+    ///      (Assets > Create > Rendering > Volume Profile) y asignarlo en
+    ///      postProcessProfile. No hace falta poner Volumes en la escena: esta
+    ///      clase crea un Volume global por perfil como hijo suyo (así funciona
+    ///      desde el prefab Managers sin referencias de escena) y hace crossfade
+    ///      de weight entre la etapa anterior y la nueva.
+    ///
+    /// Post-processing en AR: el fondo de cámara lo dibuja la misma cámara, así
+    /// que el post afecta TODO el frame (calle real + objetos virtuales); la UI
+    /// en Screen Space Overlay no se ve afectada. El URP Asset está en
+    /// "Volume Update Mode = Via Scripting" y sin HDR (ajustes de rendimiento),
+    /// por eso esta clase llama a UpdateVolumeStack() solo al aplicar/transicionar
+    /// y el post de la cámara se enciende solo en las etapas que tienen perfil
+    /// (un perfil vacío, sin overrides, cuenta como "sin perfil").
     ///
     /// Convivencia con HDRLightEstimation: si hay uno activo en escena y el
     /// dispositivo ya entrega estimación de luz real, esta clase deja de
@@ -108,15 +116,11 @@ namespace SIRMED.Managers
             public float fogDensity = 0.02f;
 
             // ── Post-processing ───────────────────────────────────────────────────
-            [Header("Post-processing (requiere Post Processing Stack v2)")]
-            [Tooltip("Volumen de post-processing exclusivo de esta etapa. " +
-                     "Al activar la etapa su weight sube a 1; el de la etapa anterior baja a 0. " +
-                     "Crear GameObjects con PostProcessVolume en escena y arrastrarlo aquí.")]
-#if UNITY_POST_PROCESSING_STACK_V2
-            public PostProcessVolume postProcessVolume;
-#else
-            public UnityEngine.Object postProcessVolume;   // placeholder si el paquete no está
-#endif
+            [Header("Post-processing (URP Volume)")]
+            [Tooltip("Volume Profile de esta etapa (Color Adjustments, Vignette, White Balance…). " +
+                     "Vacío = sin post en esta etapa. Al activar la etapa su weight sube a 1 y el " +
+                     "de la anterior baja a 0. Es un asset: se puede compartir entre escenas/sitios.")]
+            public VolumeProfile postProcessProfile;
             [Tooltip("Duración del crossfade de post-processing (segundos).")]
             [Range(0f, 3f)]
             public float ppFadeDuration = 1.0f;
@@ -153,6 +157,14 @@ namespace SIRMED.Managers
         [Tooltip("Directional Light de la escena. Se busca automáticamente si queda vacío.")]
         public Light sunLight;
 
+        [Header("Post-processing")]
+        [Tooltip("Enciende 'Post Processing' en la cámara principal en las etapas con perfil. " +
+                 "Apagar para medir rendimiento sin post sin tener que vaciar los perfiles.")]
+        public bool enablePostProcessing = true;
+
+        [Tooltip("Prioridad de los Volumes por etapa (por encima de cualquier Volume global de la escena).")]
+        public float volumePriority = 10f;
+
         [Header("Debug")]
         public bool debugLogs = false;
 
@@ -160,6 +172,12 @@ namespace SIRMED.Managers
         private Coroutine _lightTransitionRoutine;
         private Coroutine _ppTransitionRoutine;
         private int _currentStageIndex = -1;
+
+        // Un Volume global por etapa (índice = etapa), creado en Awake a partir
+        // de stageConfigs[i].postProcessProfile. null si la etapa no tiene perfil.
+        private Volume[] _stageVolumes;
+        private Camera _postCamera;
+        private UniversalAdditionalCameraData _postCameraData;
 
         // Valores de sol/ambiente de la etapa actual (lo que se interpola en las
         // transiciones). No se leen de sunLight porque con HDRLightEstimation
@@ -174,15 +192,13 @@ namespace SIRMED.Managers
             if (Instance != null && Instance != this) { Destroy(gameObject); return; }
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            CreateStageVolumes();
         }
 
         private void Start()
         {
             if (sunLight == null)
                 sunLight = FindAnyObjectByType<Light>();
-
-            // Desactivar todos los volúmenes de PP al inicio
-            SetAllPostProcessVolumesOff();
 
             if (StageManager.Instance != null)
                 StageManager.Instance.OnStageChanged += OnStageChanged;
@@ -267,75 +283,157 @@ namespace SIRMED.Managers
             }
         }
 
-        // ── Post-processing crossfade ─────────────────────────────────────────────
-        private void SetAllPostProcessVolumesOff()
+        // ── Post-processing (URP Volumes) ─────────────────────────────────────────
+        private void CreateStageVolumes()
         {
             if (stageConfigs == null) return;
-            foreach (var cfg in stageConfigs)
+            _stageVolumes = new Volume[stageConfigs.Length];
+
+            for (int i = 0; i < stageConfigs.Length; i++)
             {
-#if UNITY_POST_PROCESSING_STACK_V2
-                if (cfg?.postProcessVolume != null)
-                    cfg.postProcessVolume.weight = 0f;
-#endif
+                // Un perfil sin overrides cuenta como "sin post": no enciende nada.
+                var profile = stageConfigs[i]?.postProcessProfile;
+                if (profile == null || profile.components.Count == 0) continue;
+
+                var go = new GameObject($"PP_{i}_{stageConfigs[i].stageName}");
+                go.transform.SetParent(transform, false);
+                go.layer = gameObject.layer; // debe estar en el Volume Mask de la cámara (Default)
+
+                var vol = go.AddComponent<Volume>();
+                vol.isGlobal = true;
+                vol.priority = volumePriority;
+                vol.sharedProfile = profile; // sharedProfile: no clona el asset
+                vol.weight = 0f;
+                go.SetActive(false);
+                _stageVolumes[i] = vol;
+            }
+        }
+
+        private Volume GetStageVolume(int index)
+        {
+            return (_stageVolumes != null && index >= 0 && index < _stageVolumes.Length)
+                ? _stageVolumes[index]
+                : null;
+        }
+
+        /// <summary>
+        /// Busca la cámara principal (cambia tras LoadScene porque este objeto es
+        /// DontDestroyOnLoad).
+        /// </summary>
+        private bool EnsurePostCamera()
+        {
+            if (_postCamera == null)
+            {
+                _postCamera = Camera.main;
+                _postCameraData = _postCamera != null ? _postCamera.GetUniversalAdditionalCameraData() : null;
+            }
+            return _postCameraData != null;
+        }
+
+        /// <summary>
+        /// El post de la cámara solo está encendido mientras la etapa actual (o un
+        /// fade) tiene un Volume: en etapas sin perfil el coste es cero.
+        /// </summary>
+        private void SetCameraPost(bool on)
+        {
+            if (_postCameraData != null)
+                _postCameraData.renderPostProcessing = enablePostProcessing && on;
+        }
+
+        /// <summary>Con Volume Update Mode = Via Scripting los cambios de weight no se ven sin esto.</summary>
+        private void RefreshVolumeStack()
+        {
+            if (_postCameraData == null || !_postCameraData.renderPostProcessing) return;
+
+            // En Start() URP puede no haber inicializado aún el VolumeManager
+            // (lanza error). Se reintenta cuando esté listo.
+            if (!VolumeManager.instance.isInitialized)
+            {
+                if (_deferredRefreshRoutine == null)
+                    _deferredRefreshRoutine = StartCoroutine(RefreshWhenVolumeManagerReady());
+                return;
+            }
+            _postCamera.UpdateVolumeStack(_postCameraData);
+        }
+
+        private Coroutine _deferredRefreshRoutine;
+
+        private IEnumerator RefreshWhenVolumeManagerReady()
+        {
+            while (!VolumeManager.instance.isInitialized)
+                yield return null;
+            _deferredRefreshRoutine = null;
+            RefreshVolumeStack();
+        }
+
+        private void SetOnlyVolumeActive(Volume target)
+        {
+            if (_stageVolumes == null) return;
+            foreach (var v in _stageVolumes)
+            {
+                if (v == null) continue;
+                bool on = v == target;
+                v.weight = on ? 1f : 0f;
+                v.gameObject.SetActive(on);
             }
         }
 
         private void CrossfadePostProcessVolume(int targetIndex, float duration, bool fade)
         {
-#if UNITY_POST_PROCESSING_STACK_V2
             if (_ppTransitionRoutine != null)
-                StopCoroutine(_ppTransitionRoutine);
-
-            var targetVol = stageConfigs[targetIndex]?.postProcessVolume;
-
-            if (!fade || duration <= 0f)
             {
-                SetAllPostProcessVolumesOff();
-                if (targetVol != null) targetVol.weight = 1f;
+                StopCoroutine(_ppTransitionRoutine);
+                _ppTransitionRoutine = null;
+            }
+
+            if (!EnsurePostCamera()) return;
+
+            Volume targetVol = GetStageVolume(targetIndex);
+            Volume prevVol = GetStageVolume(_currentStageIndex);
+
+            if (!fade || duration <= 0f || prevVol == targetVol)
+            {
+                SetOnlyVolumeActive(targetVol);
+                SetCameraPost(targetVol != null);
+                RefreshVolumeStack();
                 return;
             }
 
-            // Obtener volumen anterior
-            PostProcessVolume prevVol = (_currentStageIndex >= 0 && _currentStageIndex < stageConfigs.Length)
-                ? stageConfigs[_currentStageIndex]?.postProcessVolume
-                : null;
-
+            SetCameraPost(true);
             _ppTransitionRoutine = StartCoroutine(PPFadeRoutine(prevVol, targetVol, duration));
-#endif
         }
 
-#if UNITY_POST_PROCESSING_STACK_V2
-        private IEnumerator PPFadeRoutine(PostProcessVolume from, PostProcessVolume to, float duration)
+        private IEnumerator PPFadeRoutine(Volume from, Volume to, float duration)
         {
-            float elapsed = 0f;
+            // Si se interrumpió un fade anterior puede quedar un tercer volumen a medias.
+            float fromStart = from != null && from.gameObject.activeSelf ? from.weight : 0f;
+            float toStart = to != null && to.gameObject.activeSelf ? to.weight : 0f;
+            foreach (var v in _stageVolumes)
+            {
+                if (v == null || v == from || v == to) continue;
+                v.weight = 0f;
+                v.gameObject.SetActive(false);
+            }
             if (to != null) to.gameObject.SetActive(true);
 
+            float elapsed = 0f;
             while (elapsed < duration)
             {
                 elapsed += Time.deltaTime;
                 float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(elapsed / duration));
 
-                if (from != null) from.weight = 1f - t;
-                if (to != null) to.weight = t;
+                if (from != null) from.weight = Mathf.Lerp(fromStart, 0f, t);
+                if (to != null) to.weight = Mathf.Lerp(toStart, 1f, t);
+                RefreshVolumeStack();
 
                 yield return null;
             }
 
-            // Valores finales exactos
-            if (from != null) { from.weight = 0f; }
-            if (to != null) { to.weight = 1f; }
-
-            // Desactivar volúmenes inactivos para ahorrar GPU
-            foreach (var cfg in stageConfigs)
-            {
-                if (cfg?.postProcessVolume == null) continue;
-                if (cfg.postProcessVolume != to)
-                    cfg.postProcessVolume.gameObject.SetActive(false);
-            }
-
+            SetOnlyVolumeActive(to);
+            RefreshVolumeStack();
+            SetCameraPost(to != null);
             _ppTransitionRoutine = null;
         }
-#endif
 
         // ── Partículas ────────────────────────────────────────────────────────────
         private void ApplyParticles(StageVisualConfig config)

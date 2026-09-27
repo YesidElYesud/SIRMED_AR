@@ -32,6 +32,21 @@ namespace SIRMED.Gameplay.Hotspots
     /// conectados (ClosePanel invoca a este último cuando
     /// data.activatesEvacuationRoute es true; ver SIRMED.Gameplay.Environment).
     /// </summary>
+    /// <summary>Tipo de hotspot (uno por ícono 3D). Hoy solo lo usa el minimapa para el color.</summary>
+    public enum HotspotCategory
+    {
+        Auto,
+        Ninguna,
+        Comunitaria,
+        Lider,
+        RutaEvacuacion,
+        Clima,
+        Documentos,
+        Trivia,
+        PuntoEncuentro,
+        Sirena
+    }
+
     [RequireComponent(typeof(Collider))]
     public class HotspotController : MonoBehaviour, IHotspotInteractable
     {
@@ -59,6 +74,11 @@ namespace SIRMED.Gameplay.Hotspots
 
         [Tooltip("Grados por segundo de rotación sobre el eje Y del marcador visual.")]
         public float rotationSpeed = 60f;
+
+        [Header("Minimapa")]
+        [Tooltip("Tipo de hotspot para el color del punto en el minimapa (MinimapController.categoryStyles).\n" +
+                 "Auto = se deduce del nombre del ícono hijo (COMUNITARIA_ICONO, LIDER-ICONO, spot CLIMA…).")]
+        public HotspotCategory minimapCategory = HotspotCategory.Auto;
 
         [Header("Efecto Visitado")]
         [Tooltip("Activa el efecto translúcido en el marcador al interactuar.")]
@@ -159,6 +179,45 @@ namespace SIRMED.Gameplay.Hotspots
         {
             return transform.parent != null &&
                    transform.parent.GetComponent<ARGeospatialAnchor>() != null;
+        }
+
+        /// <summary>
+        /// Tipo efectivo del hotspot: minimapCategory si se eligió a mano; si está en
+        /// Auto, se deduce del nombre de los íconos hijos (los FBX de
+        /// Assets/Resources/ICONOS 3D). Ninguna si no coincide con ninguno.
+        /// </summary>
+        public HotspotCategory ResolvedCategory
+        {
+            get
+            {
+                if (minimapCategory != HotspotCategory.Auto) return minimapCategory;
+                if (_resolvedCategory == null)
+                {
+                    _resolvedCategory = HotspotCategory.Ninguna;
+                    foreach (Transform child in transform)
+                    {
+                        HotspotCategory c = CategoryFromName(child.name);
+                        if (c != HotspotCategory.Ninguna) { _resolvedCategory = c; break; }
+                    }
+                }
+                return _resolvedCategory.Value;
+            }
+        }
+
+        private HotspotCategory? _resolvedCategory;
+
+        private static HotspotCategory CategoryFromName(string name)
+        {
+            string n = name.ToUpperInvariant();
+            if (n.Contains("COMUNIT")) return HotspotCategory.Comunitaria;
+            if (n.Contains("LIDER") || n.Contains("LÍDER")) return HotspotCategory.Lider;
+            if (n.Contains("ENCUENTRO")) return HotspotCategory.PuntoEncuentro;
+            if (n.Contains("RUTA") || n.Contains("EVACUA")) return HotspotCategory.RutaEvacuacion;
+            if (n.Contains("CLIMA")) return HotspotCategory.Clima;
+            if (n.Contains("DOCUMENT")) return HotspotCategory.Documentos;
+            if (n.Contains("TRIVIA")) return HotspotCategory.Trivia;
+            if (n.Contains("SIRENA")) return HotspotCategory.Sirena;
+            return HotspotCategory.Ninguna;
         }
 
         // ── Filtro de etapa ───────────────────────────────────────────────────────
