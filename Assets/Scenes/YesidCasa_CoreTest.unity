@@ -484,9 +484,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.040330210281151
-  _longitude: -73.839698446414
-  _altitude: 100.15188642498106
+  _latitude: 37.42713022204149
+  _longitude: -122.08816326778786
+  _altitude: 11.651778982020915
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -802,9 +802,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.040096999796869
-  _longitude: -73.83982500003607
-  _altitude: 100.02999997511506
+  _latitude: 37.42689783165912
+  _longitude: -122.08832122849941
+  _altitude: 11.529899171553552
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -1611,9 +1611,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.040453018705764
-  _longitude: -73.83965228974549
-  _altitude: 98.06925736833364
+  _latitude: 37.427252597572014
+  _longitude: -122.08810565831267
+  _altitude: 9.569146070629358
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -1917,9 +1917,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.0401779997388
-  _longitude: -73.83976199998784
-  _altitude: 99.41999996639788
+  _latitude: 37.42697854768741
+  _longitude: -122.08824259159381
+  _altitude: 10.919897088781
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -2101,9 +2101,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.040462882409716
-  _longitude: -73.83955637165803
-  _altitude: 98.06963438354433
+  _latitude: 37.42726243073802
+  _longitude: -122.0879859256951
+  _altitude: 9.569523630663753
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -3402,9 +3402,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.0403380000468605
-  _longitude: -73.83965799987635
-  _altitude: 98.07000000029802
+  _latitude: 37.42713798609653
+  _longitude: -122.08811277947383
+  _altitude: 9.56989267282188
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -4679,9 +4679,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.0402210000235605
-  _longitude: -73.83996399988796
-  _altitude: 99.52999999374151
+  _latitude: 37.42702138579498
+  _longitude: -122.08849474710767
+  _altitude: 11.029893671162426
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -4826,9 +4826,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.040512697712962
-  _longitude: -73.83962785326494
-  _altitude: 98.06964774429798
+  _latitude: 37.42731206629978
+  _longitude: -122.08807515806134
+  _altitude: 9.569534553214908
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -5574,9 +5574,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.040248211110834
-  _longitude: -73.83976200041869
-  _altitude: 99.74161419644952
+  _latitude: 37.42704851034111
+  _longitude: -122.08824259633147
+  _altitude: 11.241508950479329
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -5890,9 +5890,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.040402539954639
-  _longitude: -73.839589587156
-  _altitude: 98.06967684440315
+  _latitude: 37.42720230053033
+  _longitude: -122.08802738466666
+  _altitude: 9.569567910395563
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -6341,9 +6341,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.0404082105940775
-  _longitude: -73.83964595296794
-  _altitude: 99.55222844332457
+  _latitude: 37.4272079484897
+  _longitude: -122.08809774559712
+  _altitude: 11.052118783816695
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -6417,9 +6417,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.040259999802331
-  _longitude: -73.83971099996339
-  _altitude: 98.5600000526756
+  _latitude: 37.42706025968468
+  _longitude: -122.08817893403159
+  _altitude: 10.059894897043705
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -7301,7 +7301,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.6
+  m_fontSize: 33.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8836,9 +8836,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.04037254323866
-  _longitude: -73.83968577711313
-  _altitude: 98.06958591751754
+  _latitude: 37.42717240562461
+  _longitude: -122.08814745538727
+  _altitude: 9.569477126933634
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -10290,9 +10290,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.040446600589828
-  _longitude: -73.83967528019095
-  _altitude: 95.99284599535167
+  _latitude: 37.42724620111538
+  _longitude: -122.08813435657935
+  _altitude: 7.492734707891941
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -12174,9 +12174,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.040488210800134
-  _longitude: -73.83960151450849
-  _altitude: 99.07267150748521
+  _latitude: 37.42728766734635
+  _longitude: -122.08804227833663
+  _altitude: 10.572559437714517
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -12717,9 +12717,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 7.04048994699722
-  _longitude: -73.83957597664016
-  _altitude: 98.06963220704347
+  _latitude: 37.42728939855822
+  _longitude: -122.0880103998661
+  _altitude: 9.569520311430097
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
