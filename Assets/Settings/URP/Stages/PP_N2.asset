@@ -12,12 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
   m_Name: PP_N2
   m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.VolumeProfile
-  components:
-  - {fileID: -2236355530183043314, guid: 0607f3f4e0664f64bbd95506be49f7ea, type: 2}
-  - {fileID: -9030635063797676936, guid: 0607f3f4e0664f64bbd95506be49f7ea, type: 2}
-  - {fileID: 1045230968960016320, guid: 0607f3f4e0664f64bbd95506be49f7ea, type: 2}
-  - {fileID: 7653083899348317278, guid: 0607f3f4e0664f64bbd95506be49f7ea, type: 2}
-  - {fileID: 2577971411946531041, guid: 0607f3f4e0664f64bbd95506be49f7ea, type: 2}
-  - {fileID: 8690709303421598235, guid: 0607f3f4e0664f64bbd95506be49f7ea, type: 2}
-  - {fileID: 3123468790195944839, guid: 0607f3f4e0664f64bbd95506be49f7ea, type: 2}
-  - {fileID: -7678461385035748205, guid: 0607f3f4e0664f64bbd95506be49f7ea, type: 2}
+  components: []

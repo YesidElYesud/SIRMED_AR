@@ -193,6 +193,7 @@ namespace SIRMED.Managers
             Instance = this;
             DontDestroyOnLoad(gameObject);
             CreateStageVolumes();
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
         }
 
         private void Start()

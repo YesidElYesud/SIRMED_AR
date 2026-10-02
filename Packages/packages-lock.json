@@ -189,8 +189,8 @@
       }
     },
     "com.unity.test-framework.performance": {
-      "version": "3.5.0",
-      "depth": 3,
+      "version": "3.6.0",
+      "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.test-framework": "1.1.33",

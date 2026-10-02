@@ -6,36 +6,30 @@ public class RainSystem : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private Transform cameraPlane;
     [SerializeField] private Transform screenQuad;
+
+    [Space]
     [SerializeField] private Transform particles;
     [SerializeField] private ParticleSystem particleSystem;
     [SerializeField] private float particleShapeZ = 5;
 
     private ParticleSystem.ShapeModule shapeModule;
-    private bool shapeModuleReady = false;
 
     private Vector3 targetEuler = Vector3.zero;
     private float planeAngle;
     private float pitch = 0;
     private float remap = 5;
 
-    private void Reset()
-    {
-        shapeModuleReady = false;
-    }
-
     private void Awake()
     {
-        shapeModuleReady = false;
         remap = particleShapeZ;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        if (!shapeModuleReady)
+        if (!shapeModule.enabled)
         {
             shapeModule = particleSystem.shape;
             shapeModule.position = new Vector3(shapeModule.position.x, shapeModule.position.y, remap);
-            shapeModuleReady = true;
         }
 
         targetEuler = target.eulerAngles;
