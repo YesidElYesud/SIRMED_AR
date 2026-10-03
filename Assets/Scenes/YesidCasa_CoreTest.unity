@@ -889,7 +889,7 @@ Transform:
   m_GameObject: {fileID: 140181941}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -483.3828, y: -0.010709945, z: 532.72723}
+  m_LocalPosition: {x: -483.3828, y: -0.010709946, z: 532.72723}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4805,7 +4805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423620414042b824b98a703ef44e9393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Hotspots.HotspotController
-  data: {fileID: 11400000, guid: c5da3cc5b42c7d7439ca6931a39654ed, type: 2}
+  data: {fileID: 11400000, guid: 215933e38f254603abc8c100ee4d76e2, type: 2}
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 1173582928}
   rotationSpeed: 60
@@ -5177,7 +5177,16 @@ MonoBehaviour:
   adviceN4Desvio: {fileID: 11400000, guid: 86d0285e1ef18b6418452a955071f81a, type: 2}
   desvioDeltaThreshold: 4
   desvioCheckInterval: 1
+  adviceN3Quebrada: {fileID: 11400000, guid: d14b37bfe51749919ae671c6457d14c3, type: 2}
+  adviceCaudal: {fileID: 11400000, guid: 915589bbb6e44bdea8dba2a7e8e0ed25, type: 2}
+  quebradaLingerSeconds: 10
+  adviceSirenaNoVisitada: {fileID: 11400000, guid: 28b60ff013eb48a9813708bf8755b84e, type: 2}
+  sirenaReminderDelayN2: 90
+  adviceAyudaCorrecta: {fileID: 11400000, guid: d213a380a3a645618e09bdb7045fb9a7, type: 2}
+  adviceObjetos: {fileID: 11400000, guid: 3cdb10dc3e7145f8bc0151ad4b69344d, type: 2}
   adviceLlegada: {fileID: 11400000, guid: a155b0c391d022e4f8c1a697ba41d62d, type: 2}
+  adviceZonaSegura: {fileID: 11400000, guid: 08aed839c9ad4a56a534ba52c049807d, type: 2}
+  adviceSaltoN4: {fileID: 11400000, guid: b8679f9f649f4465aeba221b628551d4, type: 2}
   cooldownSeconds: 15
 --- !u!4 &763468432
 Transform:
@@ -9394,6 +9403,73 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1312748316}
   m_CullTransparentMesh: 0
+--- !u!1 &1315811300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1315811303}
+  - component: {fileID: 1315811302}
+  - component: {fileID: 1315811301}
+  m_Layer: 0
+  m_Name: Quebrada Zone (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1315811301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315811300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 323a1864e6cf33943ad6dff33688e65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Environment.QuebradaZone
+  radius: 15
+--- !u!114 &1315811302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315811300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b3d0e3f52dfe4243aceaba16f9cd0c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
+  _altitudeOffset: NaN
+  _latitude: 7.040020797023893
+  _longitude: -73.8400125061897
+  _altitude: 100.35161066427827
+  _altitudeType: 0
+  _useEditorAltitudeOverride: 0
+  _editorAltitudeOverride: 0
+  _anchorManager: {fileID: 596133976}
+  Origin: {fileID: 692865340}
+--- !u!4 &1315811303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315811300}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -504.1, y: 0.31, z: 524.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1319153082
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14398,6 +14474,7 @@ SceneRoots:
   - {fileID: 251239523}
   - {fileID: 1253452379}
   - {fileID: 725570134}
+  - {fileID: 1315811303}
   - {fileID: 313519809}
   - {fileID: 793803400}
   - {fileID: 86078355}

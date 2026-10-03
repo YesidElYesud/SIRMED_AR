@@ -206,6 +206,9 @@ namespace SIRMED.Gameplay.Hotspots
 
         private HotspotCategory? _resolvedCategory;
 
+        /// <summary>True si el jugador ya abrió y cerró este hotspot (lo usa el Director, situación 4).</summary>
+        public bool HasBeenVisited => _hasBeenVisited;
+
         private static HotspotCategory CategoryFromName(string name)
         {
             string n = name.ToUpperInvariant();
