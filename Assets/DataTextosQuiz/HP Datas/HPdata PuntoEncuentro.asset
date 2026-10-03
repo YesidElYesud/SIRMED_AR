@@ -27,8 +27,10 @@ MonoBehaviour:
   requiredStage: -1
   headerImage: {fileID: 0}
   riskLevel: 0
-  trivia: {fileID: 0}
+  trivia: {fileID: 11400000, guid: 720069247ef840b4db56f22e81237343, type: 2}
   triviaPool: []
+  triviaAfterContent: 1
+  allowTriviaInN4: 1
   advancesStageOnClose: 0
   activatesEvacuationRoute: 1
   activatesEndGame: 1

@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c9d9f53c2b8e04b88a323cdbd1e524, type: 3}
   m_Name: Trivia-Sirena
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Dialogue.TriviaData
-  question: "\xBFPara qu\xE9 sirve una sirena del SAT?"
+  question: "Si escuchas una alerta del SAT, \xBFqu\xE9 debes hacer primero?"
   options:
-  - optionText: Avisar a la comunidad
+  - optionText: "Ir a la quebrada a ver c\xF3mo est\xE1 el agua"
+    isCorrect: 0
+    feedbackText: "No. Acercarte al cauce te expone al peligro. Primero atiende la informaci\xF3n oficial y act\xFAa seg\xFAn el nivel de alerta."
+  - optionText: "Atender la informaci\xF3n oficial y actuar seg\xFAn el nivel de alerta"
     isCorrect: 1
-    feedbackText: "A. Comunica una condici\xF3n de alerta y orienta acciones."
-  - optionText: Medir lluvia
+    feedbackText: "\xA1Correcto! Cada nivel de alerta indica qu\xE9 hacer. Seguir la informaci\xF3n oficial te ayuda a actuar a tiempo."
+  - optionText: "Esperar a ver qu\xE9 hacen los vecinos"
     isCorrect: 0
-    feedbackText: "A. Comunica una condici\xF3n de alerta y orienta acciones."
-  - optionText: "Alumbrar la v\xEDa"
-    isCorrect: 0
-    feedbackText: "A. Comunica una condici\xF3n de alerta y orienta acciones."
-  answerDelay: 1.5
+    feedbackText: "No. Esperar hace perder tiempo valioso. Atiende la informaci\xF3n oficial y act\xFAa seg\xFAn el nivel de alerta."
+  answerDelay: 2.5

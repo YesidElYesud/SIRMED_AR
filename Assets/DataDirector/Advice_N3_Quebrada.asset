@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7255d80cd868d1b4893f7b7d38a75393, type: 3}
-  m_Name: Advice_N4_Inactivo
+  m_Name: Advice_N3_Quebrada
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Director.DirectorAdviceData
-  debugLabel: "S1 - N4 inm\xF3vil"
+  debugLabel: "S3 - N3 se aproxima a la quebrada"
   lines:
-  - text: "Recuerda: en una emergencia el tiempo es clave. Ubica la ruta marcada y avanza hacia el punto de encuentro."
-    audio: {fileID: 8300000, guid: f4aae61b0e0547d0aad3ef5af98869f5, type: 3}
+  - text: "Mant\xE9n una distancia segura del cauce. Una creciente puede cambiar r\xE1pidamente y arrastrar objetos."
+    audio: {fileID: 8300000, guid: 10aa33adb60044f28557cfaaf9f59aed, type: 3}
     gestureTrigger: Hablar
   moveToPointId: 

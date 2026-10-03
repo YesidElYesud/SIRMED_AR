@@ -269,7 +269,7 @@ namespace SIRMED.Gameplay.Hotspots
                 _isNearby = false;
                 Debug.Log($"[Hotspot] Saliendo del rango de: {data.title}");
                 HotspotPromptButton.Instance?.UnregisterHotspot(this);
-                if (_isPanelOpen) ClosePanel();
+                if (_isPanelOpen) ClosePanel(allowTrivia: false); // no encadenar trivia al alejarse
             }
         }
 
@@ -290,11 +290,9 @@ namespace SIRMED.Gameplay.Hotspots
             // Si tiene trivia, entra directo a ella (sin pasar por InfoPanel/NPC/etc.).
             // ClosePanel() se encarga de lo que sigue (visitado, ruta, avance de etapa)
             // cuando la trivia termine y llame de vuelta.
-            if (ShouldShowTrivia())
+            if (!data.triviaAfterContent && ShouldShowTrivia())
             {
-                _triviaShown = true;
-                _isPanelOpen = true;
-                TriviaPanel.Instance.Show(data.GetTriviaToShow(), this);
+                ShowTrivia();
                 return;
             }
 
@@ -380,8 +378,20 @@ namespace SIRMED.Gameplay.Hotspots
             uiPanel.Show(data, this);
         }
 
-        public void ClosePanel()
+        public void ClosePanel() => ClosePanel(allowTrivia: true);
+
+        private void ClosePanel(bool allowTrivia)
         {
+            // Trivia después del contenido: al cerrar el panel principal se encadena la
+            // trivia; cuando termine, TriviaPanel vuelve a llamar ClosePanel() y, como
+            // _triviaShown ya es true, sigue el cierre normal (visitado, ruta, etapa...).
+            if (allowTrivia && data != null && data.triviaAfterContent && ShouldShowTrivia())
+            {
+                if (uiPanel != null) uiPanel.Hide();
+                ShowTrivia();
+                return;
+            }
+
             _isPanelOpen = false;
 
             if (!_hasBeenVisited)
@@ -428,7 +438,14 @@ namespace SIRMED.Gameplay.Hotspots
 
             bool isEvacuating = RiskLevelIndicator.Instance != null &&
                                  RiskLevelIndicator.Instance.CurrentLevel == RiskLevel.N4;
-            return !isEvacuating;
+            return !isEvacuating || data.allowTriviaInN4;
+        }
+
+        private void ShowTrivia()
+        {
+            _triviaShown = true;
+            _isPanelOpen = true;
+            TriviaPanel.Instance.Show(data.GetTriviaToShow(), this);
         }
 
         // ── Efecto visitado ───────────────────────────────────────────────────────

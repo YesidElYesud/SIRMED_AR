@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: caccdb802bd40ce42a70a8fa140c26d2, type: 3}
-  m_Name: HPdata Trivias
+  m_Name: HPdata Sirena
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Hotspots.HotspotData
-  title: Hotspot
-  description: "Informaci\xF3n del hotspot."
+  title: "Sirena del SAT"
+  description: "La sirena del SAT avisa a la comunidad cuando cambia el nivel de alerta. Si la escuchas, atiende la informaci\xF3n oficial y act\xFAa seg\xFAn el nivel de alerta. (Texto temporal.)"
   icon: {fileID: 0}
   actionType: 0
   cinematicClip: {fileID: 0}
@@ -27,11 +27,9 @@ MonoBehaviour:
   requiredStage: -1
   headerImage: {fileID: 0}
   riskLevel: 0
-  trivia: {fileID: 0}
-  triviaPool:
-  - {fileID: 11400000, guid: 2725164131129144594e90816e10f75f, type: 2}
-  - {fileID: 11400000, guid: d3cdc840261fc4e48b44f74f6d72f822, type: 2}
-  triviaAfterContent: 0
+  trivia: {fileID: 11400000, guid: d4f76188d17bb3e40bf3aeae8d2d2f8e, type: 2}
+  triviaPool: []
+  triviaAfterContent: 1
   allowTriviaInN4: 0
   advancesStageOnClose: 0
   activatesEvacuationRoute: 0

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7255d80cd868d1b4893f7b7d38a75393, type: 3}
-  m_Name: Advice_N4_Inactivo
+  m_Name: Advice_N3N4_Caudal
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Director.DirectorAdviceData
-  debugLabel: "S1 - N4 inm\xF3vil"
+  debugLabel: "S6 - Cerca del caudal en N3/N4"
   lines:
-  - text: "Recuerda: en una emergencia el tiempo es clave. Ubica la ruta marcada y avanza hacia el punto de encuentro."
-    audio: {fileID: 8300000, guid: f4aae61b0e0547d0aad3ef5af98869f5, type: 3}
+  - text: "Es momento de evacuar. Al\xE9jate del cauce inmediatamente y avanza hacia la zona segura."
+    audio: {fileID: 8300000, guid: 69197e66163a4fcbb280fbd970684490, type: 3}
     gestureTrigger: Hablar
   moveToPointId: 

@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c9d9f53c2b8e04b88a323cdbd1e524, type: 3}
   m_Name: Trivia-Sensor
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Dialogue.TriviaData
-  question: "\xBFQu\xE9 funci\xF3n cumple un sensor de nivel en una quebrada?"
+  question: "\xBFPara qu\xE9 sirve el sensor instalado cerca de la quebrada?"
   options:
-  - optionText: "Decoraci\xF3n"
-    isCorrect: 0
-    feedbackText: "B. Permite observar cambios y apoyar la generaci\xF3n de alertas."
-  - optionText: Monitorear el nivel del agua
+  - optionText: "Monitorear el nivel y el comportamiento del agua para apoyar el sistema de alerta"
     isCorrect: 1
-    feedbackText: "B. Permite observar cambios y apoyar la generaci\xF3n de alertas."
-  - optionText: "Guiar veh\xEDculos"
+    feedbackText: "\xA1Correcto! El sensor vigila el agua de forma continua y sus datos ayudan a generar las alertas del SAT."
+  - optionText: "Avisar con sonido a los vecinos"
     isCorrect: 0
-    feedbackText: "B. Permite observar cambios y apoyar la generaci\xF3n de alertas."
-  answerDelay: 1.5
+    feedbackText: "No. El aviso sonoro lo da la sirena. El sensor monitorea el nivel y el comportamiento del agua para apoyar el sistema de alerta."
+  - optionText: "Medir la temperatura del barrio"
+    isCorrect: 0
+    feedbackText: "No. El sensor monitorea el nivel y el comportamiento del agua de la quebrada para apoyar el sistema de alerta."
+  answerDelay: 2.5

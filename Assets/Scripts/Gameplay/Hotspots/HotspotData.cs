@@ -142,6 +142,16 @@ namespace SIRMED.Gameplay.Hotspots
                  "Útil para que un mismo hotspot no repita siempre la misma pregunta.")]
         public TriviaData[] triviaPool;
 
+        [Tooltip("Si true, primero se muestra el contenido del hotspot (panel, NPC, slides...)\n" +
+                 "y la trivia aparece al cerrarlo (checklist M02: 'trivia después de consultar\n" +
+                 "el contenido'). Si false, el hotspot entra directo a la trivia (hotspots\n" +
+                 "TRIVIA independientes).")]
+        public bool triviaAfterContent = false;
+
+        [Tooltip("Permite la trivia aunque el nivel activo sea N4. Solo para hotspots donde la\n" +
+                 "evacuación ya terminó (p. ej. punto de encuentro, trivia 6 del DAGRD).")]
+        public bool allowTriviaInN4 = false;
+
         /// <summary>
         /// Trivia a mostrar: aleatoria de triviaPool si tiene elementos, si no trivia.
         /// </summary>

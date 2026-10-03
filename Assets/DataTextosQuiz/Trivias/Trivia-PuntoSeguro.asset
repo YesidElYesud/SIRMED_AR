@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c9d9f53c2b8e04b88a323cdbd1e524, type: 3}
   m_Name: Trivia-PuntoSeguro
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Dialogue.TriviaData
-  question: "\xBFQu\xE9 representa el punto de encuentro?"
+  question: "Despu\xE9s de evacuar, \xBFqu\xE9 debes hacer?"
   options:
-  - optionText: "Zona de reuni\xF3n segura"
+  - optionText: "Regresar a casa en cuanto deje de llover"
+    isCorrect: 0
+    feedbackText: "No. Regresar no es una decisi\xF3n propia: permanece en el punto seguro hasta que los l\xEDderes o autoridades lo autoricen."
+  - optionText: "Volver por los objetos que quedaron en casa"
+    isCorrect: 0
+    feedbackText: "No. La vida tiene prioridad sobre los bienes. Permanece en el punto seguro y sigue las indicaciones oficiales."
+  - optionText: "Permanecer en el punto seguro y seguir las indicaciones oficiales"
     isCorrect: 1
-    feedbackText: "A. Es el destino definido para reunirse despu\xE9s de evacuar."
-  - optionText: "Sitio de observaci\xF3n del r\xEDo"
-    isCorrect: 0
-    feedbackText: "A. Es el destino definido para reunirse despu\xE9s de evacuar."
-  - optionText: Inicio de la creciente
-    isCorrect: 0
-    feedbackText: "A. Es el destino definido para reunirse despu\xE9s de evacuar."
-  answerDelay: 1.5
+    feedbackText: "\xA1Correcto! Mant\xE9n la calma y espera a que los l\xEDderes o autoridades autoricen el regreso a casa."
+  answerDelay: 2.5

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7255d80cd868d1b4893f7b7d38a75393, type: 3}
-  m_Name: Advice_N4_Inactivo
+  m_Name: Advice_Objetos
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Director.DirectorAdviceData
-  debugLabel: "S1 - N4 inm\xF3vil"
+  debugLabel: "S10 - Transporte de objetos"
   lines:
-  - text: "Recuerda: en una emergencia el tiempo es clave. Ubica la ruta marcada y avanza hacia el punto de encuentro."
-    audio: {fileID: 8300000, guid: f4aae61b0e0547d0aad3ef5af98869f5, type: 3}
+  - text: "No debes llevar o priorizar objetos o art\xEDculos no vitales, esto impide tu r\xE1pida evacuaci\xF3n y la protecci\xF3n de tu vida."
+    audio: {fileID: 8300000, guid: 6483bef935de4fdeb3c1dd9a0bde38f2, type: 3}
     gestureTrigger: Hablar
   moveToPointId: 

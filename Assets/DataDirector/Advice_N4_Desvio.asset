@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7255d80cd868d1b4893f7b7d38a75393, type: 3}
   m_Name: Advice_N4_Desvio
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Director.DirectorAdviceData
-  debugLabel: "N4 - Desv\xEDo "
+  debugLabel: "S2 - N4 se aleja de la ruta"
   lines:
-  - text: "Te est\xE1s alejando del recorrido seguro. Revisa el minimapa y vuelve
-      hacia la ruta marcada. "
-    audio: {fileID: 8300000, guid: 1c911e3fb11980d43b446980f28ffac7, type: 3}
+  - text: "Vas en direcci\xF3n contraria a la zona segura. Revisa el minimapa y vuelve a la ruta de evacuaci\xF3n."
+    audio: {fileID: 8300000, guid: c3a5c5bd390d44dab262d0799d563b95, type: 3}
     gestureTrigger: Hablar
   moveToPointId: 
