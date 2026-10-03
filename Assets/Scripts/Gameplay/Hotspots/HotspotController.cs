@@ -2,6 +2,7 @@ namespace SIRMED.Gameplay.Hotspots
 {
     using System.Collections.Generic;
     using Google.XR.ARCoreExtensions;
+    using SIRMED.Gameplay.Dialogue;
     using SIRMED.Managers;
     using SIRMED.UI;
     using UnityEngine;
@@ -92,6 +93,12 @@ namespace SIRMED.Gameplay.Hotspots
                  "salga y vuelva a entrar en rango.")]
         [SerializeField] private bool _interactOnce = false;
 
+        [Header("Secuencia (opcional — p. ej. Líder: parada 1 → 2 → 3)")]
+        [Tooltip("Hotspots con el mismo id forman una secuencia; vacío = sin secuencia.")]
+        public string sequenceId = "";
+        [Tooltip("Orden dentro de la secuencia (0 = primera parada). Solo aparece cuando las anteriores ya se completaron.")]
+        public int sequenceStep = 0;
+
         // ── Internos ──────────────────────────────────────────────────────────────
         private Transform _playerCamera;
         private bool _isNearby = false;
@@ -131,6 +138,7 @@ namespace SIRMED.Gameplay.Hotspots
 
             if (StageManager.Instance != null)
                 StageManager.Instance.OnStageChanged += OnStageChanged;
+            HotspotSequence.Changed += RefreshStageVisibility;
 
             RefreshStageVisibility();
         }
@@ -139,6 +147,7 @@ namespace SIRMED.Gameplay.Hotspots
         {
             if (StageManager.Instance != null)
                 StageManager.Instance.OnStageChanged -= OnStageChanged;
+            HotspotSequence.Changed -= RefreshStageVisibility;
 
             HotspotPromptButton.Instance?.UnregisterHotspot(this);
         }
@@ -236,13 +245,16 @@ namespace SIRMED.Gameplay.Hotspots
         private void RefreshStageVisibility()
         {
             if (data == null) return;
-            if (data.requiredStage < 0) return;
+            bool hasSequence = !string.IsNullOrEmpty(sequenceId);
+            if (data.requiredStage < 0 && !hasSequence) return;
 
-            bool stageMatch = StageManager.Instance != null &&
-                              (int)StageManager.Instance.CurrentStage == data.requiredStage;
+            bool stageMatch = data.requiredStage < 0 ||
+                              (StageManager.Instance != null &&
+                               (int)StageManager.Instance.CurrentStage == data.requiredStage);
+            bool unlocked = HotspotSequence.IsUnlocked(sequenceId, sequenceStep);
 
-            gameObject.SetActive(stageMatch);
-            // OnDisable se encarga de limpiar el prompt button si stageMatch es false
+            gameObject.SetActive(stageMatch && unlocked);
+            // OnDisable se encarga de limpiar el prompt button si queda oculto
         }
 
         // ── Rotación del marcador ─────────────────────────────────────────────────
@@ -322,7 +334,14 @@ namespace SIRMED.Gameplay.Hotspots
                     if (NpcDialoguePanel.Instance != null)
                     {
                         _isPanelOpen = true;
-                        NpcDialoguePanel.Instance.Show(data.dialogueData, this);
+                        RiskLevel level = RiskLevelIndicator.Instance != null
+                            ? RiskLevelIndicator.Instance.CurrentLevel
+                            : RiskLevel.None;
+                        NpcDialogueData dialogue = data.GetDialogueFor(level);
+                        System.Action onCorrect = null;
+                        if (dialogue != null && dialogue.isCommunityHelp)
+                            onCorrect = () => SIRMED.Gameplay.Director.DirectorAdviceController.Instance?.NotifyCommunityHelpCorrect();
+                        NpcDialoguePanel.Instance.Show(dialogue, this, onCorrect);
                     }
                     else
                     {
@@ -402,6 +421,9 @@ namespace SIRMED.Gameplay.Hotspots
                 if (enableVisitedEffect) MarkAsVisited(); // MarkAsVisited también pone _hasBeenVisited = true
                 else _hasBeenVisited = true;
             }
+
+            // Al salir del rango no cuenta como parada completada (se cortó el contenido).
+            if (allowTrivia) HotspotSequence.Complete(sequenceId, sequenceStep);
 
             if (uiPanel != null) uiPanel.Hide();
 

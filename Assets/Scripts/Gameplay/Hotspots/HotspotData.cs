@@ -100,6 +100,20 @@ namespace SIRMED.Gameplay.Hotspots
         [Tooltip("Datos del diálogo. Solo se usa cuando actionType = NpcConversation o SiataCall (sin secuencia).")]
         public NpcDialogueData dialogueData;
 
+        [Tooltip("Opcional, para NpcConversation: diálogo según el nivel de riesgo activo\n" +
+                 "(índice 0 = N1 … 3 = N4). Si el del nivel actual está vacío se usa dialogueData.\n" +
+                 "Así el Líder dice el mensaje de la alerta en curso en cualquiera de sus paradas.")]
+        public NpcDialogueData[] dialogueByLevel;
+
+        /// <summary>Diálogo a mostrar: el de dialogueByLevel para 'level' si existe, si no dialogueData.</summary>
+        public NpcDialogueData GetDialogueFor(RiskLevel level)
+        {
+            int i = (int)level - 1;
+            if (dialogueByLevel != null && i >= 0 && i < dialogueByLevel.Length && dialogueByLevel[i] != null)
+                return dialogueByLevel[i];
+            return dialogueData;
+        }
+
         [Tooltip("Secuencia SIATA con pasos mixtos Info/Question.\n" +
                  "Si está asignada, tiene prioridad sobre dialogueData cuando actionType = SiataCall.")]
         public SiataDialogueSequence siataSequence;

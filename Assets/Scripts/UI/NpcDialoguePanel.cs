@@ -54,6 +54,9 @@ namespace SIRMED.UI
         [Header("Comportamiento")]
         [Range(0.3f, 3f)]
         [SerializeField] private float _feedbackDuration = 1.2f;
+        [Tooltip("Segundos mínimos de feedback cuando la opción trae feedbackText (para alcanzar a leerlo).")]
+        [Range(1f, 8f)]
+        [SerializeField] private float _feedbackReadDuration = 4f;
 
         // ── Info NPC (opcional) ────────────────────────────────────────────────────
         [Header("Info NPC (opcional)")]
@@ -299,14 +302,23 @@ namespace SIRMED.UI
             SetOptionsInteractable(false);
             SetButtonColor(index, opt.isCorrect ? _colorCorrect : _colorWrong);
 
+            // El feedback de la opción (por qué sí / por qué no) reemplaza al enunciado
+            // mientras dura; en ayuda comunitaria es la parte que enseña.
+            float wait = _feedbackDuration;
+            if (!string.IsNullOrEmpty(opt.feedbackText) && _preguntaText != null)
+            {
+                _preguntaText.text = opt.feedbackText;
+                wait = Mathf.Max(wait, _feedbackReadDuration);
+            }
+
             _feedbackRoutine = opt.isCorrect
-                ? StartCoroutine(CorrectAnswerRoutine())
-                : StartCoroutine(WrongAnswerRoutine());
+                ? StartCoroutine(CorrectAnswerRoutine(wait))
+                : StartCoroutine(WrongAnswerRoutine(wait));
         }
 
-        private IEnumerator CorrectAnswerRoutine()
+        private IEnumerator CorrectAnswerRoutine(float wait)
         {
-            yield return new WaitForSeconds(_feedbackDuration);
+            yield return new WaitForSeconds(wait);
 
             if (_currentData != null && _currentData.advancesStageOnCorrect)
                 StageManager.Instance?.NextStage();
@@ -316,12 +328,14 @@ namespace SIRMED.UI
             cb?.Invoke();
         }
 
-        private IEnumerator WrongAnswerRoutine()
+        private IEnumerator WrongAnswerRoutine(float wait)
         {
-            yield return new WaitForSeconds(_feedbackDuration);
+            yield return new WaitForSeconds(wait);
             _feedbackRoutine = null;
 
-            // Resetear colores y permitir reintento
+            // Restaurar el enunciado, resetear colores y permitir reintento
+            if (_preguntaText != null && _lines != null && _lineIndex < _lines.Length)
+                _preguntaText.text = _lines[_lineIndex];
             if (_currentData?.options != null)
                 SetupOptionButtons(_currentData.options);
         }
