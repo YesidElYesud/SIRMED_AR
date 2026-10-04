@@ -165,7 +165,8 @@ namespace SIRMED.Gameplay.Director
             // se vuelve a medir desde cero en vez de reaccionar al salto.
             bool reliable = TrackingStatusBanner.IsPositionReliable;
             bool isN4 = level == RiskLevel.N4;
-            CheckInactivity(isN4 && reliable);
+            // Leyendo un panel modal (diálogo, trivia, info) no cuenta como "inmóvil".
+            CheckInactivity(isN4 && reliable && !IsModalOpen());
             CheckDesvio(isN4 && reliable);
             CheckQuebrada(level, reliable);
             CheckSirenaInN2(level);
@@ -348,8 +349,14 @@ namespace SIRMED.Gameplay.Director
             Show(_urgentQueue.Dequeue());
         }
 
+        // Ocupado = banner del Director visible o un panel modal abierto (NpcDialoguePanel,
+        // TriviaPanel… bloquean el input vía StageManager). Así el consejo no queda tapado
+        // detrás del diálogo: los urgentes esperan en cola, los demás se descartan.
         private static bool IsPanelBusy() =>
-            DirectorAdvicePanel.Instance != null && DirectorAdvicePanel.Instance.IsShowing;
+            (DirectorAdvicePanel.Instance != null && DirectorAdvicePanel.Instance.IsShowing) || IsModalOpen();
+
+        private static bool IsModalOpen() =>
+            StageManager.Instance != null && StageManager.Instance.IsPlayerInputBlocked;
 
         private void Show(DirectorAdviceData advice)
         {
