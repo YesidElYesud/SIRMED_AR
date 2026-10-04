@@ -113,7 +113,12 @@ namespace SIRMED.UI
                 titleText.text = data.title;
 
             if (descText != null)
-                descText.text = data.description;
+            {
+                RiskLevel level = RiskLevelIndicator.Instance != null
+                    ? RiskLevelIndicator.Instance.CurrentLevel
+                    : RiskLevel.None;
+                descText.text = data.GetDescriptionFor(level);
+            }
 
             if (iconImage != null)
             {

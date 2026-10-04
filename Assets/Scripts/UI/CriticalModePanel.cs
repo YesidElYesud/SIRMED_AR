@@ -30,6 +30,10 @@ namespace SIRMED.UI
 
             [Tooltip("Imagen que se muestra en el panel para esta etapa")]
             public Sprite image;
+
+            [Tooltip("Texto de la alerta (opcional). Sirve mientras no exista la imagen final.")]
+            [TextArea(2, 6)]
+            public string message;
         }
 
         // ── Inspector ─────────────────────────────────────────────────────────────
@@ -37,12 +41,24 @@ namespace SIRMED.UI
         [Tooltip("Define qué etapas disparan el modal y qué imagen mostrar.")]
         public StageContent[] stageContents = new StageContent[]
         {
-            new StageContent { stage = StageManager.Stage.Etapa3 },
-            new StageContent { stage = StageManager.Stage.Etapa4 }
+            new StageContent
+            {
+                stage = StageManager.Stage.Etapa3,
+                message = "ALERTA NARANJA\nEl nivel de la quebrada aumentó. Aléjate del cauce y ten clara la ruta de evacuación. " +
+                          "Si la sirena suena de forma intermitente, prepárate para evacuar."
+            },
+            new StageContent
+            {
+                stage = StageManager.Stage.Etapa4,
+                message = "ALERTA ROJA: EVACÚA\nLa sirena suena de forma continua. Sigue la ruta de evacuación hacia el punto de encuentro; " +
+                          "no te detengas ni intentes cruzar la corriente."
+            }
         };
 
         [Header("UI")]
         public Image panelImage;
+        [Tooltip("Opcional: texto de la alerta (StageContent.message). Se oculta si el mensaje está vacío.")]
+        public TMPro.TextMeshProUGUI messageText;
         public Button continueButton;
 
         [Header("Comportamiento")]
@@ -172,6 +188,13 @@ namespace SIRMED.UI
 
         private void PopulateUI(StageContent content)
         {
+            if (messageText != null)
+            {
+                bool hasMessage = !string.IsNullOrEmpty(content.message);
+                messageText.gameObject.SetActive(hasMessage);
+                if (hasMessage) messageText.text = content.message;
+            }
+
             if (panelImage == null) return;
             if (content.image != null)
             {
@@ -181,7 +204,8 @@ namespace SIRMED.UI
             else
             {
                 panelImage.gameObject.SetActive(false);
-                Debug.LogWarning($"[CriticalModePanel] StageContent para {content.stage} no tiene imagen asignada.");
+                if (string.IsNullOrEmpty(content.message))
+                    Debug.LogWarning($"[CriticalModePanel] StageContent para {content.stage} no tiene imagen asignada.");
             }
         }
 

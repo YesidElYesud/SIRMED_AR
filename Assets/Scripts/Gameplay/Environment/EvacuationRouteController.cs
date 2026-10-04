@@ -71,6 +71,20 @@ namespace SIRMED.Gameplay.Environment
         [Tooltip("Radio (m) para el auto-ocultamiento.")]
         public float hideRadius = 4f;
 
+        [Header("Puntos de control (checklist M07/M08)")]
+        [Tooltip("Radio (m) para dar por alcanzado un waypoint intermedio mientras la ruta está visible.")]
+        public float checkpointRadius = 6f;
+        [Tooltip("Puntos de control intermedios que hay que pasar antes de que cuente la llegada al punto de encuentro " +
+                 "(condición mínima de ruta). Se limita a los que existan; 0 = sin condición.")]
+        public int minCheckpointsForArrival = 1;
+
+        /// <summary>(alcanzados, total) cada vez que se pasa un punto de control intermedio.</summary>
+        public event System.Action<int, int> OnCheckpointReached;
+
+        /// <summary>Puntos de control intermedios (waypoints sin contar el primero ni el último).</summary>
+        public int CheckpointCount => waypoints == null ? 0 : Mathf.Max(0, waypoints.Length - 2);
+        public int CheckpointsReached { get; private set; }
+
         [Header("Visibilidad por nivel de riesgo (GDD §13)")]
         [Tooltip("Desde este nivel la ruta aparece sola. None = solo la abren los hotspots con activatesEvacuationRoute.")]
         public RiskLevel autoShowFromLevel = RiskLevel.N3;
@@ -161,11 +175,17 @@ namespace SIRMED.Gameplay.Environment
 
             UpdateLevelVisibility();
 
-            if (!_isVisible || puntoDeEncuentro == null || Camera.main == null) return;
+            if (!_isVisible || Camera.main == null) return;
 
-            Vector3 flat = puntoDeEncuentro.position - Camera.main.transform.position;
+            Vector3 player = Camera.main.transform.position;
+            CheckCheckpoints(player);
+
+            if (puntoDeEncuentro == null) return;
+
+            Vector3 flat = puntoDeEncuentro.position - player;
             flat.y = 0f;
-            if (flat.sqrMagnitude <= hideRadius * hideRadius)
+            int required = Mathf.Min(minCheckpointsForArrival, CheckpointCount);
+            if (flat.sqrMagnitude <= hideRadius * hideRadius && CheckpointsReached >= required)
             {
                 _arrived = true;
                 OnArrivalAtPuntoDeEncuentro?.Invoke();
@@ -262,11 +282,46 @@ namespace SIRMED.Gameplay.Environment
             if (!wanted)
             {
                 _arrived = false;
+                if (!_shownByHotspot) ResetCheckpoints(); // ruta abierta por hotspot en N1/N2: conservar progreso
                 if (_isVisible && !_shownByHotspot) Hide();
                 return;
             }
 
             if (!_isVisible && !_arrived) ShowInternal();
+        }
+
+        // ── Puntos de control ─────────────────────────────────────────────────────
+        // Cada waypoint intermedio cuenta una vez; no hace falta pasarlos en orden
+        // (en la calle real el GPS puede "saltarse" uno), solo cuántos se alcanzaron.
+        private bool[] _checkpointHit;
+
+        private void CheckCheckpoints(Vector3 player)
+        {
+            int count = CheckpointCount;
+            if (count == 0) return;
+            if (_checkpointHit == null || _checkpointHit.Length != count) _checkpointHit = new bool[count];
+
+            for (int i = 0; i < count; i++)
+            {
+                if (_checkpointHit[i]) continue;
+                RouteWaypoint wp = waypoints[i + 1];
+                if (wp == null) continue;
+
+                Vector3 d = wp.transform.position - player;
+                d.y = 0f;
+                if (d.sqrMagnitude > checkpointRadius * checkpointRadius) continue;
+
+                _checkpointHit[i] = true;
+                CheckpointsReached++;
+                OnCheckpointReached?.Invoke(CheckpointsReached, count);
+            }
+        }
+
+        private void ResetCheckpoints()
+        {
+            if (CheckpointsReached == 0) return;
+            CheckpointsReached = 0;
+            _checkpointHit = null;
         }
 
         // ── Anclaje geoespacial ───────────────────────────────────────────────────

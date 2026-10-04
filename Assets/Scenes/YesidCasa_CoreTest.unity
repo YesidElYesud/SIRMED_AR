@@ -870,7 +870,7 @@ MonoBehaviour:
   _altitudeOffset: NaN
   _latitude: 7.040096999796869
   _longitude: -73.83982500003607
-  _altitude: 100.02999997325242
+  _altitude: 100.02999997138977
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -955,7 +955,7 @@ Transform:
   m_GameObject: {fileID: 140181941}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -483.3828, y: -0.010709946, z: 532.72723}
+  m_LocalPosition: {x: -483.3828, y: -0.010709948, z: 532.72723}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2113,6 +2113,8 @@ MonoBehaviour:
   samplesPerMeter: 1
   puntoDeEncuentro: {fileID: 251239523}
   hideRadius: 4
+  checkpointRadius: 6
+  minCheckpointsForArrival: 1
   autoShowFromLevel: 3
   ribbonWidth: 0.5
   heightOffset: 0.15
@@ -2710,6 +2712,7 @@ MonoBehaviour:
   _shutterVolume: 1
   _audioSource: {fileID: 0}
   _albumName: SIRMED AR
+  _hideInN4: 1
 --- !u!1 &400371379
 GameObject:
   m_ObjectHideFlags: 0
@@ -4902,10 +4905,10 @@ RectTransform:
   - {fileID: 409327760}
   - {fileID: 109263086}
   - {fileID: 1893879630}
+  - {fileID: 515366204}
   - {fileID: 2008644829}
   - {fileID: 1642540955}
   - {fileID: 1949433358}
-  - {fileID: 515366204}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

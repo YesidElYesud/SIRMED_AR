@@ -151,6 +151,65 @@ MonoBehaviour:
   enablePostProcessing: 1
   volumePriority: 10
   debugLogs: 0
+--- !u!1 &919611441420057069
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 116356726909297805}
+  - component: {fileID: 3215887246063441988}
+  m_Layer: 0
+  m_Name: SirenController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &116356726909297805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919611441420057069}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3567654600318729271}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3215887246063441988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919611441420057069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8d1045969743118fac3b43c0a480f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Environment.SirenController
+  alertClip: {fileID: 8300000, guid: 686b11337cb1428daa8e58fa4c8dff7c, type: 3}
+  evacuationClip: {fileID: 8300000, guid: f978f26949634238bd98440ee82caddd, type: 3}
+  alertInterval: 25
+  volume: 0.8
+  duckFactor: 0.25
+  spatialBlend: 0
+  onAlertStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onEvacuationStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onSilenced:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1927297311288322440
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +425,7 @@ Transform:
   m_GameObject: {fileID: 4635060345867713210}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 177.78394, y: -0.00004, z: 2174.7834}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -374,5 +433,6 @@ Transform:
   - {fileID: 3291007785217620521}
   - {fileID: 2022655615826996635}
   - {fileID: 5548323965353862293}
+  - {fileID: 116356726909297805}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

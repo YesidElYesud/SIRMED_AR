@@ -77,6 +77,22 @@ namespace SIRMED.Gameplay.Hotspots
         [TextArea(3, 8)]
         public string description = "Información del hotspot.";
 
+        [Tooltip("Opcional: descripción según el nivel de riesgo activo (índice 0 = N1 … 3 = N4).\n" +
+                 "Vacío o sin texto para ese nivel = se usa 'description'. Ej.: la Sirena explica\n" +
+                 "qué significa su sonido en cada nivel (checklist M03).")]
+        [TextArea(2, 6)]
+        public string[] descriptionByLevel;
+
+        /// <summary>Descripción para 'level': la de descriptionByLevel si tiene texto, si no description.</summary>
+        public string GetDescriptionFor(RiskLevel level)
+        {
+            int i = (int)level - 1;
+            if (descriptionByLevel != null && i >= 0 && i < descriptionByLevel.Length &&
+                !string.IsNullOrEmpty(descriptionByLevel[i]))
+                return descriptionByLevel[i];
+            return description;
+        }
+
         [Tooltip("Ícono opcional para el panel informativo")]
         public Sprite icon;
 

@@ -172,6 +172,9 @@ namespace SIRMED.Gameplay.Director
             CheckSirenaInN2(level);
         }
 
+        /// <summary>True si hay consejos urgentes esperando turno (RouteProgressHud espera a que salgan antes del cierre).</summary>
+        public bool HasPendingAdvice => _urgentQueue.Count > 0;
+
         // ── API pública (la llaman los diálogos de ayuda comunitaria) ─────────────
         /// <summary>S5: el usuario resolvió bien una situación de ayuda comunitaria.</summary>
         public void NotifyCommunityHelpCorrect() => TryTrigger(adviceAyudaCorrecta);
