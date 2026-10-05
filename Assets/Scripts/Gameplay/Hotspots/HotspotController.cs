@@ -177,8 +177,15 @@ namespace SIRMED.Gameplay.Hotspots
         /// </summary>
         public bool IsAnchorReady()
         {
-            return transform.parent != null &&
-                   transform.parent.GetComponent<ARGeospatialAnchor>() != null;
+            if (Application.isEditor)
+            {
+                return true;
+            }
+            else
+            {
+                return transform.parent != null &&
+                       transform.parent.GetComponent<ARGeospatialAnchor>() != null;
+            }
         }
 
         /// <summary>

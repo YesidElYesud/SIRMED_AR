@@ -512,37 +512,58 @@ namespace Google.XR.ARCoreExtensions
 
         private void SelectCameraConfig()
         {
+            Debug.LogWarning("SelectCameraConfig");
             if (CameraManager == null)
             {
                 return;
             }
 
-            using (var configurations = CameraManager.GetConfigurations(Allocator.Temp))
+            using NativeArray<XRCameraConfiguration> configurations = CameraManager.GetConfigurations(Allocator.Temp);
+
+            if (configurations.Length == 0)
             {
-                if (configurations.Length == 0)
-                {
-                    Debug.LogWarning(
-                        "Unable to choose a custom camera configuration " +
-                        "because none are available.");
-                    return;
-                }
-
-                int configIndex = 0;
-                if (OnChooseXRCameraConfiguration != null)
-                {
-                    configIndex = OnChooseXRCameraConfiguration(configurations.ToList());
-                }
-
-                if (configIndex < 0 || configIndex >= configurations.Length)
-                {
-                    Debug.LogWarning(
-                        "Failed to find a valid config index with " +
-                        "the custom selection function.");
-                    return;
-                }
-
-                CameraManager.currentConfiguration = configurations[configIndex];
+                Debug.LogWarning(
+                    "Unable to choose a custom camera configuration " +
+                    "because none are available.");
+                return;
             }
+
+            foreach (XRCameraConfiguration config in configurations)
+            {
+                Debug.Log($"configs: {config.resolution} {config}");
+            }
+            int configIndex = -1;
+            Vector2Int desiredResolution = new(1280, 720);
+            for (int i = 0; i < configurations.Length; i++)
+            {
+                if (configurations[i].resolution == desiredResolution)
+                {
+                    configIndex = i;
+                    Debug.Log($"index: {configIndex} is 720p");
+                    break;
+                }
+            }
+            if (configIndex == -1)
+            {
+                Debug.LogWarning("1280x720 camera configuration not available.");
+                configIndex = 0;
+            }
+
+            if (OnChooseXRCameraConfiguration != null)
+            {
+                configIndex = OnChooseXRCameraConfiguration(configurations.ToList());
+            }
+
+            if (configIndex < 0 || configIndex >= configurations.Length)
+            {
+                Debug.LogWarning(
+                    "Failed to find a valid config index with " +
+                    "the custom selection function.");
+                return;
+            }
+
+            Debug.Log($"index: {configIndex} configs:{configurations[configIndex].resolution} {configurations[configIndex]}");
+            CameraManager.currentConfiguration = configurations[configIndex];
         }
 #endif // UNITY_ANDROID
 
