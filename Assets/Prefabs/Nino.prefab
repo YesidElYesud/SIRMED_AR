@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a80d22fa6ba9f4944ab223d9fd94676a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -466.95
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a80d22fa6ba9f4944ab223d9fd94676a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.069
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a80d22fa6ba9f4944ab223d9fd94676a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 568.41
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a80d22fa6ba9f4944ab223d9fd94676a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 821082f130c4e3444a143ebf7ee8959a, type: 2}
     - target: {fileID: 919132149155446097, guid: a80d22fa6ba9f4944ab223d9fd94676a, type: 3}
       propertyPath: m_Name
-      value: Nino_MainPose
+      value: Nino
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
