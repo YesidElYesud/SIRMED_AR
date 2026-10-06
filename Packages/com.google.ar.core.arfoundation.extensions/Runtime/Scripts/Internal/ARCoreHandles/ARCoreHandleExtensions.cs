@@ -35,12 +35,19 @@ namespace Google.XR.ARCoreExtensions.Internal
                 return IntPtr.Zero;
             }
 
-            SessionNativePointerStruct info = (SessionNativePointerStruct)
-                Marshal.PtrToStructure(
-                    session.subsystem.nativePtr,
-                    typeof(SessionNativePointerStruct));
+            try
+            {
+                SessionNativePointerStruct info = (SessionNativePointerStruct)
+                    Marshal.PtrToStructure(
+                        session.subsystem.nativePtr,
+                        typeof(SessionNativePointerStruct));
 
-            return info.SessionHandle;
+                return info.SessionHandle;
+            }
+            catch (Exception)
+            {
+                return IntPtr.Zero;
+            }
         }
 
         public static IntPtr AnchorHandle(this ARAnchor anchor)
