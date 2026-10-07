@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3496927341261676715
+--- !u!114 &-337748954757485450
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,37 +20,23 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Clouds
-  m_Shader: {fileID: -6465566751694194690, guid: 9364d147d1591f04d91a991018a5b46f, type: 3}
+  m_Name: _Fog
+  m_Shader: {fileID: -6465566751694194690, guid: 86c7ce90e995ff24f8f60130824d1ced, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _ENUM_A
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
-  - XRMotionVectors
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Cloud_Map:
-        m_Texture: {fileID: 2800000, guid: 73a68beb960b511418f1ba164690039f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DefaultCloudMap:
-        m_Texture: {fileID: 2800000, guid: 73a68beb960b511418f1ba164690039f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 8.42, y: 0}
-    - _SampleTexture2D_ca9d561fafb94b079efbe3b7e851e123_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 73a68beb960b511418f1ba164690039f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -65,25 +51,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Circle: 1.57
-    - _Clip: 0.001
-    - _ENUM: 0
-    - _Float: 0.001
-    - _Float_1: -0.02
-    - _Layer_A: 0
-    - _Layer_B: 0
-    - _Layer_G: 0
-    - _Layer_R: 1
-    - _Offset: -0.2
-    - _Power: 4
-    - _QueueControl: 1
+    - _Offset: 0.1
+    - _QueueControl: 0
     - _QueueOffset: 0
-    - _Rotation: 0.9070621
-    - _Rotation_Speed: 0.1
-    - _XRMotionVectorsPass: 0
+    - _Scale: 0.8
+    - _XRMotionVectorsPass: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Vector2: {r: 46.4, g: 0, b: 0, a: 0}
-    - _Vector3: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
