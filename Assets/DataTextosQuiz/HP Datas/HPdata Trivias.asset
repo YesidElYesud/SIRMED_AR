@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Hotspots.HotspotData
   title: Hotspot
   description: "Informaci\xF3n del hotspot."
+  descriptionByLevel: []
   icon: {fileID: 0}
   actionType: 0
   cinematicClip: {fileID: 0}
   cinematicUrl: 
   cinematicAdvancesStage: 1
   dialogueData: {fileID: 0}
+  dialogueByLevel: []
   siataSequence: {fileID: 0}
   infoSlides: []
   infoSlideAdvancesStage: 1
@@ -29,8 +31,13 @@ MonoBehaviour:
   riskLevel: 0
   trivia: {fileID: 0}
   triviaPool:
-  - {fileID: 11400000, guid: 2725164131129144594e90816e10f75f, type: 2}
   - {fileID: 11400000, guid: d3cdc840261fc4e48b44f74f6d72f822, type: 2}
+  - {fileID: 11400000, guid: d9604a74217acb44b9c0c50e3c49cbf2, type: 2}
+  - {fileID: 11400000, guid: 2725164131129144594e90816e10f75f, type: 2}
+  - {fileID: 11400000, guid: 720069247ef840b4db56f22e81237343, type: 2}
+  - {fileID: 11400000, guid: ec98700e4430a9b4189dabb73acaaff8, type: 2}
+  - {fileID: 11400000, guid: 5b1e348dcd129af4eab507038ce3fb0e, type: 2}
+  - {fileID: 11400000, guid: d4f76188d17bb3e40bf3aeae8d2d2f8e, type: 2}
   triviaAfterContent: 0
   allowTriviaInN4: 0
   advancesStageOnClose: 0

@@ -66,6 +66,12 @@ namespace SIRMED.Managers
         /// </summary>
         public event Action<Stage, Stage> OnStageChanged;
 
+        /// <summary>
+        /// Se dispara cuando cambia IsPlayerInputBlocked (un panel modal se abre/cierra).
+        /// Estático para que sistemas que despiertan antes que StageManager puedan suscribirse en Awake.
+        /// </summary>
+        public static event Action<bool> OnPlayerInputBlockedChanged;
+
         // ── Propiedades públicas ──────────────────────────────────────────────────
         public Stage CurrentStage { get; private set; } = Stage.Intro;
 
@@ -161,7 +167,9 @@ namespace SIRMED.Managers
         /// </summary>
         public void SetPlayerInputBlocked(bool blocked)
         {
+            if (IsPlayerInputBlocked == blocked) return;
             IsPlayerInputBlocked = blocked;
+            OnPlayerInputBlockedChanged?.Invoke(blocked);
         }
 
         // ── Privados ──────────────────────────────────────────────────────────────
