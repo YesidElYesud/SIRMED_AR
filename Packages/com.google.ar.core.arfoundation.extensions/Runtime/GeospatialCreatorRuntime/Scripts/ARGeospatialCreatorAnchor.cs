@@ -477,6 +477,18 @@ namespace Google.XR.ARCoreExtensions.GeospatialCreator
 #if UNITY_EDITOR
         internal void Update()
         {
+            // SIRMED: los _previous* no se serializan, así que tras cargar la escena o un
+            // domain reload el primer Update veía "cambios" en transform y lat/lon y
+            // recalculaba uno a partir del otro con un Origin todavía sin sincronizar
+            // (Google HQ o sin inicializar) — corrompía lat/lon o las posiciones al
+            // guardar. Lo cargado del disco ya es coherente: solo se toma como base.
+            if (!_baselineCaptured)
+            {
+                _baselineCaptured = true;
+                FinishUpdate();
+                return;
+            }
+
             // If the Unity world coordinates were modified, then the geospatial coordinates must
             // be updated to stay in sync.
             if (
@@ -628,8 +640,42 @@ namespace Google.XR.ARCoreExtensions.GeospatialCreator
                 Debug.LogError("Cannot update the location for " + gameObject.name + ": The " +
                     "Origin " + Origin.gameObject.name + " has no Georeference.");
             }
+            else
+            {
+                // SIRMED: _originPoint no se serializa (GeoCoordinate no es [Serializable]):
+                // al cargar la escena o tras un domain reload vale el default (Google HQ)
+                // hasta que el adapter lo sincroniza con el CesiumGeoreference. Recalcular
+                // con ese origen movía todas las anclas a Mountain View al guardar la escena.
+                // Se sincroniza aquí mismo y, si sigue siendo el default, no se recalcula.
+                if (Origin._originComponentAdapter != null)
+                    Origin.UpdateOriginFromComponent();
+
+                if (Origin._originComponentAdapter == null || IsDefaultOrigin(Origin._originPoint))
+                {
+                    if (!_loggedSkippedUpdate)
+                    {
+                        _loggedSkippedUpdate = true;
+                        Debug.LogWarning("[SIRMED] " + gameObject.name + ": Origin aún no " +
+                            "sincronizado con Cesium; se omite recalcular lat/lon/alt.");
+                    }
+                    return null;
+                }
+            }
 
             return Origin?._originPoint;
+        }
+
+        private bool _loggedSkippedUpdate;
+        private bool _baselineCaptured;
+
+        // Default de Google HQ, o (0,0) si el CesiumGeoreference aún no se inicializó.
+        private static bool IsDefaultOrigin(GeoCoordinate point)
+        {
+            GeoCoordinate d = ARGeospatialCreatorOrigin._defaultOriginPoint;
+            bool isHq = Math.Abs(point.Latitude - d.Latitude) < 1e-6 &&
+                        Math.Abs(point.Longitude - d.Longitude) < 1e-6;
+            bool isZero = Math.Abs(point.Latitude) < 1e-9 && Math.Abs(point.Longitude) < 1e-9;
+            return isHq || isZero || double.IsNaN(point.Latitude);
         }
 #endif // UNITY_EDITOR
 #endregion Editor-only anchor location update methods

@@ -29,13 +29,20 @@ namespace SIRMED.UI
 
         // ── Inspector: Cuerpo ─────────────────────────────────────────────────────
         [Header("Cuerpo")]
+        [Tooltip("Muestra TriviaData.topic. Se oculta si la trivia no tiene tema.")]
+        public TextMeshProUGUI topicText;
         public TextMeshProUGUI questionText;
 
         // ── Inspector: Panel de opciones múltiples ───────────────────────────────
         [Header("Panel de opciones múltiples")]
         public MultipleChoicePanel choicePanel;
 
+        // ── HUD ───────────────────────────────────────────────────────────────────
+        [Header("HUD — ocultar durante la trivia")]
+        [SerializeField] private GameObject[] _hudElementsToHide;
+
         // ── Internos ──────────────────────────────────────────────────────────────
+        private bool[] _hudWasActive;
         private TriviaData _data;
         private HotspotController _sourceHotspot;
         private Coroutine _correctRoutine;
@@ -62,10 +69,17 @@ namespace SIRMED.UI
             _data = data;
             _sourceHotspot = source;
 
+            if (topicText != null)
+            {
+                bool hasTopic = !string.IsNullOrWhiteSpace(data.topic);
+                topicText.text = hasTopic ? data.topic : string.Empty;
+                topicText.gameObject.SetActive(hasTopic);
+            }
             if (questionText != null) questionText.text = data.question;
 
             gameObject.SetActive(true);
             BlockInput(true);
+            SaveAndHideHud();
 
             if (choicePanel != null) choicePanel.gameObject.SetActive(true);
             SetupChoicePanel(data.options);
@@ -79,6 +93,7 @@ namespace SIRMED.UI
             if (choicePanel != null) choicePanel.Clear();
 
             BlockInput(false);
+            RestoreHud();
             gameObject.SetActive(false);
 
             _data = null;
@@ -146,6 +161,36 @@ namespace SIRMED.UI
             // Regenerar las mismas opciones (sin cerrar el panel) — igual que SiataCallPanel.
             if (_data != null)
                 SetupChoicePanel(_data.options);
+        }
+
+        // ── HUD ───────────────────────────────────────────────────────────────────
+
+        private void SaveAndHideHud()
+        {
+            // Si ya está oculto (Show sin Hide previo), no sobreescribir el estado guardado.
+            if (_hudWasActive != null) return;
+            if (_hudElementsToHide == null || _hudElementsToHide.Length == 0) return;
+
+            _hudWasActive = new bool[_hudElementsToHide.Length];
+            for (int i = 0; i < _hudElementsToHide.Length; i++)
+            {
+                if (_hudElementsToHide[i] == null) continue;
+                _hudWasActive[i] = _hudElementsToHide[i].activeSelf;
+                _hudElementsToHide[i].SetActive(false);
+            }
+        }
+
+        private void RestoreHud()
+        {
+            if (_hudElementsToHide == null || _hudWasActive == null) return;
+
+            for (int i = 0; i < _hudElementsToHide.Length; i++)
+            {
+                if (_hudElementsToHide[i] == null) continue;
+                if (i < _hudWasActive.Length)
+                    _hudElementsToHide[i].SetActive(_hudWasActive[i]);
+            }
+            _hudWasActive = null;
         }
 
         // ── Input / utilidades ────────────────────────────────────────────────────
