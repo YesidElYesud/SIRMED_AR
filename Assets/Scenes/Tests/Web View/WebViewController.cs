@@ -1,0 +1,296 @@
+using Gree.UnityWebView;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.Networking;
+
+public class WebViewController : MonoBehaviour
+{
+    public string Url;
+    public int LeftMargin, RightMargin, TopMargin, BottomMargin;
+
+    [SerializeField]
+    private WebViewObject webViewObject;
+
+    private Coroutine _loadCoroutine;
+
+    private void Start()
+    {
+        _loadCoroutine = StartCoroutine(LoadWebView(Url));
+        SetVisibility(true);
+    }
+
+    private void OnDisable()
+    {
+        if (_loadCoroutine != null)
+        {
+            StopCoroutine(_loadCoroutine);
+        }
+    }
+
+    public void SetVisibility(bool visibility)
+    {
+        webViewObject.SetVisibility(visibility);
+    }
+
+    public bool GetVisibility()
+    {
+        return webViewObject.GetVisibility();
+    }
+
+    public void InjectJS()
+    {
+        string jsScript = @"
+            (function() {
+                var visor = document.querySelector('#visor');
+                if (!visor) return;
+
+                // --- 1. ESCALA Y VIEWPORT AL 80% ---
+                var metaViewport = document.querySelector('meta[name=""viewport""]');
+                if (!metaViewport) {
+                    metaViewport = document.createElement('meta');
+                    metaViewport.name = 'viewport';
+                    document.head.appendChild(metaViewport);
+                }
+                metaViewport.setAttribute('content', 'width=device-width, initial-scale=0.80, maximum-scale=0.80, user-scalable=no');
+                
+                // Ajustar fuente base a 8.0px (80% del valor original de 10px)
+                document.documentElement.style.setProperty('font-size', '8.0px', 'important');
+
+                // --- 2. OCULTAR ELEMENTOS ---
+                // a. Barra superior azul (SIRMED / General / X)
+                var topBar = visor.querySelector('.bg-bgBlue.z-\\[100\\]');
+                if (topBar) topBar.style.setProperty('display', 'none', 'important');
+
+                // b. Botón circular de login (arriba a la derecha)
+                var loginBtn = document.querySelector('#searchForm .rounded-full.bg-\\[\\#232B48\\]') ||
+                               document.querySelector('#searchForm button svg path[d*=""M15.8635""]')?.closest('div');
+                if (loginBtn) loginBtn.style.setProperty('display', 'none', 'important');
+
+                // c. Panel negro transparente con logos de abajo
+                var logosPanel = visor.querySelector('img[src*=""logo_DAGRD.png""]')?.closest('.absolute.bottom-0') ||
+                                 visor.querySelector('.bg-\\[\\#1E1E1E\\].opacity-40');
+                if (logosPanel) logosPanel.style.setProperty('display', 'none', 'important');
+
+                // d. Barra de 3 botones (Video / Estadísticas / Info)
+                var bottomBar = visor.querySelector('.lg\\:hidden.w-full.\\!h-\\[75px\\]') ||
+                                visor.querySelector('.z-\\[250\\].\\!h-\\[75px\\]');
+                if (bottomBar) bottomBar.style.setProperty('display', 'none', 'important');
+
+                // e. Ocultar la caja contenedora blanca inferior
+                var sideCol = visor.querySelector('.flex.flex-col.w-full.h-full.flex-shrink-0.z-\\[1205\\]') ||
+                              visor.querySelector('.bg-white.z-\\[1205\\]');
+                if (sideCol) sideCol.style.setProperty('display', 'none', 'important');
+
+                // --- 3. REINICIAR MÁRGENES Y EXPANDIR EL MAPA AL 100% DE LA PANTALLA ---
+                document.documentElement.style.setProperty('margin', '0px', 'important');
+                document.documentElement.style.setProperty('padding', '0px', 'important');
+                document.body.style.setProperty('margin', '0px', 'important');
+                document.body.style.setProperty('padding', '0px', 'important');
+                document.body.style.setProperty('background-color', '#000000', 'important');
+
+                var wrapper = visor.querySelector('.bg-bgBlancoMaterialEducativo');
+                if (wrapper) {
+                    wrapper.style.setProperty('height', '100vh', 'important');
+                    wrapper.style.setProperty('max-height', '100vh', 'important');
+                    wrapper.style.setProperty('padding', '0px', 'important');
+                    wrapper.style.setProperty('margin', '0px', 'important');
+                    wrapper.style.setProperty('background-color', '#000000', 'important');
+                }
+
+                var mapContainer = visor.querySelector('.h-\\[calc\\(100dvh-135px\\)\\]') ||
+                                   visor.querySelector('.lg\\:w-\\[40\\%\\]');
+                if (mapContainer) {
+                    mapContainer.style.setProperty('height', '100vh', 'important');
+                    mapContainer.style.setProperty('width', '100vw', 'important');
+                }
+
+                var map = document.querySelector('#map');
+                if (map) {
+                    map.style.setProperty('height', '100vh', 'important');
+                    map.style.setProperty('width', '100vw', 'important');
+                }
+
+                var maplibre = document.querySelector('#maplibreContainer');
+                if (maplibre) {
+                    maplibre.style.setProperty('height', '100vh', 'important');
+                    maplibre.style.setProperty('width', '100vw', 'important');
+                }
+
+                visor.style.setProperty('height', '100vh', 'important');
+                visor.style.setProperty('max-height', '100vh', 'important');
+
+                // --- 4. RECALCULAR TAMAÑO DE MAPLIBRE ---
+                window.dispatchEvent(new Event('resize'));
+            })();
+        ";
+
+        webViewObject.EvaluateJS(jsScript);
+    }
+
+    // Note: Load web view loads the page but wont make it visible.
+    // to do this, you must run SetVisibility(true);
+    private IEnumerator LoadWebView(string Url)
+    {
+        webViewObject.Init(
+            cb: (msg) =>
+            {
+                Debug.Log(string.Format("CallFromJS[{0}]", msg));
+            },
+            err: (msg) =>
+            {
+                Debug.Log(string.Format("CallOnError[{0}]", msg));
+            },
+            httpErr: (msg) =>
+            {
+                Debug.Log(string.Format("CallOnHttpError[{0}]", msg));
+            },
+            started: (msg) =>
+            {
+                Debug.Log(string.Format("CallOnStarted[{0}]", msg));
+            },
+            hooked: (msg) =>
+            {
+                Debug.Log(string.Format("CallOnHooked[{0}]", msg));
+            },
+            cookies: (msg) =>
+            {
+                Debug.Log(string.Format("CallOnCookies[{0}]", msg));
+            },
+            ld: (msg) =>
+            {
+                Debug.Log(string.Format("CallOnLoaded[{0}]", msg));
+#if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX || UNITY_IOS
+                // NOTE: the following js definition is required only for UIWebView; if
+                // enabledWKWebView is true and runtime has WKWebView, Unity.call is defined
+                // directly by the native plugin.
+#if true
+                var js = @"
+                    if (!(window.webkit && window.webkit.messageHandlers)) {
+                        window.Unity = {
+                            call: function(msg) {
+                                window.location = 'unity:' + msg;
+                            }
+                        };
+                    }
+                ";
+#else
+                // NOTE: depending on the situation, you might prefer this 'iframe' approach.
+                // cf. https://github.com/gree/unity-webview/issues/189
+                var js = @"
+                    if (!(window.webkit && window.webkit.messageHandlers)) {
+                        window.Unity = {
+                            call: function(msg) {
+                                var iframe = document.createElement('IFRAME');
+                                iframe.setAttribute('src', 'unity:' + msg);
+                                document.documentElement.appendChild(iframe);
+                                iframe.parentNode.removeChild(iframe);
+                                iframe = null;
+                            }
+                        };
+                    }
+                ";
+#endif
+#elif UNITY_WEBPLAYER || UNITY_WEBGL
+                var js = @"
+                    window.Unity = {
+                        call:function(msg) {
+                            parent.unityWebView.sendMessage('WebViewObject', msg);
+                        }
+                    };
+                ";
+#else
+                var js = "";
+#endif
+                webViewObject.EvaluateJS(js + @"Unity.call('ua=' + navigator.userAgent)");
+            },
+            //transparent: false,
+            zoom: false
+            //ua: "custom user agent string",
+            //radius: 0,  // rounded corner radius in pixel
+            //// android
+            //androidForceDarkMode: 0,  // 0: follow system setting, 1: force dark off, 2: force dark on
+            //// ios
+            //enableWKWebView: true,
+            //wkContentMode: 0,  // 0: recommended, 1: mobile, 2: desktop
+            //wkAllowsLinkPreview: true,
+            //// editor
+            //separated: false
+            );
+#if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
+        webViewObject.bitmapRefreshCycle = 1;
+        webViewObject.devicePixelRatio = 1;  // 1 or 2
+#endif
+        // cf. https://github.com/gree/unity-webview/pull/512
+        // Added alertDialogEnabled flag to enable/disable alert/confirm/prompt dialogs. by KojiNakamaru · Pull Request #512 · gree/unity-webview
+        //webViewObject.SetAlertDialogEnabled(false);
+
+        // cf. https://github.com/gree/unity-webview/pull/728
+        //webViewObject.SetCameraAccess(true);
+        //webViewObject.SetMicrophoneAccess(true);
+
+        // cf. https://github.com/gree/unity-webview/pull/550
+        // introduced SetURLPattern(..., hookPattern). by KojiNakamaru · Pull Request #550 · gree/unity-webview
+        //webViewObject.SetURLPattern("", "^https://.*youtube.com", "^https://.*google.com");
+
+        // cf. https://github.com/gree/unity-webview/pull/570
+        // Add BASIC authentication feature (Android and iOS with WKWebView only) by takeh1k0 · Pull Request #570 · gree/unity-webview
+        //webViewObject.SetBasicAuthInfo("id", "password");
+
+        //webViewObject.SetScrollbarsVisibility(true);
+
+        webViewObject.SetMargins(LeftMargin, TopMargin, RightMargin, BottomMargin);
+        webViewObject.SetTextZoom(100);  // android only. cf. https://stackoverflow.com/questions/21647641/android-webview-set-font-size-system-default/47017410#47017410
+
+#if !UNITY_WEBPLAYER && !UNITY_WEBGL
+        if (Url.StartsWith("http"))
+        {
+            webViewObject.LoadURL(Url.Replace(" ", "%20"));
+        }
+        else
+        {
+            var exts = new string[]{
+                ".jpg",
+                ".js",
+                ".html"  // should be last
+            };
+            foreach (var ext in exts)
+            {
+                var url = Url.Replace(".html", ext);
+                var src = System.IO.Path.Combine(Application.streamingAssetsPath, url);
+                var dst = System.IO.Path.Combine(Application.temporaryCachePath, url);
+                byte[] result = null;
+                if (src.Contains("://"))
+                {  // for Android
+#if UNITY_2018_4_OR_NEWER
+                    // NOTE: a more complete code that utilizes UnityWebRequest can be found in https://github.com/gree/unity-webview/commit/2a07e82f760a8495aa3a77a23453f384869caba7#diff-4379160fa4c2a287f414c07eb10ee36d
+                    var unityWebRequest = UnityWebRequest.Get(src);
+                    yield return unityWebRequest.SendWebRequest();
+                    result = unityWebRequest.downloadHandler.data;
+#else
+                    var www = new WWW(src);
+                    yield return www;
+                    result = www.bytes;
+#endif
+                }
+                else
+                {
+                    result = System.IO.File.ReadAllBytes(src);
+                }
+                System.IO.File.WriteAllBytes(dst, result);
+                if (ext == ".html")
+                {
+                    webViewObject.LoadURL("file://" + dst.Replace(" ", "%20"));
+                    break;
+                }
+            }
+        }
+#else
+        if (Url.StartsWith("http")) {
+            webViewObject.LoadURL(Url.Replace(" ", "%20"));
+        } else {
+            webViewObject.LoadURL("StreamingAssets/" + Url.Replace(" ", "%20"));
+        }
+#endif
+        yield break;
+    }
+}
