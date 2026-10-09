@@ -97,7 +97,7 @@ public class RainSystem : MonoBehaviour
         #endregion
 
         #region Fog
-        fogRoot.position = new Vector3(target.position.x, 1.1176f, target.position.z);
+        fogRoot.position = new Vector3(target.position.x, 1.1176f /*value from XR Origin*/, target.position.z);
         #endregion
     }
 }
