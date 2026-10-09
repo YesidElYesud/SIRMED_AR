@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caccdb802bd40ce42a70a8fa140c26d2, type: 3}
+  m_Name: HPdata Lider
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Hotspots.HotspotData
+  title: "L\xEDder comunitario"
+  description: "El liderazgo comunitario facilita la comunicaci\xF3n, la preparaci\xF3n y una respuesta organizada ante una alerta. (Texto temporal.)"
+  icon: {fileID: 0}
+  actionType: 2
+  cinematicClip: {fileID: 0}
+  cinematicUrl: 
+  cinematicAdvancesStage: 1
+  dialogueData: {fileID: 11400000, guid: f13ffee75f98d03cbaedf669a60c4fc4, type: 2}
+  dialogueByLevel:
+  - {fileID: 11400000, guid: f13ffee75f98d03cbaedf669a60c4fc4, type: 2}
+  - {fileID: 11400000, guid: 41b07d1f866c251b89d86cdee65a4e7a, type: 2}
+  - {fileID: 11400000, guid: b204d5aa5e39c28fd88e20de6066c6ab, type: 2}
+  - {fileID: 11400000, guid: 19792f336b2a1f188b62ccabd2c4eaef, type: 2}
+  siataSequence: {fileID: 0}
+  infoSlides: []
+  infoSlideAdvancesStage: 1
+  triggerRadius: 3
+  requiredStage: -1
+  headerImage: {fileID: 0}
+  riskLevel: 0
+  trivia: {fileID: 0}
+  triviaPool: []
+  triviaAfterContent: 0
+  allowTriviaInN4: 0
+  advancesStageOnClose: 0
+  activatesEvacuationRoute: 0
+  activatesEndGame: 0
+  endGameRequiredStage: -1
+  isBlinking: 1
+  blinkSpeed: 1.5

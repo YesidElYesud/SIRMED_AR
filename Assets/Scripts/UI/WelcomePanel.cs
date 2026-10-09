@@ -19,6 +19,11 @@ namespace SIRMED.UI
     ///     Llena el array "slides" con GameObjects existentes.
     ///     slideTemplate debe quedar vacío para que no haya conflicto.
     ///
+    /// Botones propios por slide (opcional):
+    ///   Si el slide visible contiene botones con WelcomeSlideButton, se ocultan los
+    ///   botones globales de abajo y se usan los del slide. Los slides sin botones
+    ///   propios siguen usando los globales, así que ambos esquemas conviven.
+    ///
     /// Flujo:
     ///   Intro → onboarding → "Comenzar" → GoToStage(Etapa1)
     ///
@@ -109,6 +114,9 @@ namespace SIRMED.UI
         [Tooltip("Solo visible en el último slide.")]
         public Button startButton;
 
+        [Tooltip("Se ocultan automáticamente cuando el slide visible tiene sus propios WelcomeSlideButton.")]
+        [SerializeField] private bool _hideGlobalButtonsWhenSlideHasOwn = true;
+
         [Header("Indicador de progreso (opcional)")]
         public TextMeshProUGUI slideCounterText;
 
@@ -168,6 +176,24 @@ namespace SIRMED.UI
             gameObject.SetActive(false);
         }
 
+        /// <summary>Llamado por los WelcomeSlideButton de cada slide.</summary>
+        public void Navigate(WelcomeSlideButton.Role role)
+        {
+            switch (role)
+            {
+                case WelcomeSlideButton.Role.Previous:
+                    OnPrevious();
+                    break;
+                case WelcomeSlideButton.Role.Next:
+                    if (_currentSlide >= SlideCount - 1) OnStart();
+                    else OnNext();
+                    break;
+                case WelcomeSlideButton.Role.Start:
+                    OnStart();
+                    break;
+            }
+        }
+
         // ── Visualización ─────────────────────────────────────────────────────────
         private void ShowSlide(int index)
         {
@@ -223,9 +249,38 @@ namespace SIRMED.UI
             bool isFirst = _currentSlide == 0;
             bool isLast = _currentSlide >= SlideCount - 1;
 
-            if (previousButton != null) previousButton.gameObject.SetActive(!isFirst);
-            if (nextButton != null) nextButton.gameObject.SetActive(!isLast);
-            if (startButton != null) startButton.gameObject.SetActive(isLast);
+            WelcomeSlideButton[] own = GetCurrentSlideButtons();
+            bool useOwn = _hideGlobalButtonsWhenSlideHasOwn && own.Length > 0;
+
+            if (previousButton != null) previousButton.gameObject.SetActive(!useOwn && !isFirst);
+            if (nextButton != null) nextButton.gameObject.SetActive(!useOwn && !isLast);
+            if (startButton != null) startButton.gameObject.SetActive(!useOwn && isLast);
+
+            if (!useOwn) return;
+
+            bool hasOwnStart = System.Array.Exists(own, b => b.role == WelcomeSlideButton.Role.Start);
+            foreach (var b in own)
+            {
+                bool visible = b.role switch
+                {
+                    WelcomeSlideButton.Role.Previous => !isFirst,
+                    WelcomeSlideButton.Role.Next => !(isLast && hasOwnStart),
+                    _ => isLast,
+                };
+                b.gameObject.SetActive(visible);
+            }
+        }
+
+        /// <summary>Botones WelcomeSlideButton dentro del slide visible (incluye inactivos).</summary>
+        private WelcomeSlideButton[] GetCurrentSlideButtons()
+        {
+            GameObject root = _usingDataMode
+                ? slideTemplate
+                : (slides != null && _currentSlide < slides.Length ? slides[_currentSlide] : null);
+
+            return root != null
+                ? root.GetComponentsInChildren<WelcomeSlideButton>(true)
+                : System.Array.Empty<WelcomeSlideButton>();
         }
 
         private void UpdateCounter()

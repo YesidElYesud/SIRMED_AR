@@ -2,6 +2,7 @@ namespace SIRMED.Gameplay.Hotspots
 {
     using System.Collections;
     using System.Collections.Generic;
+    using SIRMED.Managers;
     using UnityEngine;
     using UnityEngine.UI;
 
@@ -52,10 +53,15 @@ namespace SIRMED.Gameplay.Hotspots
 
             if (buttonRoot != null) buttonRoot.SetActive(false);
             if (button != null) button.onClick.AddListener(OnButtonClicked);
+
+            // Suscripción en Awake/OnDestroy (no OnEnable/OnDisable): buttonRoot suele ser
+            // este mismo GO, y se desactiva al ocultarse — seguiría necesitando el aviso.
+            StageManager.OnPlayerInputBlockedChanged += HandleInputBlockedChanged;
         }
 
         private void OnDestroy()
         {
+            StageManager.OnPlayerInputBlockedChanged -= HandleInputBlockedChanged;
             if (button != null) button.onClick.RemoveListener(OnButtonClicked);
             if (Instance == this) Instance = null;
         }
@@ -97,8 +103,17 @@ namespace SIRMED.Gameplay.Hotspots
             }
 
             _activeHotspot = FindClosest();
+
+            // Con un panel modal abierto (trivia, diálogo, SIATA…) no se ofrece otro hotspot;
+            // se vuelve a mostrar al desbloquearse el input (HandleInputBlockedChanged).
+            if (IsInputBlocked()) { HideButton(); return; }
             ShowButton();
         }
+
+        private void HandleInputBlockedChanged(bool blocked) => RefreshActive();
+
+        private static bool IsInputBlocked() =>
+            StageManager.Instance != null && StageManager.Instance.IsPlayerInputBlocked;
 
         private IHotspotInteractable FindClosest()
         {

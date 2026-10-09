@@ -2,6 +2,7 @@ namespace SIRMED.UI
 {
     using System;
     using System.Collections;
+    using SIRMED.Managers;
     using UnityEngine;
     using UnityEngine.UI;
 
@@ -55,9 +56,33 @@ namespace SIRMED.UI
         [Tooltip("Álbum/carpeta donde quedan las fotos en la galería del teléfono.")]
         [SerializeField] private string _albumName = "SIRMED AR";
 
+        [Header("Visibilidad por nivel")]
+        [Tooltip("Ocultar el botón en N4: durante la evacuación no se toman fotos (checklist M13).")]
+        [SerializeField] private bool _hideInN4 = true;
+
         private bool _busy;
 
         // ── Lifecycle ─────────────────────────────────────────────────────────────
+        private void Start()
+        {
+            // Suscrito desde Start y no desde OnEnable: el handler debe seguir recibiendo
+            // el evento mientras el botón está oculto para volver a mostrarlo al bajar de N4.
+            if (_hideInN4 && StageManager.Instance != null)
+            {
+                StageManager.Instance.OnStageChanged += HandleStageChanged;
+                HandleStageChanged(StageManager.Instance.CurrentStage, StageManager.Instance.CurrentStage);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (StageManager.Instance != null)
+                StageManager.Instance.OnStageChanged -= HandleStageChanged;
+        }
+
+        private void HandleStageChanged(StageManager.Stage previous, StageManager.Stage current) =>
+            gameObject.SetActive(current != StageManager.Stage.Etapa4);
+
         private void Awake()
         {
             if (_captureButton != null)

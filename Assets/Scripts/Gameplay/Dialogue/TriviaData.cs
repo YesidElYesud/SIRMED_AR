@@ -19,6 +19,9 @@ namespace SIRMED.Gameplay.Dialogue
     public class TriviaData : ScriptableObject
     {
         [Header("Pregunta")]
+        [Tooltip("Tema de la pregunta, mostrado sobre ella en el TriviaPanel (p.ej. \"Evacuación\"). Vacío = se oculta.")]
+        public string topic = "";
+
         [TextArea(2, 4)]
         public string question = "¿Pregunta de la trivia?";
 

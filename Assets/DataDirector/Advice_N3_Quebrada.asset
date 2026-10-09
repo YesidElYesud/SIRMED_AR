@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7255d80cd868d1b4893f7b7d38a75393, type: 3}
+  m_Name: Advice_N3_Quebrada
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Director.DirectorAdviceData
+  debugLabel: "S3 - N3 se aproxima a la quebrada"
+  lines:
+  - text: "Mant\xE9n una distancia segura del cauce. Una creciente puede cambiar r\xE1pidamente y arrastrar objetos."
+    audio: {fileID: 8300000, guid: 10aa33adb60044f28557cfaaf9f59aed, type: 3}
+    gestureTrigger: Hablar
+  moveToPointId: 

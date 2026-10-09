@@ -88,5 +88,9 @@ namespace SIRMED.Gameplay.Dialogue
         [Tooltip("Segundos de pausa tras respuesta correcta antes de cerrar el panel y avanzar.")]
         [Range(0.5f, 4f)]
         public float correctAnswerDelay = 1.5f;
+
+        [Tooltip("Situación de ayuda comunitaria: al responder bien, el Director da el consejo\n" +
+                 "'Buena decisión…' (situación 5 del documento de validación del DAGRD).")]
+        public bool isCommunityHelp = false;
     }
 }

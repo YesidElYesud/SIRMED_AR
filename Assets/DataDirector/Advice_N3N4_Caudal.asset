@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7255d80cd868d1b4893f7b7d38a75393, type: 3}
+  m_Name: Advice_N3N4_Caudal
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Director.DirectorAdviceData
+  debugLabel: "S6 - Cerca del caudal en N3/N4"
+  lines:
+  - text: "Es momento de evacuar. Al\xE9jate del cauce inmediatamente y avanza hacia la zona segura."
+    audio: {fileID: 8300000, guid: 69197e66163a4fcbb280fbd970684490, type: 3}
+    gestureTrigger: Hablar
+  moveToPointId: 

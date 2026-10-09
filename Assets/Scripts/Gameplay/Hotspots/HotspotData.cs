@@ -77,6 +77,22 @@ namespace SIRMED.Gameplay.Hotspots
         [TextArea(3, 8)]
         public string description = "Información del hotspot.";
 
+        [Tooltip("Opcional: descripción según el nivel de riesgo activo (índice 0 = N1 … 3 = N4).\n" +
+                 "Vacío o sin texto para ese nivel = se usa 'description'. Ej.: la Sirena explica\n" +
+                 "qué significa su sonido en cada nivel (checklist M03).")]
+        [TextArea(2, 6)]
+        public string[] descriptionByLevel;
+
+        /// <summary>Descripción para 'level': la de descriptionByLevel si tiene texto, si no description.</summary>
+        public string GetDescriptionFor(RiskLevel level)
+        {
+            int i = (int)level - 1;
+            if (descriptionByLevel != null && i >= 0 && i < descriptionByLevel.Length &&
+                !string.IsNullOrEmpty(descriptionByLevel[i]))
+                return descriptionByLevel[i];
+            return description;
+        }
+
         [Tooltip("Ícono opcional para el panel informativo")]
         public Sprite icon;
 
@@ -99,6 +115,20 @@ namespace SIRMED.Gameplay.Hotspots
 
         [Tooltip("Datos del diálogo. Solo se usa cuando actionType = NpcConversation o SiataCall (sin secuencia).")]
         public NpcDialogueData dialogueData;
+
+        [Tooltip("Opcional, para NpcConversation: diálogo según el nivel de riesgo activo\n" +
+                 "(índice 0 = N1 … 3 = N4). Si el del nivel actual está vacío se usa dialogueData.\n" +
+                 "Así el Líder dice el mensaje de la alerta en curso en cualquiera de sus paradas.")]
+        public NpcDialogueData[] dialogueByLevel;
+
+        /// <summary>Diálogo a mostrar: el de dialogueByLevel para 'level' si existe, si no dialogueData.</summary>
+        public NpcDialogueData GetDialogueFor(RiskLevel level)
+        {
+            int i = (int)level - 1;
+            if (dialogueByLevel != null && i >= 0 && i < dialogueByLevel.Length && dialogueByLevel[i] != null)
+                return dialogueByLevel[i];
+            return dialogueData;
+        }
 
         [Tooltip("Secuencia SIATA con pasos mixtos Info/Question.\n" +
                  "Si está asignada, tiene prioridad sobre dialogueData cuando actionType = SiataCall.")]
@@ -141,6 +171,16 @@ namespace SIRMED.Gameplay.Hotspots
         [Tooltip("Si tiene elementos, se elige una al azar en vez de usar 'trivia'.\n" +
                  "Útil para que un mismo hotspot no repita siempre la misma pregunta.")]
         public TriviaData[] triviaPool;
+
+        [Tooltip("Si true, primero se muestra el contenido del hotspot (panel, NPC, slides...)\n" +
+                 "y la trivia aparece al cerrarlo (checklist M02: 'trivia después de consultar\n" +
+                 "el contenido'). Si false, el hotspot entra directo a la trivia (hotspots\n" +
+                 "TRIVIA independientes).")]
+        public bool triviaAfterContent = false;
+
+        [Tooltip("Permite la trivia aunque el nivel activo sea N4. Solo para hotspots donde la\n" +
+                 "evacuación ya terminó (p. ej. punto de encuentro, trivia 6 del DAGRD).")]
+        public bool allowTriviaInN4 = false;
 
         /// <summary>
         /// Trivia a mostrar: aleatoria de triviaPool si tiene elementos, si no trivia.

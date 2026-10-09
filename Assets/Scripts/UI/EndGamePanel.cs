@@ -62,6 +62,10 @@ namespace SIRMED.UI
         {
             StageManager.Instance?.SetPlayerInputBlocked(false);
 
+            // Volver a empezar = paradas del Líder (y demás secuencias) desde cero
+            // (la recarga de escena también lo hace; esto refresca antes de recargar).
+            SIRMED.Gameplay.Hotspots.HotspotSequence.ResetScene();
+
             DestroyPersistentSingletons();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }

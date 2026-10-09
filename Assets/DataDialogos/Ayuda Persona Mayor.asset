@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64322bcf911b1bc41a2a521643cb8e77, type: 3}
+  m_Name: Ayuda Persona Mayor
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Dialogue.NpcDialogueData
+  npcName: "Vecino mayor"
+  npcPhoto: {fileID: 0}
+  dialogueEntries:
+  - text: "Disculpa... escuch\xE9 la sirena y me confund\xED con tanta gente. No s\xE9 para d\xF3nde ir."
+    audio: {fileID: 0}
+  - text: "\xBFQu\xE9 haces?"
+    audio: {fileID: 0}
+  dialogueLines: []
+  npcText: 
+  options:
+  - optionText: "Le digo que espere aqu\xED mientras voy a mirar la quebrada"
+    isCorrect: 0
+    feedbackText: "No. Acercarte al cauce te expone al peligro y lo deja solo. Ori\xE9ntalo con calma hacia el punto de encuentro."
+  - optionText: "Le indico con calma la direcci\xF3n del punto de encuentro y lo acompa\xF1o por la ruta"
+    isCorrect: 1
+    feedbackText: "\xA1Bien hecho! Orientar con calma y no dejar sola a una persona vulnerable es la forma segura de ayudar."
+  - optionText: "Sigo mi camino; seguro alguien m\xE1s lo ayudar\xE1"
+    isCorrect: 0
+    feedbackText: "No. Una persona mayor desorientada no debe quedarse sola. Ind\xEDcale la ruta y, si puedes, acomp\xE1\xF1ala."
+  advancesStageOnCorrect: 0
+  correctAnswerDelay: 1.5
+  isCommunityHelp: 1

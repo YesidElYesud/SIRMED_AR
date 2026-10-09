@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c582fc279321b724b804e7152e3e5c5f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -466.65
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c582fc279321b724b804e7152e3e5c5f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.065
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c582fc279321b724b804e7152e3e5c5f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 568.422
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c582fc279321b724b804e7152e3e5c5f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 2b6bd5101edf3024794e63f5e01d5506, type: 2}
     - target: {fileID: 919132149155446097, guid: c582fc279321b724b804e7152e3e5c5f, type: 3}
       propertyPath: m_Name
-      value: Lider_MainPose
+      value: Lider
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7255d80cd868d1b4893f7b7d38a75393, type: 3}
   m_Name: Advice_N4_Llegada
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Director.DirectorAdviceData
-  debugLabel: 'N4 - Llegada '
+  debugLabel: "S7 - Llegada al punto de encuentro"
   lines:
-  - text: "Has llegado al punto de encuentro. Permanece atento a la informaci\xF3n
-      oficial y no regreses a la zona de riesgo hasta que sea seguro."
-    audio: {fileID: 8300000, guid: ef38ada6b02f1404c88f630e39cc800a, type: 3}
+  - text: "Has llegado a la zona segura. En una emergencia real, permanece atento a las indicaciones de los organismos de respuesta."
+    audio: {fileID: 8300000, guid: b37ebb70e24a4166aef8a5dd6bb45d17, type: 3}
     gestureTrigger: Hablar
   moveToPointId: 
