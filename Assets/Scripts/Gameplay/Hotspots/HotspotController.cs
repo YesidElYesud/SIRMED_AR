@@ -193,10 +193,10 @@ namespace SIRMED.Gameplay.Hotspots
             }
             else
             {
-                if (geospatialAnchor == null)
+                if (geospatialAnchor == null && transform.parent != null)
                     geospatialAnchor = transform.parent.GetComponent<ARGeospatialAnchor>();
 
-                return transform.parent != null && geospatialAnchor != null;
+                return geospatialAnchor != null;
             }
         }
 

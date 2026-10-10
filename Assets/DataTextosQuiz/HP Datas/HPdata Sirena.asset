@@ -18,8 +18,8 @@ MonoBehaviour:
     el nivel de alerta. (Texto temporal.)"
   descriptionByLevel:
   - "La sirena de alerta temprana emite se\xF1ales sonoras para advertir sobre posibles
-    crecientes o inundaciones. indica el nivel de riesgo y las acciones necesarias;
-    Mantenerse alerta, prepararse para evacurar o evacuar inmediatamente hacia zonas
+    crecientes o inundaciones. Indica el nivel de riesgo y las acciones necesarias:
+    mantenerse alerta, prepararse para evacuar o evacuar inmediatamente hacia zonas
     seguras."
   - "La sirena est\xE1 activa con se\xF1ales intermitentes, indicando un riesgo menor
     de inundaci\xF3n. Mantente atento, evita acercarte a la quebrada y prep\xE1rate

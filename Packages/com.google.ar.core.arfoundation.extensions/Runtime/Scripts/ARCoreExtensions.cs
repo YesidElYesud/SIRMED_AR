@@ -193,7 +193,10 @@ namespace Google.XR.ARCoreExtensions
             IOSSupportManager.Instance.SetEnabled(true);
 #endif // UNITY_IOS && ARCORE_EXTENSIONS_IOS_SUPPORT
 #if UNITY_ANDROID
-            if (_instance.Session == null || Session.subsystem != null)
+            // SIRMED: con XR Simulation (PC) el subsistema no es de ARCore y el cast
+            // de abajo fallaría; en el celular se conserva el comportamiento original.
+            if (_instance.Session == null ||
+                (Session.subsystem != null && !(Session.subsystem is ARCoreSessionSubsystem)))
             {
                 Debug.LogWarning("ARSession is required by ARCoreExtensions !!!");
                 return;
