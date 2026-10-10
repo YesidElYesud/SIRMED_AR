@@ -97,7 +97,8 @@ public class WeatherSystem : MonoBehaviour
         #endregion
 
         #region Fog
-        fogRoot.position = new Vector3(target.position.x, 1.1176f /*value from XR Origin*/, target.position.z);
+        //fogRoot.position = new Vector3(target.position.x, 1.1176f /*value from XR Origin*/, target.position.z); // Y value needs more testing
+        fogRoot.position = target.position;
         #endregion
     }
 }

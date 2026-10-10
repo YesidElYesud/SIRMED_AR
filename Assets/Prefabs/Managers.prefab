@@ -57,7 +57,8 @@ MonoBehaviour:
     sunIntensity: 1
     enableFog: 0
     fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    fogDensity: 0.02
+    fogDensity: 0
+    fogSphere: 0
     postProcessProfile: {fileID: 0}
     ppFadeDuration: 1
     cameraFarPlane: 125
@@ -88,7 +89,8 @@ MonoBehaviour:
     sunIntensity: 1
     enableFog: 0
     fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    fogDensity: 0.02
+    fogDensity: 0
+    fogSphere: 0
     postProcessProfile: {fileID: 11400000, guid: 0607f3f4e0664f64bbd95506be49f7ea, type: 2}
     ppFadeDuration: 1
     cameraFarPlane: 125
@@ -120,6 +122,7 @@ MonoBehaviour:
     enableFog: 1
     fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     fogDensity: 0.01
+    fogSphere: 0.33333334
     postProcessProfile: {fileID: 11400000, guid: 8ee2a598b7719b34a9d124c523022c9b, type: 2}
     ppFadeDuration: 1
     cameraFarPlane: 100
@@ -154,7 +157,8 @@ MonoBehaviour:
     sunIntensity: 0.4
     enableFog: 1
     fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    fogDensity: 0.03
+    fogDensity: 0.025
+    fogSphere: 0.8
     postProcessProfile: {fileID: 11400000, guid: 627d7307e9509cb4e81ed8f399b65b68, type: 2}
     ppFadeDuration: 1
     cameraFarPlane: 75
@@ -190,6 +194,7 @@ MonoBehaviour:
     enableFog: 1
     fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     fogDensity: 0.05
+    fogSphere: 1
     postProcessProfile: {fileID: 11400000, guid: 8a9875fcefd325b40ba79bd0615a8e04, type: 2}
     ppFadeDuration: 1
     cameraFarPlane: 50
@@ -216,6 +221,8 @@ MonoBehaviour:
   sunLight: {fileID: 0}
   clouds: {fileID: 2100000, guid: 4c8faad00fb9c9745af321ee770f031e, type: 2}
   wetFloor: {fileID: 2100000, guid: 8349e6fd801ad8544886578e7fa291cb, type: 2}
+  fogSphere: {fileID: 2100000, guid: bd035913e51ace443942afe17c1e2427, type: 2}
+  fogTransform: {fileID: 0}
   enablePostProcessing: 1
   volumePriority: 10
   debugLogs: 0

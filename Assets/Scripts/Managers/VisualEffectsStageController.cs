@@ -123,6 +123,8 @@ namespace SIRMED.Managers
             [Tooltip("Densidad de la niebla (modo Exponential).")]
             [Range(0f, 0.1f)]
             public float fogDensity = 0.02f;
+            [Range(0, 1)]
+            public float fogSphere = 0;
 
             // ── Post-processing ───────────────────────────────────────────────────
             [Header("Post-processing (URP Volume)")]
@@ -148,11 +150,11 @@ namespace SIRMED.Managers
             // ── Clouds ────────────────────────────────────────────────────────────
             [Header("Clouds")]
             public float cloudsAlpha = 0;
-            public float cloudsColor = 1;
-            public float cloudLayerR;
-            public float cloudLayerG;
-            public float cloudLayerB;
-            public float cloudLayerA;
+            [Range(0, 1)] public float cloudsColor = 1;
+            [Range(0, 1)] public float cloudLayerR;
+            [Range(0, 1)] public float cloudLayerG;
+            [Range(0, 1)] public float cloudLayerB;
+            [Range(0, 1)] public float cloudLayerA;
 
             // ── Wet Floor ─────────────────────────────────────────────────────────
             [Header("Wet Floot")]
@@ -184,6 +186,8 @@ namespace SIRMED.Managers
         public Light sunLight;
         public Material clouds;
         public Material wetFloor;
+        public Material fogSphere;
+        public Transform fogTransform;
 
         [Header("Post-processing")]
         [Tooltip("Enciende 'Post Processing' en la cámara principal en las etapas con perfil. " +
@@ -377,11 +381,11 @@ namespace SIRMED.Managers
         /// El post de la cámara solo está encendido mientras la etapa actual (o un
         /// fade) tiene un Volume: en etapas sin perfil el coste es cero.
         /// </summary>
-        private void SetCameraPost(bool on)
-        {
-            if (_postCameraData != null)
-                _postCameraData.renderPostProcessing = enablePostProcessing && on;
-        }
+        //private void SetCameraPost(bool on)
+        //{
+        //    if (_postCameraData != null)
+        //        _postCameraData.renderPostProcessing = enablePostProcessing && on;
+        //}
 
         /// <summary>Con Volume Update Mode = Via Scripting los cambios de weight no se ven sin esto.</summary>
         private void RefreshVolumeStack()
@@ -581,6 +585,7 @@ namespace SIRMED.Managers
         private IEnumerator CameraFarPlaneRoutine(StageVisualConfig target)
         {
             float startFarPlane = _postCamera.farClipPlane;
+            float startFog = fogSphere.GetFloat("_Alpha");
 
             float elapsed = 0f;
             while (elapsed < target.transitionDuration)
@@ -589,6 +594,10 @@ namespace SIRMED.Managers
                 float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(elapsed / target.transitionDuration));
 
                 _postCamera.farClipPlane = Mathf.Lerp(startFarPlane, target.cameraFarPlane, t);
+
+                // liked fog with camera farClipPlane
+                fogTransform.localScale = (_postCamera.farClipPlane - 6) * 2 * Vector3.one;
+                fogSphere.SetFloat("_Alpha", Mathf.Lerp(startFog, target.fogSphere, t));
 
                 yield return null;
             }
