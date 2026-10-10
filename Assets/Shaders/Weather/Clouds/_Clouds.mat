@@ -65,7 +65,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha_Power: 1
+    - _Alpha_Power: 1.25
     - _Circle: 1.57
     - _Clip: 0.001
     - _Color: 1
@@ -77,11 +77,11 @@ Material:
     - _Layer_B: 0
     - _Layer_G: 0
     - _Layer_R: 1
-    - _Offset: -0.2
+    - _Offset: -0.1
     - _Power: 4
     - _QueueControl: 1
     - _QueueOffset: 0
-    - _Rotation: 0.7043858
+    - _Rotation: 0.09595548
     - _Rotation_Speed: 0.1
     - _XRMotionVectorsPass: 0
     m_Colors:

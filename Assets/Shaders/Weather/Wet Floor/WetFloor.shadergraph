@@ -5945,7 +5945,7 @@
         "x"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
@@ -7756,10 +7756,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1133.999755859375,
-            "y": 50.9999885559082,
-            "width": 301.999755859375,
-            "height": 325.9999694824219
+            "x": -1134.0,
+            "y": 51.0,
+            "width": 302.0,
+            "height": 326.0
         }
     },
     "m_Slots": [
@@ -7787,9 +7787,9 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     },
-    "m_SourceType": 1,
+    "m_SourceType": 0,
     "m_FunctionName": "NormalBlend3_Reoriented",
-    "m_FunctionSource": "",
+    "m_FunctionSource": "b22781cc784e76648bf690d23e697797",
     "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "float3 t = A + float3(0.0, 0.0, 1.0);\n    float3 u = B * float3(-1.0, -1.0, 1.0);\n\n    float3 AB = (t / t.z) * dot(t, u) - u;\n\n    // AB + C\n    t = AB + float3(0.0, 0.0, 1.0);\n    u = C * float3(-1.0, -1.0, 1.0);\n\n    Out = (t / t.z) * dot(t, u) - u;"
 }
@@ -7809,13 +7809,13 @@
     "m_RefNameGeneratedByDisplayName": "CameraTexture",
     "m_DefaultReferenceName": "_CameraTexture",
     "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": false,
+    "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
     "m_DismissedVersion": 0,
     "m_Precision": 0,
     "overrideHLSLDeclaration": true,
-    "hlslDeclarationOverride": 1,
+    "hlslDeclarationOverride": 2,
     "hideConnector": false,
     "m_Hidden": false,
     "m_PerRendererData": false,

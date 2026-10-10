@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[ExecuteInEditMode]
-public class RainSystem : MonoBehaviour
+//[ExecuteInEditMode]
+public class WeatherSystem : MonoBehaviour
 {
     [Header("Rain")]
     [SerializeField] private Transform target;
@@ -41,7 +41,6 @@ public class RainSystem : MonoBehaviour
 
     private void Awake()
     {
-        remap = particleShapeZ;
         cloudsRotation = Random.Range(0f, 1f);
     }
 
@@ -58,6 +57,7 @@ public class RainSystem : MonoBehaviour
         #region Rain
         if (!shapeModule.enabled)
         {
+            remap = particleShapeZ;
             shapeModule = particleSystem.shape;
             shapeModule.position = new Vector3(shapeModule.position.x, shapeModule.position.y, remap);
         }
@@ -99,32 +99,5 @@ public class RainSystem : MonoBehaviour
         #region Fog
         fogRoot.position = new Vector3(target.position.x, 1.1176f /*value from XR Origin*/, target.position.z);
         #endregion
-    }
-
-    public void SetColor(float value)
-    {
-        cloudsMaterial.SetFloat("_Color", value);
-    }
-
-    public void SetAlphaMulti(string value)
-    {
-        cloudsMaterial.SetFloat("_Alpha_Power", float.Parse(value));
-    }
-
-    public void SetR(float value)
-    {
-        cloudsMaterial.SetFloat("_Layer_R", value);
-    }
-    public void SetG(float value)
-    {
-        cloudsMaterial.SetFloat("_Layer_G", value);
-    }
-    public void SetB(float value)
-    {
-        cloudsMaterial.SetFloat("_Layer_B", value);
-    }
-    public void SetA(float value)
-    {
-        cloudsMaterial.SetFloat("_Layer_A", value);
     }
 }

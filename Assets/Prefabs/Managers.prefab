@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2022655615826996635}
   - component: {fileID: 6169024265861012582}
+  - component: {fileID: 6146727907208788699}
   m_Layer: 0
   m_Name: VisualEffectsStageController
   m_TagString: Untagged
@@ -59,8 +60,19 @@ MonoBehaviour:
     fogDensity: 0.02
     postProcessProfile: {fileID: 0}
     ppFadeDuration: 1
+    cameraFarPlane: 125
     particlesToPlay: []
-    particlesToStop: []
+    particlesToStop:
+    - particle: {fileID: 0}
+      rateOverTime: 0
+      simulationSpeed: 0
+      stopBehavior: 0
+    cloudsAlpha: 0
+    cloudsColor: 1
+    cloudLayerR: 0
+    cloudLayerG: 0
+    cloudLayerB: 0
+    cloudLayerA: 0
     transitionDuration: 1
   - stageName: Etapa1
     ambientMode: 0
@@ -76,8 +88,19 @@ MonoBehaviour:
     fogDensity: 0.02
     postProcessProfile: {fileID: 11400000, guid: 0607f3f4e0664f64bbd95506be49f7ea, type: 2}
     ppFadeDuration: 1
+    cameraFarPlane: 125
     particlesToPlay: []
-    particlesToStop: []
+    particlesToStop:
+    - particle: {fileID: 0}
+      rateOverTime: 0
+      simulationSpeed: 0
+      stopBehavior: 1
+    cloudsAlpha: 0
+    cloudsColor: 1
+    cloudLayerR: 0
+    cloudLayerG: 0
+    cloudLayerB: 0
+    cloudLayerA: 0
     transitionDuration: 1.5
   - stageName: Etapa2
     ambientMode: 0
@@ -93,8 +116,23 @@ MonoBehaviour:
     fogDensity: 0.01
     postProcessProfile: {fileID: 11400000, guid: 8ee2a598b7719b34a9d124c523022c9b, type: 2}
     ppFadeDuration: 1
-    particlesToPlay: []
+    cameraFarPlane: 100
+    particlesToPlay:
+    - particle: {fileID: 0}
+      rateOverTime: 216
+      simulationSpeed: 0.3333333
+      stopBehavior: 0
+    - particle: {fileID: 0}
+      rateOverTime: 1300
+      simulationSpeed: 0.3333333
+      stopBehavior: 0
     particlesToStop: []
+    cloudsAlpha: 1.35
+    cloudsColor: 1
+    cloudLayerR: 1
+    cloudLayerG: 0
+    cloudLayerB: 0
+    cloudLayerA: 0
     transitionDuration: 2
   - stageName: Etapa3
     ambientMode: 0
@@ -110,8 +148,23 @@ MonoBehaviour:
     fogDensity: 0.03
     postProcessProfile: {fileID: 11400000, guid: 627d7307e9509cb4e81ed8f399b65b68, type: 2}
     ppFadeDuration: 1
-    particlesToPlay: []
+    cameraFarPlane: 75
+    particlesToPlay:
+    - particle: {fileID: 0}
+      rateOverTime: 433
+      simulationSpeed: 0.6666666
+      stopBehavior: 0
+    - particle: {fileID: 0}
+      rateOverTime: 2600
+      simulationSpeed: 0.6666666
+      stopBehavior: 0
     particlesToStop: []
+    cloudsAlpha: 2
+    cloudsColor: 0.35
+    cloudLayerR: 0
+    cloudLayerG: 1
+    cloudLayerB: 0
+    cloudLayerA: 0
     transitionDuration: 1
   - stageName: Etapa4
     ambientMode: 0
@@ -127,30 +180,42 @@ MonoBehaviour:
     fogDensity: 0.05
     postProcessProfile: {fileID: 11400000, guid: 8a9875fcefd325b40ba79bd0615a8e04, type: 2}
     ppFadeDuration: 1
-    particlesToPlay: []
+    cameraFarPlane: 50
+    particlesToPlay:
+    - particle: {fileID: 0}
+      rateOverTime: 650
+      simulationSpeed: 1
+      stopBehavior: 0
+    - particle: {fileID: 0}
+      rateOverTime: 3900
+      simulationSpeed: 1
+      stopBehavior: 0
     particlesToStop: []
+    cloudsAlpha: 1.5
+    cloudsColor: 0.25
+    cloudLayerR: 0
+    cloudLayerG: 0
+    cloudLayerB: 0
+    cloudLayerA: 1
     transitionDuration: 0.8
-  - stageName: Etapa5
-    ambientMode: 0
-    ambientColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    ambientIntensity: 0.9
-    ambientSkyColor: {r: 0.5, g: 0.7, b: 1, a: 1}
-    ambientEquatorColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
-    ambientGroundColor: {r: 0.2, g: 0.2, b: 0.1, a: 1}
-    sunColor: {r: 0.9, g: 0.85, b: 0.75, a: 1}
-    sunIntensity: 0.8
-    enableFog: 0
-    fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    fogDensity: 0.02
-    postProcessProfile: {fileID: 0}
-    ppFadeDuration: 1
-    particlesToPlay: []
-    particlesToStop: []
-    transitionDuration: 2.5
   sunLight: {fileID: 0}
+  clouds: {fileID: 2100000, guid: 4c8faad00fb9c9745af321ee770f031e, type: 2}
   enablePostProcessing: 1
   volumePriority: 10
   debugLogs: 0
+--- !u!114 &6146727907208788699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83046602342107598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dec60875692923a4caf806f8c7476839, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestTextures
+  m_CameraManager: {fileID: 0}
 --- !u!1 &919611441420057069
 GameObject:
   m_ObjectHideFlags: 0

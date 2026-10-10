@@ -51,12 +51,25 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaClip: 0
+    - _AlphaToMask: 0
+    - _Blend: 0
+    - _CastShadows: 0
+    - _Cull: 1
+    - _DstBlend: 0
+    - _DstBlendAlpha: 0
     - _Offset: 0.1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Scale: 0.8
+    - _SrcBlend: 1
+    - _SrcBlendAlpha: 1
+    - _Surface: 1
     - _XRMotionVectorsPass: 1
+    - _ZTest: 4
+    - _ZWrite: 0
+    - _ZWriteControl: 2
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.21200001, g: 0.21200001, b: 0.21200001, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

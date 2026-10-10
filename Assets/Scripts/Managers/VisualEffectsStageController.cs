@@ -1,11 +1,11 @@
 namespace SIRMED.Managers
 {
+    using SIRMED.Utils;
     using System;
     using System.Collections;
     using UnityEngine;
     using UnityEngine.Rendering;
     using UnityEngine.Rendering.Universal;
-    using SIRMED.Utils;
 
     /// <summary>
     /// VisualEffectsStageController — Iluminación/niebla/partículas por etapa.
@@ -68,6 +68,15 @@ namespace SIRMED.Managers
             Trilight
         }
 
+        [Serializable]
+        public class ParticleSystems
+        {
+            public ParticleSystem particle;
+            public float rateOverTime;
+            public float simulationSpeed;
+            public ParticleSystemStopBehavior stopBehavior;
+        }
+
         // ── Datos visuales por etapa ──────────────────────────────────────────────
         [Serializable]
         public class StageVisualConfig
@@ -125,13 +134,25 @@ namespace SIRMED.Managers
             [Range(0f, 3f)]
             public float ppFadeDuration = 1.0f;
 
+            // ── Camera ────────────────────────────────────────────────────────────
+            public float cameraFarPlane = 125;
+
             // ── Partículas ────────────────────────────────────────────────────────
             [Header("Partículas")]
             [Tooltip("Sistemas de partículas a ACTIVAR en esta etapa (p.ej. lluvia, chispas).")]
-            public ParticleSystem[] particlesToPlay;
+            public ParticleSystems[] particlesToPlay;
 
             [Tooltip("Sistemas de partículas a DETENER al entrar a esta etapa.")]
-            public ParticleSystem[] particlesToStop;
+            public ParticleSystems[] particlesToStop;
+
+            // ── Clouds ────────────────────────────────────────────────────────────
+            [Header("Nubes")]
+            public float cloudsAlpha = 0;
+            public float cloudsColor = 1;
+            public float cloudLayerR;
+            public float cloudLayerG;
+            public float cloudLayerB;
+            public float cloudLayerA;
 
             // ── Transición ────────────────────────────────────────────────────────
             [Header("Transición")]
@@ -142,20 +163,20 @@ namespace SIRMED.Managers
 
         // ── Inspector ─────────────────────────────────────────────────────────────
         [Header("Configuración por etapa")]
-        [Tooltip("6 entradas: índice 0=Intro, 1=Etapa1 … 5=Etapa5.")]
+        [Tooltip("5 entradas: índice 0=Intro, 1=Etapa1 … 4=Etapa4.")]
         public StageVisualConfig[] stageConfigs = new StageVisualConfig[]
         {
             new StageVisualConfig { stageName = "Intro",  ambientIntensity = 1.0f, sunIntensity = 1.0f,  sunColor = new Color(1.0f, 0.95f, 0.85f), transitionDuration = 1.0f },
             new StageVisualConfig { stageName = "Etapa1", ambientIntensity = 1.0f, sunIntensity = 1.0f,  sunColor = new Color(1.0f, 0.95f, 0.85f), transitionDuration = 1.5f },
             new StageVisualConfig { stageName = "Etapa2", ambientIntensity = 0.8f, sunIntensity = 0.7f,  sunColor = new Color(0.9f, 0.9f, 0.95f),  enableFog = true, fogDensity = 0.01f, transitionDuration = 2.0f },
             new StageVisualConfig { stageName = "Etapa3", ambientIntensity = 0.5f, sunIntensity = 0.4f,  sunColor = new Color(0.7f, 0.75f, 0.9f),  enableFog = true, fogDensity = 0.03f, transitionDuration = 1.0f },
-            new StageVisualConfig { stageName = "Etapa4", ambientIntensity = 0.3f, sunIntensity = 0.25f, sunColor = new Color(0.5f, 0.55f, 0.7f),  enableFog = true, fogDensity = 0.05f, transitionDuration = 0.8f },
-            new StageVisualConfig { stageName = "Etapa5", ambientIntensity = 0.9f, sunIntensity = 0.8f,  sunColor = new Color(0.9f, 0.85f, 0.75f), enableFog = false, transitionDuration = 2.5f },
+            new StageVisualConfig { stageName = "Etapa4", ambientIntensity = 0.3f, sunIntensity = 0.25f, sunColor = new Color(0.5f, 0.55f, 0.7f),  enableFog = true, fogDensity = 0.05f, transitionDuration = 0.8f }
         };
 
         [Header("Referencias")]
         [Tooltip("Directional Light de la escena. Se busca automáticamente si queda vacío.")]
         public Light sunLight;
+        public Material clouds;
 
         [Header("Post-processing")]
         [Tooltip("Enciende 'Post Processing' en la cámara principal en las etapas con perfil. " +
@@ -192,8 +213,10 @@ namespace SIRMED.Managers
             if (Instance != null && Instance != this) { Destroy(gameObject); return; }
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            CreateStageVolumes();
+
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
+            CreateStageVolumes();
         }
 
         private void Start()
@@ -248,6 +271,10 @@ namespace SIRMED.Managers
             // ── Post-processing: fade entre volúmenes ─────────────────────────────
             CrossfadePostProcessVolume(stageIndex, config.ppFadeDuration, fade);
 
+            // ── Camera ────────────────────────────────────────────────────────────
+            StopCoroutine(CameraFarPlaneRoutine(config));
+            StartCoroutine(CameraFarPlaneRoutine(config));
+
             // ── Iluminación y niebla: con o sin fade ──────────────────────────────
             if (_lightTransitionRoutine != null)
                 StopCoroutine(_lightTransitionRoutine);
@@ -256,6 +283,10 @@ namespace SIRMED.Managers
                 _lightTransitionRoutine = StartCoroutine(LightTransitionRoutine(config));
             else
                 ApplyImmediateLightValues(config);
+
+            // ── Clouds ────────────────────────────────────────────────────────────
+            StopCoroutine(CloudsRoutine(config));
+            StartCoroutine(CloudsRoutine(config));
 
             _currentStageIndex = stageIndex;
         }
@@ -395,12 +426,12 @@ namespace SIRMED.Managers
             if (!fade || duration <= 0f || prevVol == targetVol)
             {
                 SetOnlyVolumeActive(targetVol);
-                SetCameraPost(targetVol != null);
+                //SetCameraPost(targetVol != null);
                 RefreshVolumeStack();
                 return;
             }
 
-            SetCameraPost(true);
+            //SetCameraPost(true);
             _ppTransitionRoutine = StartCoroutine(PPFadeRoutine(prevVol, targetVol, duration));
         }
 
@@ -432,30 +463,37 @@ namespace SIRMED.Managers
 
             SetOnlyVolumeActive(to);
             RefreshVolumeStack();
-            SetCameraPost(to != null);
+            //SetCameraPost(to != null);
             _ppTransitionRoutine = null;
         }
 
         // ── Partículas ────────────────────────────────────────────────────────────
         private void ApplyParticles(StageVisualConfig config)
         {
-            if (config.particlesToPlay != null)
-            {
-                foreach (var ps in config.particlesToPlay)
-                {
-                    if (ps == null) continue;
-                    ps.gameObject.SetActive(true);
-                    if (!ps.isPlaying) ps.Play();
-                }
-            }
-
             if (config.particlesToStop != null)
             {
                 foreach (var ps in config.particlesToStop)
                 {
-                    if (ps == null) continue;
-                    ps.Stop();
-                    ps.gameObject.SetActive(false);
+                    if (ps.particle == null) continue;
+                    ps.particle.Stop(true, ps.stopBehavior);
+                }
+            }
+
+            if (config.particlesToPlay != null)
+            {
+                foreach (var ps in config.particlesToPlay)
+                {
+                    Debug.LogWarning("particlesToPlay " + ps.particle.gameObject.name, ps.particle.gameObject);
+                    if (ps.particle == null) continue;
+                    ps.particle.gameObject.SetActive(true);
+
+                    var mainModule = ps.particle.main;
+                    mainModule.simulationSpeed = ps.simulationSpeed;
+
+                    var emissionModule = ps.particle.emission;
+                    emissionModule.rateOverTime = ps.rateOverTime;
+
+                    if (!ps.particle.isPlaying) ps.particle.Play();
                 }
             }
         }
@@ -528,6 +566,48 @@ namespace SIRMED.Managers
             if (!target.enableFog) RenderSettings.fog = false;
 
             _lightTransitionRoutine = null;
+        }
+
+        private IEnumerator CameraFarPlaneRoutine(StageVisualConfig target)
+        {
+            float startFarPlane = _postCamera.farClipPlane;
+
+            float elapsed = 0f;
+            while (elapsed < target.transitionDuration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(elapsed / target.transitionDuration));
+
+                _postCamera.farClipPlane = Mathf.Lerp(startFarPlane, target.cameraFarPlane, t);
+
+                yield return null;
+            }
+        }
+
+        private IEnumerator CloudsRoutine(StageVisualConfig target)
+        {
+            float startCloudsAlpha = clouds.GetFloat("_Alpha_Power");
+            float startCloudsColor = clouds.GetFloat("_Color");
+            float startCloudLayerR = clouds.GetFloat("_Layer_R");
+            float startCloudLayerG = clouds.GetFloat("_Layer_G");
+            float startCloudLayerB = clouds.GetFloat("_Layer_B");
+            float startCloudLayerA = clouds.GetFloat("_Layer_A");
+
+            float elapsed = 0f;
+            while (elapsed < target.transitionDuration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(elapsed / target.transitionDuration));
+
+                clouds.SetFloat("_Alpha_Power", Mathf.Lerp(startCloudsAlpha, target.cloudsAlpha, t));
+                clouds.SetFloat("_Color", Mathf.Lerp(startCloudsColor, target.cloudsColor, t));
+                clouds.SetFloat("_Layer_R", Mathf.Lerp(startCloudLayerR, target.cloudLayerR, t));
+                clouds.SetFloat("_Layer_G", Mathf.Lerp(startCloudLayerG, target.cloudLayerG, t));
+                clouds.SetFloat("_Layer_B", Mathf.Lerp(startCloudLayerB, target.cloudLayerB, t));
+                clouds.SetFloat("_Layer_A", Mathf.Lerp(startCloudLayerA, target.cloudLayerA, t));
+
+                yield return null;
+            }
         }
     }
 }

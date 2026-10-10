@@ -106,6 +106,7 @@ namespace SIRMED.Gameplay.Hotspots
         private bool _hasBeenVisited = false;
         private bool _triviaShown = false;
         private Renderer _meshRenderer;
+        private ARGeospatialAnchor geospatialAnchor;
 
         // ── Gizmos en editor ──────────────────────────────────────────────────────
         private void OnDrawGizmosSelected()
@@ -192,8 +193,10 @@ namespace SIRMED.Gameplay.Hotspots
             }
             else
             {
-                return transform.parent != null &&
-                       transform.parent.GetComponent<ARGeospatialAnchor>() != null;
+                if (geospatialAnchor == null)
+                    geospatialAnchor = transform.parent.GetComponent<ARGeospatialAnchor>();
+
+                return transform.parent != null && geospatialAnchor != null;
             }
         }
 
