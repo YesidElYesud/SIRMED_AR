@@ -65,7 +65,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha_Power: 1.35
+    - _Alpha_Power: 0
     - _Circle: 1.57
     - _Clip: 0.001
     - _Color: 1
@@ -76,7 +76,7 @@ Material:
     - _Layer_A: 0
     - _Layer_B: 0
     - _Layer_G: 0
-    - _Layer_R: 1
+    - _Layer_R: 0
     - _Offset: -0.1
     - _Power: 4
     - _QueueControl: 1

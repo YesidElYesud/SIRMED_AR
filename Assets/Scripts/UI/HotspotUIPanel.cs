@@ -68,6 +68,10 @@ namespace SIRMED.UI
         public Color colorN3 = new Color(1.00f, 0.60f, 0.00f); // naranja  #FF9800
         public Color colorN4 = new Color(0.96f, 0.26f, 0.21f); // rojo     #F44336
 
+        // ── HUD ───────────────────────────────────────────────────────────────────
+        [Header("HUD — ocultar mientras el panel está abierto")]
+        [SerializeField] private GameObject[] _hudElementsToHide;
+
         // ── Internos ──────────────────────────────────────────────────────────────
         private HotspotController _currentHotspot;
 
@@ -95,6 +99,7 @@ namespace SIRMED.UI
             PopulateRiskBadge(data);
             ResetScroll();
 
+            HudHider.Hide(this, _hudElementsToHide);
             SetPanelActive(true);
         }
 
@@ -102,6 +107,7 @@ namespace SIRMED.UI
         public void Hide()
         {
             _currentHotspot = null;
+            HudHider.Restore(this);
             SetPanelActive(false);
         }
 

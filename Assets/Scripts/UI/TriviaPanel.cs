@@ -42,7 +42,6 @@ namespace SIRMED.UI
         [SerializeField] private GameObject[] _hudElementsToHide;
 
         // ── Internos ──────────────────────────────────────────────────────────────
-        private bool[] _hudWasActive;
         private TriviaData _data;
         private HotspotController _sourceHotspot;
         private Coroutine _correctRoutine;
@@ -165,33 +164,9 @@ namespace SIRMED.UI
 
         // ── HUD ───────────────────────────────────────────────────────────────────
 
-        private void SaveAndHideHud()
-        {
-            // Si ya está oculto (Show sin Hide previo), no sobreescribir el estado guardado.
-            if (_hudWasActive != null) return;
-            if (_hudElementsToHide == null || _hudElementsToHide.Length == 0) return;
+        private void SaveAndHideHud() => HudHider.Hide(this, _hudElementsToHide);
 
-            _hudWasActive = new bool[_hudElementsToHide.Length];
-            for (int i = 0; i < _hudElementsToHide.Length; i++)
-            {
-                if (_hudElementsToHide[i] == null) continue;
-                _hudWasActive[i] = _hudElementsToHide[i].activeSelf;
-                _hudElementsToHide[i].SetActive(false);
-            }
-        }
-
-        private void RestoreHud()
-        {
-            if (_hudElementsToHide == null || _hudWasActive == null) return;
-
-            for (int i = 0; i < _hudElementsToHide.Length; i++)
-            {
-                if (_hudElementsToHide[i] == null) continue;
-                if (i < _hudWasActive.Length)
-                    _hudElementsToHide[i].SetActive(_hudWasActive[i]);
-            }
-            _hudWasActive = null;
-        }
+        private void RestoreHud() => HudHider.Restore(this);
 
         // ── Input / utilidades ────────────────────────────────────────────────────
         private void BlockInput(bool block) =>

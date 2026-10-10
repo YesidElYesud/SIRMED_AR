@@ -10,11 +10,13 @@ namespace SIRMED.UI
     /// <summary>
     /// DirectorAdvicePanel — banner breve del Director DAGRD (GDD pág. 28; Anexo A).
     ///
-    /// A diferencia de NpcDialoguePanel/SiataCallPanel, este panel NO oculta el HUD
-    /// ni bloquea al jugador: el GDD exige que el consejo sea "breve, accionable y
+    /// A diferencia de NpcDialoguePanel/SiataCallPanel, este panel no bloquea al
+    /// jugador y por defecto no oculta el HUD (_hudElementsToHide vacío): el GDD exige que el consejo sea "breve, accionable y
     /// compatible con caminar de forma segura" (nunca debe competir con moverse
     /// durante una evacuación N4). Por eso vive como un banner superpuesto, no como
-    /// un panel de pantalla completa.
+    /// un panel de pantalla completa. Si algún elemento del HUD estorba al banner,
+    /// se puede listar en _hudElementsToHide; no ocultar el minimapa ni nada que
+    /// guíe la evacuación.
     ///
     /// Paginado con el mismo patrón de NpcDialoguePanel (texto + audio opcional +
     /// botón "▶" que corta el audio en curso y avanza a la siguiente línea), pero
@@ -35,6 +37,9 @@ namespace SIRMED.UI
         [SerializeField] private GameObject _root;
         [SerializeField] private TextMeshProUGUI _text;
         [SerializeField] private Button _nextButton;
+
+        [Header("HUD — ocultar mientras el banner está visible (opcional)")]
+        [SerializeField] private GameObject[] _hudElementsToHide;
 
         [Header("Audio de voz")]
         [SerializeField] private AudioSource _voiceSource;
@@ -88,6 +93,7 @@ namespace SIRMED.UI
             IsShowing = true;
 
             if (_root != null) _root.SetActive(true);
+            HudHider.Hide(this, _hudElementsToHide);
             AudioStageManager.Instance?.DuckAmbient(_ambientDuckVolume, _duckFadeDuration);
 
             Advance();
@@ -120,6 +126,7 @@ namespace SIRMED.UI
         {
             IsShowing = false;
             if (_root != null) _root.SetActive(false);
+            HudHider.Restore(this);
             _voiceSource.Stop();
             AudioStageManager.Instance?.RestoreVolume(_duckFadeDuration);
 

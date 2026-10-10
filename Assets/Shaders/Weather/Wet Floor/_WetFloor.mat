@@ -70,13 +70,13 @@ Material:
     - _Float: 1
     - _QueueControl: 1
     - _QueueOffset: -1
-    - _Ripples_Strength: 0.25
+    - _Ripples_Strength: 0
     - _Tiling: 15
-    - _Waves_Strength: 0.03
+    - _Waves_Strength: 0
     - _Waves_Tiling: 3
     - _XRMotionVectorsPass: 1
     m_Colors:
-    - _Color: {r: 0.76666665, g: 0.8117647, b: 0.9019608, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Offset: {r: -1060.5, g: 1112.7856, b: 0, a: 0}
     - _Offsets_Speed: {r: 0.15, g: 0.15, b: 0, a: 0}
     - _Tiling: {r: 3, g: 3, b: 0, a: 0}
