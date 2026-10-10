@@ -96,6 +96,15 @@ namespace UnityEngine.XR.Simulation
             m_TextureSinglePropertyNameId = Shader.PropertyToID(SimulationCameraSubsystem.k_TextureSinglePropertyName);
         }
 
+        private void Start()
+        {
+            Destroy(transform.GetChild(0).gameObject);
+            Destroy(GetComponent<SimulatedExifData>());
+            Destroy(GetComponent<CameraTextureProvider>());
+            Destroy(GetComponent<Camera>());
+            //Destroy(GetComponent<UniversalAdditionalCameraData>());
+        }
+
         void InitializeProvider(Camera xrCamera, Camera simulationCamera)
         {
             if (m_Initialized)

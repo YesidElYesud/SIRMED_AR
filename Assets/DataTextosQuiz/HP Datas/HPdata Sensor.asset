@@ -12,14 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caccdb802bd40ce42a70a8fa140c26d2, type: 3}
   m_Name: HPdata Sensor
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Hotspots.HotspotData
-  title: "Sensor de nivel"
-  description: "El sensor instalado cerca de la quebrada monitorea el nivel y el comportamiento del agua para apoyar el sistema de alerta temprana. (Texto temporal.)"
+  title: Sensor de nivel
+  description: El sensor instalado cerca de la quebrada monitorea el nivel y el comportamiento
+    del agua para apoyar el sistema de alerta temprana. (Texto temporal.)
+  descriptionByLevel:
+  - Los sensores de nivel monitorean en tiempo real la altura del agua en el cauce.
+    Sus datos permiten detectar variaciones y activar alertas tempranas ante posibles
+    inundaciones o avenidas torrenciales.
+  - El sensor indica un <b>leve aumento del nivel del agua</b>, sin riesgo actual.
+    Se recomienda monitorear su comportamiento en tiempo real mediante el Geoportal
+    del SIATA.
+  - El sensor indica <b>un aumento considerable del nivel del agua</b> y riesgo de
+    desbordamiento. Se recomienda hacer seguimiento en tiempo real mediante el Geoportal
+    del SIATA.
+  - "El sensor indica <b>un aumento muy alto del nivel del agua</b>. Significa evacuaci\xF3n:
+    sigue la ruta hacia el punto de encuentro sin detenerte.\n(Texto temporal.)"
   icon: {fileID: 0}
   actionType: 0
   cinematicClip: {fileID: 0}
   cinematicUrl: 
   cinematicAdvancesStage: 1
   dialogueData: {fileID: 0}
+  dialogueByLevel: []
   siataSequence: {fileID: 0}
   infoSlides: []
   infoSlideAdvancesStage: 1

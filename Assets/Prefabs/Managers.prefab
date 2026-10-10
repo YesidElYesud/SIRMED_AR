@@ -73,6 +73,9 @@ MonoBehaviour:
     cloudLayerG: 0
     cloudLayerB: 0
     cloudLayerA: 0
+    wetFloorRipples: 0
+    wetFloorWaves: 0
+    wetFlootColor: {r: 1, g: 1, b: 1, a: 1}
     transitionDuration: 1
   - stageName: Etapa1
     ambientMode: 0
@@ -101,6 +104,9 @@ MonoBehaviour:
     cloudLayerG: 0
     cloudLayerB: 0
     cloudLayerA: 0
+    wetFloorRipples: 0
+    wetFloorWaves: 0
+    wetFlootColor: {r: 1, g: 1, b: 1, a: 1}
     transitionDuration: 1.5
   - stageName: Etapa2
     ambientMode: 0
@@ -133,6 +139,9 @@ MonoBehaviour:
     cloudLayerG: 0
     cloudLayerB: 0
     cloudLayerA: 0
+    wetFloorRipples: 0.015
+    wetFloorWaves: 0.005
+    wetFlootColor: {r: 0.9, g: 0.93235296, b: 1, a: 1}
     transitionDuration: 2
   - stageName: Etapa3
     ambientMode: 0
@@ -165,6 +174,9 @@ MonoBehaviour:
     cloudLayerG: 1
     cloudLayerB: 0
     cloudLayerA: 0
+    wetFloorRipples: 0.1
+    wetFloorWaves: 0.02
+    wetFlootColor: {r: 0.7396079, g: 0.7921338, b: 0.9019608, a: 1}
     transitionDuration: 1
   - stageName: Etapa4
     ambientMode: 0
@@ -197,9 +209,13 @@ MonoBehaviour:
     cloudLayerG: 0
     cloudLayerB: 0
     cloudLayerA: 1
+    wetFloorRipples: 0.25
+    wetFloorWaves: 0.035
+    wetFlootColor: {r: 0.7490196, g: 0.654902, b: 0.5254902, a: 1}
     transitionDuration: 0.8
   sunLight: {fileID: 0}
   clouds: {fileID: 2100000, guid: 4c8faad00fb9c9745af321ee770f031e, type: 2}
+  wetFloor: {fileID: 2100000, guid: 8349e6fd801ad8544886578e7fa291cb, type: 2}
   enablePostProcessing: 1
   volumePriority: 10
   debugLogs: 0

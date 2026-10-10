@@ -193,9 +193,9 @@ namespace Google.XR.ARCoreExtensions
             IOSSupportManager.Instance.SetEnabled(true);
 #endif // UNITY_IOS && ARCORE_EXTENSIONS_IOS_SUPPORT
 #if UNITY_ANDROID
-            if (_instance.Session == null)
+            if (_instance.Session == null || Session.subsystem != null)
             {
-                Debug.LogError("ARSession is required by ARCoreExtensions!");
+                Debug.LogWarning("ARSession is required by ARCoreExtensions !!!");
                 return;
             }
 

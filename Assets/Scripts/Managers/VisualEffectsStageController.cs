@@ -146,13 +146,19 @@ namespace SIRMED.Managers
             public ParticleSystems[] particlesToStop;
 
             // ── Clouds ────────────────────────────────────────────────────────────
-            [Header("Nubes")]
+            [Header("Clouds")]
             public float cloudsAlpha = 0;
             public float cloudsColor = 1;
             public float cloudLayerR;
             public float cloudLayerG;
             public float cloudLayerB;
             public float cloudLayerA;
+
+            // ── Wet Floor ─────────────────────────────────────────────────────────
+            [Header("Wet Floot")]
+            public float wetFloorRipples;
+            public float wetFloorWaves;
+            public Color wetFlootColor;
 
             // ── Transición ────────────────────────────────────────────────────────
             [Header("Transición")]
@@ -177,6 +183,7 @@ namespace SIRMED.Managers
         [Tooltip("Directional Light de la escena. Se busca automáticamente si queda vacío.")]
         public Light sunLight;
         public Material clouds;
+        public Material wetFloor;
 
         [Header("Post-processing")]
         [Tooltip("Enciende 'Post Processing' en la cámara principal en las etapas con perfil. " +
@@ -287,6 +294,10 @@ namespace SIRMED.Managers
             // ── Clouds ────────────────────────────────────────────────────────────
             StopCoroutine(CloudsRoutine(config));
             StartCoroutine(CloudsRoutine(config));
+
+            // ── Wet Floor ─────────────────────────────────────────────────────────
+            StopCoroutine(WetFloorRoutine(config));
+            StartCoroutine(WetFloorRoutine(config));
 
             _currentStageIndex = stageIndex;
         }
@@ -483,7 +494,6 @@ namespace SIRMED.Managers
             {
                 foreach (var ps in config.particlesToPlay)
                 {
-                    Debug.LogWarning("particlesToPlay " + ps.particle.gameObject.name, ps.particle.gameObject);
                     if (ps.particle == null) continue;
                     ps.particle.gameObject.SetActive(true);
 
@@ -605,6 +615,26 @@ namespace SIRMED.Managers
                 clouds.SetFloat("_Layer_G", Mathf.Lerp(startCloudLayerG, target.cloudLayerG, t));
                 clouds.SetFloat("_Layer_B", Mathf.Lerp(startCloudLayerB, target.cloudLayerB, t));
                 clouds.SetFloat("_Layer_A", Mathf.Lerp(startCloudLayerA, target.cloudLayerA, t));
+
+                yield return null;
+            }
+        }
+
+        private IEnumerator WetFloorRoutine(StageVisualConfig target)
+        {
+            float startRipples = wetFloor.GetFloat("_Ripples_Strength");
+            float startWaves = wetFloor.GetFloat("_Waves_Strength");
+            Color startColor = wetFloor.GetColor("_Color");
+
+            float elapsed = 0f;
+            while (elapsed < target.transitionDuration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(elapsed / target.transitionDuration));
+
+                wetFloor.SetFloat("_Ripples_Strength", Mathf.Lerp(startRipples, target.wetFloorRipples, t));
+                wetFloor.SetFloat("_Waves_Strength", Mathf.Lerp(startWaves, target.wetFloorWaves, t));
+                wetFloor.SetColor("_Color", Color.Lerp(startColor, target.wetFlootColor, t));
 
                 yield return null;
             }

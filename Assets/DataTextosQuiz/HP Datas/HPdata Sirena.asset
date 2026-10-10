@@ -12,19 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caccdb802bd40ce42a70a8fa140c26d2, type: 3}
   m_Name: HPdata Sirena
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Hotspots.HotspotData
-  title: "Sirena del SAT"
-  description: "La sirena del SAT avisa a la comunidad cuando cambia el nivel de alerta. Si la escuchas, atiende la informaci\xF3n oficial y act\xFAa seg\xFAn el nivel de alerta. (Texto temporal.)"
+  title: Sirena del SAT
+  description: "La sirena del SAT avisa a la comunidad cuando cambia el nivel de
+    alerta. Si la escuchas, atiende la informaci\xF3n oficial y act\xFAa seg\xFAn
+    el nivel de alerta. (Texto temporal.)"
   descriptionByLevel:
-  - "Nivel 1: la sirena del SAT est\xE1 en silencio. Sirve para avisar a la comunidad cuando cambia el nivel de alerta; conocer su sonido te ayuda a actuar a tiempo. (Texto temporal.)"
-  - "Alerta amarilla: la sirena todav\xEDa no suena. Mantente informado con el SIATA y el SIRMED y prep\xE1rate ante cualquier cambio. (Texto temporal.)"
-  - "Alerta naranja: la sirena suena de forma intermitente. Permanece alerta ante un posible aumento del nivel del agua y una eventual evacuaci\xF3n; al\xE9jate del cauce. (Texto temporal.)"
-  - "Alerta roja: la sirena suena de forma continua. Significa evacuaci\xF3n: sigue la ruta hacia el punto de encuentro sin detenerte. (Texto temporal.)"
+  - "La sirena de alerta temprana emite se\xF1ales sonoras para advertir sobre posibles
+    crecientes o inundaciones. indica el nivel de riesgo y las acciones necesarias;
+    Mantenerse alerta, prepararse para evacurar o evacuar inmediatamente hacia zonas
+    seguras."
+  - "La sirena est\xE1 activa con se\xF1ales intermitentes, indicando un riesgo menor
+    de inundaci\xF3n. Mantente atento, evita acercarte a la quebrada y prep\xE1rate
+    para evacuar si aumenta el nivel del agua."
+  - "La sirena emite se\xF1ales intermitentes, indicando un riesgo menor de inundaci\xF3n.
+    Se recomienda evitar la quebrada, mantenerse atento y prepararse para evacuar
+    si aumenta el nivel del agua."
+  - "La sirena suena de forma continua. Significa evacuaci\xF3n: sigue la ruta hacia
+    el punto de encuentro sin detenerte.\n(Texto temporal.)"
   icon: {fileID: 0}
   actionType: 0
   cinematicClip: {fileID: 0}
   cinematicUrl: 
   cinematicAdvancesStage: 1
   dialogueData: {fileID: 0}
+  dialogueByLevel: []
   siataSequence: {fileID: 0}
   infoSlides: []
   infoSlideAdvancesStage: 1
