@@ -100,4 +100,31 @@ public class RainSystem : MonoBehaviour
         fogRoot.position = new Vector3(target.position.x, 1.1176f /*value from XR Origin*/, target.position.z);
         #endregion
     }
+
+    public void SetColor(float value)
+    {
+        cloudsMaterial.SetFloat("_Color", value);
+    }
+
+    public void SetAlphaMulti(string value)
+    {
+        cloudsMaterial.SetFloat("_Alpha_Power", float.Parse(value));
+    }
+
+    public void SetR(float value)
+    {
+        cloudsMaterial.SetFloat("_Layer_R", value);
+    }
+    public void SetG(float value)
+    {
+        cloudsMaterial.SetFloat("_Layer_G", value);
+    }
+    public void SetB(float value)
+    {
+        cloudsMaterial.SetFloat("_Layer_B", value);
+    }
+    public void SetA(float value)
+    {
+        cloudsMaterial.SetFloat("_Layer_A", value);
+    }
 }
