@@ -96,6 +96,20 @@ namespace SIRMED.Gameplay.Hotspots
         [Tooltip("Ícono opcional para el panel informativo")]
         public Sprite icon;
 
+        [Tooltip("Opcional: ícono según el nivel de riesgo activo (índice 0 = N1 … 3 = N4).\n" +
+                 "Vacío o sin sprite para ese nivel = se usa 'icon'. Ej.: Sirena y Sensor\n" +
+                 "cambian de ícono con el nivel.")]
+        public Sprite[] iconByLevel;
+
+        /// <summary>Ícono para 'level': el de iconByLevel si tiene sprite, si no icon.</summary>
+        public Sprite GetIconFor(RiskLevel level)
+        {
+            int i = (int)level - 1;
+            if (iconByLevel != null && i >= 0 && i < iconByLevel.Length && iconByLevel[i] != null)
+                return iconByLevel[i];
+            return icon;
+        }
+
         // ── Tipo de acción ────────────────────────────────────────────────────────
         [Header("Tipo de acción")]
         [Tooltip("Qué ocurre al activar este hotspot. Ver comentarios del enum " +

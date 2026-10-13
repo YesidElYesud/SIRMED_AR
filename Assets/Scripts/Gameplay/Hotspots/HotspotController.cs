@@ -133,7 +133,14 @@ namespace SIRMED.Gameplay.Hotspots
                 _playerCamera = Camera.main.transform;
 
             if (uiPanel == null)
-                uiPanel = FindAnyObjectByType<HotspotUIPanel>();
+            {
+                // Preferir el panel genérico; las copias por hotspot (isDefaultPanel = false)
+                // solo se usan si el hotspot las tiene asignadas.
+                foreach (HotspotUIPanel p in FindObjectsByType<HotspotUIPanel>(FindObjectsSortMode.None))
+                {
+                    if (p.isDefaultPanel) { uiPanel = p; break; }
+                }
+            }
 
             if (data == null)
             {

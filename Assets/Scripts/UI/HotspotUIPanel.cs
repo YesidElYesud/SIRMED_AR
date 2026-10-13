@@ -26,6 +26,10 @@ namespace SIRMED.UI
     ///   │       └── Content             [VerticalLayoutGroup + ContentSizeFitter]
     ///   │           └── DescText        [TextMeshProUGUI]    ← descText
     ///   └── CloseButton                 [Button]             ← closeButton
+    ///
+    /// Copias para un hotspot concreto (ej. Sirena/Sensor, texto e ícono por nivel vía
+    /// HotspotData.descriptionByLevel / iconByLevel): desmarcar isDefaultPanel en la copia
+    /// y asignarla en HotspotController.uiPanel de ese hotspot.
     /// </summary>
     public class HotspotUIPanel : MonoBehaviour
     {
@@ -45,6 +49,10 @@ namespace SIRMED.UI
 
         [Tooltip("RectTransform raíz del panel. Si está vacío se usa el de este GameObject.")]
         public RectTransform panel;
+
+        [Tooltip("Desmarcar en copias para hotspots concretos (Sirena, Sensor): así los hotspots\n" +
+                 "sin 'uiPanel' asignado no las toman por error al buscar el panel genérico.")]
+        public bool isDefaultPanel = true;
 
         // ── Panel enriquecido (opcional) ──────────────────────────────────────────
         [Header("Panel Enriquecido (opcional)")]
@@ -118,19 +126,19 @@ namespace SIRMED.UI
             if (titleText != null)
                 titleText.text = data.title;
 
+            RiskLevel level = RiskLevelIndicator.Instance != null
+                ? RiskLevelIndicator.Instance.CurrentLevel
+                : RiskLevel.None;
+
             if (descText != null)
-            {
-                RiskLevel level = RiskLevelIndicator.Instance != null
-                    ? RiskLevelIndicator.Instance.CurrentLevel
-                    : RiskLevel.None;
                 descText.text = data.GetDescriptionFor(level);
-            }
 
             if (iconImage != null)
             {
-                bool hasIcon = data.icon != null;
+                Sprite icon = data.GetIconFor(level);
+                bool hasIcon = icon != null;
                 iconImage.gameObject.SetActive(hasIcon);
-                if (hasIcon) iconImage.sprite = data.icon;
+                if (hasIcon) iconImage.sprite = icon;
             }
         }
 
