@@ -2836,12 +2836,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 2074323953}
   rotationSpeed: 60
-  minimapCategory: 0
+  minimapCategory: 3
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
-  sequenceId: Lider
+  sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: 1
 --- !u!114 &140181943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3748,6 +3749,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158523581}
   m_CullTransparentMesh: 1
+--- !u!1 &167239150
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 167239152}
+  - component: {fileID: 167239151}
+  m_Layer: 0
+  m_Name: LiderNPC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &167239151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167239150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9331d8f245df47c47af444691cd9bf78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.NPCs.LeaderNpcController
+  stops:
+  - {fileID: 140181942}
+  - {fileID: 806053703}
+  - {fileID: 1126923716}
+  visualRoot: {fileID: 1588341508}
+  animator: {fileID: 1588341507}
+  walkingBoolParam: Caminando
+  heightOffset: -1.4
+  moveSpeed: 1.9
+  arrivalThreshold: 0.05
+  turnSpeed: 240
+  facePlayerWhenIdle: 1
+--- !u!4 &167239152
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167239150}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -484.05588, y: -1.5, z: 541.23004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1588341508}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &167577272
 GameObject:
   m_ObjectHideFlags: 0
@@ -5509,6 +5567,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &251239520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7298,6 +7357,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &317834716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7850,6 +7910,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &352252988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8588,6 +8649,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &378563515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13333,6 +13395,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &582981028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16220,6 +16283,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &720515441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16506,6 +16570,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &725570131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16988,6 +17053,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &733415339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18498,12 +18564,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 91453300}
   rotationSpeed: 60
-  minimapCategory: 0
+  minimapCategory: 3
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
-  sequenceId: Lider
+  sequenceId: 
   sequenceStep: 1
+  requiredStageOverride: 2
 --- !u!114 &806053704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19043,6 +19110,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &810865935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20787,6 +20855,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &892163126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26560,12 +26629,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 94296498}
   rotationSpeed: 60
-  minimapCategory: 0
+  minimapCategory: 3
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
-  sequenceId: Lider
+  sequenceId: 
   sequenceStep: 2
+  requiredStageOverride: 3
 --- !u!114 &1126923717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29943,6 +30013,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &1253452376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36980,6 +37051,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1587000026}
   m_CullTransparentMesh: 0
+--- !u!1001 &1588341506
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 167239152}
+    m_Modifications:
+    - target: {fileID: 3708518550924354489, guid: 91c3cf727cb649e4caa1f9553c79956e, type: 3}
+      propertyPath: m_Name
+      value: Lider
+      objectReference: {fileID: 0}
+    - target: {fileID: 4052286756018108675, guid: 91c3cf727cb649e4caa1f9553c79956e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4052286756018108675, guid: 91c3cf727cb649e4caa1f9553c79956e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4052286756018108675, guid: 91c3cf727cb649e4caa1f9553c79956e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4052286756018108675, guid: 91c3cf727cb649e4caa1f9553c79956e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4052286756018108675, guid: 91c3cf727cb649e4caa1f9553c79956e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4052286756018108675, guid: 91c3cf727cb649e4caa1f9553c79956e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4052286756018108675, guid: 91c3cf727cb649e4caa1f9553c79956e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988455007345664889, guid: 91c3cf727cb649e4caa1f9553c79956e, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 54a2c7af22df3f4459d3f78df9afb63d, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 91c3cf727cb649e4caa1f9553c79956e, type: 3}
+--- !u!95 &1588341507 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7988455007345664889, guid: 91c3cf727cb649e4caa1f9553c79956e, type: 3}
+  m_PrefabInstance: {fileID: 1588341506}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1588341508 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4052286756018108675, guid: 91c3cf727cb649e4caa1f9553c79956e, type: 3}
+  m_PrefabInstance: {fileID: 1588341506}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1605932074
 GameObject:
   m_ObjectHideFlags: 0
@@ -44039,6 +44169,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &1957062651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45500,6 +45631,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &2026167106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47107,6 +47239,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &2090281928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48762,9 +48895,9 @@ SceneRoots:
   - {fileID: 7137149567416391428}
   - {fileID: 7390732089197708070}
   - {fileID: 720515445}
-  - {fileID: 140181946}
   - {fileID: 2090281931}
   - {fileID: 352252991}
+  - {fileID: 140181946}
   - {fileID: 806053707}
   - {fileID: 1126923720}
   - {fileID: 317834719}
@@ -48787,3 +48920,4 @@ SceneRoots:
   - {fileID: 1647742813}
   - {fileID: 467740855}
   - {fileID: 763468432}
+  - {fileID: 167239152}
