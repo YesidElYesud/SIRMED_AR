@@ -4,6 +4,7 @@ namespace SIRMED.Gameplay.NPCs
     using Google.XR.ARCoreExtensions;
     using SIRMED.Gameplay.Hotspots;
     using SIRMED.Managers;
+    using SIRMED.Utils;
     using UnityEngine;
 
     /// <summary>
@@ -43,6 +44,9 @@ namespace SIRMED.Gameplay.NPCs
         [Tooltip("Animator del modelo. Opcional.")]
         public Animator animator;
 
+        [Tooltip("DissolveFader en la raíz del modelo (aparición suave). Sin él, aparece con SetActive.")]
+        public DissolveFader fader;
+
         [Tooltip("Parámetro Bool del Animator que indica 'caminando'. Vacío = no se toca el Animator.")]
         public string walkingBoolParam = "Caminando";
 
@@ -75,7 +79,11 @@ namespace SIRMED.Gameplay.NPCs
         private void Awake()
         {
             if (animator != null) animator.applyRootMotion = false; // clips Mixamo: el script mueve, no la animación
-            if (visualRoot != null) visualRoot.gameObject.SetActive(false);
+            if (visualRoot != null)
+            {
+                if (fader != null) fader.SetVisibleImmediate(false);
+                else visualRoot.gameObject.SetActive(false);
+            }
         }
 
         private void OnEnable()
@@ -153,7 +161,8 @@ namespace SIRMED.Gameplay.NPCs
             visualRoot.position = StopPosition(stop);
             if (_playerCamera != null) FaceInstantly(_playerCamera.position);
             AttachToAnchor(stop);
-            visualRoot.gameObject.SetActive(true);
+            if (fader != null) fader.FadeIn();
+            else visualRoot.gameObject.SetActive(true);
         }
 
         // ── Movimiento ────────────────────────────────────────────────────────────

@@ -3784,6 +3784,7 @@ MonoBehaviour:
   - {fileID: 1126923716}
   visualRoot: {fileID: 1588341508}
   animator: {fileID: 1588341507}
+  fader: {fileID: 613754628}
   walkingBoolParam: Caminando
   heightOffset: -1.4
   moveSpeed: 1.9
@@ -14107,6 +14108,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 613339161}
   m_CullTransparentMesh: 1
+--- !u!114 &613754628 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8631920369751935585, guid: 91c3cf727cb649e4caa1f9553c79956e, type: 3}
+  m_PrefabInstance: {fileID: 1588341506}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ffa2e32aa03fd54fa621842c743a809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Utils.DissolveFader
 --- !u!1 &624315044
 GameObject:
   m_ObjectHideFlags: 0

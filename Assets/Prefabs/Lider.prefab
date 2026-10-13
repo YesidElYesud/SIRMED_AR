@@ -71,5 +71,27 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3859572846885677319, guid: c582fc279321b724b804e7152e3e5c5f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8631920369751935585}
   m_SourcePrefab: {fileID: 100100000, guid: c582fc279321b724b804e7152e3e5c5f, type: 3}
+--- !u!1 &736849979378431983 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3859572846885677319, guid: c582fc279321b724b804e7152e3e5c5f, type: 3}
+  m_PrefabInstance: {fileID: 4590896627904405224}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8631920369751935585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736849979378431983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ffa2e32aa03fd54fa621842c743a809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Utils.DissolveFader
+  _propertyName: _Dissolve
+  _duration: 0.8

@@ -45,13 +45,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b60feee7fd93a1945a41dfa8795ff3a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Director.DirectorController
-  visualRoot: {fileID: 7593139436725311355}
+  visualRoot: {fileID: 4969341171502818182}
   animator: {fileID: 1303380479543343612}
   walkingBoolParam: Caminando
   waypoints: []
   homeWaypoint: {fileID: 0}
   moveSpeed: 1.2
   arrivalThreshold: 0.05
+  appearInFrontOfPlayer: 1
+  distanceInFront: 2.5
+  eyeHeight: 1.4
+  turnSpeed: 240
+  fader: {fileID: 3188505274908490692}
 --- !u!1001 &4862792526955496557
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115,20 +120,37 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -3127865785818711632, guid: 830b06a4ee6e50e418533700431b84b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3188505274908490692}
   m_SourcePrefab: {fileID: 100100000, guid: 830b06a4ee6e50e418533700431b84b6, type: 3}
 --- !u!95 &1303380479543343612 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 830b06a4ee6e50e418533700431b84b6, type: 3}
   m_PrefabInstance: {fileID: 4862792526955496557}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1723623744388611549 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3127865785818711632, guid: 830b06a4ee6e50e418533700431b84b6, type: 3}
+  m_PrefabInstance: {fileID: 4862792526955496557}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3188505274908490692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723623744388611549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ffa2e32aa03fd54fa621842c743a809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Utils.DissolveFader
+  _propertyName: _Dissolve
+  _duration: 0.8
 --- !u!4 &4969341171502818182 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 830b06a4ee6e50e418533700431b84b6, type: 3}
-  m_PrefabInstance: {fileID: 4862792526955496557}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &7593139436725311355 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -6188970510813048042, guid: 830b06a4ee6e50e418533700431b84b6, type: 3}
   m_PrefabInstance: {fileID: 4862792526955496557}
   m_PrefabAsset: {fileID: 0}
