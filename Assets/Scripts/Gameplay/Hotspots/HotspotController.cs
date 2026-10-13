@@ -1,5 +1,6 @@
 namespace SIRMED.Gameplay.Hotspots
 {
+    using System;
     using System.Collections.Generic;
     using Google.XR.ARCoreExtensions;
     using SIRMED.Gameplay.Dialogue;
@@ -107,6 +108,9 @@ namespace SIRMED.Gameplay.Hotspots
         private bool _triviaShown = false;
         private Renderer _meshRenderer;
         private ARGeospatialAnchor geospatialAnchor;
+
+        public Action correctNpcDialogue;
+        public Action incorrectNpcDialogue;
 
         // ── Gizmos en editor ──────────────────────────────────────────────────────
         private void OnDrawGizmosSelected()
@@ -285,14 +289,14 @@ namespace SIRMED.Gameplay.Hotspots
             if (nowNearby && !_isNearby)
             {
                 _isNearby = true;
-                Debug.Log($"[Hotspot] Entrando en rango de: {data.title}");
+                Debug.Log($"[Hotspot] Entrando en rango de: {data.title}", gameObject);
                 if (!_isPanelOpen && !(_interactOnce && _hasBeenVisited))
                     HotspotPromptButton.Instance?.RegisterHotspot(this);
             }
             else if (!nowNearby && _isNearby)
             {
                 _isNearby = false;
-                Debug.Log($"[Hotspot] Saliendo del rango de: {data.title}");
+                Debug.Log($"[Hotspot] Saliendo del rango de: {data.title}", gameObject);
                 HotspotPromptButton.Instance?.UnregisterHotspot(this);
                 if (_isPanelOpen) ClosePanel(allowTrivia: false); // no encadenar trivia al alejarse
             }
@@ -348,10 +352,22 @@ namespace SIRMED.Gameplay.Hotspots
                             ? RiskLevelIndicator.Instance.CurrentLevel
                             : RiskLevel.None;
                         NpcDialogueData dialogue = data.GetDialogueFor(level);
-                        System.Action onCorrect = null;
+                        Action onCorrect = null;
+                        Action onIncorrect = null;
                         if (dialogue != null && dialogue.isCommunityHelp)
-                            onCorrect = () => SIRMED.Gameplay.Director.DirectorAdviceController.Instance?.NotifyCommunityHelpCorrect();
-                        NpcDialoguePanel.Instance.Show(dialogue, this, onCorrect);
+                        {
+                            onCorrect = () =>
+                            {
+                                Director.DirectorAdviceController.Instance?.NotifyCommunityHelpCorrect();
+                                correctNpcDialogue?.Invoke();
+                            };
+                            onIncorrect = () =>
+                            {
+                                incorrectNpcDialogue?.Invoke();
+                            };
+                        }
+
+                        NpcDialoguePanel.Instance.Show(dialogue, this, onCorrect, onIncorrect);
                     }
                     else
                     {

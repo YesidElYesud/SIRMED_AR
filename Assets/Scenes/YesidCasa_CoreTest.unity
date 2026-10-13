@@ -3421,8 +3421,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Your current location does not have VPS coverage. Your session will be using
-    your GPS signal only if VPS is not available.
+  m_Text: Your current location does not have VPS coverage. Your session will be
+    using your GPS signal only if VPS is not available.
 --- !u!222 &167577275
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6173,9 +6173,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Experiencia educativa en Realidad Aumentada para el reconocimiento de se\xF1ales
-    de alerta ante crecientes s\xFAbitas e inundaciones\n\n\nRecorre el barrio, interact\xFAa
-    con los puntos de alerta y aprende a leer el riesgo junto a tu comunidad."
+  m_text: "Experiencia educativa en Realidad Aumentada para el reconocimiento de
+    se\xF1ales de alerta ante crecientes s\xFAbitas e inundaciones\n\n\nRecorre el
+    barrio, interact\xFAa con los puntos de alerta y aprende a leer el riesgo junto
+    a tu comunidad."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b6fc8e4d611b65645beb6de28cf4cc55, type: 2}
   m_sharedMaterial: {fileID: 9152362842041680357, guid: b6fc8e4d611b65645beb6de28cf4cc55, type: 2}
@@ -6850,7 +6851,39 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 808337800}
+  - {fileID: 325194089}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &325194088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 325194089}
+  m_Layer: 0
+  m_Name: Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &325194089
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325194088}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.32, y: -1, z: 0.87}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 317834719}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &326500295
 GameObject:
@@ -7235,6 +7268,7 @@ GameObject:
   - component: {fileID: 352252989}
   - component: {fileID: 352252988}
   - component: {fileID: 352252987}
+  - component: {fileID: 352252992}
   m_Layer: 0
   m_Name: HP NPC Viejo (1)
   m_TagString: Untagged
@@ -7371,6 +7405,23 @@ Transform:
   - {fileID: 2143724614}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &352252992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352252986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a16385644f3821e418d3f33553373b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DisorientedOlderNPC
+  controller: {fileID: 352252987}
+  animator: {fileID: 2143724615}
+  poins:
+  - {fileID: 325194089}
+  walkSpeed: 1.15
 --- !u!1 &353487779
 GameObject:
   m_ObjectHideFlags: 0
@@ -31878,7 +31929,8 @@ MonoBehaviour:
 
     HorizontalAcc: xxx
 
-    ALTITUDE: xxx
+    ALTITUDE:
+    xxx
 
     VerticalAcc: xxx
 
@@ -38416,11 +38468,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1969851178}
   m_CullTransparentMesh: 0
---- !u!198 &1986400204 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2643179655618904146, guid: eeeedfb4c93c0f54ab75370ed258a49c, type: 3}
-  m_PrefabInstance: {fileID: 7390732089197708070}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1979489059
 GameObject:
   m_ObjectHideFlags: 0
@@ -38496,6 +38543,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979489059}
   m_CullTransparentMesh: 1
+--- !u!198 &1986400204 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2643179655618904146, guid: eeeedfb4c93c0f54ab75370ed258a49c, type: 3}
+  m_PrefabInstance: {fileID: 7390732089197708070}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1988353739
 GameObject:
   m_ObjectHideFlags: 0
@@ -41423,6 +41475,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Viejito
       objectReference: {fileID: 0}
+    - target: {fileID: 4731092565407888163, guid: 71b1665e1c6dca74a9c85d10dc43c014, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4559755c6fe24f54faa39cdf8d8e5e30, type: 2}
+    - target: {fileID: 4731092565407888163, guid: 71b1665e1c6dca74a9c85d10dc43c014, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -41431,6 +41491,11 @@ PrefabInstance:
 --- !u!4 &2143724614 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1677620873183177049, guid: 71b1665e1c6dca74a9c85d10dc43c014, type: 3}
+  m_PrefabInstance: {fileID: 2143724613}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2143724615 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4731092565407888163, guid: 71b1665e1c6dca74a9c85d10dc43c014, type: 3}
   m_PrefabInstance: {fileID: 2143724613}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2245503807656656256
@@ -41474,7 +41539,7 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6071269842717733258, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 1165c594742cdb449b269aa5a72c707f, type: 2}
     - target: {fileID: 7593139436725311355, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
@@ -41498,7 +41563,7 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8577495209384076753, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
-      propertyPath: waypoints.Array.data[0]
+      propertyPath: 'waypoints.Array.data[0]'
       value: 
       objectReference: {fileID: 1647742811}
     - target: {fileID: 8926105923228549517, guid: 247d386e8e304af43b738c0d82b77102, type: 3}
