@@ -1,5 +1,6 @@
 namespace SIRMED.Gameplay.Hotspots
 {
+    using System;
     using System.Collections.Generic;
     using Google.XR.ARCoreExtensions;
     using SIRMED.Gameplay.Dialogue;
@@ -99,6 +100,12 @@ namespace SIRMED.Gameplay.Hotspots
         [Tooltip("Orden dentro de la secuencia (0 = primera parada). Solo aparece cuando las anteriores ya se completaron.")]
         public int sequenceStep = 0;
 
+        [Header("Etapa (opcional)")]
+        [Tooltip("Etapa en la que se ve ESTE hotspot (1 = N1 … 4 = N4); sobrescribe data.requiredStage.\n" +
+                 "-1 = usar data.requiredStage. Útil cuando varios hotspots comparten el mismo HotspotData\n" +
+                 "(p. ej. las paradas del Líder, una por nivel).")]
+        public int requiredStageOverride = -1;
+
         // ── Internos ──────────────────────────────────────────────────────────────
         private Transform _playerCamera;
         private bool _isNearby = false;
@@ -107,6 +114,15 @@ namespace SIRMED.Gameplay.Hotspots
         private bool _triviaShown = false;
         private Renderer _meshRenderer;
         private ARGeospatialAnchor geospatialAnchor;
+
+        public Action correctNpcDialogue;
+        public Action incorrectNpcDialogue;
+
+        /// <summary>
+        /// Se dispara al activar el hotspot (el jugador pulsó el botón del HUD), antes de abrir
+        /// su panel. Lo usa p. ej. LeaderNpcController para que la líder aparezca de inmediato.
+        /// </summary>
+        public event Action<HotspotController> Activated;
 
         // ── Gizmos en editor ──────────────────────────────────────────────────────
         private void OnDrawGizmosSelected()
@@ -129,7 +145,14 @@ namespace SIRMED.Gameplay.Hotspots
                 _playerCamera = Camera.main.transform;
 
             if (uiPanel == null)
-                uiPanel = FindAnyObjectByType<HotspotUIPanel>();
+            {
+                // Preferir el panel genérico; las copias por hotspot (isDefaultPanel = false)
+                // solo se usan si el hotspot las tiene asignadas.
+                foreach (HotspotUIPanel p in FindObjectsByType<HotspotUIPanel>(FindObjectsSortMode.None))
+                {
+                    if (p.isDefaultPanel) { uiPanel = p; break; }
+                }
+            }
 
             if (data == null)
             {
@@ -256,11 +279,12 @@ namespace SIRMED.Gameplay.Hotspots
         {
             if (data == null) return;
             bool hasSequence = !string.IsNullOrEmpty(sequenceId);
-            if (data.requiredStage < 0 && !hasSequence) return;
+            int requiredStage = requiredStageOverride >= 0 ? requiredStageOverride : data.requiredStage;
+            if (requiredStage < 0 && !hasSequence) return;
 
-            bool stageMatch = data.requiredStage < 0 ||
+            bool stageMatch = requiredStage < 0 ||
                               (StageManager.Instance != null &&
-                               (int)StageManager.Instance.CurrentStage == data.requiredStage);
+                               (int)StageManager.Instance.CurrentStage == requiredStage);
             bool unlocked = HotspotSequence.IsUnlocked(sequenceId, sequenceStep);
 
             gameObject.SetActive(stageMatch && unlocked);
@@ -285,14 +309,14 @@ namespace SIRMED.Gameplay.Hotspots
             if (nowNearby && !_isNearby)
             {
                 _isNearby = true;
-                Debug.Log($"[Hotspot] Entrando en rango de: {data.title}");
+                Debug.Log($"[Hotspot] Entrando en rango de: {data.title}", gameObject);
                 if (!_isPanelOpen && !(_interactOnce && _hasBeenVisited))
                     HotspotPromptButton.Instance?.RegisterHotspot(this);
             }
             else if (!nowNearby && _isNearby)
             {
                 _isNearby = false;
-                Debug.Log($"[Hotspot] Saliendo del rango de: {data.title}");
+                Debug.Log($"[Hotspot] Saliendo del rango de: {data.title}", gameObject);
                 HotspotPromptButton.Instance?.UnregisterHotspot(this);
                 if (_isPanelOpen) ClosePanel(allowTrivia: false); // no encadenar trivia al alejarse
             }
@@ -305,6 +329,8 @@ namespace SIRMED.Gameplay.Hotspots
         public void DispatchAction()
         {
             if (data == null) return;
+
+            Activated?.Invoke(this);
 
             // Ocultar el botón de prompt mientras el panel está abierto
             HotspotPromptButton.Instance?.UnregisterHotspot(this);
@@ -348,10 +374,22 @@ namespace SIRMED.Gameplay.Hotspots
                             ? RiskLevelIndicator.Instance.CurrentLevel
                             : RiskLevel.None;
                         NpcDialogueData dialogue = data.GetDialogueFor(level);
-                        System.Action onCorrect = null;
+                        Action onCorrect = null;
+                        Action onIncorrect = null;
                         if (dialogue != null && dialogue.isCommunityHelp)
-                            onCorrect = () => SIRMED.Gameplay.Director.DirectorAdviceController.Instance?.NotifyCommunityHelpCorrect();
-                        NpcDialoguePanel.Instance.Show(dialogue, this, onCorrect);
+                        {
+                            onCorrect = () =>
+                            {
+                                Director.DirectorAdviceController.Instance?.NotifyCommunityHelpCorrect();
+                                correctNpcDialogue?.Invoke();
+                            };
+                            onIncorrect = () =>
+                            {
+                                incorrectNpcDialogue?.Invoke();
+                            };
+                        }
+
+                        NpcDialoguePanel.Instance.Show(dialogue, this, onCorrect, onIncorrect);
                     }
                     else
                     {
@@ -458,6 +496,20 @@ namespace SIRMED.Gameplay.Hotspots
             // Si el jugador sigue en rango y el hotspot permite re-activación, mostrar el botón
             if (_isNearby && !(_interactOnce && _hasBeenVisited))
                 HotspotPromptButton.Instance?.RegisterHotspot(this);
+        }
+
+        // ── Marcador visual ───────────────────────────────────────────────────────
+        /// <summary>
+        /// Muestra/oculta el marcador (ícono 3D hijo) sin desactivar el hotspot: sigue
+        /// detectando proximidad y abriendo su panel. Lo usa LeaderNpcController para
+        /// cambiar la moneda por el personaje.
+        /// </summary>
+        public void SetMarkerVisible(bool visible)
+        {
+            if (meshTransform == null && transform.childCount > 0)
+                meshTransform = transform.GetChild(0);
+            if (meshTransform != null)
+                meshTransform.gameObject.SetActive(visible);
         }
 
         // ── Trivia ────────────────────────────────────────────────────────────────

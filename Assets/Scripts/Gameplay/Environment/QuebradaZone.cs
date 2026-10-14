@@ -29,6 +29,10 @@ namespace SIRMED.Gameplay.Environment
         /// <summary>Igual chequeo que RouteWaypoint/HotspotController: antes de resolver, la posición es la del Editor.</summary>
         public bool IsAnchorReady()
         {
+            // En el Editor (XR Simulation en PC) no hay Geospatial real: se usa la posición
+            // autorada, igual que HotspotController.IsAnchorReady. No afecta las builds.
+            if (Application.isEditor) return true;
+
             return transform.parent != null &&
                    transform.parent.GetComponent<ARGeospatialAnchor>() != null;
         }

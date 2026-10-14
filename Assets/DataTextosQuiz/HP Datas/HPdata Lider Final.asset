@@ -32,7 +32,7 @@ MonoBehaviour:
   requiredStage: -1
   headerImage: {fileID: 0}
   riskLevel: 0
-  trivia: {fileID: 11400000, guid: d9604a74217acb44b9c0c50e3c49cbf2, type: 2}
+  trivia: {fileID: 0}
   triviaPool: []
   triviaAfterContent: 1
   allowTriviaInN4: 0

@@ -79,6 +79,7 @@ namespace SIRMED.UI
         private NpcDialogueData _currentData;
         private IHotspotInteractable _sourceHotspot;
         private System.Action _onCorrectCallback;
+        private System.Action _onIncorrectCallback;
         private string[] _lines;
         private AudioClip[] _lineAudios; // paralelo a _lines; puede ser null
         private int _lineIndex;
@@ -116,7 +117,7 @@ namespace SIRMED.UI
         /// Abre el panel con el diálogo indicado.
         /// Llamado desde HotspotController (o cualquier IHotspotInteractable).
         /// </summary>
-        public void Show(NpcDialogueData data, IHotspotInteractable source, System.Action onCorrect = null)
+        public void Show(NpcDialogueData data, IHotspotInteractable source, System.Action onCorrect = null, System.Action onIncorrect = null)
         {
             if (data == null)
             {
@@ -127,6 +128,7 @@ namespace SIRMED.UI
             _currentData = data;
             _sourceHotspot = source;
             _onCorrectCallback = onCorrect;
+            _onIncorrectCallback = onIncorrect;
 
             // Prioridad: dialogueEntries (texto + audio) → dialogueLines (solo texto) → npcText
             bool hasEntries = data.dialogueEntries != null && data.dialogueEntries.Length > 0;
@@ -191,6 +193,7 @@ namespace SIRMED.UI
 
             _currentData = null;
             _onCorrectCallback = null;
+            _onIncorrectCallback = null;
             _lineAudios = null;
             gameObject.SetActive(false);
         }
@@ -317,18 +320,20 @@ namespace SIRMED.UI
 
         private IEnumerator CorrectAnswerRoutine(float wait)
         {
+            _onCorrectCallback?.Invoke();
+
             yield return new WaitForSeconds(wait);
 
             if (_currentData != null && _currentData.advancesStageOnCorrect)
                 StageManager.Instance?.NextStage();
 
-            System.Action cb = _onCorrectCallback;
             Hide();
-            cb?.Invoke();
         }
 
         private IEnumerator WrongAnswerRoutine(float wait)
         {
+            _onIncorrectCallback?.Invoke();
+
             yield return new WaitForSeconds(wait);
             _feedbackRoutine = null;
 

@@ -1,4 +1,3 @@
-using System;
 using System.Runtime.InteropServices;
 using Unity.XR.CoreUtils;
 
@@ -81,8 +80,9 @@ namespace UnityEngine.XR.Simulation
         {
             if (simulationEnvironment != null)
             {
-                m_FPSModeHandler.movementBounds = simulationEnvironment.cameraMovementBounds;
-                m_FPSModeHandler.useMovementBounds = true;
+                //m_FPSModeHandler.movementBounds = simulationEnvironment.cameraMovementBounds;
+                //m_FPSModeHandler.useMovementBounds = true;
+                m_FPSModeHandler.useMovementBounds = false;
 
                 if (m_InputHandlerEnabled)
                 {

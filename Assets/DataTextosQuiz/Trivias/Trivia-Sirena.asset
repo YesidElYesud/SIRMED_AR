@@ -15,17 +15,16 @@ MonoBehaviour:
   topic: "Se\xF1ales de alerta"
   question: "Si escuchas una alerta del SAT, \xBFqu\xE9 debes hacer primero?"
   options:
-  - optionText: "Ir a la quebrada a ver c\xF3mo est\xE1 el agua"
+  - optionText: "Acercarte a la quebrada para comprobar personalmente qué está ocurriendo."
     isCorrect: 0
-    feedbackText: "No. Acercarte al cauce te expone al peligro. Primero atiende la
-      informaci\xF3n oficial y act\xFAa seg\xFAn el nivel de alerta."
-  - optionText: "Atender la informaci\xF3n oficial y actuar seg\xFAn el nivel de
-      alerta"
+    feedbackText: "No. Acercarte al cauce te expone al peligro. Primero atiende la información oficial y actúa según el nivel de alerta."
+  - optionText: "Esperar a que otras personas comiencen a evacuar antes de tomar una decisión."
+    isCorrect: 0
+    feedbackText: "No. Esperar a los demás hace perder tiempo valioso. Atiende la información oficial y actúa según el nivel de alerta."
+  - optionText: "Atender la información oficial y actuar según el nivel de alerta."
     isCorrect: 1
-    feedbackText: "\xA1Correcto! Cada nivel de alerta indica qu\xE9 hacer. Seguir
-      la informaci\xF3n oficial te ayuda a actuar a tiempo."
-  - optionText: "Esperar a ver qu\xE9 hacen los vecinos"
+    feedbackText: "¡Correcto! Cada nivel de alerta indica qué hacer. Seguir la información oficial te ayuda a actuar a tiempo."
+  - optionText: "Ignorar la alerta si todavía no observas una situación peligrosa."
     isCorrect: 0
-    feedbackText: "No. Esperar hace perder tiempo valioso. Atiende la informaci\xF3n
-      oficial y act\xFAa seg\xFAn el nivel de alerta."
+    feedbackText: "No. Cuando el peligro se ve, puede ser tarde. Atiende la información oficial y actúa según el nivel de alerta."
   answerDelay: 2.5

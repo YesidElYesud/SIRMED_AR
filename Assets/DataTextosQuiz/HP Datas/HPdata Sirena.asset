@@ -30,6 +30,11 @@ MonoBehaviour:
   - "La sirena suena de forma continua. Significa evacuaci\xF3n: sigue la ruta hacia
     el punto de encuentro sin detenerte.\n(Texto temporal.)"
   icon: {fileID: 0}
+  iconByLevel:
+  - {fileID: 21300000, guid: fbfc905e8751e9249bd25992d6ff34c0, type: 3}
+  - {fileID: 21300000, guid: 1cb730b0f6553a245936239fbcbb33d1, type: 3}
+  - {fileID: 21300000, guid: 1addc641d905280489661251a0b04624, type: 3}
+  - {fileID: 21300000, guid: 4f6ca5ee935ce944fb7cfd50a8548f85, type: 3}
   actionType: 0
   cinematicClip: {fileID: 0}
   cinematicUrl: 

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64322bcf911b1bc41a2a521643cb8e77, type: 3}
+  m_Name: Ayuda Perro
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Dialogue.NpcDialogueData
+  npcName: Perro
+  npcPhoto: {fileID: 0}
+  dialogueEntries:
+  - text: "Guau (\xBFPuedes ayudarme a ir a un lugar seguro?)"
+    audio: {fileID: 0}
+  - text: "\xBFGuau?"
+    audio: {fileID: 0}
+  dialogueLines: []
+  npcText: 
+  options:
+  - optionText: "Dejar al perro all\xED y continuar sin hacer nada."
+    isCorrect: 0
+    feedbackText: No. pobre perrito :c
+  - optionText: "Indicar \u201CVen conmigo\u201D y continuar por la ruta segura con
+      el animal."
+    isCorrect: 1
+    feedbackText: "\xA1Muy bien! Ahora llevalo a un lugar seguro."
+  - optionText: "Salirse de la ruta para buscar al due\xF1o del animal."
+    isCorrect: 0
+    feedbackText: "\xBFY si le pasa algo?"
+  advancesStageOnCorrect: 0
+  correctAnswerDelay: 1.5
+  isCommunityHelp: 1

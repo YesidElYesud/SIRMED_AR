@@ -28,6 +28,12 @@ namespace SIRMED.UI
     ///           PrevButton (Button) ← se oculta en slide 0
     ///           Counter (TMP)      ← "1 / 3"
     ///           NextButton (Button) ← texto cambia a "Cerrar" en el último slide
+    ///         SkipButton (Button) ← opcional, "Saltar": cierra desde cualquier slide
+    ///
+    /// Uso típico: contexto histórico del SAT (p. ej. "HPdata Contexto SantaRita",
+    /// slides de imagen completa sin título/texto, portados del proyecto WebGL).
+    /// IMPORTANTE: el GameObject debe empezar ACTIVO en la escena (Awake lo oculta);
+    /// si empieza inactivo, Instance nunca se asigna y el hotspot cae al InfoPanel.
     /// </summary>
     public class InfoSlidePanel : MonoBehaviour
     {
@@ -48,6 +54,8 @@ namespace SIRMED.UI
         [Tooltip("TextMeshPro DENTRO del nextButton para cambiar su texto a 'Cerrar'.")]
         public TextMeshProUGUI nextButtonLabel;
         public TextMeshProUGUI counterText;
+        [Tooltip("Opcional: botón 'Saltar' que cierra el panel desde cualquier slide. Se oculta en el último.")]
+        public Button skipButton;
 
         [Header("Textos de botones")]
         public string labelNext = "Siguiente ›";
@@ -71,6 +79,7 @@ namespace SIRMED.UI
         {
             if (prevButton != null) prevButton.onClick.AddListener(OnPrev);
             if (nextButton != null) nextButton.onClick.AddListener(OnNext);
+            if (skipButton != null) skipButton.onClick.AddListener(Close);
         }
 
         // ── API pública ────────────────────────────────────────────────────────────
@@ -146,6 +155,10 @@ namespace SIRMED.UI
             // Botón Siguiente: texto cambia a "Cerrar" en el último slide
             if (nextButtonLabel != null)
                 nextButtonLabel.text = isLast ? labelClose : labelNext;
+
+            // Saltar: sobra en el último slide (ahí "Cerrar" hace lo mismo)
+            if (skipButton != null)
+                skipButton.gameObject.SetActive(!isLast);
 
             // Contador
             if (counterText != null)

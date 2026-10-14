@@ -20,6 +20,12 @@ namespace SIRMED.Geospatial
 
         private float _nextLogTime;
 
+        private void Awake()
+        {
+            if (Application.isEditor)
+                enabled = false;
+        }
+
         private IEnumerator Start()
         {
             if (Input.location.status == LocationServiceStatus.Stopped)

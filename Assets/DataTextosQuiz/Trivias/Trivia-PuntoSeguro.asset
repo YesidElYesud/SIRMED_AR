@@ -15,16 +15,16 @@ MonoBehaviour:
   topic: Cierre
   question: "Despu\xE9s de evacuar, \xBFqu\xE9 debes hacer?"
   options:
-  - optionText: Regresar a casa en cuanto deje de llover
+  - optionText: "Regresar inmediatamente a casa si aparentemente ya pasó el peligro."
     isCorrect: 0
-    feedbackText: "No. Regresar no es una decisi\xF3n propia: permanece en el punto
-      seguro hasta que los l\xEDderes o autoridades lo autoricen."
-  - optionText: Volver por los objetos que quedaron en casa
-    isCorrect: 0
-    feedbackText: No. La vida tiene prioridad sobre los bienes. Permanece en el punto
-      seguro y sigue las indicaciones oficiales.
-  - optionText: Permanecer en el punto seguro y seguir las indicaciones oficiales
+    feedbackText: "No. Regresar no es una decisión propia: permanece en el punto seguro hasta que los líderes o autoridades lo autoricen."
+  - optionText: "Permanecer en el punto seguro y seguir indicaciones oficiales."
     isCorrect: 1
-    feedbackText: "\xA1Correcto! Mant\xE9n la calma y espera a que los l\xEDderes
-      o autoridades autoricen el regreso a casa."
+    feedbackText: "¡Correcto! Mantén la calma y espera a que los líderes o autoridades autoricen el regreso a casa."
+  - optionText: "Salir del punto de encuentro para observar qué está ocurriendo en la quebrada."
+    isCorrect: 0
+    feedbackText: "No. Salir del punto seguro te expone de nuevo al peligro. Permanece ahí y sigue las indicaciones oficiales."
+  - optionText: "Volver por objetos personales que hayan quedado durante la evacuación."
+    isCorrect: 0
+    feedbackText: "No. La vida tiene prioridad sobre los bienes. Permanece en el punto seguro y sigue las indicaciones oficiales."
   answerDelay: 2.5

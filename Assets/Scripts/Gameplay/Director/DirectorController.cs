@@ -2,6 +2,7 @@ namespace SIRMED.Gameplay.Director
 {
     using System.Collections;
     using SIRMED.UI;
+    using SIRMED.Utils;
     using UnityEngine;
 
     /// <summary>
@@ -32,6 +33,12 @@ namespace SIRMED.Gameplay.Director
     /// `homeWaypoint` bajo su `ARGeospatialAnchor` resuelto, el modelo se mueve solo con
     /// él — sin ningún polling. `homeWaypoint` se conserva solo por referencia/documentación,
     /// ya no participa en la lógica de spawn.
+    ///
+    /// Modo "frente al jugador" (appearInFrontOfPlayer, por defecto, sesión 2026-10-13): el
+    /// modelo está oculto y, al abrirse un consejo, aparece a distanceInFront metros delante
+    /// de la cámara (con DissolveFader, sin popping). Queda fijo en el mundo mientras el
+    /// consejo está abierto (el jugador puede acercarse), mira al jugador, y desaparece al
+    /// cerrarse. En este modo se ignora moveToPointId.
     /// </summary>
     public class DirectorController : MonoBehaviour
     {
@@ -61,14 +68,48 @@ namespace SIRMED.Gameplay.Director
         [Tooltip("Distancia (m) para considerar que ya llegó al punto objetivo.")]
         public float arrivalThreshold = 0.05f;
 
+        [Header("Aparición frente al jugador")]
+        [Tooltip("Si true, el Director solo se ve mientras hay un consejo abierto: aparece delante de la cámara\n" +
+                 "y desaparece al cerrarse (se ignora moveToPointId). Si false, comportamiento anterior (anclado).")]
+        public bool appearInFrontOfPlayer = true;
+
+        [Tooltip("Distancia (m) delante de la cámara a la que aparece.")]
+        public float distanceInFront = 2.5f;
+
+        [Tooltip("Altura aproximada del teléfono sobre el suelo (m): los pies quedan a esta distancia bajo la cámara.")]
+        public float eyeHeight = 1.4f;
+
+        [Tooltip("Grados por segundo al girar para mirar al jugador.")]
+        public float turnSpeed = 240f;
+
+        [Tooltip("DissolveFader en la raíz del modelo (aparición suave). Sin él, aparece/desaparece con SetActive.")]
+        public DissolveFader fader;
+
         // ── Internos ──────────────────────────────────────────────────────────────
         private Coroutine _moveRoutine;
+        private Transform _playerCamera;
+        private bool _presenting;
 
         // ── Lifecycle ─────────────────────────────────────────────────────────────
         private void Awake()
         {
             if (Instance != null && Instance != this) { Destroy(gameObject); return; }
             Instance = this;
+
+            if (appearInFrontOfPlayer) SetVisualVisible(false, immediate: true);
+        }
+
+        private void Update()
+        {
+            if (!_presenting || visualRoot == null) return;
+            if (_playerCamera == null && Camera.main != null) _playerCamera = Camera.main.transform;
+            if (_playerCamera == null) return;
+
+            Vector3 flat = _playerCamera.position - visualRoot.position;
+            flat.y = 0f;
+            if (flat.sqrMagnitude > 0.0001f)
+                visualRoot.rotation = Quaternion.RotateTowards(
+                    visualRoot.rotation, Quaternion.LookRotation(flat, Vector3.up), turnSpeed * Time.deltaTime);
         }
 
         private void OnDestroy()
@@ -81,6 +122,7 @@ namespace SIRMED.Gameplay.Director
         public void ShowAdvice(DirectorAdviceData advice)
         {
             if (advice == null || advice.lines == null || advice.lines.Length == 0) return;
+            if (appearInFrontOfPlayer) Present();
             DirectorAdvicePanel.Instance?.Show(advice, OnLineShown, () => OnAdviceFinished(advice));
         }
 
@@ -92,10 +134,57 @@ namespace SIRMED.Gameplay.Director
 
         private void OnAdviceFinished(DirectorAdviceData advice)
         {
+            if (appearInFrontOfPlayer)
+            {
+                _presenting = false;
+                SetVisualVisible(false, immediate: false);
+                return;
+            }
+
             if (string.IsNullOrEmpty(advice.moveToPointId)) return;
 
             DirectorWaypoint target = FindWaypoint(advice.moveToPointId);
             if (target != null) MoveTo(target);
+        }
+
+        // ── Aparición frente al jugador ───────────────────────────────────────────
+        /// <summary>Coloca el modelo delante de la cámara (si no estaba ya presente) y lo hace aparecer.</summary>
+        private void Present()
+        {
+            if (visualRoot == null) return;
+            if (_playerCamera == null && Camera.main != null) _playerCamera = Camera.main.transform;
+
+            if (!_presenting && _playerCamera != null)
+            {
+                if (_moveRoutine != null) { StopCoroutine(_moveRoutine); _moveRoutine = null; }
+
+                Vector3 forward = _playerCamera.forward;
+                forward.y = 0f;
+                if (forward.sqrMagnitude < 0.0001f) forward = _playerCamera.up; // teléfono apuntando al suelo/cielo
+                forward.y = 0f;
+                forward.Normalize();
+
+                Vector3 pos = _playerCamera.position + forward * distanceInFront;
+                pos.y = _playerCamera.position.y - eyeHeight;
+
+                // Fijo en el mundo (no sigue a la cámara): se suelta del waypoint.
+                visualRoot.SetParent(null, true);
+                visualRoot.position = pos;
+                visualRoot.rotation = Quaternion.LookRotation(-forward, Vector3.up);
+            }
+
+            _presenting = true;
+            SetVisualVisible(true, immediate: false);
+        }
+
+        private void SetVisualVisible(bool visible, bool immediate)
+        {
+            if (visualRoot == null) return;
+            if (fader == null) { visualRoot.gameObject.SetActive(visible); return; }
+
+            if (immediate) fader.SetVisibleImmediate(visible);
+            else if (visible) fader.FadeIn();
+            else fader.FadeOut();
         }
 
         private DirectorWaypoint FindWaypoint(string pointId)
