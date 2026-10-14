@@ -16,16 +16,16 @@ MonoBehaviour:
   question: "Si el nivel de la quebrada aumenta r\xE1pidamente, \xBFqu\xE9 acci\xF3n
     es m\xE1s segura?"
   options:
-  - optionText: "Alejarse del cauce y prepararse para seguir la ruta de evacuaci\xF3n"
+  - optionText: "Alejarse del cauce y prepararse para seguir la ruta de evacuación."
     isCorrect: 1
-    feedbackText: "\xA1Correcto! Alejarte a tiempo y tener clara la ruta reduce tu
-      exposici\xF3n al riesgo."
-  - optionText: Acercarse al cauce para tomar fotos o videos
+    feedbackText: "¡Correcto! Alejarte a tiempo y tener clara la ruta reduce tu exposición al riesgo."
+  - optionText: "Acercarse al cauce para observar cuánto ha aumentado el nivel del agua."
     isCorrect: 0
-    feedbackText: "No. Una creciente puede cambiar r\xE1pidamente. Al\xE9jate del
-      cauce y prep\xE1rate para seguir la ruta de evacuaci\xF3n."
-  - optionText: "Quedarse en casa sin prestar atenci\xF3n a las alertas"
+    feedbackText: "No. Una creciente puede cambiar rápidamente. Aléjate del cauce y prepárate para seguir la ruta de evacuación."
+  - optionText: "Permanecer en el mismo lugar hasta confirmar visualmente un desbordamiento."
     isCorrect: 0
-    feedbackText: "No. Ignorar las alertas te deja sin tiempo para reaccionar. Al\xE9jate
-      del cauce y prep\xE1rate para seguir la ruta de evacuaci\xF3n."
+    feedbackText: "No. Esperar a ver el desbordamiento te deja sin tiempo para reaccionar. Aléjate del cauce y prepárate para seguir la ruta de evacuación."
+  - optionText: "Buscar una zona más cercana a la quebrada desde donde sea posible observar mejor."
+    isCorrect: 0
+    feedbackText: "No. Acercarte al cauce aumenta tu exposición al riesgo. Aléjate y prepárate para seguir la ruta de evacuación."
   answerDelay: 2.5
