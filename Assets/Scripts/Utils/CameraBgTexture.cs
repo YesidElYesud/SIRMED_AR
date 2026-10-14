@@ -26,7 +26,7 @@ public class CameraBgTexture : MonoBehaviour
             Debug.LogWarning($"BgTexture count: {args.textures.Count}");
             for (int i = 0; i < args.textures.Count; i++)
             {
-                Debug.LogWarning($"BgTexture count: {args.textures[i].name} {args.propertyNameIds[i]} {args.textures[i].isDataSRGB}");
+                Debug.LogWarning($"BgTexture {i} - {args.textures[i].name} - {args.propertyNameIds[i]} - {args.textures[i].isDataSRGB}");
             }
 
             if (args.displayMatrix != null)
