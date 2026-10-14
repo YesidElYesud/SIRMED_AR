@@ -270,7 +270,7 @@ MonoBehaviour:
   cloudsRotationSpeed: 0.001
   floorRoot: {fileID: 2456553775514850046}
   floorOffsetY: -0.25
-  offsetMulti: 2.142857
+  offsetMulti: 1.5
   wetFloorMaterial: {fileID: 2100000, guid: 8349e6fd801ad8544886578e7fa291cb, type: 2}
   fogRoot: {fileID: 6691520476842585154}
 --- !u!1 &5747753669941914942
@@ -5139,7 +5139,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0.25, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2053092805254463837}

@@ -23,6 +23,12 @@ public class CameraBgTexture : MonoBehaviour
     {
         if (!textureSet && args.textures.Count > 0)
         {
+            Debug.LogWarning($"BgTexture count: {args.textures.Count}");
+            for (int i = 0; i < args.textures.Count; i++)
+            {
+                Debug.LogWarning($"BgTexture count: {args.textures[i].name} {args.propertyNameIds[i]} {args.textures[i].isDataSRGB}");
+            }
+
             if (args.displayMatrix != null)
                 Shader.SetGlobalMatrix(_DisplayMatrix, args.displayMatrix.Value);
 
