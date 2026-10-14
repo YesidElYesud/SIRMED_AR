@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Loader.unity
+    guid: 055449ecd62091b479c9c1f1bca42de1
+  - enabled: 1
     path: Assets/Scenes/YesidCasa_CoreTest.unity
     guid: 55b98dabc4beed547945cb3581ee2fa7
   - enabled: 1
