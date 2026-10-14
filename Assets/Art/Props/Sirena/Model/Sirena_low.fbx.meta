@@ -3,7 +3,12 @@ guid: 6b7d0fff6507400469b1265adaea455a
 ModelImporter:
   serializedVersion: 24501
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sirena
+    second: {fileID: 2100000, guid: 5abb36ccfbdebc642b118c90e74e6c85, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

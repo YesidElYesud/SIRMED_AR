@@ -23,13 +23,13 @@ public class DisorientedOlderNPC : MonoBehaviour
     private Vector3 targetEuler;
 
     private readonly int _correct = Animator.StringToHash("correct");
+    private readonly int _incorrect = Animator.StringToHash("incorrect");
     private readonly int _idle = Animator.StringToHash("idle");
 
     private void OnEnable()
     {
         controller.correctNpcDialogue += OnCorrectDialogue;
         controller.incorrectNpcDialogue += OnIncorrectDialogue;
-        DisorientedOlderNPC_SMB.OnStartWalking += StartWalking;
     }
 
     private void OnDisable()
@@ -41,17 +41,19 @@ public class DisorientedOlderNPC : MonoBehaviour
 
     private void OnCorrectDialogue()
     {
-        //Debug.LogWarning("correct Dialogue");
+        DisorientedOlderNPC_SMB.OnStartWalking += StartWalking;
         animator.SetTrigger(_correct);
+        controller.enabled = false;
     }
 
     private void OnIncorrectDialogue()
     {
-        //Debug.LogWarning("Incorrect Dialogue");
+        animator.SetTrigger(_incorrect);
     }
 
     private void StartWalking()
     {
+        DisorientedOlderNPC_SMB.OnStartWalking -= StartWalking;
         start = true;
         startRotation = true;
         pointIndex = 0;
@@ -71,7 +73,7 @@ public class DisorientedOlderNPC : MonoBehaviour
             walkSpeed * Time.deltaTime
         );
 
-        direction = poins[pointIndex].position - transform.position;
+        direction = poins[pointIndex].position - animator.transform.position;
         targetRotation = Quaternion.LookRotation(direction);
 
         if (startRotation)

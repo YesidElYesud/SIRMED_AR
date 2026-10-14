@@ -606,9 +606,8 @@ MonoBehaviour:
   visualRoot: {fileID: 1588341508}
   animator: {fileID: 1588341507}
   fader: {fileID: 613754628}
-  walkingBoolParam: Caminando
   heightOffset: -1.4
-  moveSpeed: 1.9
+  moveSpeed: 2.3
   arrivalThreshold: 0.05
   turnSpeed: 240
   facePlayerWhenIdle: 1
@@ -976,6 +975,11 @@ PrefabInstance:
 --- !u!4 &275380239 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1064805304693677970, guid: 2f3b62b87b855124190d18f9f5b5dd94, type: 3}
+  m_PrefabInstance: {fileID: 275380238}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &275380240 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6352008540324496872, guid: 2f3b62b87b855124190d18f9f5b5dd94, type: 3}
   m_PrefabInstance: {fileID: 275380238}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &313519804
@@ -3827,6 +3831,7 @@ GameObject:
   - component: {fileID: 2090281929}
   - component: {fileID: 2090281928}
   - component: {fileID: 2090281927}
+  - component: {fileID: 2090281932}
   m_Layer: 0
   m_Name: HP NPC Nino (1)
   m_TagString: Untagged
@@ -3964,6 +3969,21 @@ Transform:
   - {fileID: 275380239}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2090281932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090281926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14cd1af140a8ca944a46d1b295909536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChildSeparatedNPC
+  controller: {fileID: 2090281927}
+  animator: {fileID: 275380240}
+  leader: {fileID: 167239151}
 --- !u!1001 &2143724613
 PrefabInstance:
   m_ObjectHideFlags: 0
