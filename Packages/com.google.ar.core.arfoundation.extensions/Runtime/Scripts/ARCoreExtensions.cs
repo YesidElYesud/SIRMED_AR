@@ -515,7 +515,6 @@ namespace Google.XR.ARCoreExtensions
 
         private void SelectCameraConfig()
         {
-            Debug.LogWarning("SelectCameraConfig");
             if (CameraManager == null)
             {
                 return;
@@ -531,10 +530,7 @@ namespace Google.XR.ARCoreExtensions
                 return;
             }
 
-            foreach (XRCameraConfiguration config in configurations)
-            {
-                Debug.Log($"configs: {config.resolution} {config}");
-            }
+            // SIRMED: se prefiere 1280x720 (rendimiento); si no existe, la primera.
             int configIndex = -1;
             Vector2Int desiredResolution = new(1280, 720);
             for (int i = 0; i < configurations.Length; i++)
@@ -542,7 +538,6 @@ namespace Google.XR.ARCoreExtensions
                 if (configurations[i].resolution == desiredResolution)
                 {
                     configIndex = i;
-                    Debug.Log($"index: {configIndex} is 720p");
                     break;
                 }
             }
@@ -565,7 +560,6 @@ namespace Google.XR.ARCoreExtensions
                 return;
             }
 
-            Debug.Log($"index: {configIndex} configs:{configurations[configIndex].resolution} {configurations[configIndex]}");
             CameraManager.currentConfiguration = configurations[configIndex];
         }
 #endif // UNITY_ANDROID
