@@ -11,6 +11,13 @@
         "com.unity.inputsystem": "1.4.2"
       }
     },
+    "com.cysharp.unitask": {
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "a77a1b4a89824fb6df293099de3060daf2a432c1"
+    },
     "com.febucci.custom-hierarchy": {
       "version": "https://github.com/acur97/unitypackage-custom-hierarchy.git",
       "depth": 0,

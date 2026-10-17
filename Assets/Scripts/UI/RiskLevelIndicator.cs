@@ -1,9 +1,10 @@
 namespace SIRMED.UI
 {
+    using Cysharp.Threading.Tasks;
     using SIRMED.Gameplay.Hotspots;
     using SIRMED.Managers;
     using System;
-    using System.Collections;
+    using System.Threading;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
@@ -33,7 +34,7 @@ namespace SIRMED.UI
 
         // ── Nivel por defecto por etapa ───────────────────────────────────────────
         [Serializable]
-        public class StageRiskConfig
+        private class StageRiskConfig
         {
             [Tooltip("Etapa a la que aplica este nivel por defecto.")]
             public StageManager.Stage stage;
@@ -43,15 +44,13 @@ namespace SIRMED.UI
             public RiskLevel defaultRiskLevel = RiskLevel.None;
         }
 
-        [Header("Nivel de riesgo por etapa (opcional)")]
-        [Tooltip("Al entrar a cada etapa configurada, el indicador muestra el nivel asignado.")]
-        public StageRiskConfig[] stageRiskDefaults = new StageRiskConfig[]
+        private readonly StageRiskConfig[] stageRiskDefaults = new StageRiskConfig[]
         {
-            new StageRiskConfig { stage = StageManager.Stage.Intro,  defaultRiskLevel = RiskLevel.None },
-            new StageRiskConfig { stage = StageManager.Stage.Etapa1, defaultRiskLevel = RiskLevel.N1 },
-            new StageRiskConfig { stage = StageManager.Stage.Etapa2, defaultRiskLevel = RiskLevel.N2 },
-            new StageRiskConfig { stage = StageManager.Stage.Etapa3, defaultRiskLevel = RiskLevel.N3 },
-            new StageRiskConfig { stage = StageManager.Stage.Etapa4, defaultRiskLevel = RiskLevel.N4 }
+            new() { stage = StageManager.Stage.Intro,  defaultRiskLevel = RiskLevel.None },
+            new() { stage = StageManager.Stage.Etapa1, defaultRiskLevel = RiskLevel.N1 },
+            new() { stage = StageManager.Stage.Etapa2, defaultRiskLevel = RiskLevel.N2 },
+            new() { stage = StageManager.Stage.Etapa3, defaultRiskLevel = RiskLevel.N3 },
+            new() { stage = StageManager.Stage.Etapa4, defaultRiskLevel = RiskLevel.N4 }
         };
 
         // ── Referencias UI — Indicador ────────────────────────────────────────────
@@ -83,6 +82,10 @@ namespace SIRMED.UI
         [Range(0f, 0.2f)]
         public float pulseAmplitude = 0.07f;
 
+        private float speed;
+        private float pulse;
+        private CancellationTokenSource _cts = new();
+
         // ── Estado ────────────────────────────────────────────────────────────────
         public RiskLevel CurrentLevel { get; private set; } = RiskLevel.None;
 
@@ -103,7 +106,7 @@ namespace SIRMED.UI
             {
                 btnsPanel[i].sizeDelta = new Vector2(btnsPanel[i].sizeDelta.x, 100);
             }
-            bg.sizeDelta = new Vector2(0, 355); //160
+            bg.sizeDelta = new Vector2(0, 355);
             descriptionText.SetText(string.Empty);
         }
 
@@ -132,7 +135,7 @@ namespace SIRMED.UI
 
             if (StageManager.Instance?.CurrentStage != stage)
             {
-                CoroutineRunner.Instance.StartCoroutine(AnimatePanels(index));
+                AnimatePanels(index).Forget();
 
                 StageManager.Instance?.GoToStage(stage);
             }
@@ -141,17 +144,20 @@ namespace SIRMED.UI
                 if (!firstBtn || Mathf.Approximately(btnsPanel[index].sizeDelta.y, 100f))
                 {
                     firstBtn = true;
-                    CoroutineRunner.Instance.StartCoroutine(AnimatePanels(index));
+                    AnimatePanels(index).Forget();
                 }
                 else
                 {
-                    CoroutineRunner.Instance.StartCoroutine(ClosePanels(index));
+                    ClosePanels(index).Forget();
                 }
             }
         }
 
-        private IEnumerator AnimatePanels(int index)
+        private async UniTaskVoid AnimatePanels(int index)
         {
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _cts = new CancellationTokenSource();
             float lerp = 0;
 
             while (lerp < 1)
@@ -173,12 +179,15 @@ namespace SIRMED.UI
                 float height = descriptionText.GetPreferredValues(descriptionText.text, descriptionText.rectTransform.rect.width, Mathf.Infinity).y;
                 bg.sizeDelta = new Vector2(0, Mathf.Lerp(bg.sizeDelta.y, 365 + height, lerp));
 
-                yield return null;
+                await UniTask.Yield(cancellationToken: _cts.Token);
             }
         }
 
-        private IEnumerator ClosePanels(int index)
+        private async UniTaskVoid ClosePanels(int index)
         {
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _cts = new CancellationTokenSource();
             float lerp = 0;
 
             while (lerp < 1)
@@ -188,7 +197,7 @@ namespace SIRMED.UI
                 btnsPanel[index].sizeDelta = new Vector2(btnsPanel[index].sizeDelta.x, Mathf.Lerp(btnsPanel[index].sizeDelta.y, 100, lerp));
                 bg.sizeDelta = new Vector2(0, Mathf.Lerp(bg.sizeDelta.y, 160, lerp));
 
-                yield return null;
+                await UniTask.Yield(cancellationToken: _cts.Token);
             }
         }
 
@@ -214,14 +223,14 @@ namespace SIRMED.UI
         {
             CurrentLevel = level;
 
-            bool visible = level != RiskLevel.None;
-            if (indicatorRoot != null) indicatorRoot.SetActive(visible);
+            if (indicatorRoot != null) indicatorRoot.SetActive(level != RiskLevel.None);
         }
 
         // ── Reacción al cambio de etapa ───────────────────────────────────────────
         private void OnStageChanged(StageManager.Stage previous, StageManager.Stage current)
         {
             StageRiskConfig config = FindStageConfig(current);
+
             if (config != null)
                 SetLevel(config.defaultRiskLevel);
         }
@@ -238,16 +247,20 @@ namespace SIRMED.UI
         {
             if (indicatorRoot == null || CurrentLevel < RiskLevel.N3) return;
 
-            float speed = CurrentLevel == RiskLevel.N4 ? pulseSpeedN4 : pulseSpeedN3;
-            float pulse = 1f + pulseAmplitude * Mathf.Sin(Time.time * speed * Mathf.PI * 2f);
+            speed = CurrentLevel == RiskLevel.N4 ? pulseSpeedN4 : pulseSpeedN3;
+            pulse = 1f + pulseAmplitude * Mathf.Sin(Time.time * speed * Mathf.PI * 2f);
             indicatorRoot.transform.localScale = _baseScale * pulse;
         }
 
         private StageRiskConfig FindStageConfig(StageManager.Stage stage)
         {
-            if (stageRiskDefaults == null) return null;
-            foreach (var c in stageRiskDefaults)
-                if (c.stage == stage) return c;
+            if (stageRiskDefaults == null)
+                return null;
+
+            foreach (StageRiskConfig c in stageRiskDefaults)
+                if (c.stage == stage)
+                    return c;
+
             return null;
         }
     }

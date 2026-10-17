@@ -100,7 +100,7 @@ namespace SIRMED.Managers
             }
 
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
 
         private void Start()
@@ -153,7 +153,7 @@ namespace SIRMED.Managers
             CurrentStage = target;
 
             if (debugLogs)
-                Debug.Log($"[StageManager] {previous} → {target}");
+                Debug.Log($"[StageManager] <b>{previous} → {target}</b>");
 
             // OnStageChanged primero: sistemas reaccionan (audio, visuals, hotspots).
             // ApplyStageConfig después: StageManager tiene la última palabra sobre SetActive.
