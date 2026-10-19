@@ -15,17 +15,16 @@ MonoBehaviour:
   topic: "Funci\xF3n del sensor"
   question: "\xBFPara qu\xE9 sirve el sensor instalado cerca de la quebrada?"
   options:
-  - optionText: Monitorear el nivel y el comportamiento del agua para apoyar el sistema
-      de alerta
+  - optionText: "Activar automáticamente la sirena cada vez que comienza a llover."
+    isCorrect: 0
+    feedbackText: "No. El sensor no activa la sirena cada vez que llueve: monitorea el nivel y el comportamiento del agua para apoyar el sistema de alerta."
+  - optionText: "Monitorear el nivel/comportamiento del agua para apoyar el sistema de alerta."
     isCorrect: 1
-    feedbackText: "\xA1Correcto! El sensor vigila el agua de forma continua y sus
-      datos ayudan a generar las alertas del SAT."
-  - optionText: Avisar con sonido a los vecinos
+    feedbackText: "¡Correcto! El sensor vigila el agua de forma continua y sus datos ayudan a generar las alertas del SAT."
+  - optionText: "Medir la cantidad de personas que transitan cerca de la quebrada."
     isCorrect: 0
-    feedbackText: No. El aviso sonoro lo da la sirena. El sensor monitorea el nivel
-      y el comportamiento del agua para apoyar el sistema de alerta.
-  - optionText: Medir la temperatura del barrio
+    feedbackText: "No. El sensor no cuenta personas: monitorea el nivel y el comportamiento del agua de la quebrada para apoyar el sistema de alerta."
+  - optionText: "Controlar el funcionamiento de las rutas de evacuación del sector."
     isCorrect: 0
-    feedbackText: No. El sensor monitorea el nivel y el comportamiento del agua de
-      la quebrada para apoyar el sistema de alerta.
+    feedbackText: "No. Las rutas de evacuación no dependen del sensor. El sensor monitorea el nivel y el comportamiento del agua para apoyar el sistema de alerta."
   answerDelay: 2.5

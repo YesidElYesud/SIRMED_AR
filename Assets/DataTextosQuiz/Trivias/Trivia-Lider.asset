@@ -15,17 +15,16 @@ MonoBehaviour:
   topic: "Organizaci\xF3n comunitaria"
   question: "\xBFPor qu\xE9 es importante el liderazgo comunitario en un SAT?"
   options:
-  - optionText: "Porque el l\xEDder reemplaza a los organismos de socorro"
+  - optionText: "Porque reemplaza completamente a los organismos oficiales durante una emergencia."
     isCorrect: 0
-    feedbackText: "No. El l\xEDder no reemplaza a los organismos de socorro: facilita
-      la comunicaci\xF3n, la preparaci\xF3n y una respuesta organizada."
-  - optionText: "Porque as\xED los dem\xE1s vecinos no tienen que prepararse"
+    feedbackText: "No. El liderazgo comunitario no reemplaza a los organismos oficiales: facilita la comunicación, la preparación y una respuesta organizada."
+  - optionText: "Porque permite que una sola persona decida cuándo debe evacuar toda la comunidad."
     isCorrect: 0
-    feedbackText: "No. La preparaci\xF3n es de todos. El liderazgo facilita la comunicaci\xF3n,
-      la preparaci\xF3n y una respuesta organizada."
-  - optionText: "Porque facilita la comunicaci\xF3n, la preparaci\xF3n y una respuesta
-      organizada"
+    feedbackText: "No. La evacuación se decide según el nivel de alerta oficial. El liderazgo facilita la comunicación, la preparación y una respuesta organizada."
+  - optionText: "Porque su función principal es vigilar permanentemente el nivel de la quebrada"
+    isCorrect: 0
+    feedbackText: "No. El monitoreo del agua lo hacen los sensores del SAT. El liderazgo facilita la comunicación, la preparación y una respuesta organizada."
+  - optionText: "Porque facilita comunicación, preparación y respuesta organizada."
     isCorrect: 1
-    feedbackText: "\xA1Correcto! Una comunidad organizada se comunica mejor y responde
-      a tiempo ante una alerta."
+    feedbackText: "¡Correcto! Una comunidad organizada se comunica mejor y responde a tiempo ante una alerta."
   answerDelay: 2.5

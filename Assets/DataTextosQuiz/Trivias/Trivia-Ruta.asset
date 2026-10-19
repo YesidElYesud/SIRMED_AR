@@ -15,16 +15,16 @@ MonoBehaviour:
   topic: "Evacuaci\xF3n"
   question: "\xBFCu\xE1l es el objetivo de la ruta de evacuaci\xF3n?"
   options:
-  - optionText: "Llegar m\xE1s r\xE1pido a la quebrada"
-    isCorrect: 0
-    feedbackText: 'No. La ruta te aleja del cauce: conduce a la comunidad hacia una
-      zona segura o punto de encuentro.'
-  - optionText: Conducir a la comunidad hacia una zona segura o punto de encuentro
+  - optionText: "Conducir a la comunidad hacia una zona segura/punto de encuentro."
     isCorrect: 1
-    feedbackText: "\xA1Correcto! La ruta est\xE1 definida para que todos lleguen
-      de forma ordenada a una zona segura."
-  - optionText: "Recorrer el barrio para ver qu\xE9 est\xE1 pasando"
+    feedbackText: "¡Correcto! La ruta está definida para que todos lleguen de forma ordenada a una zona segura."
+  - optionText: "Indicar el camino más rápido para acercarse a la quebrada."
     isCorrect: 0
-    feedbackText: "No. En una evacuaci\xF3n no se recorre el barrio: la ruta conduce
-      a la comunidad hacia una zona segura o punto de encuentro."
+    feedbackText: "No. La ruta te aleja del cauce: conduce a la comunidad hacia una zona segura o punto de encuentro."
+  - optionText: "Señalar únicamente dónde se encuentran instalados los sensores del SAT."
+    isCorrect: 0
+    feedbackText: "No. La ruta no marca los sensores: conduce a la comunidad hacia una zona segura o punto de encuentro."
+  - optionText: "Permitir que cada persona elija cualquier camino para salir del sector."
+    isCorrect: 0
+    feedbackText: "No. La ruta está definida para evitar zonas de riesgo: seguirla lleva a todos de forma ordenada a la zona segura."
   answerDelay: 2.5

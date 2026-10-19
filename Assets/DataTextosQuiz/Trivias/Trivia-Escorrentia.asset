@@ -15,16 +15,16 @@ MonoBehaviour:
   topic: "Comportamiento seguro en v\xEDas inundadas"
   question: "\xBFQu\xE9 debes hacer si tu ruta cruza por una calle con agua en movimiento?"
   options:
-  - optionText: "Cruzar r\xE1pido si el agua parece poco profunda"
-    isCorrect: 0
-    feedbackText: "No. Aunque parezca poco profunda, el agua en movimiento puede
-      arrastrarte. Nunca es seguro caminar a trav\xE9s de una inundaci\xF3n."
-  - optionText: Cruzar en carro o en moto
-    isCorrect: 0
-    feedbackText: "No. Nunca es seguro conducir a trav\xE9s de una inundaci\xF3n:
-      el agua puede arrastrar veh\xEDculos. Busca un terreno elevado."
-  - optionText: Evitar el contacto con el flujo de agua
+  - optionText: "Evitar el contacto con el flujo de agua; nunca es seguro caminar o conducir a través de una inundación."
     isCorrect: 1
-    feedbackText: "\xA1Correcto! Nunca es seguro caminar o conducir a trav\xE9s de
-      una inundaci\xF3n. Busca un terreno elevado o un camino alterno."
+    feedbackText: "¡Correcto! El agua en movimiento puede arrastrar personas y vehículos. Busca un terreno elevado o un camino alterno."
+  - optionText: "Cruzar rápidamente si consideras que el agua todavía no alcanza mucha altura."
+    isCorrect: 0
+    feedbackText: "No. Aunque parezca poco profunda, el agua en movimiento puede arrastrarte. Nunca es seguro caminar a través de una inundación."
+  - optionText: "Atravesar la calle siguiendo a otra persona que haya logrado pasar primero."
+    isCorrect: 0
+    feedbackText: "No. Que otra persona haya pasado no significa que sea seguro: la corriente puede cambiar en segundos. Evita el contacto con el agua."
+  - optionText: "Continuar por la ruta normalmente mientras el vehículo o tus zapatos puedan avanzar."
+    isCorrect: 0
+    feedbackText: "No. Nunca es seguro caminar o conducir a través de una inundación: el agua puede arrastrar personas y vehículos. Busca un camino alterno."
   answerDelay: 2.5

@@ -2705,6 +2705,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: Lider
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &140181943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4990,6 +4991,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!135 &226653333
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5266,6 +5268,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &251239520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7740,6 +7743,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &378563515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8481,6 +8485,7 @@ MonoBehaviour:
   iconImage: {fileID: 0}
   closeButton: {fileID: 2110576206}
   panel: {fileID: 400371380}
+  isDefaultPanel: 1
   headerImage: {fileID: 0}
   descScrollRect: {fileID: 0}
   riskLevelBadge: {fileID: 0}
@@ -11631,6 +11636,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &582981028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14628,6 +14634,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &720515441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14914,6 +14921,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &725570131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15138,6 +15146,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &733415339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16442,6 +16451,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: Lider
   sequenceStep: 1
+  requiredStageOverride: -1
 --- !u!114 &806053704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16860,6 +16870,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &810865935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18407,6 +18418,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &892163126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23568,6 +23580,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: Lider
   sequenceStep: 2
+  requiredStageOverride: -1
 --- !u!114 &1126923717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25017,6 +25030,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!135 &1189655772
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -26332,6 +26346,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &1253452376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39029,6 +39044,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &1957062651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40218,6 +40234,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &2026167106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41624,6 +41641,7 @@ MonoBehaviour:
   _interactOnce: 0
   sequenceId: 
   sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &2090281928
 MonoBehaviour:
   m_ObjectHideFlags: 0

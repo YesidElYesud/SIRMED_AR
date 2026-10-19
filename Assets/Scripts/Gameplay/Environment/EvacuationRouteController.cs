@@ -68,7 +68,7 @@ namespace SIRMED.Gameplay.Environment
         [Tooltip("Al acercarse a este Transform la cinta se oculta automáticamente. Normalmente el mismo GameObject del hotspot 'PUNTO DE ENCUENTRO'.")]
         public Transform puntoDeEncuentro;
 
-        [Tooltip("Radio (m) para el auto-ocultamiento.")]
+        [Tooltip("Radio (m) de llegada: alrededor del punto de encuentro o del último waypoint (final de la cinta).")]
         public float hideRadius = 4f;
 
         [Header("Puntos de control (checklist M07/M08)")]
@@ -156,6 +156,10 @@ namespace SIRMED.Gameplay.Environment
         // valida la longitud resultante antes de aceptar el build como definitivo.
         private const float _minValidSplineLength = 1f;
 
+        // Diagnóstico (logcat: filtrar por "[EvacRoute]"): cada cuánto se reporta qué falta para construir.
+        private const float _waitLogInterval = 5f;
+        private float _nextWaitLog;
+
         private void Update()
         {
             if (!_built)
@@ -169,6 +173,12 @@ namespace SIRMED.Gameplay.Environment
 
                     BuildRibbonMesh();
                     _built = true;
+                    Debug.Log($"[EvacRoute] Cinta construida: {waypoints.Length} waypoints, {length:F1} m.", this);
+                }
+                else if (Time.time >= _nextWaitLog)
+                {
+                    _nextWaitLog = Time.time + _waitLogInterval;
+                    Debug.Log($"[EvacRoute] Esperando anclas: {DescribePendingWaypoints()}", this);
                 }
                 return;
             }
@@ -180,17 +190,28 @@ namespace SIRMED.Gameplay.Environment
             Vector3 player = Camera.main.transform.position;
             CheckCheckpoints(player);
 
-            if (puntoDeEncuentro == null) return;
+            // Llegada: cerca del punto de encuentro O del final de la cinta (último waypoint).
+            // Ambos cuentan porque el jugador sigue la cinta, y su final puede no coincidir
+            // exactamente con el hotspot del punto de encuentro (en YesidCasa están a ~7 m).
+            bool nearMeetingPoint = puntoDeEncuentro != null && IsWithinHideRadius(puntoDeEncuentro.position, player);
+            RouteWaypoint last = waypoints[waypoints.Length - 1];
+            bool nearRouteEnd = last != null && IsWithinHideRadius(last.transform.position, player);
 
-            Vector3 flat = puntoDeEncuentro.position - player;
-            flat.y = 0f;
             int required = Mathf.Min(minCheckpointsForArrival, CheckpointCount);
-            if (flat.sqrMagnitude <= hideRadius * hideRadius && CheckpointsReached >= required)
+            if ((nearMeetingPoint || nearRouteEnd) && CheckpointsReached >= required)
             {
                 _arrived = true;
+                Debug.Log($"[EvacRoute] Llegada al punto de encuentro ({CheckpointsReached} checkpoints): se oculta la cinta.", this);
                 OnArrivalAtPuntoDeEncuentro?.Invoke();
                 Hide();
             }
+        }
+
+        private bool IsWithinHideRadius(Vector3 target, Vector3 player)
+        {
+            Vector3 flat = target - player;
+            flat.y = 0f;
+            return flat.sqrMagnitude <= hideRadius * hideRadius;
         }
 
         // ── API pública ───────────────────────────────────────────────────────────
@@ -253,8 +274,14 @@ namespace SIRMED.Gameplay.Environment
 
         private void ShowInternal()
         {
-            if (!_built || _isVisible) return;
+            if (!_built)
+            {
+                Debug.Log("[EvacRoute] Show() pedido pero la cinta aún no está construida (faltan anclas).", this);
+                return;
+            }
+            if (_isVisible) return;
             _isVisible = true;
+            Debug.Log($"[EvacRoute] Mostrando cinta (por hotspot: {_shownByHotspot}).", this);
             _meshRenderer.enabled = true;
             if (_fadeRoutine != null) StopCoroutine(_fadeRoutine);
             _fadeRoutine = StartCoroutine(FadeRoutine(_currentAlpha, 1f, fadeInDuration));
@@ -331,6 +358,18 @@ namespace SIRMED.Gameplay.Environment
             foreach (var wp in waypoints)
                 if (wp == null || !wp.IsAnchorReady()) return false;
             return true;
+        }
+
+        private string DescribePendingWaypoints()
+        {
+            if (waypoints == null || waypoints.Length < 2) return "se necesitan al menos 2 waypoints asignados";
+            var pending = new List<string>();
+            foreach (var wp in waypoints)
+            {
+                if (wp == null) pending.Add("(vacío)");
+                else if (!wp.IsAnchorReady()) pending.Add(wp.name);
+            }
+            return pending.Count == 0 ? "todas listas (spline aún degenerada)" : "sin anclar: " + string.Join(", ", pending);
         }
 
         // ── Spline: curva suave a través de los waypoints ya anclados ────────────

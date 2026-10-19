@@ -6,8 +6,26 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Loader.unity
+    guid: 055449ecd62091b479c9c1f1bca42de1
+  - enabled: 1
+    path: Assets/Scenes/SAT_PlazaLibertad.unity
+    guid: 733b8db046e147bf8afb8afacc070694
+  - enabled: 1
+    path: Assets/Scenes/SAT_OlayaHerrera.unity
+    guid: 88537b87313945baadc587dc78a87fca
+  - enabled: 1
+    path: Assets/Scenes/SAT_SantaRita.unity
+    guid: 7207b26b570e4c1b8f9d63dc99326482
+  - enabled: 1
+    path: Assets/Scenes/SAT_Cantera.unity
+    guid: fd596a649e8c4b73b09e380ac3297db6
+  - enabled: 1
     path: Assets/Scenes/YesidCasa_CoreTest.unity
     guid: 55b98dabc4beed547945cb3581ee2fa7
+  - enabled: 1
+    path: Assets/Scenes/UrregoCasa_CoreTest.unity
+    guid: c076cf0e36dfea04c83d1aa2104932b7
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 9ef37b6f075f1007a8c8ed48d2f5770b, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: c93f3394cd008cb95a529f7dc76d60f0, type: 2}

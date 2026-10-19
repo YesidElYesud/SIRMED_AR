@@ -47,8 +47,8 @@ namespace SIRMED.Gameplay.NPCs
         [Tooltip("DissolveFader en la raíz del modelo (aparición suave). Sin él, aparece con SetActive.")]
         public DissolveFader fader;
 
-        [Tooltip("Parámetro Bool del Animator que indica 'caminando'. Vacío = no se toca el Animator.")]
-        public string walkingBoolParam = "Caminando";
+        //[Tooltip("Parámetro Bool del Animator que indica 'caminando'. Vacío = no se toca el Animator.")]
+        private readonly int walkingParam = Animator.StringToHash("Speed");
 
         [Tooltip("Desplazamiento vertical (m) respecto a la posición del hotspot. Negativo si la moneda flota\n" +
                  "sobre el suelo y la líder queda en el aire.")]
@@ -231,8 +231,37 @@ namespace SIRMED.Gameplay.NPCs
 
         private void SetWalking(bool walking)
         {
-            if (animator != null && !string.IsNullOrEmpty(walkingBoolParam))
-                animator.SetBool(walkingBoolParam, walking);
+            if (animator != null)
+            {
+                StopCoroutine(FadeWalking(walking));
+                StartCoroutine(FadeWalking(walking));
+            }
+        }
+
+        private IEnumerator FadeWalking(bool walking)
+        {
+            if (walking)
+            {
+                float time = 0;
+                while (time < 1)
+                {
+                    time += Time.deltaTime * 2.5f;
+                    animator.SetFloat(walkingParam, time);
+                    yield return null;
+                }
+                animator.SetFloat(walkingParam, 1);
+            }
+            else
+            {
+                float time = 1;
+                while (time > 0)
+                {
+                    time -= Time.deltaTime * 2.5f;
+                    animator.SetFloat(walkingParam, time);
+                    yield return null;
+                }
+                animator.SetFloat(walkingParam, 0);
+            }
         }
     }
 }

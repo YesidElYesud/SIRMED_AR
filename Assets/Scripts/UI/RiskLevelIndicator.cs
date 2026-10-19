@@ -1,8 +1,11 @@
 namespace SIRMED.UI
 {
-    using System;
+    using Cysharp.Threading.Tasks;
     using SIRMED.Gameplay.Hotspots;
     using SIRMED.Managers;
+    using System;
+    using System.Threading;
+    using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
 
@@ -31,7 +34,7 @@ namespace SIRMED.UI
 
         // ── Nivel por defecto por etapa ───────────────────────────────────────────
         [Serializable]
-        public class StageRiskConfig
+        private class StageRiskConfig
         {
             [Tooltip("Etapa a la que aplica este nivel por defecto.")]
             public StageManager.Stage stage;
@@ -41,15 +44,13 @@ namespace SIRMED.UI
             public RiskLevel defaultRiskLevel = RiskLevel.None;
         }
 
-        [Header("Nivel de riesgo por etapa (opcional)")]
-        [Tooltip("Al entrar a cada etapa configurada, el indicador muestra el nivel asignado.")]
-        public StageRiskConfig[] stageRiskDefaults = new StageRiskConfig[]
+        private readonly StageRiskConfig[] stageRiskDefaults = new StageRiskConfig[]
         {
-            new StageRiskConfig { stage = StageManager.Stage.Intro,  defaultRiskLevel = RiskLevel.None },
-            new StageRiskConfig { stage = StageManager.Stage.Etapa1, defaultRiskLevel = RiskLevel.N1 },
-            new StageRiskConfig { stage = StageManager.Stage.Etapa2, defaultRiskLevel = RiskLevel.N2 },
-            new StageRiskConfig { stage = StageManager.Stage.Etapa3, defaultRiskLevel = RiskLevel.N3 },
-            new StageRiskConfig { stage = StageManager.Stage.Etapa4, defaultRiskLevel = RiskLevel.N4 }
+            new() { stage = StageManager.Stage.Intro,  defaultRiskLevel = RiskLevel.None },
+            new() { stage = StageManager.Stage.Etapa1, defaultRiskLevel = RiskLevel.N1 },
+            new() { stage = StageManager.Stage.Etapa2, defaultRiskLevel = RiskLevel.N2 },
+            new() { stage = StageManager.Stage.Etapa3, defaultRiskLevel = RiskLevel.N3 },
+            new() { stage = StageManager.Stage.Etapa4, defaultRiskLevel = RiskLevel.N4 }
         };
 
         // ── Referencias UI — Indicador ────────────────────────────────────────────
@@ -57,43 +58,20 @@ namespace SIRMED.UI
         [Tooltip("GameObject raíz del widget. Se activa con nivel ≠ None.")]
         public GameObject indicatorRoot;
 
-        [Tooltip("Image del nivel activo dentro de FondoBtn.")]
-        public Image levelImage;
+        // ── Referencias UI — Botones de nivel ─────────────────────────────────────
+        [Header("Botones de nivel")]
+        public Button[] btnsN;
+        public RectTransform[] btnsPanel;
 
-        [Tooltip("Botón FondoBtn. Al pulsarlo abre el RiskLevelPanel.")]
-        public Button fondoBtn;
+        // ── Referencias UI — Fondo y texto ────────────────────────────────────────
+        [Header("Fondo y texto")]
+        public RectTransform bg;
+        public CanvasRenderer description;
+        public TextMeshProUGUI descriptionText;
 
-        // ── Referencias UI — Botones de nivel ────────────────────────────────────
-        [Header("Botones de nivel (junto a FondoBtn)")]
-        public Button btnN1;
-        public Button btnN2;
-        public Button btnN3;
-        public Button btnN4;
-
-        // ── Referencias UI — Panel de riesgo ─────────────────────────────────────
-        [Header("RiskLevelPanel")]
-        [Tooltip("Panel que se abre al pulsar FondoBtn. Contiene PanelImage + ExitButton.")]
-        public GameObject panelRoot;
-
-        [Tooltip("Image dentro del panel que muestra la imagen del nivel actual.")]
-        public Image panelImage;
-
-        public Button panelExitButton;
-
-        // ── Sprites indicador (pequeños, en HUD) ─────────────────────────────────
-        [Header("Sprites indicador (HUD)")]
-        public Sprite spriteN1;
-        public Sprite spriteN2;
-        public Sprite spriteN3;
-        public Sprite spriteN4;
-
-        // ── Sprites panel (tamaño completo) ───────────────────────────────────────
-        [Header("Sprites panel (imagen fullscreen/grande)")]
-        [Tooltip("Si quedan vacíos se usarán los sprites del indicador como fallback.")]
-        public Sprite panelSpriteN1;
-        public Sprite panelSpriteN2;
-        public Sprite panelSpriteN3;
-        public Sprite panelSpriteN4;
+        // ── Referencias UI — Descripciones ────────────────────────────────────────
+        [Header("Descripciones")]
+        [TextArea] public string[] riskTexts;
 
         // ── Animación ─────────────────────────────────────────────────────────────
         [Header("Animación")]
@@ -104,10 +82,15 @@ namespace SIRMED.UI
         [Range(0f, 0.2f)]
         public float pulseAmplitude = 0.07f;
 
+        private float speed;
+        private float pulse;
+        private CancellationTokenSource _cts = new();
+
         // ── Estado ────────────────────────────────────────────────────────────────
         public RiskLevel CurrentLevel { get; private set; } = RiskLevel.None;
 
         private Vector3 _baseScale;
+        private bool firstBtn = false;
 
         // ── Lifecycle ─────────────────────────────────────────────────────────────
         private void Awake()
@@ -117,6 +100,14 @@ namespace SIRMED.UI
 
             if (indicatorRoot != null)
                 _baseScale = indicatorRoot.transform.localScale;
+
+            btnsPanel[0].sizeDelta = new Vector2(btnsPanel[0].sizeDelta.x, 250);
+            for (int i = 1; i < btnsPanel.Length; i++)
+            {
+                btnsPanel[i].sizeDelta = new Vector2(btnsPanel[i].sizeDelta.x, 100);
+            }
+            bg.sizeDelta = new Vector2(0, 355);
+            descriptionText.SetText(string.Empty);
         }
 
         private void Start()
@@ -124,59 +115,90 @@ namespace SIRMED.UI
             if (StageManager.Instance != null)
                 StageManager.Instance.OnStageChanged += OnStageChanged;
 
-            // Auto-cablear si no están asignados en el Inspector
-            AutoWireButtons();
-
-            // Botón principal → abre el panel
-            if (fondoBtn != null)
-                fondoBtn.onClick.AddListener(OpenPanel);
-
-            // Botón salir del panel
-            if (panelExitButton != null)
-                panelExitButton.onClick.AddListener(ClosePanel);
-
             // Botones de nivel → cambian la etapa completa del juego (dispara todos los efectos)
-            if (btnN1 != null) btnN1.onClick.AddListener(() => GoToStageForLevel(RiskLevel.N1));
-            if (btnN2 != null) btnN2.onClick.AddListener(() => GoToStageForLevel(RiskLevel.N2));
-            if (btnN3 != null) btnN3.onClick.AddListener(() => GoToStageForLevel(RiskLevel.N3));
-            if (btnN4 != null) btnN4.onClick.AddListener(() => GoToStageForLevel(RiskLevel.N4));
+            if (btnsN[0] != null) btnsN[0].onClick.AddListener(() => GoToStageForLevel(RiskLevel.N1));
+            if (btnsN[1] != null) btnsN[1].onClick.AddListener(() => GoToStageForLevel(RiskLevel.N2));
+            if (btnsN[2] != null) btnsN[2].onClick.AddListener(() => GoToStageForLevel(RiskLevel.N3));
+            if (btnsN[3] != null) btnsN[3].onClick.AddListener(() => GoToStageForLevel(RiskLevel.N4));
 
             // Ocultar indicador y panel al arrancar
             if (indicatorRoot != null) indicatorRoot.SetActive(false);
-            if (panelRoot != null) panelRoot.SetActive(false);
-        }
-
-        // Busca los botones por nombre en la jerarquía si el Inspector los dejó vacíos.
-        private void AutoWireButtons()
-        {
-            if (indicatorRoot == null) return;
-            var root = indicatorRoot.transform;
-
-            if (fondoBtn == null)
-                fondoBtn = root.Find("FondoBtn")?.GetComponent<Button>();
-
-            // Los 4 botones de nivel viven dentro de un hijo llamado "Orden"
-            Transform orden = root.Find("Orden");
-            Transform search = orden != null ? orden : root;
-
-            if (btnN1 == null) btnN1 = search.Find("N1_Btn")?.GetComponent<Button>();
-            if (btnN2 == null) btnN2 = search.Find("N2_Btn")?.GetComponent<Button>();
-            if (btnN3 == null) btnN3 = search.Find("N3_Btn")?.GetComponent<Button>();
-            if (btnN4 == null) btnN4 = search.Find("N4_Btn")?.GetComponent<Button>();
         }
 
         // Llama GoToStage para el nivel solicitado y dispara todos los efectos del juego.
         private void GoToStageForLevel(RiskLevel level)
         {
-            StageManager.Stage stage = level switch
+            StageManager.Stage stage = (StageManager.Stage)(int)level;
+            int index = (int)level - 1;
+
+            descriptionText.SetText(riskTexts[index]);
+
+            if (StageManager.Instance?.CurrentStage != stage)
             {
-                RiskLevel.N1 => StageManager.Stage.Etapa1,
-                RiskLevel.N2 => StageManager.Stage.Etapa2,
-                RiskLevel.N3 => StageManager.Stage.Etapa3,
-                RiskLevel.N4 => StageManager.Stage.Etapa4,
-                _ => StageManager.Stage.Etapa1,
-            };
-            StageManager.Instance?.GoToStage(stage);
+                AnimatePanels(index).Forget();
+
+                StageManager.Instance?.GoToStage(stage);
+            }
+            else
+            {
+                if (!firstBtn || Mathf.Approximately(btnsPanel[index].sizeDelta.y, 100f))
+                {
+                    firstBtn = true;
+                    AnimatePanels(index).Forget();
+                }
+                else
+                {
+                    ClosePanels(index).Forget();
+                }
+            }
+        }
+
+        private async UniTaskVoid AnimatePanels(int index)
+        {
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _cts = new CancellationTokenSource();
+            float lerp = 0;
+
+            while (lerp < 1)
+            {
+                lerp += Time.deltaTime * 3;
+
+                for (int i = 0; i < btnsPanel.Length; i++)
+                {
+                    if (i == index)
+                        continue;
+
+                    btnsPanel[i].sizeDelta = new Vector2(btnsPanel[i].sizeDelta.x, Mathf.Lerp(btnsPanel[i].sizeDelta.y, 100, lerp));
+                }
+
+                description.SetAlpha(lerp);
+
+                btnsPanel[index].sizeDelta = new Vector2(btnsPanel[index].sizeDelta.x, Mathf.Lerp(btnsPanel[index].sizeDelta.y, 250, lerp));
+
+                float height = descriptionText.GetPreferredValues(descriptionText.text, descriptionText.rectTransform.rect.width, Mathf.Infinity).y;
+                bg.sizeDelta = new Vector2(0, Mathf.Lerp(bg.sizeDelta.y, 365 + height, lerp));
+
+                await UniTask.Yield(cancellationToken: _cts.Token);
+            }
+        }
+
+        private async UniTaskVoid ClosePanels(int index)
+        {
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _cts = new CancellationTokenSource();
+            float lerp = 0;
+
+            while (lerp < 1)
+            {
+                lerp += Time.deltaTime * 3;
+
+                btnsPanel[index].sizeDelta = new Vector2(btnsPanel[index].sizeDelta.x, Mathf.Lerp(btnsPanel[index].sizeDelta.y, 100, lerp));
+                bg.sizeDelta = new Vector2(0, Mathf.Lerp(bg.sizeDelta.y, 160, lerp));
+
+                await UniTask.Yield(cancellationToken: _cts.Token);
+            }
         }
 
         private void OnDestroy()
@@ -201,49 +223,14 @@ namespace SIRMED.UI
         {
             CurrentLevel = level;
 
-            bool visible = level != RiskLevel.None;
-            if (indicatorRoot != null) indicatorRoot.SetActive(visible);
-
-            if (!visible)
-            {
-                ClosePanel();
-                return;
-            }
-
-            if (levelImage != null) levelImage.sprite = GetIndicatorSprite(level);
-
-            // Si el panel ya está abierto, actualizar su imagen en tiempo real
-            if (panelRoot != null && panelRoot.activeSelf)
-                RefreshPanelImage();
-        }
-
-        /// <summary>Oculta el widget. Equivale a SetLevel(None).</summary>
-        public void ClearLevel() => SetLevel(RiskLevel.None);
-
-        // ── Panel ─────────────────────────────────────────────────────────────────
-
-        public void OpenPanel()
-        {
-            if (panelRoot == null || CurrentLevel == RiskLevel.None) return;
-            RefreshPanelImage();
-            panelRoot.SetActive(true);
-        }
-
-        public void ClosePanel()
-        {
-            if (panelRoot != null) panelRoot.SetActive(false);
-        }
-
-        private void RefreshPanelImage()
-        {
-            if (panelImage == null) return;
-            panelImage.sprite = GetPanelSprite(CurrentLevel);
+            if (indicatorRoot != null) indicatorRoot.SetActive(level != RiskLevel.None);
         }
 
         // ── Reacción al cambio de etapa ───────────────────────────────────────────
         private void OnStageChanged(StageManager.Stage previous, StageManager.Stage current)
         {
             StageRiskConfig config = FindStageConfig(current);
+
             if (config != null)
                 SetLevel(config.defaultRiskLevel);
         }
@@ -253,7 +240,6 @@ namespace SIRMED.UI
         {
             if (CurrentLevel == RiskLevel.None) return;
             if (indicatorRoot != null) indicatorRoot.SetActive(true);
-            if (levelImage != null) levelImage.sprite = GetIndicatorSprite(CurrentLevel);
         }
 
         // ── Pulso de escala (N3 / N4) ─────────────────────────────────────────────
@@ -261,36 +247,20 @@ namespace SIRMED.UI
         {
             if (indicatorRoot == null || CurrentLevel < RiskLevel.N3) return;
 
-            float speed = CurrentLevel == RiskLevel.N4 ? pulseSpeedN4 : pulseSpeedN3;
-            float pulse = 1f + pulseAmplitude * Mathf.Sin(Time.time * speed * Mathf.PI * 2f);
+            speed = CurrentLevel == RiskLevel.N4 ? pulseSpeedN4 : pulseSpeedN3;
+            pulse = 1f + pulseAmplitude * Mathf.Sin(Time.time * speed * Mathf.PI * 2f);
             indicatorRoot.transform.localScale = _baseScale * pulse;
         }
 
-        // ── Helpers ───────────────────────────────────────────────────────────────
-        private Sprite GetIndicatorSprite(RiskLevel level) => level switch
-        {
-            RiskLevel.N1 => spriteN1,
-            RiskLevel.N2 => spriteN2,
-            RiskLevel.N3 => spriteN3,
-            RiskLevel.N4 => spriteN4,
-            _ => null,
-        };
-
-        // Si el sprite de panel no está asignado, usa el del indicador como fallback.
-        private Sprite GetPanelSprite(RiskLevel level) => level switch
-        {
-            RiskLevel.N1 => panelSpriteN1 != null ? panelSpriteN1 : spriteN1,
-            RiskLevel.N2 => panelSpriteN2 != null ? panelSpriteN2 : spriteN2,
-            RiskLevel.N3 => panelSpriteN3 != null ? panelSpriteN3 : spriteN3,
-            RiskLevel.N4 => panelSpriteN4 != null ? panelSpriteN4 : spriteN4,
-            _ => null,
-        };
-
         private StageRiskConfig FindStageConfig(StageManager.Stage stage)
         {
-            if (stageRiskDefaults == null) return null;
-            foreach (var c in stageRiskDefaults)
-                if (c.stage == stage) return c;
+            if (stageRiskDefaults == null)
+                return null;
+
+            foreach (StageRiskConfig c in stageRiskDefaults)
+                if (c.stage == stage)
+                    return c;
+
             return null;
         }
     }

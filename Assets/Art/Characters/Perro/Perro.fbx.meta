@@ -3,7 +3,12 @@ guid: df253ad9783f5fb4681a919eaa56b0e7
 ModelImporter:
   serializedVersion: 24501
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: V-Ray Node Material
+    second: {fileID: 2100000, guid: b2ea11680445ddc488c73bbac9092aaa, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

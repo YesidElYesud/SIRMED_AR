@@ -488,6 +488,36 @@ MonoBehaviour:
   worldRange: 60
   clampToEdge: 0
   edgePaddingPx: 6
+  routeDotPrefab: {fileID: 0}
+  routeDotSpacing: 4
+  showRouteFromLevel: 2
+  meetingPointIcon: {fileID: 0}
+  evacuationModeLevel: 4
+  categoryStyles:
+  - category: 2
+    color: {r: 0.98, g: 0.78, b: 0.1, a: 1}
+    sprite: {fileID: 0}
+  - category: 3
+    color: {r: 0.65, g: 0.4, b: 0.9, a: 1}
+    sprite: {fileID: 0}
+  - category: 4
+    color: {r: 1, g: 0.55, b: 0.1, a: 1}
+    sprite: {fileID: 0}
+  - category: 8
+    color: {r: 0.15, g: 0.85, b: 0.35, a: 1}
+    sprite: {fileID: 0}
+  - category: 5
+    color: {r: 0.3, g: 0.85, b: 0.95, a: 1}
+    sprite: {fileID: 0}
+  - category: 6
+    color: {r: 0.95, g: 0.95, b: 0.95, a: 1}
+    sprite: {fileID: 0}
+  - category: 7
+    color: {r: 0.95, g: 0.35, b: 0.7, a: 1}
+    sprite: {fileID: 0}
+  - category: 9
+    color: {r: 0.9, g: 0.2, b: 0.2, a: 1}
+    sprite: {fileID: 0}
   defaultDotColor: {r: 1, g: 1, b: 1, a: 1}
   colorN1: {r: 0.3, g: 0.8, b: 0.35, a: 1}
   colorN2: {r: 0.95, g: 0.85, b: 0.25, a: 1}
@@ -679,9 +709,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 2046165063}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &140181943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -857,9 +891,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 941094921}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &142695061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1521,9 +1559,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 0}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &195130287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1899,9 +1941,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 682477812}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &251962273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2194,6 +2240,9 @@ MonoBehaviour:
   samplesPerMeter: 1
   puntoDeEncuentro: {fileID: 251962276}
   hideRadius: 4
+  checkpointRadius: 6
+  minCheckpointsForArrival: 1
+  autoShowFromLevel: 3
   ribbonWidth: 0.5
   heightOffset: 0.15
   ribbonMaterial: {fileID: 2100000, guid: 56c3d870b107d514f90a8e3a953008c4, type: 2}
@@ -2348,9 +2397,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 146951752}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &317834716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2531,9 +2584,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 1049824809}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &378563515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2700,6 +2757,7 @@ MonoBehaviour:
   iconImage: {fileID: 0}
   closeButton: {fileID: 146598516}
   panel: {fileID: 400371380}
+  isDefaultPanel: 1
   headerImage: {fileID: 0}
   descScrollRect: {fileID: 0}
   riskLevelBadge: {fileID: 0}
@@ -2708,6 +2766,7 @@ MonoBehaviour:
   colorN2: {r: 1, g: 0.76, b: 0.03, a: 1}
   colorN3: {r: 1, g: 0.6, b: 0, a: 1}
   colorN4: {r: 0.96, g: 0.26, b: 0.21, a: 1}
+  _hudElementsToHide: []
 --- !u!114 &400371382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2823,8 +2882,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16bfbd36c90e8bc4fa2ade9d2dd877d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.UI.TriviaPanel
+  topicText: {fileID: 0}
   questionText: {fileID: 546797787}
   choicePanel: {fileID: 630969291}
+  _hudElementsToHide: []
 --- !u!1 &430750537
 GameObject:
   m_ObjectHideFlags: 0
@@ -3377,9 +3438,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 98092467}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &582981028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3727,9 +3792,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 927358021}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &600342178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4023,9 +4092,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 1577482229}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &640200267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4423,9 +4496,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 745937445}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &691755974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4739,9 +4816,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 1191558459}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &720515441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4885,9 +4966,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 1794102872}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &733415339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5755,9 +5840,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 965050251}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &810865935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6252,9 +6341,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 1968854056}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &892163126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6634,9 +6727,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 811973873}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &993466341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7456,9 +7553,13 @@ MonoBehaviour:
   uiPanel: {fileID: 0}
   meshTransform: {fileID: 200472581}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &1129785332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8188,9 +8289,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 300530169}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &1266472113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8334,9 +8439,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 1697595855}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &1272492894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11067,9 +11176,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 815585328}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &1957062651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11500,9 +11613,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 745937445}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &1981654932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12211,9 +12328,13 @@ MonoBehaviour:
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 1497735469}
   rotationSpeed: 60
+  minimapCategory: 0
   enableVisitedEffect: 1
   visitedAlpha: 0.35
   _interactOnce: 0
+  sequenceId: 
+  sequenceStep: 0
+  requiredStageOverride: -1
 --- !u!114 &2124654675
 MonoBehaviour:
   m_ObjectHideFlags: 0

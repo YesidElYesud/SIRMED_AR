@@ -223,7 +223,6 @@ MonoBehaviour:
   wetFloor: {fileID: 2100000, guid: 8349e6fd801ad8544886578e7fa291cb, type: 2}
   fogSphere: {fileID: 2100000, guid: bd035913e51ace443942afe17c1e2427, type: 2}
   fogTransform: {fileID: 0}
-  enablePostProcessing: 1
   volumePriority: 10
   debugLogs: 0
 --- !u!114 &6146727907208788699

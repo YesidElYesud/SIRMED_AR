@@ -53,8 +53,8 @@ MonoBehaviour:
   moveSpeed: 1.2
   arrivalThreshold: 0.05
   appearInFrontOfPlayer: 1
-  distanceInFront: 2.5
-  eyeHeight: 1.4
+  distanceInFront: 2.2
+  eyeHeight: 2.1
   turnSpeed: 240
   fader: {fileID: 3188505274908490692}
 --- !u!1001 &4862792526955496557

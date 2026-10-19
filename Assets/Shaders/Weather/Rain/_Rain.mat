@@ -91,6 +91,6 @@ Material:
     - _Strength: 0.1
     - _XRMotionVectorsPass: 1
     m_Colors:
-    - _Color: {r: 2.9960785, g: 2.9960785, b: 2.9960785, a: 1}
+    - _Color: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

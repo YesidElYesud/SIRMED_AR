@@ -26,7 +26,7 @@ namespace SIRMED.Gameplay.Director
     ///   S10 El usuario decide cargar objetos → NotifyObjectsDecision().
     ///
     /// Regla de diseño del GDD (pág. 28): cooldown entre consejos y nunca repetir
-    /// el mismo mensaje seguido (TryTrigger). Los consejos urgentes (S6, S7, S8,
+    /// el mismo mensaje seguido (TryTrigger). Los consejos urgentes (S5, S6, S7, S8,
     /// S9, S10) se saltan el cooldown y, si el banner está ocupado, esperan en
     /// cola a que se cierre en vez de perderse.
     /// </summary>
@@ -177,7 +177,10 @@ namespace SIRMED.Gameplay.Director
 
         // ── API pública (la llaman los diálogos de ayuda comunitaria) ─────────────
         /// <summary>S5: el usuario resolvió bien una situación de ayuda comunitaria.</summary>
-        public void NotifyCommunityHelpCorrect() => TryTrigger(adviceAyudaCorrecta);
+        // En cola (urgent): se llama al acertar, con el NpcDialoguePanel todavía abierto
+        // mostrando el feedback; como consejo normal se descartaba por IsPanelBusy().
+        // Así sale justo al cerrarse el diálogo.
+        public void NotifyCommunityHelpCorrect() => TryTrigger(adviceAyudaCorrecta, urgent: true);
 
         /// <summary>S10: el usuario eligió cargar/regresar por objetos no vitales.</summary>
         public void NotifyObjectsDecision() => TryTrigger(adviceObjetos, urgent: true);
