@@ -4,30 +4,33 @@ using UnityEngine.Networking;
 
 public class SirmedDataLoader : MonoBehaviour
 {
-    [SerializeField, TextArea] private string test;
-    [SerializeField] private SirmedData data;
-
-    private string responseBody;
+    [SerializeField] private bool ready = false;
+    [SerializeField] private SirmedDataScriptable dataScriptable;
 
     private const string url = "https://www.medellin.gov.co/sirmed-api/api/v1/capas-monitoreo/1";
+
+    private void Awake()
+    {
+        ResetReady();
+    }
 
     [ContextMenu("Clear Data")]
     public void ClearData()
     {
-        data = null;
-    }
-
-    [ContextMenu("Set Test")]
-    public void SetTest()
-    {
-        data = JsonUtility.FromJson<SirmedData>(test);
-        data.layer.styles.ParseColors();
+        dataScriptable.data = null;
     }
 
     [ContextMenu("Get Data")]
     public void GetData()
     {
+        ResetReady();
         GetSirmedData().Forget();
+    }
+
+    private void ResetReady()
+    {
+        dataScriptable.isUpToDate = false;
+        ready = false;
     }
 
     private async UniTaskVoid GetSirmedData()
@@ -45,17 +48,7 @@ public class SirmedDataLoader : MonoBehaviour
         {
             await request.SendWebRequest();
 
-            Debug.LogWarning(request.result);
-
-            responseBody = request.downloadHandler.text;
-
-            Debug.Log("Ok 200");
-            Debug.Log(responseBody);
-            Debug.Log("----------");
-            Debug.Log(JsonUtility.ToJson(responseBody));
-
-            data = JsonUtility.FromJson<SirmedData>(responseBody);
-            data.layer.styles.ParseColors();
+            ParseData(true, request.downloadHandler.text);
         }
         catch (UnityWebRequestException ex)
         {
@@ -63,10 +56,10 @@ public class SirmedDataLoader : MonoBehaviour
             {
                 case UnityWebRequest.Result.ProtocolError:
                     long responseCode = request.responseCode;
-                    responseBody = request.downloadHandler != null ? request.downloadHandler.text : string.Empty;
 
-                    string errorDetail = GetSirmedMeanings(responseCode, responseBody);
-                    Debug.LogError($"[HTTP Error {responseCode}] {errorDetail}");
+                    string errorDetail = GetSirmedMeanings(responseCode,
+                        request.downloadHandler != null ? request.downloadHandler.text : string.Empty);
+                    Debug.LogError($"[HTTP code {responseCode} error]: {errorDetail}");
                     break;
 
                 case UnityWebRequest.Result.ConnectionError:
@@ -81,10 +74,14 @@ public class SirmedDataLoader : MonoBehaviour
                     Debug.LogError($"[Error]: {request.error}");
                     break;
             }
+
+            ParseData(false);
         }
         catch (System.Exception ex)
         {
             Debug.LogError($"Unexpected error: {ex.Message}");
+
+            ParseData(false);
         }
     }
 
@@ -108,5 +105,29 @@ public class SirmedDataLoader : MonoBehaviour
             default:
                 return $"Unspecifically mapped HTTP code: {code}";
         }
+    }
+
+    private void ParseData(bool ok, string data = null)
+    {
+        if (ok)
+        {
+            Debug.Log("Using updated data");
+
+            Debug.Log("Ok 200");
+            Debug.Log(data);
+
+            dataScriptable.data = JsonUtility.FromJson<SirmedData>(data);
+            dataScriptable.data.layer.styles.ParseColors();
+            dataScriptable.isUpToDate = true;
+
+            if (Application.isEditor)
+                Debug.Log(JsonUtility.ToJson(dataScriptable.data, true));
+        }
+        else
+        {
+            Debug.LogWarning("Using offline data");
+        }
+
+        ready = true;
     }
 }

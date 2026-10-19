@@ -2,6 +2,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "SirmedData", menuName = "ScriptableObjects/SirmedData", order = 1)]
+public class SirmedDataScriptable : ScriptableObject ///Envoltorio de la respuesta de ambos endpoints
+{
+    public bool isUpToDate;
+    public SirmedData data;
+}
+
 [Serializable]
 public class SirmedData ///Envoltorio de la respuesta de ambos endpoints
 {

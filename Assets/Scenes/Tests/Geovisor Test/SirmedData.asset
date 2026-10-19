@@ -1,0 +1,583 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: SirmedData
+  m_EditorClassIdentifier: Assembly-CSharp::SirmedDataScriptable
+  isUpToDate: 0
+  data:
+    statusCode: 200
+    layer:
+      id: 1
+      name: Alarmas
+      display_name: Alarmas
+      description: Capa de Alarmas
+      type: LOCAL
+      geometry: points
+      url: 
+      active: 1
+      downloadable: 1
+      filters:
+      - name: Comuna
+        type: text
+        property: comuna_nom
+      - name: Barrio
+        type: text
+        property: barrio_nom
+      - name: Microcuenca
+        type: text
+        property: microcuenc
+      - name: "C\xF3digo SIATA"
+        type: text
+        property: siata_cod
+      - name: Nombre SIATA
+        type: text
+        property: siata_nom
+      enlace_redireccion: 
+      styles:
+        type: unique
+        puntos:
+        - prop: 
+          value: 
+          colorIcon: '#ffffff'
+          _colorIcon: {r: 1, g: 1, b: 1, a: 1}
+          markerIcon: plus
+          markerClass: square
+          markerColor: '#4338dc'
+          _markerColor: {r: 0.2627451, g: 0.21960784, b: 0.8627451, a: 1}
+        poligonos:
+        - prop: 
+          value: 
+          fillColor: '#3388ff'
+          _fillColor: {r: 0.2, g: 0.53333336, b: 1, a: 1}
+          lineColor: '#3388ff'
+          _lineColor: {r: 0.2, g: 0.53333336, b: 1, a: 1}
+          lineWeight: 2
+          fillOpacity: 0.5
+          lineOpacity: 1
+      data:
+      - id: 1
+        modulo: alarmas
+        siata_cod: 582
+        siata_nom: "Salado - Para\xEDso"
+        barrio_cod: 8006
+        barrio_nom: El Salado
+        comuna_cod: 80
+        comuna_nom: San Antonio de Prado
+        microcuenc: "Quebrada Do\xF1a Mar\xEDa"
+        nivel: 546
+        pluviograf: 18
+        camara: 
+      - id: 2
+        modulo: alarmas
+        siata_cod: 216
+        siata_nom: Santa Rita
+        barrio_cod: 8007
+        barrio_nom: La Verde
+        comuna_cod: 80
+        comuna_nom: San Antonio de Prado
+        microcuenc: "Quebrada Do\xF1a Mar\xEDa"
+        nivel: 108
+        pluviograf: 727
+        camara: 100637
+      - id: 3
+        modulo: alarmas
+        siata_cod: 581
+        siata_nom: Salado - Playas
+        barrio_cod: 8006
+        barrio_nom: El Salado
+        comuna_cod: 80
+        comuna_nom: San Antonio de Prado
+        microcuenc: "Quebrada Do\xF1a Mar\xEDa"
+        nivel: 90, 720
+        pluviograf: 727
+        camara: 100789
+      - id: 4
+        modulo: alarmas
+        siata_cod: 632
+        siata_nom: Aures - El Chorro
+        barrio_cod: 0712
+        barrio_nom: Aures No. 2
+        comuna_cod: 07
+        comuna_nom: Robledo
+        microcuenc: Quebrada La Malpaso
+        nivel: 634
+        pluviograf: 769
+        camara: 
+      - id: 5
+        modulo: alarmas
+        siata_cod: 219
+        siata_nom: Las Violetas
+        barrio_cod: 1616
+        barrio_nom: Las Violetas
+        comuna_cod: 16
+        comuna_nom: "Bel\xE9n"
+        microcuenc: Quebrada La Picacha
+        nivel: 382
+        pluviograf: 9
+        camara: 100777
+      - id: 6
+        modulo: alarmas
+        siata_cod: 580
+        siata_nom: "Santa Luc\xEDa"
+        barrio_cod: 0902
+        barrio_nom: "Barrios de Jes\xFAs"
+        comuna_cod: 09
+        comuna_nom: Buenos Aires
+        microcuenc: Quebrada Santa Elena
+        nivel: 402
+        pluviograf: 289
+        camara: 100641
+      - id: 7
+        modulo: alarmas
+        siata_cod: 220
+        siata_nom: "Playitas - Aguas Fr\xEDas"
+        barrio_cod: 7002
+        barrio_nom: "Aguas Fr\xEDas"
+        comuna_cod: 70
+        comuna_nom: Altavista
+        microcuenc: Quebrada La Picacha
+        nivel: 760
+        pluviograf: 766
+        camara: 
+      - id: 8
+        modulo: alarmas
+        siata_cod: 627
+        siata_nom: La Palma
+        barrio_cod: 6001
+        barrio_nom: La Palma
+        comuna_cod: 60
+        comuna_nom: "San Crist\xF3bal"
+        microcuenc: Quebrada Potreritos o San Francisca
+        nivel: 630
+        pluviograf: 11
+        camara: 100713
+      - id: 9
+        modulo: alarmas
+        siata_cod: 693
+        siata_nom: Aures - El Chispero
+        barrio_cod: 0712
+        barrio_nom: Aures 2
+        comuna_cod: 07
+        comuna_nom: Robledo
+        microcuenc: Quebrada La Malpaso
+        nivel: 634
+        pluviograf: 769
+        camara: 100731, 100797
+      - id: 10
+        modulo: alarmas
+        siata_cod: 502
+        siata_nom: El Pesebre
+        barrio_cod: 1301
+        barrio_nom: El Pesebre
+        comuna_cod: 13
+        comuna_nom: San Javier
+        microcuenc: "Quebrada La Iguan\xE1"
+        nivel: 238
+        pluviograf: 456
+        camara: 100262
+      - id: 11
+        modulo: alarmas
+        siata_cod: 697
+        siata_nom: El hoyo
+        barrio_cod: 1616
+        barrio_nom: "Bel\xE9n-Las Violetas"
+        comuna_cod: 16
+        comuna_nom: "Bel\xE9n"
+        microcuenc: Quebrada La Picacha
+        nivel: 
+        pluviograf: 9
+        camara: 100849
+      - id: 12
+        modulo: alarmas
+        siata_cod: 721
+        siata_nom: "Alejandro Echavarr\xEDa"
+        barrio_cod: 0902
+        barrio_nom: "Alejandro Echavarr\xEDa"
+        comuna_cod: 09
+        comuna_nom: Buenos Aires
+        microcuenc: Quebrada Santa Elena
+        nivel: 
+        pluviograf: 551
+        camara: 100820
+      - id: 13
+        modulo: alarmas
+        siata_cod: 824
+        siata_nom: Manzanillo
+        barrio_cod: 7007
+        barrio_nom: "San Jos\xE9 del Manzanillo"
+        comuna_cod: 70
+        comuna_nom: Altavista
+        microcuenc: Quebrada La Guayabala
+        nivel: 822
+        pluviograf: 826
+        camara: 
+      - id: 14
+        modulo: alarmas
+        siata_cod: 806
+        siata_nom: Palo Blanco
+        barrio_cod: 8000
+        barrio_nom: San Antonio de Prado
+        comuna_cod: 80
+        comuna_nom: San Antonio de Prado
+        microcuenc: Quebrada La Chorrera
+        nivel: 811
+        pluviograf: 820
+        camara: 100942
+      - id: 15
+        modulo: alarmas
+        siata_cod: 776
+        siata_nom: Guanteros
+        barrio_cod: 7004
+        barrio_nom: San Pablo
+        comuna_cod: 70
+        comuna_nom: Altavista
+        microcuenc: Quebrada La Picacha
+        nivel: 173, 760
+        pluviograf: 766
+        camara: 100128, 100962
+      - id: 16
+        modulo: alarmas
+        siata_cod: 778
+        siata_nom: Olaya Herrera 1
+        barrio_cod: 0722
+        barrio_nom: Olaya Herrera
+        comuna_cod: 07
+        comuna_nom: Robledo
+        microcuenc: "Quebrada La Iguan\xE1"
+        nivel: 479
+        pluviograf: 456
+        camara: 100971
+      - id: 17
+        modulo: alarmas
+        siata_cod: 779
+        siata_nom: "Nueva Villa de la Iguan\xE1"
+        barrio_cod: 0725
+        barrio_nom: "Nueva Villa de La Iguan\xE1"
+        comuna_cod: 07
+        comuna_nom: Robledo
+        microcuenc: "Quebrada La Iguan\xE1"
+        nivel: 754
+        pluviograf: 23
+        camara: 100976
+      - id: 18
+        modulo: alarmas
+        siata_cod: 823
+        siata_nom: Manzanillo (2 Sirena)
+        barrio_cod: 7007
+        barrio_nom: "San Jos\xE9 del Manzanillo"
+        comuna_cod: 70
+        comuna_nom: Altavista
+        microcuenc: Quebrada La Guayabala
+        nivel: 828
+        pluviograf: 22
+        camara: 100985
+      - id: 19
+        modulo: alarmas
+        siata_cod: 793
+        siata_nom: Villa Esperanza
+        barrio_cod: 0801
+        barrio_nom: Villa Hermosa
+        comuna_cod: 08
+        comuna_nom: Villa Hermosa
+        microcuenc: Quebrada La Loca
+        nivel: 758
+        pluviograf: 35
+        camara: 
+      - id: 20
+        modulo: alarmas
+        siata_cod: 794
+        siata_nom: Altos de la Torre
+        barrio_cod: 0806
+        barrio_nom: Llanaditas
+        comuna_cod: 08
+        comuna_nom: Villa Hermosa
+        microcuenc: Quebrada Chorro Hondo
+        nivel: 807
+        pluviograf: 762
+        camara: 100957
+      - id: 21
+        modulo: alarmas
+        siata_cod: 791
+        siata_nom: Las Estancias
+        barrio_cod: 0815
+        barrio_nom: Las Estancias
+        comuna_cod: 08
+        comuna_nom: Villa Hermosa
+        microcuenc: Quebrada Santa Elena
+        nivel: 804
+        pluviograf: 289
+        camara: 100959
+      - id: 22
+        modulo: alarmas
+        siata_cod: 801
+        siata_nom: Picacho
+        barrio_cod: 0608
+        barrio_nom: Picacho
+        comuna_cod: 06
+        comuna_nom: Doce de Octubre
+        microcuenc: Quebrada La Cantera
+        nivel: 796
+        pluviograf: 241
+        camara: 100965
+      - id: 23
+        modulo: alarmas
+        siata_cod: 795
+        siata_nom: Colinas de Enciso
+        barrio_cod: 0807
+        barrio_nom: Los Mangos
+        comuna_cod: 08
+        comuna_nom: Villa Hermosa
+        microcuenc: Quebrada La Aguadita
+        nivel: 803
+        pluviograf: 35
+        camara: 
+      - id: 24
+        modulo: alarmas
+        siata_cod: 813
+        siata_nom: "Uni\xF3n de Cristo"
+        barrio_cod: 0819
+        barrio_nom: Villa Lilliam
+        comuna_cod: 08
+        comuna_nom: Villa Hermosa
+        microcuenc: Quebrada La Castro
+        nivel: 805
+        pluviograf: 862
+        camara: 
+      - id: 25
+        modulo: alarmas
+        siata_cod: 814
+        siata_nom: Villatina La Torre
+        barrio_cod: 0814
+        barrio_nom: San Antonio
+        comuna_cod: 08
+        comuna_nom: Villa Hermosa
+        microcuenc: Quebrada La Gallinaza
+        nivel: 815
+        pluviograf: 763
+        camara: 100955
+      - id: 26
+        modulo: alarmas
+        siata_cod: 836
+        siata_nom: Guamo
+        barrio_cod: 7087
+        barrio_nom: Suburbano Altavista
+        comuna_cod: 70
+        comuna_nom: Altavista
+        microcuenc: Quebrada Altavista
+        nivel: 812
+        pluviograf: 1
+        camara: 
+      - id: 27
+        modulo: alarmas
+        siata_cod: 839
+        siata_nom: Manzanares
+        barrio_cod: 7087
+        barrio_nom: Suburbano Altavista
+        comuna_cod: 70
+        comuna_nom: Altavista
+        microcuenc: Quebrada Altavista
+        nivel: 812
+        pluviograf: 8
+        camara: 
+      - id: 28
+        modulo: alarmas
+        siata_cod: 838
+        siata_nom: La Base
+        barrio_cod: 0103
+        barrio_nom: Popular
+        comuna_cod: 01
+        comuna_nom: Popular
+        microcuenc: Quebrada La Seca
+        nivel: 853
+        pluviograf: 833
+        camara: 
+      - id: 29
+        modulo: alarmas
+        siata_cod: 462
+        siata_nom: El Pesebre (2 Sirena)
+        barrio_cod: 1301
+        barrio_nom: El Pesebre
+        comuna_cod: 13
+        comuna_nom: San Javier
+        microcuenc: "Quebrada La Iguan\xE1"
+        nivel: 238
+        pluviograf: 456
+        camara: 100262
+      - id: 30
+        modulo: alarmas
+        siata_cod: 808
+        siata_nom: Barrio Nuevo - Expres
+        barrio_cod: 7096
+        barrio_nom: Area De Expansion Altavista
+        comuna_cod: 70
+        comuna_nom: Altavista
+        microcuenc: Quebrada Altavista
+        nivel: 92
+        pluviograf: 39
+        camara: 101045
+      - id: 31
+        modulo: alarmas
+        siata_cod: 837
+        siata_nom: La Union
+        barrio_cod: 7096
+        barrio_nom: Area De Expansion Altavista
+        comuna_cod: 70
+        comuna_nom: Altavista
+        microcuenc: Quebrada Altavista
+        nivel: 92
+        pluviograf: 39
+        camara: 
+      - id: 32
+        modulo: alarmas
+        siata_cod: 887
+        siata_nom: Buga
+        barrio_cod: 7001
+        barrio_nom: Altavista Sector Central
+        comuna_cod: 70
+        comuna_nom: Altavista
+        microcuenc: Quebrada Altavista
+        nivel: 856
+        pluviograf: 601
+        camara: 101028
+      - id: 33
+        modulo: alarmas
+        siata_cod: 854
+        siata_nom: "Choc\xF3 Chiquito"
+        barrio_cod: 0402
+        barrio_nom: San Isidro
+        comuna_cod: 04
+        comuna_nom: Aranjuez
+        microcuenc: "Quebrada Mosc\xFA"
+        nivel: 872
+        pluviograf: 40
+        camara: 
+      - id: 34
+        modulo: alarmas
+        siata_cod: 886
+        siata_nom: "Aguas Fr\xEDas Parte Alta"
+        barrio_cod: 7002
+        barrio_nom: "Aguas Fr\xEDas"
+        comuna_cod: 70
+        comuna_nom: Altavista
+        microcuenc: Quebrada La Picacha
+        nivel: 173
+        pluviograf: 29
+        camara: 100128
+      - id: 35
+        modulo: alarmas
+        siata_cod: 852
+        siata_nom: Barrio Nuevo
+        barrio_cod: 7096
+        barrio_nom: Area De Expansion Altavista
+        comuna_cod: 70
+        comuna_nom: Altavista
+        microcuenc: Quebrada Altavista
+        nivel: 92
+        pluviograf: 39
+        camara: 101045
+      - id: 36
+        modulo: alarmas
+        siata_cod: 860
+        siata_nom: Miramar
+        barrio_cod: 0607
+        barrio_nom: Kennedy
+        comuna_cod: 06
+        comuna_nom: Doce de Octubre
+        microcuenc: Quebrada La Cantera Sur
+        nivel: 875
+        pluviograf: 879
+        camara: 101039
+      - id: 37
+        modulo: alarmas
+        siata_cod: 868
+        siata_nom: "Caracol\xED - Balmoral"
+        barrio_cod: AUC1
+        barrio_nom: "San Crist\xF3bal"
+        comuna_cod: 60
+        comuna_nom: Cabecera
+        microcuenc: Quebrada La Honda
+        nivel: 876
+        pluviograf: 767
+        camara: 101054
+      - id: 38
+        modulo: alarmas
+        siata_cod: 892
+        siata_nom: "Play\xF3n de Comuneros"
+        barrio_cod: 0202
+        barrio_nom: "Play\xF3n de Los Comuneros"
+        comuna_cod: 02
+        comuna_nom: Santa Cruz
+        microcuenc: Quebrada La Seca
+        nivel: 150
+        pluviograf: 896
+        camara: 
+      - id: 39
+        modulo: alarmas
+        siata_cod: 891
+        siata_nom: El Hueco
+        barrio_cod: 0412
+        barrio_nom: "La Pi\xF1uela"
+        comuna_cod: 04
+        comuna_nom: "Aranju\xE9z"
+        microcuenc: Quebrada La Bermejala
+        nivel: 883
+        pluviograf: 558
+        camara: 100587
+      - id: 40
+        modulo: alarmas
+        siata_cod: 889
+        siata_nom: La Honda
+        barrio_cod: 0311
+        barrio_nom: La Cruz
+        comuna_cod: 03
+        comuna_nom: Manrique
+        microcuenc: Quebrada La Honda
+        nivel: 
+        pluviograf: 16
+        camara: 
+      - id: 41
+        modulo: alarmas
+        siata_cod: 895
+        siata_nom: "Morro Coraz\xF3n Los Tanques"
+        barrio_cod: 7003
+        barrio_nom: "El Coraz\xF3n El Morro"
+        comuna_cod: 70
+        comuna_nom: Altavista
+        microcuenc: "Quebrada Ana D\xEDaz"
+        nivel: 
+        pluviograf: 17
+        camara: 
+      - id: 42
+        modulo: alarmas
+        siata_cod: 877
+        siata_nom: La Paz
+        barrio_cod: 0813
+        barrio_nom: Villatina
+        comuna_cod: 08
+        comuna_nom: Villa Hermosa
+        microcuenc: Quebrada Santa Elena
+        nivel: 858
+        pluviograf: 551
+        camara: 
+      - id: 43
+        modulo: alarmas
+        siata_cod: 579
+        siata_nom: La Estrechura
+        barrio_cod: 0812
+        barrio_nom: La Libertad
+        comuna_cod: 08
+        comuna_nom: Villa Hermosa
+        microcuenc: Quebrada Santa Elena
+        nivel: 859
+        pluviograf: 551
+        camara: 
+      category: Monitoreo y Alertas
