@@ -79,6 +79,7 @@ namespace SIRMED.UI
         private List<Image> _buttonImages = new List<Image>();
         private DialogueOption[] _currentOptions;
         private bool _answered = false;
+        private string _feedbackPlaceholder;
 
         // ── Lifecycle ─────────────────────────────────────────────────────────────
         private void Awake()
@@ -97,15 +98,20 @@ namespace SIRMED.UI
         /// <summary>
         /// Genera los botones de opción desde el array dado y muestra la sección de opciones.
         /// Llama esto cada vez que quieras mostrar (o reiniciar) el panel de elección.
+        /// Si se pasa feedbackPlaceholder, el texto de feedback lo muestra hasta que se responda
+        /// (en vez del texto que tenga el prefab).
         /// </summary>
-        public void SetOptions(DialogueOption[] options)
+        public void SetOptions(DialogueOption[] options, string feedbackPlaceholder = null)
         {
             _currentOptions = options;
             _answered = false;
+            _feedbackPlaceholder = feedbackPlaceholder;
 
             ClearButtons();
 
             if (feedbackSection != null) feedbackSection.SetActive(false);
+            if (feedbackText != null && feedbackPlaceholder != null)
+                feedbackText.text = feedbackPlaceholder;
             if (optionsContainer != null) optionsContainer.gameObject.SetActive(true);
 
             if (options == null || options.Length == 0)
@@ -221,7 +227,7 @@ namespace SIRMED.UI
             OnRetry?.Invoke();
             // Regenerar las mismas opciones en el mismo panel (sin cerrarlo)
             if (_currentOptions != null)
-                SetOptions(_currentOptions);
+                SetOptions(_currentOptions, _feedbackPlaceholder);
         }
 
         // ── Limpieza interna ──────────────────────────────────────────────────────
