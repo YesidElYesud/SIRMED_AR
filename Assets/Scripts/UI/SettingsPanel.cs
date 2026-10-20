@@ -1,74 +1,106 @@
 namespace SIRMED.UI
 {
+    using SIRMED.Managers;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
 
     /// <summary>
-    /// Panel de ajustes compacto — sonido global.
+    /// SettingsPanel — Botón SONIDOS del HUD + panel compacto de ajustes de sonido.
     ///
-    /// Comportamiento:
-    ///   - Abre/cierra desde un botón en HUD (no es fullscreen).
-    ///   - Al abrir: oculta los elementos del HUD indicados en hudElementsToHide[].
-    ///   - Al cerrar: restaura esos elementos a su estado previo.
-    ///   - Persiste el estado en PlayerPrefs.
+    ///   - Desactivar todo el sonido   (Toggle, marcado = silenciado; voces incluidas)
+    ///   - Desactivar solo efectos     (Toggle, marcado = silenciado; ambiente, sirena, obturador)
+    ///   - Volumen del sonido          (Slider 0–1)
     ///
-    /// Nota de portado (SATCS → SIRMED_AR): se eliminaron los botones de
-    /// inversión de ejes del giroscopio (InvertPitch/Roll/Yaw) — dependían de
-    /// GyroscopeManager, que no existe en AR real (el tracking de AR Foundation
-    /// no necesita ni permite ese tipo de ajuste manual). Solo se conserva el
-    /// control de sonido, que es independiente de la fuente de tracking.
+    /// El estado y la persistencia viven en SoundSettings (estático); este script solo
+    /// es la UI. Con "todo" silenciado, el toggle de efectos y el slider quedan no
+    /// interactuables (no tendrían efecto audible).
+    ///
+    /// Va en un GameObject SIEMPRE ACTIVO (p. ej. un contenedor en Safe Area) que tenga
+    /// como hijos el botón y el panel: el panel se muestra/oculta con _panelRoot, no con
+    /// este GameObject, para que Awake() corra aunque el panel arranque oculto.
+    ///
+    /// Jerarquía sugerida:
+    ///   SoundSettings              [este script]
+    ///   ├── SoundButton            [Button, Image]  ← _openButton (mismo tamaño que ScreenshotButton)
+    ///   └── SoundPanel             ← _panelRoot
+    ///       ├── MuteAllToggle      [Toggle]  ← _muteAllToggle
+    ///       ├── MuteEffectsToggle  [Toggle]  ← _muteEffectsToggle
+    ///       ├── VolumeSlider       [Slider]  ← _volumeSlider
+    ///       │   └── ValueText      [TMP]     ← _volumeValueText (opcional, "80%")
+    ///       └── CloseButton        [Button]  ← _closeButton (opcional)
     /// </summary>
     public class SettingsPanel : MonoBehaviour
     {
         public static SettingsPanel Instance { get; private set; }
 
-        // ── Referencias de botones ─────────────────────────────────────────────────
-        [Header("Botones del panel")]
-        [SerializeField] private Button _closeButton;
-        [SerializeField] private Button _soundOnButton;
-        [SerializeField] private Button _soundOffButton;
+        // ── Referencias ────────────────────────────────────────────────────────────
+        [Header("Botón del HUD")]
+        [Tooltip("Abre/cierra el panel.")]
+        [SerializeField] private Button _openButton;
 
-        // ── Colores de estado ──────────────────────────────────────────────────────
-        [Header("Colores — estado activo / inactivo")]
-        [SerializeField] private Color _colorFondoActivo = new Color(1.00f, 0.80f, 0.00f, 1f); // amarillo
-        [SerializeField] private Color _colorFondoInactivo = new Color(0.14f, 0.16f, 0.26f, 1f); // navy
-        [SerializeField] private Color _colorTextoActivo = new Color(0.14f, 0.16f, 0.26f, 1f); // navy oscuro
-        [SerializeField] private Color _colorTextoInactivo = new Color(1.00f, 0.80f, 0.00f, 1f); // amarillo
+        [Header("Panel")]
+        [Tooltip("Raíz visual del panel; se activa/desactiva al abrir/cerrar.")]
+        [SerializeField] private GameObject _panelRoot;
+        [SerializeField] private Button _closeButton;
+
+        [Header("Controles")]
+        [Tooltip("Marcado = todo el sonido desactivado.")]
+        [SerializeField] private Toggle _muteAllToggle;
+        [Tooltip("Marcado = solo los efectos desactivados (las voces siguen).")]
+        [SerializeField] private Toggle _muteEffectsToggle;
+        [Tooltip("Volumen general, rango 0–1.")]
+        [SerializeField] private Slider _volumeSlider;
+        [Tooltip("Opcional: muestra el volumen en porcentaje.")]
+        [SerializeField] private TMP_Text _volumeValueText;
 
         // ── Elementos HUD a ocultar ────────────────────────────────────────────────
         [Header("HUD — ocultar mientras el panel esté abierto")]
         [SerializeField] private GameObject[] _hudElementsToHide;
 
-        // ── PlayerPrefs keys ───────────────────────────────────────────────────────
-        private const string KEY_SOUND = "settings_sound_on";
-
         // ── Estado interno ─────────────────────────────────────────────────────────
-        private bool _soundOn;
         private bool[] _hudWasActive;
+
+        public bool IsOpen => _panelRoot != null && _panelRoot.activeSelf;
 
         // ── Lifecycle ──────────────────────────────────────────────────────────────
         private void Awake()
         {
             if (Instance != null && Instance != this) { Destroy(gameObject); return; }
             Instance = this;
-            // NO DontDestroyOnLoad — panel de escena, no Singleton global
+
+            if (_panelRoot == null)
+                Debug.LogWarning("[SettingsPanel] _panelRoot no asignado en el Inspector.", this);
+            else
+                _panelRoot.SetActive(false);
+
+            if (_volumeSlider != null)
+            {
+                _volumeSlider.minValue = 0f;
+                _volumeSlider.maxValue = 1f;
+            }
+
+            WireControls();
+            Refresh();
         }
 
-        private void Start()
+        private void OnDestroy()
         {
-            LoadPrefs();
-            WireButtons();
-            RefreshSoundButtons();
-            gameObject.SetActive(false);
+            if (Instance == this) Instance = null;
         }
 
         // ── API pública ────────────────────────────────────────────────────────────
+        public void Toggle()
+        {
+            if (IsOpen) Close();
+            else Open();
+        }
 
         /// <summary>Abre el panel y oculta los elementos del HUD.</summary>
         public void Open()
         {
-            // Guardar estado previo del HUD y ocultar
+            if (_panelRoot == null || IsOpen) return;
+
             _hudWasActive = new bool[_hudElementsToHide.Length];
             for (int i = 0; i < _hudElementsToHide.Length; i++)
             {
@@ -77,60 +109,63 @@ namespace SIRMED.UI
                 _hudElementsToHide[i].SetActive(false);
             }
 
-            RefreshSoundButtons();
-            gameObject.SetActive(true);
+            Refresh();
+            _panelRoot.SetActive(true);
         }
 
         /// <summary>Cierra el panel y restaura el HUD.</summary>
         public void Close()
         {
-            gameObject.SetActive(false);
+            if (_panelRoot == null || !IsOpen) return;
+            _panelRoot.SetActive(false);
             RestoreHUD();
         }
 
-        // ── Sonido ─────────────────────────────────────────────────────────────────
-        private void SetSound(bool on)
+        // ── Controles ──────────────────────────────────────────────────────────────
+        private void WireControls()
         {
-            _soundOn = on;
-            AudioListener.volume = on ? 1f : 0f;
-            PlayerPrefs.SetInt(KEY_SOUND, on ? 1 : 0);
-            PlayerPrefs.Save();
-            RefreshSoundButtons();
-        }
-
-        // ── Feedback visual ────────────────────────────────────────────────────────
-        private void RefreshSoundButtons()
-        {
-            SetButtonState(_soundOnButton, _soundOn);
-            SetButtonState(_soundOffButton, !_soundOn);
-        }
-
-        /// <summary>Aplica color de fondo y texto al botón según si está "activo".</summary>
-        private void SetButtonState(Button btn, bool active)
-        {
-            if (btn == null) return;
-
-            var img = btn.GetComponent<Image>();
-            if (img != null)
-                img.color = active ? _colorFondoActivo : _colorFondoInactivo;
-
-            var label = btn.GetComponentInChildren<TMP_Text>();
-            if (label != null)
-                label.color = active ? _colorTextoActivo : _colorTextoInactivo;
-        }
-
-        // ── Init ───────────────────────────────────────────────────────────────────
-        private void LoadPrefs()
-        {
-            _soundOn = PlayerPrefs.GetInt(KEY_SOUND, 1) == 1;
-            AudioListener.volume = _soundOn ? 1f : 0f;
-        }
-
-        private void WireButtons()
-        {
+            _openButton?.onClick.AddListener(Toggle);
             _closeButton?.onClick.AddListener(Close);
-            _soundOnButton?.onClick.AddListener(() => SetSound(true));
-            _soundOffButton?.onClick.AddListener(() => SetSound(false));
+
+            _muteAllToggle?.onValueChanged.AddListener(muted =>
+            {
+                SoundSettings.SetAllMuted(muted);
+                Refresh();
+            });
+            _muteEffectsToggle?.onValueChanged.AddListener(SoundSettings.SetEffectsMuted);
+            _volumeSlider?.onValueChanged.AddListener(value =>
+            {
+                SoundSettings.SetVolume(value);
+                RefreshVolumeText();
+            });
+        }
+
+        /// <summary>Sincroniza los controles con SoundSettings sin disparar sus eventos.</summary>
+        private void Refresh()
+        {
+            bool allMuted = SoundSettings.AllMuted;
+
+            if (_muteAllToggle != null) _muteAllToggle.SetIsOnWithoutNotify(allMuted);
+
+            if (_muteEffectsToggle != null)
+            {
+                _muteEffectsToggle.SetIsOnWithoutNotify(SoundSettings.EffectsMuted);
+                _muteEffectsToggle.interactable = !allMuted;
+            }
+
+            if (_volumeSlider != null)
+            {
+                _volumeSlider.SetValueWithoutNotify(SoundSettings.Volume);
+                _volumeSlider.interactable = !allMuted;
+            }
+
+            RefreshVolumeText();
+        }
+
+        private void RefreshVolumeText()
+        {
+            if (_volumeValueText != null)
+                _volumeValueText.text = $"{Mathf.RoundToInt(SoundSettings.Volume * 100f)}%";
         }
 
         private void RestoreHUD()
