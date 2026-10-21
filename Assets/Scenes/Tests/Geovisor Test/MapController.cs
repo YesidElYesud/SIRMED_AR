@@ -56,7 +56,7 @@ public class MapController : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public bool needUpdateZoom;
     public bool updatingMap = false;
 
-    private /*const*/ string urlMaps = "https://maps.googleapis.com/maps/api/staticmap?center={0},{1}" +
+    private const string urlMaps = "https://maps.googleapis.com/maps/api/staticmap?center={0},{1}" +
         "&zoom={2}" +
         "&size=640x640" +
         //"&scale=2" +
