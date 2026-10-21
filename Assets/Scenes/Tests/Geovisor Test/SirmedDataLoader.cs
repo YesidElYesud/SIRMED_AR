@@ -7,7 +7,7 @@ public class SirmedDataLoader : MonoBehaviour
     [SerializeField] private bool ready = false;
     [SerializeField] private SirmedDataScriptable dataScriptable;
 
-    private const string url = "https://www.medellin.gov.co/sirmed-api/api/v1/capas-monitoreo/1";
+    private const string urlSirmed = "https://www.medellin.gov.co/sirmed-api/api/v1/capas-monitoreo/1";
 
     private void Awake()
     {
@@ -35,7 +35,7 @@ public class SirmedDataLoader : MonoBehaviour
 
     private async UniTaskVoid GetSirmedData()
     {
-        using UnityWebRequest request = UnityWebRequest.Get(url);
+        using UnityWebRequest request = UnityWebRequest.Get(urlSirmed);
 
         request.SetRequestHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
         request.SetRequestHeader("Accept", "application/json, text/plain, */*");

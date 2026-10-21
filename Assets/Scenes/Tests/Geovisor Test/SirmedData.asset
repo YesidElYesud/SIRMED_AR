@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: bff09888a913c7440977003e6581f203, type: 3}
   m_Name: SirmedData
   m_EditorClassIdentifier: Assembly-CSharp::SirmedDataScriptable
   isUpToDate: 0
@@ -76,6 +76,8 @@ MonoBehaviour:
         nivel: 546
         pluviograf: 18
         camara: 
+        latitud: 6.204199265063271
+        longitud: -75.66690644798224
       - id: 2
         modulo: alarmas
         siata_cod: 216
@@ -88,6 +90,8 @@ MonoBehaviour:
         nivel: 108
         pluviograf: 727
         camara: 100637
+        latitud: 6.190698685042962
+        longitud: -75.65150023275535
       - id: 3
         modulo: alarmas
         siata_cod: 581
@@ -100,6 +104,8 @@ MonoBehaviour:
         nivel: 90, 720
         pluviograf: 727
         camara: 100789
+        latitud: 6.195026374406466
+        longitud: -75.66122708160565
       - id: 4
         modulo: alarmas
         siata_cod: 632
@@ -112,6 +118,8 @@ MonoBehaviour:
         nivel: 634
         pluviograf: 769
         camara: 
+        latitud: 6.290300114697544
+        longitud: -75.59240047742259
       - id: 5
         modulo: alarmas
         siata_cod: 219
@@ -124,6 +132,8 @@ MonoBehaviour:
         nivel: 382
         pluviograf: 9
         camara: 100777
+        latitud: 6.234600598513958
+        longitud: -75.61260000128343
       - id: 6
         modulo: alarmas
         siata_cod: 580
@@ -136,6 +146,8 @@ MonoBehaviour:
         nivel: 402
         pluviograf: 289
         camara: 100641
+        latitud: 6.2306242026395
+        longitud: -75.53238854043632
       - id: 7
         modulo: alarmas
         siata_cod: 220
@@ -148,6 +160,8 @@ MonoBehaviour:
         nivel: 760
         pluviograf: 766
         camara: 
+        latitud: 6.234215824951115
+        longitud: -75.62661241579002
       - id: 8
         modulo: alarmas
         siata_cod: 627
@@ -160,6 +174,8 @@ MonoBehaviour:
         nivel: 630
         pluviograf: 11
         camara: 100713
+        latitud: 6.272900356905584
+        longitud: -75.65279975987043
       - id: 9
         modulo: alarmas
         siata_cod: 693
@@ -172,6 +188,8 @@ MonoBehaviour:
         nivel: 634
         pluviograf: 769
         camara: 100731, 100797
+        latitud: 6.294055962311973
+        longitud: -75.59631416210904
       - id: 10
         modulo: alarmas
         siata_cod: 502
@@ -184,6 +202,8 @@ MonoBehaviour:
         nivel: 238
         pluviograf: 456
         camara: 100262
+        latitud: 6.273100117012048
+        longitud: -75.59770023901734
       - id: 11
         modulo: alarmas
         siata_cod: 697
@@ -196,6 +216,8 @@ MonoBehaviour:
         nivel: 
         pluviograf: 9
         camara: 100849
+        latitud: 6.236733614570706
+        longitud: -75.62047707449065
       - id: 12
         modulo: alarmas
         siata_cod: 721
@@ -208,6 +230,8 @@ MonoBehaviour:
         nivel: 
         pluviograf: 551
         camara: 100820
+        latitud: 6.235078643194557
+        longitud: -75.54140068460126
       - id: 13
         modulo: alarmas
         siata_cod: 824
@@ -220,6 +244,8 @@ MonoBehaviour:
         nivel: 822
         pluviograf: 826
         camara: 
+        latitud: 6.205621168408951
+        longitud: -75.6165802814638
       - id: 14
         modulo: alarmas
         siata_cod: 806
@@ -232,6 +258,8 @@ MonoBehaviour:
         nivel: 811
         pluviograf: 820
         camara: 100942
+        latitud: 6.182129482894763
+        longitud: -75.66157973826236
       - id: 15
         modulo: alarmas
         siata_cod: 776
@@ -244,6 +272,8 @@ MonoBehaviour:
         nivel: 173, 760
         pluviograf: 766
         camara: 100128, 100962
+        latitud: 6.233953236229435
+        longitud: -75.629335485562
       - id: 16
         modulo: alarmas
         siata_cod: 778
@@ -256,6 +286,8 @@ MonoBehaviour:
         nivel: 479
         pluviograf: 456
         camara: 100971
+        latitud: 6.273018538043458
+        longitud: -75.61866560511542
       - id: 17
         modulo: alarmas
         siata_cod: 779
@@ -268,6 +300,8 @@ MonoBehaviour:
         nivel: 754
         pluviograf: 23
         camara: 100976
+        latitud: 6.259864998697974
+        longitud: -75.58144699944879
       - id: 18
         modulo: alarmas
         siata_cod: 823
@@ -280,6 +314,8 @@ MonoBehaviour:
         nivel: 828
         pluviograf: 22
         camara: 100985
+        latitud: 6.206228731270232
+        longitud: -75.61355958869821
       - id: 19
         modulo: alarmas
         siata_cod: 793
@@ -292,6 +328,8 @@ MonoBehaviour:
         nivel: 758
         pluviograf: 35
         camara: 
+        latitud: 6.254551998057451
+        longitud: -75.55051800011513
       - id: 20
         modulo: alarmas
         siata_cod: 794
@@ -304,6 +342,8 @@ MonoBehaviour:
         nivel: 807
         pluviograf: 762
         camara: 100957
+        latitud: 6.251499999535016
+        longitud: -75.54060200021105
       - id: 21
         modulo: alarmas
         siata_cod: 791
@@ -316,6 +356,8 @@ MonoBehaviour:
         nivel: 804
         pluviograf: 289
         camara: 100959
+        latitud: 6.231854290256437
+        longitud: -75.53587065367071
       - id: 22
         modulo: alarmas
         siata_cod: 801
@@ -328,6 +370,8 @@ MonoBehaviour:
         nivel: 796
         pluviograf: 241
         camara: 100965
+        latitud: 6.29353199763164
+        longitud: -75.58402299963504
       - id: 23
         modulo: alarmas
         siata_cod: 795
@@ -340,6 +384,8 @@ MonoBehaviour:
         nivel: 803
         pluviograf: 35
         camara: 
+        latitud: 6.253749999608996
+        longitud: -75.54406000049141
       - id: 24
         modulo: alarmas
         siata_cod: 813
@@ -352,6 +398,8 @@ MonoBehaviour:
         nivel: 805
         pluviograf: 862
         camara: 
+        latitud: 6.236701805283471
+        longitud: -75.53411637200968
       - id: 25
         modulo: alarmas
         siata_cod: 814
@@ -364,6 +412,8 @@ MonoBehaviour:
         nivel: 815
         pluviograf: 763
         camara: 100955
+        latitud: 6.239278999795848
+        longitud: -75.53703600036286
       - id: 26
         modulo: alarmas
         siata_cod: 836
@@ -376,6 +426,8 @@ MonoBehaviour:
         nivel: 812
         pluviograf: 1
         camara: 
+        latitud: 6.222583734065893
+        longitud: -75.62524324190967
       - id: 27
         modulo: alarmas
         siata_cod: 839
@@ -388,6 +440,8 @@ MonoBehaviour:
         nivel: 812
         pluviograf: 8
         camara: 
+        latitud: 6.223324278105793
+        longitud: -75.63174382156713
       - id: 28
         modulo: alarmas
         siata_cod: 838
@@ -400,6 +454,8 @@ MonoBehaviour:
         nivel: 853
         pluviograf: 833
         camara: 
+        latitud: 6.304323580256471
+        longitud: -75.54423059153295
       - id: 29
         modulo: alarmas
         siata_cod: 462
@@ -412,6 +468,8 @@ MonoBehaviour:
         nivel: 238
         pluviograf: 456
         camara: 100262
+        latitud: 6.274702921450983
+        longitud: -75.60151483032759
       - id: 30
         modulo: alarmas
         siata_cod: 808
@@ -424,6 +482,8 @@ MonoBehaviour:
         nivel: 92
         pluviograf: 39
         camara: 101045
+        latitud: 6.221105326878174
+        longitud: -75.61341439631784
       - id: 31
         modulo: alarmas
         siata_cod: 837
@@ -436,6 +496,8 @@ MonoBehaviour:
         nivel: 92
         pluviograf: 39
         camara: 
+        latitud: 6.22164289782236
+        longitud: -75.61624032348095
       - id: 32
         modulo: alarmas
         siata_cod: 887
@@ -448,6 +510,8 @@ MonoBehaviour:
         nivel: 856
         pluviograf: 601
         camara: 101028
+        latitud: 6.220300121537265
+        longitud: -75.64350045350493
       - id: 33
         modulo: alarmas
         siata_cod: 854
@@ -460,6 +524,8 @@ MonoBehaviour:
         nivel: 872
         pluviograf: 40
         camara: 
+        latitud: 6.289638922446904
+        longitud: -75.55995225777865
       - id: 34
         modulo: alarmas
         siata_cod: 886
@@ -472,6 +538,8 @@ MonoBehaviour:
         nivel: 173
         pluviograf: 29
         camara: 100128
+        latitud: 6.230798684129353
+        longitud: -75.64035462947932
       - id: 35
         modulo: alarmas
         siata_cod: 852
@@ -484,6 +552,8 @@ MonoBehaviour:
         nivel: 92
         pluviograf: 39
         camara: 101045
+        latitud: 6.221609705104366
+        longitud: -75.61306466242485
       - id: 36
         modulo: alarmas
         siata_cod: 860
@@ -496,6 +566,8 @@ MonoBehaviour:
         nivel: 875
         pluviograf: 879
         camara: 101039
+        latitud: 6.292029176874425
+        longitud: -75.58494225612768
       - id: 37
         modulo: alarmas
         siata_cod: 868
@@ -508,6 +580,8 @@ MonoBehaviour:
         nivel: 876
         pluviograf: 767
         camara: 101054
+        latitud: 6.277099818118492
+        longitud: -75.63139674267033
       - id: 38
         modulo: alarmas
         siata_cod: 892
@@ -520,6 +594,8 @@ MonoBehaviour:
         nivel: 150
         pluviograf: 896
         camara: 
+        latitud: 6.30784022403127
+        longitud: -75.55405047496053
       - id: 39
         modulo: alarmas
         siata_cod: 891
@@ -532,6 +608,8 @@ MonoBehaviour:
         nivel: 883
         pluviograf: 558
         camara: 100587
+        latitud: 6.28011667307169
+        longitud: -75.55499333107359
       - id: 40
         modulo: alarmas
         siata_cod: 889
@@ -544,6 +622,8 @@ MonoBehaviour:
         nivel: 
         pluviograf: 16
         camara: 
+        latitud: 6.266590512077602
+        longitud: -75.53438980534034
       - id: 41
         modulo: alarmas
         siata_cod: 895
@@ -556,6 +636,8 @@ MonoBehaviour:
         nivel: 
         pluviograf: 17
         camara: 
+        latitud: 6.250435904428514
+        longitud: -75.63556954843295
       - id: 42
         modulo: alarmas
         siata_cod: 877
@@ -568,6 +650,8 @@ MonoBehaviour:
         nivel: 858
         pluviograf: 551
         camara: 
+        latitud: 6.236739999799285
+        longitud: -75.54200000059524
       - id: 43
         modulo: alarmas
         siata_cod: 579
@@ -580,4 +664,6 @@ MonoBehaviour:
         nivel: 859
         pluviograf: 551
         camara: 
+        latitud: 6.239897687132727
+        longitud: -75.54484529427195
       category: Monitoreo y Alertas

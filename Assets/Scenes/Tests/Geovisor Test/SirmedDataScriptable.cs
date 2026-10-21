@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SirmedData", menuName = "ScriptableObjects/SirmedData", order = 1)]
+[CreateAssetMenu(fileName = "SirmedData", menuName = "ScriptableObjects/Sirmed Data", order = 1)]
 public class SirmedDataScriptable : ScriptableObject ///Envoltorio de la respuesta de ambos endpoints
 {
     public bool isUpToDate;
@@ -117,10 +117,8 @@ public class Datum
     public string? nivel; ///Sensor de nivel asociado a la alarma //"108"
     public string? pluviograf; ///Pluviógrafo asociado a la alarma //"727"
     public string? camara; ///Cámara asociada a la alarma //"100637"
-#pragma warning disable UAC1001
-    public double? latitud; ///Coordenada geográfica de latitud (WGS84) //6.190698685042962
-    public double? longitud; ///Coordenada geográfica de longitud (WGS84) //-75.65150023275535
-#pragma warning restore UAC1001
+    public double latitud; ///Coordenada geográfica de latitud (WGS84) //6.190698685042962
+    public double longitud; ///Coordenada geográfica de longitud (WGS84) //-75.65150023275535
 #nullable disable
     public DateTime created_at; ///Fecha y hora de creación del registro (ISO 8601) //"2026-07-03T09:25:21.855Z"
 }
