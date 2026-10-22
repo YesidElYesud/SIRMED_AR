@@ -76,9 +76,13 @@ namespace SIRMED.UI
 
         private void OnDestroy()
         {
+            SoundSettings.Changed -= ApplySoundSettings;
             if (StageManager.Instance != null)
                 StageManager.Instance.OnStageChanged -= HandleStageChanged;
         }
+
+        // El obturador cuenta como "efecto de sonido" (SettingsPanel).
+        private void ApplySoundSettings() => SoundSettings.ApplyEffects(_audioSource);
 
         private void HandleStageChanged(StageManager.Stage previous, StageManager.Stage current) =>
             gameObject.SetActive(current != StageManager.Stage.Etapa4);
@@ -98,6 +102,9 @@ namespace SIRMED.UI
                 _audioSource.loop = false;
                 _audioSource.spatialBlend = 0f; // 2D
             }
+
+            SoundSettings.Changed += ApplySoundSettings;
+            ApplySoundSettings();
         }
 
         // ── API pública ───────────────────────────────────────────────────────────

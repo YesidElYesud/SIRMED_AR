@@ -110,6 +110,7 @@ namespace SIRMED.Gameplay.Hotspots
         private Transform _playerCamera;
         private bool _isNearby = false;
         private bool _isPanelOpen = false;
+        private bool _isInfoPanelOpen = false;
         private bool _hasBeenVisited = false;
         private bool _triviaShown = false;
         private Renderer _meshRenderer;
@@ -318,7 +319,10 @@ namespace SIRMED.Gameplay.Hotspots
                 _isNearby = false;
                 Debug.Log($"[Hotspot] Saliendo del rango de: {data.title}", gameObject);
                 HotspotPromptButton.Instance?.UnregisterHotspot(this);
-                if (_isPanelOpen) ClosePanel(allowTrivia: false); // no encadenar trivia al alejarse
+                // Solo se corta el InfoPanel. Los modales (trivia, NPC, SIATA, slides) siguen
+                // hasta que el jugador los cierra y llaman ClosePanel() ellos mismos; cerrarlos
+                // aquí hacía que el cierre corriera dos veces (doble avance de etapa).
+                if (_isInfoPanelOpen) ClosePanel(allowTrivia: false); // no encadenar trivia al alejarse
             }
         }
 
@@ -341,11 +345,8 @@ namespace SIRMED.Gameplay.Hotspots
             // Si tiene trivia, entra directo a ella (sin pasar por InfoPanel/NPC/etc.).
             // ClosePanel() se encarga de lo que sigue (visitado, ruta, avance de etapa)
             // cuando la trivia termine y llame de vuelta.
-            if (!data.triviaAfterContent && ShouldShowTrivia())
-            {
-                ShowTrivia();
+            if (!data.triviaAfterContent && ShouldShowTrivia() && ShowTrivia())
                 return;
-            }
 
             switch (data.actionType)
             {
@@ -445,6 +446,7 @@ namespace SIRMED.Gameplay.Hotspots
         {
             if (uiPanel == null) return;
             _isPanelOpen = true;
+            _isInfoPanelOpen = true;
             uiPanel.Show(data, this);
         }
 
@@ -458,11 +460,12 @@ namespace SIRMED.Gameplay.Hotspots
             if (allowTrivia && data != null && data.triviaAfterContent && ShouldShowTrivia())
             {
                 if (uiPanel != null) uiPanel.Hide();
-                ShowTrivia();
-                return;
+                _isInfoPanelOpen = false;
+                if (ShowTrivia()) return;
             }
 
             _isPanelOpen = false;
+            _isInfoPanelOpen = false;
 
             if (!_hasBeenVisited)
             {
@@ -528,11 +531,17 @@ namespace SIRMED.Gameplay.Hotspots
             return !isEvacuating || data.allowTriviaInN4;
         }
 
-        private void ShowTrivia()
+        /// <summary>
+        /// False si el panel no la pudo mostrar (trivia null en el pool, o ya hay otra
+        /// abierta): el que llama sigue con el contenido/cierre normal en vez de dejar el
+        /// hotspot trabado con _isPanelOpen = true.
+        /// </summary>
+        private bool ShowTrivia()
         {
             _triviaShown = true;
+            if (!TriviaPanel.Instance.Show(data.GetTriviaToShow(), this)) return false;
             _isPanelOpen = true;
-            TriviaPanel.Instance.Show(data.GetTriviaToShow(), this);
+            return true;
         }
 
         // ── Efecto visitado ───────────────────────────────────────────────────────

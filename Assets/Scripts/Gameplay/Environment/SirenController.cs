@@ -60,10 +60,17 @@ namespace SIRMED.Gameplay.Environment
             _source = gameObject.AddComponent<AudioSource>();
             _source.playOnAwake = false;
             _source.spatialBlend = spatialBlend;
+
+            // La sirena cuenta como "efecto de sonido" (SettingsPanel).
+            SoundSettings.Changed += ApplySoundSettings;
+            ApplySoundSettings();
         }
+
+        private void ApplySoundSettings() => SoundSettings.ApplyEffects(_source);
 
         private void OnDestroy()
         {
+            SoundSettings.Changed -= ApplySoundSettings;
             if (Instance == this) Instance = null;
             if (_subscribed && StageManager.Instance != null)
                 StageManager.Instance.OnStageChanged -= HandleStageChanged;

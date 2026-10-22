@@ -130,6 +130,8 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
+    - _Power_Brillos: 0.81
+    - _Power_Metal: 0.54
     - _QueueControl: 0
     - _QueueOffset: -9
     - _ReceiveShadows: 1
