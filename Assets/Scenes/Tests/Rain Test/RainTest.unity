@@ -651,7 +651,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec60875692923a4caf806f8c7476839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestTextures
-  m_CameraManager: {fileID: 0}
+  m_CameraManager: {fileID: 1558881146}
+  testImage: []
 --- !u!224 &954971917
 RectTransform:
   m_ObjectHideFlags: 0
@@ -849,7 +850,8 @@ PrefabInstance:
     - {fileID: 689627182629458148, guid: 7961f7502b016d745affa0660185a90b, type: 3}
     - {fileID: 3908046806225416848, guid: 7961f7502b016d745affa0660185a90b, type: 3}
     - {fileID: 7249854743804340363, guid: 7961f7502b016d745affa0660185a90b, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5319941628835741737, guid: 7961f7502b016d745affa0660185a90b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7961f7502b016d745affa0660185a90b, type: 3}
@@ -939,7 +941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22400762, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000019073486
+      value: 0.000011444092
       objectReference: {fileID: 0}
     - target: {fileID: 22414360, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchoredPosition.x

@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/UrregoCasa_CoreTest.unity
     guid: c076cf0e36dfea04c83d1aa2104932b7
   - enabled: 1
+    path: Assets/Scenes/Tests/AR Textures Test/ArTexturesTest.unity
+    guid: 4b7f3f3cb3bc4434e9047ae862fe1caf
+  - enabled: 1
     path: Assets/Scenes/Tests/Rain Test/RainTest.unity
     guid: 3f61aa3b6a089784db62fd302327c73d
   - enabled: 1
