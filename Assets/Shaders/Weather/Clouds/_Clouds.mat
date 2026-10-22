@@ -34,7 +34,6 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
-  - XRMotionVectors
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -65,23 +64,23 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha_Power: 2
+    - _Alpha_Power: 0
     - _Circle: 1.57
     - _Clip: 0.001
-    - _Color: 0.35
+    - _Color: 1
     - _ColorFloat: 1
     - _ENUM: 0
     - _Float: 0.001
     - _Float_1: -0.02
     - _Layer_A: 0
     - _Layer_B: 0
-    - _Layer_G: 1
+    - _Layer_G: 0
     - _Layer_R: 0
     - _Offset: -0.1
     - _Power: 4
     - _QueueControl: 1
     - _QueueOffset: 0
-    - _Rotation: 0.31810096
+    - _Rotation: 0.80384636
     - _Rotation_Speed: 0.1
     - _XRMotionVectorsPass: 0
     m_Colors:
