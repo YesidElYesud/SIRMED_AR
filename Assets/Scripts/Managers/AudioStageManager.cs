@@ -85,9 +85,20 @@ namespace SIRMED.Managers
         {
             if (Instance != null && Instance != this) { Destroy(gameObject); return; }
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
 
             EnsureAudioSources();
+
+            SoundSettings.Changed += ApplySoundSettings;
+            ApplySoundSettings();
+        }
+
+        // Ambiente y SFX cuentan como "efectos de sonido" (SettingsPanel).
+        private void ApplySoundSettings()
+        {
+            SoundSettings.ApplyEffects(sourceA);
+            SoundSettings.ApplyEffects(sourceB);
+            SoundSettings.ApplyEffects(sourceSFX);
         }
 
         private void Start()
@@ -103,6 +114,7 @@ namespace SIRMED.Managers
 
         private void OnDestroy()
         {
+            SoundSettings.Changed -= ApplySoundSettings;
             if (StageManager.Instance != null)
                 StageManager.Instance.OnStageChanged -= OnStageChanged;
         }

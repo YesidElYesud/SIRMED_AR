@@ -651,7 +651,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec60875692923a4caf806f8c7476839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestTextures
-  m_CameraManager: {fileID: 0}
+  m_CameraManager: {fileID: 1558881146}
+  testImage: []
 --- !u!224 &954971917
 RectTransform:
   m_ObjectHideFlags: 0
@@ -702,8 +703,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions::Google.XR.ARCoreExtensions.ARCoreExtensions
   Session: {fileID: 1521951724}
-  Origin: {fileID: 0}
-  CameraManager: {fileID: 0}
+  Origin: {fileID: 1558881147}
+  CameraManager: {fileID: 1558881146}
   ARCoreExtensionsConfig: {fileID: 0}
   CameraConfigFilter: {fileID: 11400000, guid: 709e361e27fc5744ab0f1b254887b9d1, type: 2}
 --- !u!4 &1057067254
@@ -849,7 +850,8 @@ PrefabInstance:
     - {fileID: 689627182629458148, guid: 7961f7502b016d745affa0660185a90b, type: 3}
     - {fileID: 3908046806225416848, guid: 7961f7502b016d745affa0660185a90b, type: 3}
     - {fileID: 7249854743804340363, guid: 7961f7502b016d745affa0660185a90b, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5319941628835741737, guid: 7961f7502b016d745affa0660185a90b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7961f7502b016d745affa0660185a90b, type: 3}
@@ -863,6 +865,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 74087336771765925, guid: 7961f7502b016d745affa0660185a90b, type: 3}
   m_PrefabInstance: {fileID: 1558881143}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1558881146 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4227673179258955669, guid: 7961f7502b016d745affa0660185a90b, type: 3}
+  m_PrefabInstance: {fileID: 1558881143}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4966719baa26e4b0e8231a24d9bd491a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1558881147 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3240699290604770599, guid: 7961f7502b016d745affa0660185a90b, type: 3}
+  m_PrefabInstance: {fileID: 1558881143}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0cb9aa70a22847b5925ee5f067c10a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1623344165
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -917,7 +941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22400762, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000049591064
+      value: 0.000011444092
       objectReference: {fileID: 0}
     - target: {fileID: 22414360, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchoredPosition.x

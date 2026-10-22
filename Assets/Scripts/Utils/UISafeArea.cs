@@ -4,10 +4,12 @@ using UnityEngine;
 /// A helper component that scale the UI rect to the same size as the safe area.
 /// </summary>
 [RequireComponent(typeof(RectTransform))]
-public class SafeAreaScaler : MonoBehaviour
+public class UISafeArea : MonoBehaviour
 {
     private RectTransform rectTransform;
     private Rect lastSafeArea;
+    private Vector2 anchorMin;
+    private Vector2 anchorMax;
 
     private void Awake()
     {
@@ -25,8 +27,8 @@ public class SafeAreaScaler : MonoBehaviour
 
     public void Refresh()
     {
-        Vector2 anchorMin = lastSafeArea.position;
-        Vector2 anchorMax = lastSafeArea.position + lastSafeArea.size;
+        anchorMin = lastSafeArea.position;
+        anchorMax = lastSafeArea.position + lastSafeArea.size;
         anchorMin.x /= Screen.width;
         anchorMin.y /= Screen.height;
         anchorMax.x /= Screen.width;

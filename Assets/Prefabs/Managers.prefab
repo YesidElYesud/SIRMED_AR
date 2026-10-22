@@ -223,7 +223,6 @@ MonoBehaviour:
   wetFloor: {fileID: 2100000, guid: 8349e6fd801ad8544886578e7fa291cb, type: 2}
   fogSphere: {fileID: 2100000, guid: bd035913e51ace443942afe17c1e2427, type: 2}
   fogTransform: {fileID: 0}
-  enablePostProcessing: 1
   volumePriority: 10
   debugLogs: 0
 --- !u!114 &6146727907208788699
@@ -497,7 +496,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3567654600318729271}
-  - component: {fileID: 1316441460298356686}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -525,15 +523,3 @@ Transform:
   - {fileID: 116356726909297805}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1316441460298356686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4635060345867713210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ffb8148145d16549884bef7738884c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CoroutineRunner

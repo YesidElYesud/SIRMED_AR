@@ -103,7 +103,9 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
         /// <summary>
         /// A list of Cloud Anchors that will be used in resolving.
         /// </summary>
+#pragma warning disable UAC1009 // Unsupported collection type for serialization
         public HashSet<string> ResolvingSet = new HashSet<string>();
+#pragma warning restore UAC1009 // Unsupported collection type for serialization
 
         /// <summary>
         /// The key name used in PlayerPrefs which indicates whether the start info has displayed
