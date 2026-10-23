@@ -1,6 +1,5 @@
 using UnityEngine;
 
-//[ExecuteInEditMode]
 public class WeatherSystem : MonoBehaviour
 {
     [Header("Rain")]
@@ -97,7 +96,7 @@ public class WeatherSystem : MonoBehaviour
         #endregion
 
         #region Fog
-        //fogRoot.position = new Vector3(target.position.x, 1.1176f /*value from XR Origin*/, target.position.z); // Y value needs more testing
+        //fogRoot.position = new Vector3(target.position.x, 1.1176f /*value from XR Origin*/, target.position.z);
         fogRoot.position = target.position;
         #endregion
     }
