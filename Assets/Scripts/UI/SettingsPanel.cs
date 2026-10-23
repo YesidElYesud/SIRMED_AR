@@ -87,6 +87,12 @@ namespace SIRMED.UI
         private void OnDestroy()
         {
             if (Instance == this) Instance = null;
+            SoundSettings.Save();
+        }
+
+        private void OnApplicationPause(bool paused)
+        {
+            if (paused) SoundSettings.Save();
         }
 
         // ── API pública ────────────────────────────────────────────────────────────
@@ -118,6 +124,7 @@ namespace SIRMED.UI
         {
             if (_panelRoot == null || !IsOpen) return;
             _panelRoot.SetActive(false);
+            SoundSettings.Save();
             RestoreHUD();
         }
 

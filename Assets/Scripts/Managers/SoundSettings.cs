@@ -64,8 +64,13 @@ namespace SIRMED.Managers
             if (Mathf.Approximately(Volume, volume)) return;
             Volume = volume;
             PlayerPrefs.SetFloat(KEY_VOLUME, volume);
-            Commit();
+            // Sin PlayerPrefs.Save(): el slider llama esto en cada frame del arrastre y
+            // escribir a disco cada vez traba la UI en el teléfono. Se guarda con Save().
+            Commit(save: false);
         }
+
+        /// <summary>Escribe a disco los ajustes pendientes (p. ej. el volumen tras arrastrar).</summary>
+        public static void Save() => PlayerPrefs.Save();
 
         /// <summary>Aplica "silenciar efectos" a una fuente de efectos (null se ignora).</summary>
         public static void ApplyEffects(AudioSource source)
@@ -74,9 +79,9 @@ namespace SIRMED.Managers
         }
 
         // ── Privados ──────────────────────────────────────────────────────────────
-        private static void Commit()
+        private static void Commit(bool save = true)
         {
-            PlayerPrefs.Save();
+            if (save) PlayerPrefs.Save();
             ApplyListener();
             Changed?.Invoke();
         }
