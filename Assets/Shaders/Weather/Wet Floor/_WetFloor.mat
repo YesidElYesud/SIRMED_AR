@@ -70,14 +70,14 @@ Material:
     - _Float: 1
     - _QueueControl: 1
     - _QueueOffset: -1
-    - _Ripples_Strength: 0.1
+    - _Ripples_Strength: 0
     - _Tiling: 15
-    - _Waves_Strength: 0.02
+    - _Waves_Strength: 0
     - _Waves_Tiling: 3
     - _XRMotionVectorsPass: 1
     m_Colors:
-    - _Color: {r: 0.7396079, g: 0.7921338, b: 0.9019608, a: 1}
-    - _Offset: {r: -742.35, g: 778.94995, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Offset: {r: -70.350006, g: -101.700005, b: 0, a: 0}
     - _Offsets_Speed: {r: 0.15, g: 0.15, b: 0, a: 0}
     - _Tiling: {r: 3, g: 3, b: 0, a: 0}
   m_BuildTextureStacks: []
