@@ -85,12 +85,13 @@ Material:
     m_Floats:
     - _BOOLEAN: 0
     - _Border: 10
+    - _Fog: 0.75
     - _Offset: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Strength: 0.1
     - _XRMotionVectorsPass: 1
     m_Colors:
-    - _Color: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 1}
+    - _Color: {r: 1.5, g: 1.5, b: 1.5, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

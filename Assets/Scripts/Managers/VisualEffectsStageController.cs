@@ -126,6 +126,7 @@ namespace SIRMED.Managers
             public float fogDensity = 0.02f;
             [Range(0, 1)]
             public float fogSphere = 0;
+            [Range(0, 1)] public float rainFog;
 
             // ── Post-processing ───────────────────────────────────────────────────
             [Header("Post-processing (URP Volume)")]
@@ -188,6 +189,7 @@ namespace SIRMED.Managers
         public Material clouds;
         public Material wetFloor;
         public Material fogSphere;
+        public Material rain;
         public Transform fogTransform;
 
         [Header("Post-processing")]
@@ -296,6 +298,9 @@ namespace SIRMED.Managers
 
             // ── Wet Floor ─────────────────────────────────────────────────────────
             WetFloorRoutine(config).Forget();
+
+            // ── Rain ──────────────────────────────────────────────────────────────
+            RainRoutine(config).Forget();
 
             _currentStageIndex = stageIndex;
         }
@@ -588,6 +593,22 @@ namespace SIRMED.Managers
                 wetFloor.SetFloat("_Ripples_Strength", Mathf.Lerp(startRipples, target.wetFloorRipples, t));
                 wetFloor.SetFloat("_Waves_Strength", Mathf.Lerp(startWaves, target.wetFloorWaves, t));
                 wetFloor.SetColor("_Color", Color.Lerp(startColor, target.wetFlootColor, t));
+
+                await UniTask.Yield(cancellationToken: _cts.Token);
+            }
+        }
+
+        private async UniTaskVoid RainRoutine(StageVisualConfig target)
+        {
+            float startFog = rain.GetFloat("_Fog");
+
+            float elapsed = 0f;
+            while (elapsed < target.transitionDuration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(elapsed / target.transitionDuration));
+
+                rain.SetFloat("_Fog", Mathf.Lerp(startFog, target.rainFog, t));
 
                 await UniTask.Yield(cancellationToken: _cts.Token);
             }
