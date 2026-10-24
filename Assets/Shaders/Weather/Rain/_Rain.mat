@@ -85,7 +85,7 @@ Material:
     m_Floats:
     - _BOOLEAN: 0
     - _Border: 10
-    - _Fog: 0.75
+    - _Fog: 0
     - _Offset: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
