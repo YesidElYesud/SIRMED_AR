@@ -23,6 +23,13 @@ namespace SIRMED.UI
     {
         public static EndGamePanel Instance { get; private set; }
 
+        /// <summary>
+        /// Interruptor temporal (2026-10-25): mientras sea false el panel final nunca se abre
+        /// (ni por el hotspot final ni al llegar al punto de encuentro) y el juego sigue sin
+        /// reiniciarse. Poner en true cuando se rediseñe el panel y lo que pasa después.
+        /// </summary>
+        public static readonly bool Enabled = false;
+
         [Header("UI")]
         [Tooltip("Image donde se muestra la imagen de felicitación / slide final.")]
         [SerializeField] private Image panelImage;
@@ -50,6 +57,12 @@ namespace SIRMED.UI
         // ── API pública ───────────────────────────────────────────────────────────
         public void Show()
         {
+            if (!Enabled)
+            {
+                Debug.Log("[EndGame] Panel final desactivado (EndGamePanel.Enabled = false).");
+                return;
+            }
+
             gameObject.SetActive(true);
             StageManager.Instance?.SetPlayerInputBlocked(true);
         }

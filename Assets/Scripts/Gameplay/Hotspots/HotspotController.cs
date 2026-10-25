@@ -502,7 +502,7 @@ namespace SIRMED.Gameplay.Hotspots
             if (data != null && data.advancesStageOnClose)
                 StageManager.Instance?.NextStage();
 
-            if (data != null && data.activatesEndGame)
+            if (data != null && data.activatesEndGame && EndGamePanel.Enabled)
             {
                 bool stageOk = data.endGameRequiredStage < 0 ||
                                (StageManager.Instance != null &&

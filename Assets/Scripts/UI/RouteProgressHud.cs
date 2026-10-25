@@ -86,7 +86,7 @@ namespace SIRMED.UI
 
         private void HandleArrival()
         {
-            if (!endGameOnArrival || _closing) return;
+            if (!endGameOnArrival || !EndGamePanel.Enabled || _closing) return;
             StartCoroutine(CloseRoutine());
         }
 
