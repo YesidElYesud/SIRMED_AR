@@ -113,6 +113,7 @@ namespace SIRMED.Gameplay.Hotspots
         private bool _isInfoPanelOpen = false;
         private bool _hasBeenVisited = false;
         private bool _triviaShown = false;
+        private bool _infoCardShown = false;
         private Renderer _meshRenderer;
         private ARGeospatialAnchor geospatialAnchor;
 
@@ -334,6 +335,10 @@ namespace SIRMED.Gameplay.Hotspots
         {
             if (data == null) return;
 
+            // La tarjeta informativa es parte del contenido: sale cada vez que se abre
+            // (a diferencia de la trivia, que solo sale una vez).
+            _infoCardShown = false;
+
             Activated?.Invoke(this);
 
             // Ocultar el botón de prompt mientras el panel está abierto
@@ -454,6 +459,19 @@ namespace SIRMED.Gameplay.Hotspots
 
         private void ClosePanel(bool allowTrivia)
         {
+            // Tarjeta informativa entre el contenido y la trivia: al pulsar "Siguiente",
+            // InfoCardPanel vuelve a llamar ClosePanel() y, como _infoCardShown ya es
+            // true, sigue con la trivia / cierre normal.
+            if (allowTrivia && ShouldShowInfoCard())
+            {
+                if (uiPanel != null) uiPanel.Hide();
+                _isInfoPanelOpen = false;
+                _infoCardShown = true;
+                _isPanelOpen = true;
+                InfoCardPanel.Instance.Show(data.infoCard, this);
+                return;
+            }
+
             // Trivia después del contenido: al cerrar el panel principal se encadena la
             // trivia; cuando termine, TriviaPanel vuelve a llamar ClosePanel() y, como
             // _triviaShown ya es true, sigue el cierre normal (visitado, ruta, etapa...).
@@ -521,6 +539,12 @@ namespace SIRMED.Gameplay.Hotspots
         /// nivel de riesgo activo no es N4 (GDD: la trivia se limita a momentos
         /// seguros y nunca debe aparecer durante el desplazamiento de evacuación).
         /// </summary>
+        private bool ShouldShowInfoCard()
+        {
+            return data != null && data.useInfoCard && data.infoCard != null &&
+                   !_infoCardShown && InfoCardPanel.Instance != null;
+        }
+
         private bool ShouldShowTrivia()
         {
             if (data == null || !data.HasTrivia || _triviaShown) return false;

@@ -174,6 +174,15 @@ namespace SIRMED.Gameplay.Hotspots
                  "None = badge oculto.")]
         public RiskLevel riskLevel = RiskLevel.None;
 
+        // ── Tarjeta informativa ───────────────────────────────────────────────────
+        [Header("Tarjeta informativa (opcional)")]
+        [Tooltip("Si true, al cerrar el contenido principal se muestra InfoCardPanel con\n" +
+                 "'infoCard' y, al pulsar Siguiente, sigue la trivia (si hay) y el cierre normal.")]
+        public bool useInfoCard = false;
+
+        [Tooltip("Contenido de la tarjeta (título, intro, filas ícono + texto).")]
+        public InfoCardData infoCard;
+
         // ── Trivia ────────────────────────────────────────────────────────────────
         [Header("Trivia (opcional)")]
         [Tooltip("Si está asignada (o triviaPool tiene elementos), este hotspot entra\n" +

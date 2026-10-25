@@ -27,6 +27,16 @@ MonoBehaviour:
   requiredStage: -1
   headerImage: {fileID: 0}
   riskLevel: 0
+  useInfoCard: 1
+  infoCard:
+    title: "RUTA DE EVACUACIÓN"
+    intro: "La ruta de evacuación es el camino más seguro para llegar a un punto de encuentro en caso de una emergencia, evitando las zonas de riesgo."
+    background: {fileID: 0}
+    rows:
+    - icon: {fileID: 21300000, guid: 5d00b6c501423da49ac35b7502a904e7, type: 3}
+      text: "Conocer esta ruta te permite actuar de manera rápida y organizada cuando sea necesario."
+    - icon: {fileID: 21300000, guid: 53d3b277bd753184b814c22936df07ca, type: 3}
+      text: "Sigue la línea verde en el suelo para avanzar por la ruta de evacuación y llegar al punto de encuentro de forma segura."
   trivia: {fileID: 11400000, guid: ec98700e4430a9b4189dabb73acaaff8, type: 2}
   triviaPool: []
   triviaAfterContent: 1
