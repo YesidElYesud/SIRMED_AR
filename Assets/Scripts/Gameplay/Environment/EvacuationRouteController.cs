@@ -222,6 +222,19 @@ namespace SIRMED.Gameplay.Environment
         public bool IsBuilt => _built;
 
         /// <summary>
+        /// Descarta la cinta construida para volver a armarla con las posiciones actuales de
+        /// los waypoints (GeoAnchorManager tras recalibrar: la spline guarda posiciones, no
+        /// referencias). Mientras se reconstruye se sigue viendo la malla vieja; la visibilidad
+        /// y los checkpoints no se tocan.
+        /// </summary>
+        public void Rebuild()
+        {
+            _built = false;
+            _sampledSpacing = -1f;
+            _sampledPoints.Clear();
+        }
+
+        /// <summary>
         /// Puntos de mundo a lo largo de la ruta, uno cada spacingMeters. Usado por
         /// MinimapController para dibujar la ruta punteada. false si aún no se construyó.
         /// La lista devuelta es interna: no modificarla.

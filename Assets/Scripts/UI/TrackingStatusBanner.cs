@@ -64,6 +64,9 @@ namespace SIRMED.UI
             "Ubicación imprecisa. Detente y apunta a los edificios cercanos para mejorarla.";
         [SerializeField, TextArea] private string _msgUnavailable =
             "La ubicación RA no está disponible. Revisa tu conexión a internet y el GPS.";
+        [Tooltip("Precisión aceptable para el banner pero no todavía para GeoAnchorManager (8 m): los puntos aún no aparecen.")]
+        [SerializeField, TextArea] private string _msgPlacingPoints =
+            "Afinando tu ubicación para colocar los puntos. Apunta la cámara a fachadas y calles.";
 
         private bool _reliable;
         private float _goodTimer;
@@ -145,6 +148,11 @@ namespace SIRMED.UI
             if (pose.HorizontalAccuracy > _maxHorizontalAccuracy ||
                 pose.OrientationYawAccuracy > _maxYawAccuracy)
                 return _msgLowAccuracy;
+
+            // Ancla inicial pendiente: GeoAnchorManager exige más precisión que este banner.
+            if (SIRMED.Managers.GeoAnchorManager.Instance != null &&
+                SIRMED.Managers.GeoAnchorManager.Instance.IsWaitingForInitialAnchors)
+                return _msgPlacingPoints;
 
             return null;
         }

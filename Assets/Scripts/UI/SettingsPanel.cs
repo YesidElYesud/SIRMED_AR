@@ -28,6 +28,7 @@ namespace SIRMED.UI
     ///       ├── MuteEffectsToggle  [Toggle]  ← _muteEffectsToggle
     ///       ├── VolumeSlider       [Slider]  ← _volumeSlider
     ///       │   └── ValueText      [TMP]     ← _volumeValueText (opcional, "80%")
+    ///       ├── RecalibrateButton  [Button]  ← _recalibrateButton (opcional, abre RecalibrationPanel)
     ///       └── CloseButton        [Button]  ← _closeButton (opcional)
     /// </summary>
     public class SettingsPanel : MonoBehaviour
@@ -53,6 +54,8 @@ namespace SIRMED.UI
         [SerializeField] private Slider _volumeSlider;
         [Tooltip("Opcional: muestra el volumen en porcentaje.")]
         [SerializeField] private TMP_Text _volumeValueText;
+        [Tooltip("Opcional: cierra este panel y abre RecalibrationPanel.")]
+        [SerializeField] private Button _recalibrateButton;
 
         // ── Elementos HUD a ocultar ────────────────────────────────────────────────
         [Header("HUD — ocultar mientras el panel esté abierto")]
@@ -133,6 +136,11 @@ namespace SIRMED.UI
         {
             _openButton?.onClick.AddListener(Toggle);
             _closeButton?.onClick.AddListener(Close);
+            _recalibrateButton?.onClick.AddListener(() =>
+            {
+                Close();
+                RecalibrationPanel.Instance?.Open();
+            });
 
             _muteAllToggle?.onValueChanged.AddListener(muted =>
             {
