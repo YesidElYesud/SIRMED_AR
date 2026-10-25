@@ -24,16 +24,19 @@ MonoBehaviour:
   infoSlides:
   - title: 
     body: 
-    image: {fileID: 21300000, guid: d9311eabb9db1ca45ab5629c6f29473b, type: 3}
+    image: {fileID: 21300000, guid: 0e9fe82765d444ec8b6d9c3b7f2789e2, type: 3}
   - title: 
     body: 
-    image: {fileID: 21300000, guid: ef20bb1073a41d64bbcc7ddb59a132aa, type: 3}
+    image: {fileID: 21300000, guid: 199665a5b18b49c782e887501c99f84c, type: 3}
   - title: 
     body: 
-    image: {fileID: 21300000, guid: dd15653727d2a1fbebe99acbcccccee0, type: 3}
+    image: {fileID: 21300000, guid: 87c19fa1e5f54e24a37399e547903fa3, type: 3}
   - title: 
     body: 
-    image: {fileID: 21300000, guid: 57ca5ffc4497ae1a9a95041512572a93, type: 3}
+    image: {fileID: 21300000, guid: 107cd9c739874e80b96d80b8b91a1c53, type: 3}
+  - title: 
+    body: 
+    image: {fileID: 21300000, guid: b08ecdfdb1be4e88910cd6b23dff8f74, type: 3}
   infoSlideAdvancesStage: 0
   triggerRadius: 3
   requiredStage: -1

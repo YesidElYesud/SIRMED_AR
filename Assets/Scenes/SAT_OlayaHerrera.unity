@@ -2072,7 +2072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423620414042b824b98a703ef44e9393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Hotspots.HotspotController
-  data: {fileID: 11400000, guid: 5a08af017e1f4242a246c57cdbe7d0cf, type: 2}
+  data: {fileID: 11400000, guid: 239229f7a34d45f1a20152575e29eabd, type: 2}
   uiPanel: {fileID: 400371381}
   meshTransform: {fileID: 1158768275}
   rotationSpeed: 60
