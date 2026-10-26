@@ -11191,30 +11191,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 334032084}
     - target: {fileID: 6169024265861012582, guid: c01953915d86b2042b40e356131176fc, type: 3}
-      propertyPath: stageConfigs.Array.data[2].characterRim
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6169024265861012582, guid: c01953915d86b2042b40e356131176fc, type: 3}
-      propertyPath: stageConfigs.Array.data[3].characterRim
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6169024265861012582, guid: c01953915d86b2042b40e356131176fc, type: 3}
-      propertyPath: stageConfigs.Array.data[4].characterRim
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6169024265861012582, guid: c01953915d86b2042b40e356131176fc, type: 3}
-      propertyPath: stageConfigs.Array.data[1].characterFill
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6169024265861012582, guid: c01953915d86b2042b40e356131176fc, type: 3}
-      propertyPath: stageConfigs.Array.data[3].characterFill
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6169024265861012582, guid: c01953915d86b2042b40e356131176fc, type: 3}
-      propertyPath: stageConfigs.Array.data[4].characterFill
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6169024265861012582, guid: c01953915d86b2042b40e356131176fc, type: 3}
       propertyPath: stageConfigs.Array.data[0].particlesToStop.Array.data[0].particle
       value: 
       objectReference: {fileID: 1986400204}
