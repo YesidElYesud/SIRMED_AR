@@ -138,6 +138,16 @@ namespace SIRMED.Managers
             [Range(0f, 3f)]
             public float ppFadeDuration = 1.0f;
 
+            // ── Personajes (NPC) ──────────────────────────────────────────────────
+            [Header("Personajes (shader SIRMED_Character)")]
+            [Tooltip("Luz de relleno propia de los NPC (emisión = textura × valor). Evita que se vuelvan silueta cuando sol/ambiente bajan.")]
+            [Range(0f, 1f)]
+            public float characterFill = 0.15f;
+
+            [Tooltip("Intensidad del borde Fresnel de los NPC, para separar la silueta de la niebla.")]
+            [Range(0f, 2f)]
+            public float characterRim = 0f;
+
             // ── Camera ────────────────────────────────────────────────────────────
             public float cameraFarPlane = 125;
 
@@ -215,6 +225,13 @@ namespace SIRMED.Managers
         private Color _stageSunColor = Color.white;
         private float _stageSunIntensity = 1f;
         private float _stageAmbientIntensity = 1f;
+
+        // Globales del shader SIRMED_Character (propiedades con Scope = Global
+        // en el Shader Graph; no existen en el material).
+        private static readonly int CharacterFillId = Shader.PropertyToID("_SIRMED_CharacterFill");
+        private static readonly int CharacterRimId = Shader.PropertyToID("_SIRMED_CharacterRim");
+        private float _stageCharacterFill;
+        private float _stageCharacterRim;
 
         // ── Lifecycle ─────────────────────────────────────────────────────────────
         private void Awake()
@@ -472,6 +489,15 @@ namespace SIRMED.Managers
             RenderSettings.fogMode = FogMode.ExponentialSquared;
 
             ApplySunValues(config.sunColor, config.sunIntensity, config.ambientIntensity);
+            ApplyCharacterLighting(config.characterFill, config.characterRim);
+        }
+
+        private void ApplyCharacterLighting(float fill, float rim)
+        {
+            _stageCharacterFill = fill;
+            _stageCharacterRim = rim;
+            Shader.SetGlobalFloat(CharacterFillId, fill);
+            Shader.SetGlobalFloat(CharacterRimId, rim);
         }
 
         /// <summary>
@@ -507,6 +533,8 @@ namespace SIRMED.Managers
             Color startSunColor = _stageSunColor;
             float startSunIntensity = _stageSunIntensity;
             float startAmbientIntensity = _stageAmbientIntensity;
+            float startCharacterFill = _stageCharacterFill;
+            float startCharacterRim = _stageCharacterRim;
 
             float endFogDensity = target.enableFog ? target.fogDensity : 0f;
             if (target.enableFog) RenderSettings.fog = true;
@@ -523,6 +551,10 @@ namespace SIRMED.Managers
                     Color.Lerp(startSunColor, target.sunColor, t),
                     Mathf.Lerp(startSunIntensity, target.sunIntensity, t),
                     Mathf.Lerp(startAmbientIntensity, target.ambientIntensity, t));
+
+                ApplyCharacterLighting(
+                    Mathf.Lerp(startCharacterFill, target.characterFill, t),
+                    Mathf.Lerp(startCharacterRim, target.characterRim, t));
 
                 await UniTask.Yield(cancellationToken: _cts.Token);
             }
