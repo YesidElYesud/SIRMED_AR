@@ -81,7 +81,7 @@ Material:
     - _Power: 4
     - _QueueControl: 1
     - _QueueOffset: 0
-    - _Rotation: 0.3905737
+    - _Rotation: 0.914105
     - _Rotation_Speed: 0.1
     - _XRMotionVectorsPass: 0
     m_Colors:
