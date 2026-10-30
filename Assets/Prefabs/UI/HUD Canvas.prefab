@@ -22338,7 +22338,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278239231
   m_fontColor: {r: 1, g: 0.75, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -42171,7 +42171,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Panel de recalibrac\xF3n de los elemetos flotanten en pantalla para la
+  m_text: "Panel de recalibrac\xF3n de los elementos flotantes en pantalla para la
     experiencia AR"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5810066574caee844b111d84f44652c9, type: 2}
@@ -42782,7 +42782,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278239231
   m_fontColor: {r: 1, g: 0.75, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

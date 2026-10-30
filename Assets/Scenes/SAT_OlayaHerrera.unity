@@ -624,7 +624,7 @@ MonoBehaviour:
   visualRoot: {fileID: 1588341508}
   animator: {fileID: 1588341507}
   fader: {fileID: 613754628}
-  heightOffset: -2.1
+  heightOffset: -1.7
   moveSpeed: 2.3
   arrivalThreshold: 0.05
   turnSpeed: 240
@@ -5307,9 +5307,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 6.27336
-  _longitude: -75.618848
-  _altitude: 1707.56
+  _latitude: 6.273359999967427
+  _longitude: -75.61884800000685
+  _altitude: 1708.460074220784
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -5373,7 +5373,7 @@ Transform:
   m_GameObject: {fileID: 2090281926}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.9732776, y: 1.5599258, z: 29.866682}
+  m_LocalPosition: {x: 6.9732776, y: 2.46, z: 29.866682}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8630,6 +8630,10 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 36
       objectReference: {fileID: 0}
+    - target: {fileID: 4661528206979399827, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278239231
+      objectReference: {fileID: 0}
     - target: {fileID: 4735148522142072709, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -10501,6 +10505,10 @@ PrefabInstance:
     - target: {fileID: 7313427907929531771, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7316379041674486086, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278239231
       objectReference: {fileID: 0}
     - target: {fileID: 7319485345405598550, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
       propertyPath: m_AnchorMax.y
