@@ -29,7 +29,7 @@ namespace SIRMED.Geospatial
         private IEnumerator Start()
         {
             if (Input.location.status == LocationServiceStatus.Stopped)
-                Input.location.Start();
+                Input.location.Start(0, 0);
 
             float timeout = Time.time + 15f;
             while (Input.location.status == LocationServiceStatus.Initializing && Time.time < timeout)
@@ -40,9 +40,9 @@ namespace SIRMED.Geospatial
             if (Input.location.status != LocationServiceStatus.Running)
                 yield break;
 
-            double lat = Input.location.lastData.latitude;
-            double lon = Input.location.lastData.longitude;
-            Debug.Log($"[GeoDiag] Device location: {lat}, {lon} (accuracy {Input.location.lastData.horizontalAccuracy}m)");
+            float lat = Input.location.lastData.latitude;
+            float lon = Input.location.lastData.longitude;
+            Debug.Log($"[GeoDiag] [Input] Device location: {lat}, {lon} (accuracy H:{Input.location.lastData.horizontalAccuracy}m V:{Input.location.lastData.verticalAccuracy}m)");
 
             if (_earthManager == null)
             {
@@ -59,7 +59,8 @@ namespace SIRMED.Geospatial
         {
             if (_earthManager == null || Time.time < _nextLogTime) return;
             _nextLogTime = Time.time + _logInterval;
-            Debug.Log($"[GeoDiag] EarthState={_earthManager.EarthState} EarthTrackingState={_earthManager.EarthTrackingState}");
+            Debug.Log($"[GeoDiag] [Earth] EarthState={_earthManager.EarthState} EarthTrackingState={_earthManager.EarthTrackingState} " +
+                $"(accuracy H:{_earthManager.CameraGeospatialPose.HorizontalAccuracy} V:{_earthManager.CameraGeospatialPose.VerticalAccuracy} Y:{_earthManager.CameraGeospatialPose.OrientationYawAccuracy})");
         }
     }
 }

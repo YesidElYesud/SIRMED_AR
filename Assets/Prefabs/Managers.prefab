@@ -64,7 +64,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.15
     characterRim: 0
-    cameraFarPlane: 125
+    cameraFarPlane: 100
     particlesToPlay: []
     particlesToStop:
     - particle: {fileID: 0}
@@ -99,7 +99,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.1
     characterRim: 0
-    cameraFarPlane: 125
+    cameraFarPlane: 100
     particlesToPlay: []
     particlesToStop:
     - particle: {fileID: 0}
@@ -134,7 +134,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.15
     characterRim: 0.1
-    cameraFarPlane: 100
+    cameraFarPlane: 75
     particlesToPlay:
     - particle: {fileID: 0}
       rateOverTime: 216
@@ -173,7 +173,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.25
     characterRim: 0.25
-    cameraFarPlane: 75
+    cameraFarPlane: 50
     particlesToPlay:
     - particle: {fileID: 0}
       rateOverTime: 433
@@ -212,7 +212,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.4
     characterRim: 0.5
-    cameraFarPlane: 50
+    cameraFarPlane: 25
     particlesToPlay:
     - particle: {fileID: 0}
       rateOverTime: 650
@@ -512,6 +512,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3567654600318729271}
+  - component: {fileID: 3891611590920654031}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -540,6 +541,18 @@ Transform:
   - {fileID: 3904200970393874876}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3891611590920654031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4635060345867713210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d339ac5900ca8184a8af7c295f675ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HotspotsActivator
 --- !u!1 &6744246929999280922
 GameObject:
   m_ObjectHideFlags: 0

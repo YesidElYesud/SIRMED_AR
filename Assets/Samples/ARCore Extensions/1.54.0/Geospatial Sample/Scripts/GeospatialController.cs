@@ -1299,13 +1299,15 @@ namespace Google.XR.ARCoreExtensions.Samples.Geospatial
                 yield break;
             }
 
-            var location = Input.location.lastData;
-            var vpsAvailabilityPromise =
-                AREarthManager.CheckVpsAvailabilityAsync(location.latitude, location.longitude);
+            float lat = Input.location.lastData.latitude;
+            float lon = Input.location.lastData.longitude;
+
+            VpsAvailabilityPromise vpsAvailabilityPromise =
+                AREarthManager.CheckVpsAvailabilityAsync(lat, lon);
             yield return vpsAvailabilityPromise;
 
             Debug.LogFormat("VPS Availability at ({0}, {1}): {2}",
-                location.latitude, location.longitude, vpsAvailabilityPromise.Result);
+                lat, lon, vpsAvailabilityPromise.Result);
             VPSCheckCanvas.SetActive(vpsAvailabilityPromise.Result != VpsAvailability.Available);
         }
 
@@ -1329,7 +1331,7 @@ namespace Google.XR.ARCoreExtensions.Samples.Geospatial
             }
 
             Debug.Log("Starting location service.");
-            Input.location.Start();
+            Input.location.Start(0, 0);
 
             while (Input.location.status == LocationServiceStatus.Initializing)
             {

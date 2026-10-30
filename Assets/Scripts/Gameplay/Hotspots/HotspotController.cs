@@ -199,7 +199,7 @@ namespace SIRMED.Gameplay.Hotspots
             if (!IsAnchorReady()) return;
 
             ApplyRotationEffect();
-            CheckProximity();
+            //CheckProximity();
         }
 
         // ── Anclaje geoespacial ───────────────────────────────────────────────────
@@ -303,22 +303,19 @@ namespace SIRMED.Gameplay.Hotspots
         }
 
         // ── Proximidad ────────────────────────────────────────────────────────────
-        private void CheckProximity()
+        public void SwitchState()
         {
-            float dist = Vector3.Distance(_playerCamera.position, transform.position);
-            bool nowNearby = dist <= data.triggerRadius;
-
-            if (nowNearby && !_isNearby)
+            if (!_isNearby)
             {
                 _isNearby = true;
-                Debug.Log($"[Hotspot] Entrando en rango de: {data.title}", gameObject);
+                Debug.Log($"[Hotspot] Entrando a: {data.title}", gameObject);
                 if (!_isPanelOpen && !(_interactOnce && _hasBeenVisited))
                     HotspotPromptButton.Instance?.RegisterHotspot(this);
             }
-            else if (!nowNearby && _isNearby)
+            else if (_isNearby)
             {
                 _isNearby = false;
-                Debug.Log($"[Hotspot] Saliendo del rango de: {data.title}", gameObject);
+                Debug.Log($"[Hotspot] Saliendo de: {data.title}", gameObject);
                 HotspotPromptButton.Instance?.UnregisterHotspot(this);
                 // Solo se corta el InfoPanel. Los modales (trivia, NPC, SIATA, slides) siguen
                 // hasta que el jugador los cierra y llaman ClosePanel() ellos mismos; cerrarlos

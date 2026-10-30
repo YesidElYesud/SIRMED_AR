@@ -20,6 +20,7 @@ public class MapController : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     private bool pointsCreated;
     private RectTransform[] points;
     private RectTransform[] imagePoints;
+    private int pointsCount;
 
     [Header("Editables")]
     [SerializeField] private string MapsStaticAPIKey = "AIzaSyDrLcl9TazRnbQe3QHLaDewmUUkd9B7K8w";
@@ -106,6 +107,7 @@ public class MapController : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     private void Start()
     {
         DownloadImage().Forget();
+        Input.location.Start(0, 0);
     }
 
     private async UniTaskVoid DownloadImage()
@@ -222,6 +224,13 @@ public class MapController : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
             rect.position = touch1PositionPixels + rectOffset;
         }
+
+        if (!dragging && !zooming && !updatingMap && pointsCreated &&
+            Input.location.status == LocationServiceStatus.Running)
+        {
+            SetPointPosition(pointsCount, Input.location.lastData.longitude, Input.location.lastData.latitude);
+            imagePoints[pointsCount].position = points[pointsCount].position;
+        }
     }
 
     private void UpdatePoints()
@@ -230,11 +239,11 @@ public class MapController : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
         if (!pointsCreated)
         {
-            int count = dataScriptable.data.layer.data.Count;
-            points = new RectTransform[count];
-            imagePoints = new RectTransform[count];
+            pointsCount = dataScriptable.data.layer.data.Count;
+            points = new RectTransform[pointsCount + 1];
+            imagePoints = new RectTransform[pointsCount + 1];
 
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < pointsCount; i++)
             {
                 Datum item = dataScriptable.data.layer.data[i];
 
@@ -247,11 +256,20 @@ public class MapController : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
                 imagePoints[i].gameObject.SetActive(true);
             }
 
+            points[pointsCount] = Instantiate(point, point.parent);
+            SetPointPosition(pointsCount, Input.location.lastData.longitude, Input.location.lastData.latitude);
+            points[pointsCount].gameObject.SetActive(true);
+
+            imagePoints[pointsCount] = Instantiate(imagePoint, imagePoint.parent);
+            imagePoints[pointsCount].position = points[pointsCount].position;
+            imagePoints[pointsCount].GetComponent<Image>().color = Color.cyan;
+            imagePoints[pointsCount].gameObject.SetActive(true);
+
             pointsCreated = true;
         }
         else
         {
-            for (int i = 0; i < points.Length; i++)
+            for (int i = 0; i < points.Length - 1; i++)
             {
                 Datum item = dataScriptable.data.layer.data[i];
                 SetPointPosition(i, item.longitud, item.latitud);

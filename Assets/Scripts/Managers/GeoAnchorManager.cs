@@ -5,7 +5,6 @@ namespace SIRMED.Managers
     using System.Collections.Generic;
     using Google.XR.ARCoreExtensions;
     using Google.XR.ARCoreExtensions.GeospatialCreator;
-    using SIRMED.Gameplay.Environment;
     using UnityEngine;
     using UnityEngine.XR.ARFoundation;
     using UnityEngine.XR.ARSubsystems;
@@ -74,6 +73,7 @@ namespace SIRMED.Managers
         // ── Eventos ────────────────────────────────────────────────────────────────
         /// <summary>Se dispara al terminar el anclaje inicial.</summary>
         public event Action InitialAnchoringCompleted;
+        public event Action RecalibrationStart;
 
         /// <summary>Se dispara al terminar una recalibración: true = anclas renovadas, false = cancelada (timeout).</summary>
         public event Action<bool> RecalibrationFinished;
@@ -208,7 +208,7 @@ namespace SIRMED.Managers
                 // (antes leen 0,0,0) y se le pide reconstruirse.
                 yield return null;
                 yield return null;
-                EvacuationRouteController.Instance?.Rebuild();
+                RecalibrationStart?.Invoke();
 
                 Debug.Log($"[GeoAnchor] Recalibración completa (precisión {CurrentHorizontalAccuracy:F1} m).");
             }

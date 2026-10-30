@@ -38,7 +38,7 @@ public class DogNPC : MonoBehaviour
 
     private void OnIncorrectDialogue()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     private void Update()

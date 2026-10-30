@@ -33,14 +33,14 @@ namespace Google.XR.ARCoreExtensions
     /// <c><see cref="ARCoreExtensionsConfig.GeospatialMode"/></c> must be
     /// <c><see cref="GeospatialMode.Enabled"/></c> in order to make use of the Geospatial API.
     /// Not all devices support <c><see cref="GeospatialMode.Enabled"/></c>, use
-    /// <c><see cref="AREarthManager.IsGeospatialModeSupported"/></c> to find whether the current
+    /// <c><see cref="IsGeospatialModeSupported"/></c> to find whether the current
     /// device supports enabling this mode.
     ///
-    /// <c><see cref="AREarthManager.CameraGeospatialPose"/></c> should only be used when
-    /// <c><see cref="AREarthManager.EarthTrackingState"/></c> is
+    /// <c><see cref="CameraGeospatialPose"/></c> should only be used when
+    /// <c><see cref="EarthTrackingState"/></c> is
     /// <c><see cref="TrackingState.Tracking"/></c>, and otherwise
     /// should not be used. If the <c><see cref="EarthTrackingState"/></c> does not become
-    /// <c>Tracking</c>, then <c><see cref="AREarthManager.EarthState"/></c> may contain more
+    /// <c>Tracking</c>, then <c><see cref="EarthState"/></c> may contain more
     /// information on this failure.
     /// </summary>
     public class AREarthManager : MonoBehaviour

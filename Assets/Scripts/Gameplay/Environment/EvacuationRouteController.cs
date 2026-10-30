@@ -3,6 +3,7 @@ namespace SIRMED.Gameplay.Environment
     using System.Collections;
     using System.Collections.Generic;
     using SIRMED.Gameplay.Hotspots;
+    using SIRMED.Managers;
     using SIRMED.UI;
     using Unity.Mathematics;
     using UnityEngine;
@@ -140,6 +141,18 @@ namespace SIRMED.Gameplay.Environment
 
             ApplyAlpha(0f);
             _meshRenderer.enabled = false;
+        }
+
+        private void OnEnable()
+        {
+            if (GeoAnchorManager.Instance != null)
+                GeoAnchorManager.Instance.RecalibrationStart += Rebuild;
+        }
+
+        private void OnDisable()
+        {
+            if (GeoAnchorManager.Instance != null)
+                GeoAnchorManager.Instance.RecalibrationStart -= Rebuild;
         }
 
         private void OnDestroy()

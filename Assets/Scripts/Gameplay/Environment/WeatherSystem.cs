@@ -24,19 +24,18 @@ public class WeatherSystem : MonoBehaviour
     [SerializeField] private float cloudsRotationSpeed = 0.001f;
     private float cloudsRotation = 0;
 
-    private readonly int _Rotation = Shader.PropertyToID("_Rotation");
-
     [Header("Wet Floor")]
     [SerializeField] private Transform floorRoot;
-    [SerializeField] private float floorOffsetY = -15;
+
     [Header("Tiling / Quad Scale")]
     [SerializeField] private float offsetMulti;
     [SerializeField] private Material wetFloorMaterial;
 
-    private readonly int _Offset = Shader.PropertyToID("_Offset");
-
     [Header("Fog")]
     [SerializeField] private Transform fogRoot;
+
+    private readonly int _Rotation = Shader.PropertyToID("_Rotation");
+    private readonly int _Offset = Shader.PropertyToID("_Offset");
 
     private void Awake()
     {
@@ -90,14 +89,13 @@ public class WeatherSystem : MonoBehaviour
         particles.eulerAngles = new Vector3(0, target.eulerAngles.y, 0);
         #endregion
 
-        #region Wet Floor
-        floorRoot.position = new Vector3(target.position.x, floorOffsetY, target.position.z);
-        wetFloorMaterial.SetVector(_Offset, new Vector2(target.position.x * offsetMulti, target.position.z * offsetMulti));
+        #region Fog
+        fogRoot.position = target.position;
         #endregion
 
-        #region Fog
-        //fogRoot.position = new Vector3(target.position.x, 1.1176f /*value from XR Origin*/, target.position.z);
-        fogRoot.position = target.position;
+        #region Wet Floor
+        floorRoot.position = new Vector3(target.position.x, target.position.y - 2.2352f, target.position.z);
+        wetFloorMaterial.SetVector(_Offset, new Vector2(target.position.x * offsetMulti, target.position.z * offsetMulti));
         #endregion
     }
 }

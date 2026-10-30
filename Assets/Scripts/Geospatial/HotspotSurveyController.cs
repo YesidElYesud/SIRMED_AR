@@ -74,22 +74,6 @@ namespace SIRMED.Geospatial
         private string PersistentFilePath =>
             Path.Combine(Application.persistentDataPath, PersistentFileName);
 
-        public void Awake()
-        {
-            Screen.autorotateToLandscapeLeft = false;
-            Screen.autorotateToLandscapeRight = false;
-            Screen.autorotateToPortraitUpsideDown = false;
-            Screen.orientation = ScreenOrientation.Portrait;
-            Application.targetFrameRate = 60;
-
-            ARCameraManager cameraManager = Camera.main != null ?
-                Camera.main.GetComponent<ARCameraManager>() : null;
-            if (cameraManager != null)
-            {
-                cameraManager.requestedBackgroundRenderingMode = CameraBackgroundRenderingMode.BeforeOpaques;
-            }
-        }
-
         public void OnEnable()
         {
             StartCoroutine(EnsureArCoreAvailable());
@@ -137,7 +121,7 @@ namespace SIRMED.Geospatial
                 return;
             }
 
-            var featureSupport = EarthManager.IsGeospatialModeSupported(GeospatialMode.Enabled);
+            FeatureSupported featureSupport = EarthManager.IsGeospatialModeSupported(GeospatialMode.Enabled);
             if (featureSupport == FeatureSupported.Unsupported)
             {
                 HintText.text = "El API Geospatial no es compatible con este dispositivo.";
@@ -170,12 +154,15 @@ namespace SIRMED.Geospatial
                 return;
             }
 
-            var earthTrackingState = EarthManager.EarthTrackingState;
-            var pose = earthTrackingState == TrackingState.Tracking ?
+            TrackingState earthTrackingState = EarthManager.EarthTrackingState;
+            GeospatialPose pose = earthTrackingState == TrackingState.Tracking ?
                 EarthManager.CameraGeospatialPose : new GeospatialPose();
+
+            StatusText.text = FormatPose(pose);
 
             bool isSessionReady = ARSession.state == ARSessionState.SessionTracking &&
                 Input.location.status == LocationServiceStatus.Running;
+
             _isLocalizing = !isSessionReady ||
                 earthTrackingState != TrackingState.Tracking ||
                 pose.OrientationYawAccuracy > OrientationYawAccuracyThresholdDegrees ||
@@ -185,15 +172,12 @@ namespace SIRMED.Geospatial
             {
                 HintText.text = "Apunta la cámara a edificios o puntos de referencia cercanos " +
                     "para localizar el dispositivo.";
-                StatusText.text = string.Empty;
                 return;
             }
 
             HintText.text = _hasPendingCapture ?
                 "Confirma o descarta el punto antes de tocar de nuevo." :
                 "Toca la pantalla para capturar un hotspot en tu ubicación actual.";
-
-            StatusText.text = FormatPose(pose);
 
             if (!_hasPendingCapture &&
                 Input.touchCount > 0 &&
@@ -208,6 +192,7 @@ namespace SIRMED.Geospatial
         {
             ARGeospatialAnchor anchor = AnchorManager.AddAnchor(
                 pose.Latitude, pose.Longitude, pose.Altitude, pose.EunRotation);
+
             if (anchor == null)
             {
                 HintText.text = "No se pudo colocar el ancla, intenta de nuevo.";
@@ -230,7 +215,7 @@ namespace SIRMED.Geospatial
                 return;
             }
 
-            var record = new HotspotRecord
+            HotspotRecord record = new()
             {
                 Label = string.IsNullOrWhiteSpace(ConfirmLabelInput.text) ?
                     $"Hotspot {_records.Count + 1:00}" : ConfirmLabelInput.text.Trim(),
@@ -302,7 +287,7 @@ namespace SIRMED.Geospatial
 
         private void OnClearAllClicked()
         {
-            foreach (var anchorObject in _anchorObjects)
+            foreach (GameObject anchorObject in _anchorObjects)
             {
                 Destroy(anchorObject);
             }
@@ -326,7 +311,7 @@ namespace SIRMED.Geospatial
 
         private string BuildExportText()
         {
-            var sb = new StringBuilder();
+            StringBuilder sb = new();
             sb.AppendLine("=== SIRMED_AR - Hotspot Survey ===");
             sb.AppendLine($"Generado: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
             sb.AppendLine($"Total de hotspots: {_records.Count}");
@@ -340,7 +325,7 @@ namespace SIRMED.Geospatial
 
             sb.AppendLine("=== CSV (para pegar en Excel/Sheets) ===");
             sb.AppendLine(HotspotRecord.CsvHeader);
-            foreach (var record in _records)
+            foreach (HotspotRecord record in _records)
             {
                 sb.AppendLine(record.ToCsvRow());
             }
@@ -373,12 +358,12 @@ namespace SIRMED.Geospatial
                 "Altitud: {3} m\n" +
                 "Precisión vertical: {4} m\n" +
                 "Precisión de orientación (yaw): {5}°",
-                pose.Latitude.ToString("F6"),
-                pose.Longitude.ToString("F6"),
-                pose.HorizontalAccuracy.ToString("F2"),
-                pose.Altitude.ToString("F2"),
-                pose.VerticalAccuracy.ToString("F2"),
-                pose.OrientationYawAccuracy.ToString("F1"));
+                pose.Latitude.ToString("F7"),
+                pose.Longitude.ToString("F7"),
+                pose.HorizontalAccuracy.ToString("F3"),
+                pose.Altitude.ToString("F3"),
+                pose.VerticalAccuracy.ToString("F3"),
+                pose.OrientationYawAccuracy.ToString("F2"));
         }
 
         private IEnumerator EnsureArCoreAvailable()
@@ -412,7 +397,7 @@ namespace SIRMED.Geospatial
                 yield break;
             }
 
-            Input.location.Start();
+            Input.location.Start(0, 0);
 
             while (Input.location.status == LocationServiceStatus.Initializing)
             {

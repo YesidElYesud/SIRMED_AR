@@ -23,19 +23,19 @@ namespace SIRMED.Geospatial
             "label,latitude,longitude,altitude,horizontal_accuracy_m,vertical_accuracy_m," +
             "orientation_yaw_accuracy_deg,captured_at_utc";
 
+        private readonly CultureInfo culture = CultureInfo.InvariantCulture;
+
         public string ToCsvRow()
         {
-            var culture = CultureInfo.InvariantCulture;
-            var safeLabel = (Label ?? string.Empty).Replace(",", " ");
             return string.Join(
                 ",",
-                safeLabel,
-                Latitude.ToString("F6", culture),
-                Longitude.ToString("F6", culture),
-                Altitude.ToString("F2", culture),
-                HorizontalAccuracy.ToString("F2", culture),
-                VerticalAccuracy.ToString("F2", culture),
-                OrientationYawAccuracy.ToString("F1", culture),
+                (Label ?? string.Empty).Replace(",", " "),
+                Latitude.ToString(culture),
+                Longitude.ToString(culture),
+                Altitude.ToString(culture),
+                HorizontalAccuracy.ToString(culture),
+                VerticalAccuracy.ToString(culture),
+                OrientationYawAccuracy.ToString(culture),
                 CapturedAtUtc);
         }
 
@@ -44,12 +44,12 @@ namespace SIRMED.Geospatial
             return
                 $"--- Hotspot {index:00} ---\n" +
                 $"Nombre: {Label}\n" +
-                $"Latitud: {Latitude.ToString("F6", CultureInfo.InvariantCulture)}°\n" +
-                $"Longitud: {Longitude.ToString("F6", CultureInfo.InvariantCulture)}°\n" +
-                $"Altitud: {Altitude.ToString("F2", CultureInfo.InvariantCulture)} m\n" +
-                $"Precisión horizontal: {HorizontalAccuracy.ToString("F2", CultureInfo.InvariantCulture)} m\n" +
-                $"Precisión vertical: {VerticalAccuracy.ToString("F2", CultureInfo.InvariantCulture)} m\n" +
-                $"Precisión de orientación (yaw): {OrientationYawAccuracy.ToString("F1", CultureInfo.InvariantCulture)}°\n" +
+                $"Latitud: {Latitude.ToString(culture)}°\n" +
+                $"Longitud: {Longitude.ToString(culture)}°\n" +
+                $"Altitud: {Altitude.ToString(culture)} m\n" +
+                $"Precisión horizontal: {HorizontalAccuracy.ToString(culture)} m\n" +
+                $"Precisión vertical: {VerticalAccuracy.ToString(culture)} m\n" +
+                $"Precisión de orientación (yaw): {OrientationYawAccuracy.ToString(culture)}°\n" +
                 $"Capturado (UTC): {CapturedAtUtc}";
         }
     }
