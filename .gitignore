@@ -80,7 +80,3 @@ MIGRATION_CONTEXT.md
 *.zip
 *.pdf
 SIRMED_AR.slnx
-Assets/UI/Fonts/Metropolis/Metropolis-Bold SDF.asset
-Assets/UI/Fonts/Metropolis/Metropolis-Light SDF.asset
-Assets/UI/Fonts/Metropolis/Metropolis-Medium SDF.asset
-Assets/UI/Fonts/Metropolis/Metropolis-Regular SDF.asset
