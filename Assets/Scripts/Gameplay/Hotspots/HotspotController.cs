@@ -1,11 +1,13 @@
 namespace SIRMED.Gameplay.Hotspots
 {
-    using System;
-    using System.Collections.Generic;
+    using Cysharp.Threading.Tasks;
     using Google.XR.ARCoreExtensions;
     using SIRMED.Gameplay.Dialogue;
     using SIRMED.Managers;
     using SIRMED.UI;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading;
     using UnityEngine;
 
     /// <summary>
@@ -73,6 +75,8 @@ namespace SIRMED.Gameplay.Hotspots
         [Header("Malla / marcador visual (rotación)")]
         [Tooltip("Transform hijo con la malla del marcador. Se detecta automáticamente si está vacío.")]
         public Transform meshTransform;
+        private Vector3 meshOriginalPos;
+        private Vector3 meshOriginalSize;
 
         [Tooltip("Grados por segundo de rotación sobre el eje Y del marcador visual.")]
         public float rotationSpeed = 60f;
@@ -135,6 +139,15 @@ namespace SIRMED.Gameplay.Hotspots
         }
 
         // ── Lifecycle ─────────────────────────────────────────────────────────────
+        private void Awake()
+        {
+            if (meshTransform != null)
+            {
+                meshOriginalPos = meshTransform.localPosition;
+                meshOriginalSize = meshTransform.localScale;
+            }
+        }
+
         private void Start()
         {
             if (meshTransform == null && transform.childCount > 0)
@@ -176,6 +189,9 @@ namespace SIRMED.Gameplay.Hotspots
             HotspotSequence.Changed -= RefreshStageVisibility;
 
             HotspotPromptButton.Instance?.UnregisterHotspot(this);
+
+            _cts?.Cancel();
+            _cts?.Dispose();
         }
 
         private void OnEnable()
@@ -199,7 +215,6 @@ namespace SIRMED.Gameplay.Hotspots
             if (!IsAnchorReady()) return;
 
             ApplyRotationEffect();
-            //CheckProximity();
         }
 
         // ── Anclaje geoespacial ───────────────────────────────────────────────────
@@ -296,8 +311,7 @@ namespace SIRMED.Gameplay.Hotspots
         // ── Rotación del marcador ─────────────────────────────────────────────────
         private void ApplyRotationEffect()
         {
-            if (meshTransform == null) return;
-            if (_isNearby || _isPanelOpen) return;
+            if (meshTransform == null || rotationSpeed == 0 || _isNearby || _isPanelOpen) return;
 
             meshTransform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime, Space.Self);
         }
@@ -305,8 +319,18 @@ namespace SIRMED.Gameplay.Hotspots
         // ── Proximidad ────────────────────────────────────────────────────────────
         public void SwitchState()
         {
+            if (meshTransform != null && rotationSpeed != 0)
+            {
+                _cts?.Cancel();
+                _cts?.Dispose();
+                _cts = new CancellationTokenSource();
+            }
+
             if (!_isNearby)
             {
+                if (meshTransform != null && rotationSpeed != 0)
+                    SpotlightMesh().Forget();
+
                 _isNearby = true;
                 Debug.Log($"[Hotspot] Entrando a: {data.title}", gameObject);
                 if (!_isPanelOpen && !(_interactOnce && _hasBeenVisited))
@@ -314,6 +338,9 @@ namespace SIRMED.Gameplay.Hotspots
             }
             else if (_isNearby)
             {
+                if (meshTransform != null && rotationSpeed != 0)
+                    ReturnMesh().Forget();
+
                 _isNearby = false;
                 Debug.Log($"[Hotspot] Saliendo de: {data.title}", gameObject);
                 HotspotPromptButton.Instance?.UnregisterHotspot(this);
@@ -322,6 +349,50 @@ namespace SIRMED.Gameplay.Hotspots
                 // aquí hacía que el cierre corriera dos veces (doble avance de etapa).
                 if (_isInfoPanelOpen) ClosePanel(allowTrivia: false); // no encadenar trivia al alejarse
             }
+        }
+
+        private bool spotlight = false;
+        private CancellationTokenSource _cts = new();
+
+        private async UniTaskVoid SpotlightMesh()
+        {
+            float lerp = 0;
+            Vector3 newScale = meshOriginalSize * 0.5f;
+
+            while (lerp < 1)
+            {
+                meshTransform.position = Vector3.Lerp(meshTransform.position, _playerCamera.TransformPoint(new Vector3(0, 0.2f, 2.5f)), lerp);
+                meshTransform.localScale = Vector3.Lerp(meshTransform.localScale, newScale, lerp);
+
+                lerp += Time.deltaTime * 0.5f;
+                await UniTask.Yield(PlayerLoopTiming.LastPostLateUpdate, _cts.Token);
+            }
+            meshTransform.localScale = newScale;
+
+            spotlight = true;
+
+            while (spotlight)
+            {
+                meshTransform.position = _playerCamera.TransformPoint(new Vector3(0, 0.2f, 2.5f));
+                await UniTask.Yield(PlayerLoopTiming.LastPostLateUpdate, _cts.Token);
+            }
+        }
+
+        private async UniTaskVoid ReturnMesh()
+        {
+            spotlight = false;
+            float lerp = 0;
+
+            while (lerp < 1)
+            {
+                meshTransform.position = Vector3.Lerp(meshTransform.position, transform.TransformPoint(meshOriginalPos), lerp);
+                meshTransform.localScale = Vector3.Lerp(meshTransform.localScale, meshOriginalSize, lerp);
+
+                lerp += Time.deltaTime * 0.5f;
+                await UniTask.Yield(PlayerLoopTiming.LastPostLateUpdate, _cts.Token);
+            }
+
+            meshTransform.position = transform.TransformPoint(meshOriginalPos);
         }
 
         // ── Dispatch por tipo de acción ───────────────────────────────────────────

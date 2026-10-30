@@ -138,6 +138,7 @@ namespace SIRMED.UI
                 AnimatePanels(index).Forget();
 
                 StageManager.Instance?.GoToStage(stage);
+                HotspotsActivator.Instance?.DeactivateLastHotspot();
             }
             else
             {
