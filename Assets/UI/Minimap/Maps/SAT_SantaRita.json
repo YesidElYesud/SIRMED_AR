@@ -1,0 +1,9 @@
+{
+  "name": "SAT_SantaRita",
+  "centerLatitude": 6.190743,
+  "centerLongitude": -75.651374,
+  "metersPerPixel": 0.29296875,
+  "sizeMeters": 600.0,
+  "pixels": 2048,
+  "attribution": "© OpenStreetMap contributors"
+}

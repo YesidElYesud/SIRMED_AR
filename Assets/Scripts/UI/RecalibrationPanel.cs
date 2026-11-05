@@ -50,13 +50,13 @@ namespace SIRMED.UI
 
         [Header("Mensajes ({0} = precisión actual, {1} = requerida, en metros)")]
         [SerializeField, TextArea] private string _msgWaiting =
-            "Apunta la cámara a fachadas y calles cercanas y muévela despacio.\nPrecisión: {0:F1} m (se necesitan {1:F0} m)";
+            "Camina despacio y apunta la cámara a fachadas y calles cercanas.\nPrecisión actual: {0:F1} m";
         [SerializeField, TextArea] private string _msgWaitingNoTracking =
             "Buscando tu ubicación… apunta la cámara a fachadas y calles cercanas.";
         [SerializeField, TextArea] private string _msgAnchoring = "Reubicando los puntos…";
         [SerializeField, TextArea] private string _msgSuccess = "¡Listo! Los puntos se reubicaron.";
         [SerializeField, TextArea] private string _msgFailed =
-            "No se logró suficiente precisión. Intenta de nuevo con más edificios a la vista.";
+            "No se logró mejorar la ubicación: los puntos se quedan donde estaban. Intenta de nuevo con más casas a la vista.";
         [Tooltip("{0} = segundos restantes.")]
         [SerializeField, TextArea] private string _msgCooldown = "Podrás recalibrar de nuevo en {0:F0} s.";
         [SerializeField, TextArea] private string _msgInitialPending = "Los puntos aún se están ubicando por primera vez.";

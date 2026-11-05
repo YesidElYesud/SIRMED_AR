@@ -6832,12 +6832,10 @@ MonoBehaviour:
   _msgStartingCamera: "Iniciando la c\xE1mara\u2026 mueve el tel\xE9fono lentamente."
   _msgLocating: "Buscando tu ubicaci\xF3n. Apunta la c\xE1mara a fachadas y calles
     cercanas."
-  _msgLowAccuracy: "Ubicaci\xF3n imprecisa. Detente y apunta a los edificios cercanos
-    para mejorarla."
+  _msgLowAccuracy: "Ubicaci\xF3n imprecisa. Camina unos pasos despacio y apunta la c\xE1mara a las casas y la calle."
   _msgUnavailable: "La ubicaci\xF3n RA no est\xE1 disponible. Revisa tu conexi\xF3n
     a internet y el GPS."
-  _msgPlacingPoints: "Afinando tu ubicaci\xF3n para colocar los puntos. Apunta la
-    c\xE1mara a fachadas y calles."
+  _msgPlacingPoints: "Afinando tu ubicaci\xF3n para colocar los puntos. Camina unos pasos y apunta a las fachadas."
 --- !u!1 &1077720559976497962
 GameObject:
   m_ObjectHideFlags: 0
@@ -16027,6 +16025,11 @@ MonoBehaviour:
   worldRange: 60
   clampToEdge: 1
   edgePaddingPx: 6
+  mapData: {fileID: 0}
+  mapImage: {fileID: 2645322384720536909}
+  northUp: 1
+  alignmentInterval: 1
+  minAnchorSpread: 8
   routeDotPrefab: {fileID: 8620593047557653380, guid: 0c67dd5042e06b5408e37588459eaee1, type: 3}
   routeDotSpacing: 4
   showRouteFromLevel: 2
@@ -33321,6 +33324,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8899870920604682354}
   - {fileID: 6039180083067544110}
   - {fileID: 5429536268570086259}
   - {fileID: 54744747363937611}
@@ -33352,7 +33356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.105882354, g: 0.14901961, b: 0.21960784, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -33382,6 +33386,78 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Mask
   m_ShowMaskGraphic: 1
+--- !u!1 &5989794436639243727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8899870920604682354}
+  - component: {fileID: 3619188093398102952}
+  - component: {fileID: 2645322384720536909}
+  m_Layer: 5
+  m_Name: MapImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8899870920604682354
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5989794436639243727}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2022113175796323704}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3619188093398102952
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5989794436639243727}
+  m_CullTransparentMesh: 1
+--- !u!114 &2645322384720536909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5989794436639243727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &6039069235320826676
 GameObject:
   m_ObjectHideFlags: 0
@@ -41226,14 +41302,12 @@ MonoBehaviour:
   - {fileID: 5400003566735068547}
   - {fileID: 2746317715867435771}
   _resultSeconds: 2.5
-  _msgWaiting: "Apunta la c\xE1mara a fachadas y calles cercanas y mu\xE9vela despacio.\nPrecisi\xF3n:
-    {0:F1} m (se necesitan {1:F0} m)"
+  _msgWaiting: "Camina despacio y apunta la c\xE1mara a fachadas y calles cercanas.\nPrecisi\xF3n actual: {0:F1} m"
   _msgWaitingNoTracking: "Buscando tu ubicaci\xF3n\u2026 apunta la c\xE1mara a fachadas
     y calles cercanas."
   _msgAnchoring: "Reubicando los puntos\u2026"
   _msgSuccess: "\xA1Listo! Los puntos se reubicaron."
-  _msgFailed: "No se logr\xF3 suficiente precisi\xF3n. Intenta de nuevo con m\xE1s
-    edificios a la vista."
+  _msgFailed: "No se logr\xF3 mejorar la ubicaci\xF3n: los puntos se quedan donde estaban. Intenta de nuevo con m\xE1s casas a la vista."
   _msgCooldown: "Podr\xE1s recalibrar de nuevo en {0:F0} s."
   _msgInitialPending: "Los puntos a\xFAn se est\xE1n ubicando por primera vez."
   _msgUnavailable: "La recalibraci\xF3n no est\xE1 disponible en esta escena."

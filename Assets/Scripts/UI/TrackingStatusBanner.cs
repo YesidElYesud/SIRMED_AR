@@ -44,6 +44,8 @@ namespace SIRMED.UI
         [SerializeField] private double _maxHorizontalAccuracy = 15;
         [Tooltip("Precisión de orientación máxima aceptable, en grados.")]
         [SerializeField] private double _maxYawAccuracy = 25;
+        [Tooltip("Precisión vertical máxima aceptable, en metros (igual que GeoAnchorManager).")]
+        [SerializeField] private double _maxVerticalAccuracy = 5;
 
         [Header("Anti-parpadeo")]
         [Tooltip("Segundos seguidos con posición mala antes de mostrar el aviso.")]
@@ -61,12 +63,12 @@ namespace SIRMED.UI
         [SerializeField, TextArea] private string _msgLocating =
             "Buscando tu ubicación. Apunta la cámara a fachadas y calles cercanas.";
         [SerializeField, TextArea] private string _msgLowAccuracy =
-            "Ubicación imprecisa. Detente y apunta a los edificios cercanos para mejorarla.";
+            "Ubicación imprecisa. Camina unos pasos despacio y apunta la cámara a las casas y la calle.";
         [SerializeField, TextArea] private string _msgUnavailable =
             "La ubicación RA no está disponible. Revisa tu conexión a internet y el GPS.";
         [Tooltip("Precisión aceptable para el banner pero no todavía para GeoAnchorManager (8 m): los puntos aún no aparecen.")]
         [SerializeField, TextArea] private string _msgPlacingPoints =
-            "Afinando tu ubicación para colocar los puntos. Apunta la cámara a fachadas y calles.";
+            "Afinando tu ubicación para colocar los puntos. Camina unos pasos y apunta a las fachadas.";
 
         private bool _reliable;
         private float _goodTimer;
@@ -146,6 +148,7 @@ namespace SIRMED.UI
 
             GeospatialPose pose = _earthManager.CameraGeospatialPose;
             if (pose.HorizontalAccuracy > _maxHorizontalAccuracy ||
+                pose.VerticalAccuracy > _maxVerticalAccuracy ||
                 pose.OrientationYawAccuracy > _maxYawAccuracy)
                 return _msgLowAccuracy;
 

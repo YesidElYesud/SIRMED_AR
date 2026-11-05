@@ -1,0 +1,9 @@
+{
+  "name": "SAT_PlazaLibertad",
+  "centerLatitude": 6.244812,
+  "centerLongitude": -75.574613,
+  "metersPerPixel": 0.29296875,
+  "sizeMeters": 600.0,
+  "pixels": 2048,
+  "attribution": "© OpenStreetMap contributors"
+}
