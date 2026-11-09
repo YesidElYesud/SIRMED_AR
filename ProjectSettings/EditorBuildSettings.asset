@@ -41,13 +41,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AzulCasa.unity
     guid: 89e0265697f942caaf6d5ac6e59c402d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Legacy/HotspotSurvey.unity
     guid: eb432f203391d89e860ef8de232bd122
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Tests/Geovisor Test/GeovisorTest.unity
     guid: 4aeea8081c65ad34c81fac5d8fdbd903
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Tests/Rain Test/RainTest.unity
     guid: 3f61aa3b6a089784db62fd302327c73d
   m_configObjects:

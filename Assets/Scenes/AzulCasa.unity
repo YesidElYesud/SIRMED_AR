@@ -241,9 +241,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 6.328948
-  _longitude: -75.5676715
-  _altitude: 1549.58
+  _latitude: 6.329232333
+  _longitude: -75.568236333
+  _altitude: 1543.946666667
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -258,7 +258,7 @@ Transform:
   m_GameObject: {fileID: 86078352}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.3914, y: -0.4201, z: -10.3978}
+  m_LocalPosition: {x: -35.12, y: -6.05346, z: 21.05368}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -822,10 +822,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 6.328892
-  _longitude: -75.567564
-  _altitude: 1549.46
-  _altitudeType: 1
+  _latitude: 6.329175491
+  _longitude: -75.568340372
+  _altitude: 1545.125
+  _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
   _anchorManager: {fileID: 596133976}
@@ -860,7 +860,7 @@ Transform:
   m_GameObject: {fileID: 190874624}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.2887, y: -0.5401, z: -16.5922}
+  m_LocalPosition: {x: -46.63419, y: -4.87519, z: 14.76604}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2551,9 +2551,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 6.328952
-  _longitude: -75.567725
-  _altitude: 1549.6
+  _latitude: 6.329262
+  _longitude: -75.568155
+  _altitude: 1543.01
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -2568,7 +2568,7 @@ Transform:
   m_GameObject: {fileID: 793803397}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.4704, y: -0.4, z: -9.9553}
+  m_LocalPosition: {x: -26.11865, y: -6.9901, z: 24.33524}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3000,9 +3000,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 6.3289245
-  _longitude: -75.5676185
-  _altitude: 1549.53
+  _latitude: 6.329202667
+  _longitude: -75.568317667
+  _altitude: 1544.883333333
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -3017,7 +3017,7 @@ Transform:
   m_GameObject: {fileID: 850151904}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.2571, y: -0.4701, z: -12.9972}
+  m_LocalPosition: {x: -44.12135, y: -5.11684, z: 17.77212}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3805,9 +3805,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 6.329049
-  _longitude: -75.56791
-  _altitude: 1549.95
+  _latitude: 6.329229009
+  _longitude: -75.568297128
+  _altitude: 1544.62
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -3822,7 +3822,7 @@ Transform:
   m_GameObject: {fileID: 1315811300}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.9961, y: -0.05, z: 0.7743}
+  m_LocalPosition: {x: -41.84831, y: -5.38017, z: 20.68601}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4191,9 +4191,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 6.329042
-  _longitude: -75.567919
-  _altitude: 1549.95
+  _latitude: 6.329212
+  _longitude: -75.568291
+  _altitude: 1544.62
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -4208,7 +4208,7 @@ Transform:
   m_GameObject: {fileID: 1647742810}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.8800069, z: -0, w: 0.4749609}
-  m_LocalPosition: {x: 0, y: -0.05, z: 0}
+  m_LocalPosition: {x: -41.17009, y: -5.38016, z: 18.80452}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4347,9 +4347,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 6.328915
-  _longitude: -75.567538
-  _altitude: 1549.36
+  _latitude: 6.329173
+  _longitude: -75.568399
+  _altitude: 1545.82
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -4364,7 +4364,7 @@ Transform:
   m_GameObject: {fileID: 1897917795}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 42.1662, y: -0.6402, z: -14.0481}
+  m_LocalPosition: {x: -53.12271, y: -4.18024, z: 14.49056}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4665,9 +4665,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
   _altitudeOffset: NaN
-  _latitude: 6.328947
-  _longitude: -75.567623
-  _altitude: 1549.55
+  _latitude: 6.329201991
+  _longitude: -75.568265872
+  _altitude: 1544.385
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -4731,7 +4731,7 @@ Transform:
   m_GameObject: {fileID: 2090281926}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.759, y: -0.4501, z: -10.5084}
+  m_LocalPosition: {x: -38.3891, y: -5.61514, z: 17.69733}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -825,7 +825,7 @@ MonoBehaviour:
   _latitude: 7.040093859613399
   _longitude: -73.8399541300761
   _altitude: 99.04177790042013
-  _altitudeType: 1
+  _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
   _anchorManager: {fileID: 596133976}

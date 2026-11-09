@@ -31,6 +31,10 @@ namespace SIRMED.Managers
     ///      combinado H + V + rumbo, ver PoseErrorScore); si no mejora, se conservan. Mueve
     ///      cada objeto (y cualquier otro hijo del ancla vieja, p. ej.
     ///      el modelo del Líder) al ancla nueva y destruyendo la vieja.
+    ///   4. Corrección de altura (en cada anclaje de 2, 2b y 3): compara la altitud del
+    ///      teléfono con la de los hotspots a ≤ 20 m y sube/baja todas las anclas WGS84 la
+    ///      diferencia, para que el error vertical de la sesión no deje los puntos elevados
+    ///      o hundidos. Ver ComputeAltitudeCorrection.
     ///
     /// El resultado es idéntico a ARGeospatialCreatorAnchor.FinishAnchor: el objeto queda
     /// hijo directo de un ARGeospatialAnchor con pose local cero, así que todos los
@@ -84,6 +88,18 @@ namespace SIRMED.Managers
         [Tooltip("Si el ancla inicial salió por fallback, reanclar solo una vez al alcanzar la precisión.")]
         [SerializeField] private bool _autoReanchorAfterFallback = true;
 
+        [Header("Corrección de altura (ver ComputeAltitudeCorrection)")]
+        [Tooltip("Al anclar, compara la altitud del teléfono con la de los hotspots cercanos y sube/baja TODAS las anclas WGS84 esa diferencia.")]
+        [SerializeField] private bool _altitudeCorrection = true;
+        [Tooltip("Solo se usan hotspots a esta distancia horizontal o menos, en metros. Sin ninguno cerca no se corrige.")]
+        [SerializeField] private float _altitudeReferenceRadius = 20f;
+        [Tooltip("Si la diferencia supera este valor, en metros, se considera lectura mala y no se corrige.")]
+        [SerializeField] private float _maxAltitudeCorrection = 10f;
+        [Tooltip("Fija la altura de cada ancla al crearla: ARCore sigue ajustando la posición horizontal, pero sus cambios de altitud estimada ya no suben/bajan los hotspots.")]
+        [SerializeField] private bool _lockAnchorHeight = true;
+        [Tooltip("Cada cuántos segundos escribir en el log la línea '[GeoAnchor] Diag' (0 = nunca).")]
+        [SerializeField] private float _diagnosticLogInterval = 5f;
+
         // ── Eventos ────────────────────────────────────────────────────────────────
         /// <summary>Se dispara al terminar el anclaje inicial.</summary>
         public event Action InitialAnchoringCompleted;
@@ -116,14 +132,30 @@ namespace SIRMED.Managers
 
         public bool CanRecalibrate => _initialDone && !IsRecalibrating && CooldownRemaining <= 0f;
 
+        /// <summary>Metros que se sumaron a la altitud de las anclas WGS84 actuales (0 = sin corrección).</summary>
+        public double AltitudeCorrection { get; private set; }
+
         // ── Internos ───────────────────────────────────────────────────────────────
         private class Entry
         {
             public ARGeospatialCreatorAnchor creator;
             public Quaternion rotation;
+            public bool isHotspot; // punto levantado en campo: sirve de referencia de altura
         }
 
         private readonly List<Entry> _entries = new List<Entry>();
+
+        // Altura fijada por ancla (ver LateUpdate). captured = ya se leyó su primera pose válida.
+        private class HeightLock
+        {
+            public bool captured;
+            public float lockedY;   // localPosition.y fijada (espacio de sesión AR)
+            public float arcoreY;   // última localPosition.y que puso ARCore (para el diagnóstico)
+        }
+
+        private readonly Dictionary<ARGeospatialAnchor, HeightLock> _heightLocks =
+            new Dictionary<ARGeospatialAnchor, HeightLock>();
+        private readonly List<ARGeospatialAnchor> _deadLocks = new List<ARGeospatialAnchor>();
         private bool _initialDone;
         private bool _autoReanchorPending;
         private double _anchoredScore = double.PositiveInfinity; // PoseErrorScore al crear las anclas actuales
@@ -133,6 +165,7 @@ namespace SIRMED.Managers
         // Metros de error lateral por grado de rumbo a ~20 m (distancia típica a un hotspot).
         private const double MetersPerYawDegree = 0.35;
         private float _nextRecalibrationTime;
+        private float _nextDiagnosticTime;
 
         // ── Lifecycle ──────────────────────────────────────────────────────────────
         private void Awake()
@@ -155,7 +188,12 @@ namespace SIRMED.Managers
             foreach (var creator in creators)
             {
                 creator.enabled = false;
-                _entries.Add(new Entry { creator = creator, rotation = creator.transform.rotation });
+                _entries.Add(new Entry
+                {
+                    creator = creator,
+                    rotation = creator.transform.rotation,
+                    isHotspot = creator.GetComponent<SIRMED.Gameplay.Hotspots.HotspotController>() != null,
+                });
             }
             Debug.Log($"[GeoAnchor] {_entries.Count} anclas bajo control; se anclarán con precisión ≤ {_maxHorizontalAccuracy} m.");
         }
@@ -181,6 +219,89 @@ namespace SIRMED.Managers
             CurrentHorizontalAccuracy = IsEarthTracking()
                 ? _earthManager.CameraGeospatialPose.HorizontalAccuracy
                 : double.NaN;
+
+            if (_diagnosticLogInterval > 0f && _initialDone && Time.time >= _nextDiagnosticTime)
+            {
+                _nextDiagnosticTime = Time.time + _diagnosticLogInterval;
+                LogHeightDiagnostic();
+            }
+        }
+
+        /// <summary>
+        /// Fija la altura de las anclas. ARGeospatialAnchor.Update() copia en cada frame la pose
+        /// nativa a localPosition, y ARCore la recalcula con cada nueva estimación de la pose
+        /// Earth: si su altitud estimada salta 1–2 m (pasa cuando la precisión vertical
+        /// empeora), todos los hotspots suben o bajan con ella aunque el teléfono no se mueva
+        /// (medido en campo, 9-nov). Aquí, después de ese Update, se conserva la x/z de ARCore y
+        /// se reemplaza la y por la que tenía el ancla en su primer frame válido, cuando se
+        /// calculó la corrección de altura. La altura queda en el espacio de la sesión AR
+        /// (tracking visual del teléfono, que casi no deriva en vertical). Recalibrar crea
+        /// anclas nuevas y vuelve a fijar.
+        /// </summary>
+        private void LateUpdate()
+        {
+            if (!_lockAnchorHeight || _heightLocks.Count == 0) return;
+
+            foreach (KeyValuePair<ARGeospatialAnchor, HeightLock> kv in _heightLocks)
+            {
+                ARGeospatialAnchor anchor = kv.Key;
+                if (anchor == null) { _deadLocks.Add(anchor); continue; } // destruida al recalibrar
+
+                HeightLock hl = kv.Value;
+                Vector3 p = anchor.transform.localPosition;
+                if (!hl.captured)
+                {
+                    if (p == Vector3.zero) continue; // aún sin pose (los primeros frames leen 0,0,0)
+                    hl.captured = true;
+                    hl.lockedY = p.y;
+                }
+                hl.arcoreY = p.y;
+                if (p.y != hl.lockedY)
+                    anchor.transform.localPosition = new Vector3(p.x, hl.lockedY, p.z);
+            }
+
+            if (_deadLocks.Count > 0)
+            {
+                foreach (ARGeospatialAnchor dead in _deadLocks) _heightLocks.Remove(dead);
+                _deadLocks.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Solo diagnóstico (no cambia nada): cada _diagnosticLogInterval s escribe la pose Earth y
+        /// cuánto más arriba (+) o abajo (−) que el teléfono está el hotspot anclado más cercano.
+        /// Los hotspots se levantaron a la altura del teléfono, así que lo esperado es ≈ 0 más la
+        /// pendiente. Si ese valor cambia en la misma sesión sin recalibrar, ARCore está moviendo
+        /// las anclas por su cuenta.
+        /// </summary>
+        private void LogHeightDiagnostic()
+        {
+            Camera cam = Camera.main;
+            if (cam == null || !IsEarthTracking()) return;
+
+            Vector3 camPos = cam.transform.position;
+            ARGeospatialCreatorAnchor nearest = null;
+            float best = float.PositiveInfinity;
+            foreach (Entry e in _entries)
+            {
+                ARGeospatialCreatorAnchor c = e.creator;
+                if (c == null || !e.isHotspot) continue;
+                Transform parent = c.transform.parent;
+                if (parent == null || parent.GetComponent<ARGeospatialAnchor>() == null) continue;
+                Vector3 d = c.transform.position - camPos;
+                d.y = 0f;
+                if (d.magnitude < best) { best = d.magnitude; nearest = c; }
+            }
+            if (nearest == null) return;
+
+            GeospatialPose p = _earthManager.CameraGeospatialPose;
+            float dy = nearest.transform.position.y - camPos.y;
+            string drift = _heightLocks.TryGetValue(nearest.transform.parent.GetComponent<ARGeospatialAnchor>(), out HeightLock hl) && hl.captured
+                ? $"{hl.arcoreY - hl.lockedY:+0.0;-0.0} m" : "sin fijar";
+            Debug.Log($"[GeoAnchor] Diag: alt teléfono {p.Altitude:F1} m (V {p.VerticalAccuracy:F1}, H {p.HorizontalAccuracy:F1}, " +
+                      $"rumbo {p.OrientationYawAccuracy:F1}°) | '{nearest.name}' a {best:F1} m, {dy:+0.0;-0.0} m respecto al teléfono " +
+                      $"(guardada {nearest.Altitude - p.Altitude:+0.0;-0.0} m) | corrección {AltitudeCorrection:+0.0;-0.0} m | " +
+                      $"ARCore la movería {drift} (altura {(_lockAnchorHeight ? "fija" : "libre")})");
         }
 
         // ── API pública ────────────────────────────────────────────────────────────
@@ -341,6 +462,7 @@ namespace SIRMED.Managers
                 Debug.Log($"[GeoAnchor] Anclando con H {p.HorizontalAccuracy:F1} m, V {p.VerticalAccuracy:F1} m, " +
                           $"rumbo {p.OrientationYawAccuracy:F1}° (error combinado {_anchoredScore:F1}).");
             }
+            AltitudeCorrection = ComputeAltitudeCorrection();
             int ok = 0, failed = 0;
 
             foreach (Entry entry in _entries)
@@ -353,7 +475,7 @@ namespace SIRMED.Managers
                 switch (c.AltitudeType)
                 {
                     case AnchorAltitudeType.WGS84:
-                        anchor = _anchorManager.AddAnchor(c.Latitude, c.Longitude, c.Altitude, entry.rotation);
+                        anchor = _anchorManager.AddAnchor(c.Latitude, c.Longitude, c.Altitude + AltitudeCorrection, entry.rotation);
                         break;
 
                     case AnchorAltitudeType.Terrain:
@@ -387,6 +509,7 @@ namespace SIRMED.Managers
                 }
 
                 Attach(c.transform, anchor);
+                _heightLocks[anchor] = new HeightLock();
                 ok++;
             }
 
@@ -414,6 +537,66 @@ namespace SIRMED.Managers
                 oldParent.GetChild(i).SetParent(newAnchor.transform, false);
 
             Destroy(oldAnchor.gameObject);
+        }
+
+        /// <summary>
+        /// Corrección de altura. Todas las anclas se crean con la misma pose Earth, así que su
+        /// error vertical es el mismo para todas: si la altitud estimada del teléfono está b metros
+        /// arriba, todas quedan b metros abajo (y al revés). Los hotspots se levantaron con el
+        /// teléfono en la mano (HotspotSurveyController guarda la altitud de la cámara), así que
+        /// parado cerca de ellos la altitud del teléfono debería ser la de los hotspots cercanos.
+        /// La diferencia es b y se suma a todas las anclas WGS84 (Terrain/Rooftop no: su altura
+        /// la pone Google). Se interpola entre los 3 hotspots más cercanos para no confundir la
+        /// pendiente de la calle con error. Devuelve 0 (sin corrección) si está apagada, no hay
+        /// hotspots a ≤ _altitudeReferenceRadius o la diferencia supera _maxAltitudeCorrection.
+        /// </summary>
+        private double ComputeAltitudeCorrection()
+        {
+            if (!_altitudeCorrection || !IsEarthTracking()) return 0;
+
+            GeospatialPose cam = _earthManager.CameraGeospatialPose;
+            double cosLat = Math.Cos(cam.Latitude * Math.PI / 180.0);
+            const double metersPerDegree = 111320.0;
+
+            var near = new List<(double dist, double alt, string name)>();
+            foreach (Entry e in _entries)
+            {
+                ARGeospatialCreatorAnchor c = e.creator;
+                if (c == null || !e.isHotspot || c.AltitudeType != AnchorAltitudeType.WGS84) continue;
+                double north = (c.Latitude - cam.Latitude) * metersPerDegree;
+                double east = (c.Longitude - cam.Longitude) * metersPerDegree * cosLat;
+                double dist = Math.Sqrt(north * north + east * east);
+                if (dist <= _altitudeReferenceRadius) near.Add((dist, c.Altitude, c.name));
+            }
+
+            if (near.Count == 0)
+            {
+                Debug.Log($"[GeoAnchor] Altura: sin hotspots a ≤ {_altitudeReferenceRadius} m; no se corrige.");
+                return 0;
+            }
+
+            near.Sort((a, b) => a.dist.CompareTo(b.dist));
+            int n = Math.Min(3, near.Count);
+            double weightSum = 0, altSum = 0;
+            for (int i = 0; i < n; i++)
+            {
+                double w = 1.0 / Math.Max(near[i].dist * near[i].dist, 1.0); // a menos de 1 m pesan igual
+                weightSum += w;
+                altSum += w * near[i].alt;
+            }
+            double expected = altSum / weightSum;
+            double delta = cam.Altitude - expected;
+
+            if (Math.Abs(delta) > _maxAltitudeCorrection)
+            {
+                Debug.LogWarning($"[GeoAnchor] Altura: diferencia {delta:+0.0;-0.0} m (> {_maxAltitudeCorrection} m) con " +
+                                 $"'{near[0].name}' a {near[0].dist:F0} m; se descarta y no se corrige.");
+                return 0;
+            }
+
+            Debug.Log($"[GeoAnchor] Altura: teléfono {cam.Altitude:F1} m, esperado {expected:F1} m ({n} hotspots, " +
+                      $"más cercano '{near[0].name}' a {near[0].dist:F0} m) → anclas WGS84 {delta:+0.0;-0.0} m.");
+            return delta;
         }
 
         // ── Helpers ────────────────────────────────────────────────────────────────
