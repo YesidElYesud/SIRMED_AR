@@ -2277,6 +2277,12 @@ MonoBehaviour:
   worldRange: 60
   clampToEdge: 1
   edgePaddingPx: 6
+  mapData: {fileID: 0}
+  mapImage: {fileID: 0}
+  northUp: 1
+  alignmentInterval: 1
+  minAnchorSpread: 8
+  maxAnchorDistance: 2000
   routeDotPrefab: {fileID: 8620593047557653380, guid: 0c67dd5042e06b5408e37588459eaee1, type: 3}
   routeDotSpacing: 4
   showRouteFromLevel: 2
@@ -6753,6 +6759,14 @@ MonoBehaviour:
   tint: {r: 0.15, g: 0.95, b: 0.35, a: 0.85}
   fadeInDuration: 0.8
   fadeOutDuration: 0.5
+  minSegmentLength: 2
+  stableSeconds: 1
+  stableTolerance: 0.3
+  distanceTolerance: 2
+  distanceToleranceRatio: 0.25
+  altitudeTolerance: 2
+  maxWaitForAllWaypoints: 20
+  followAnchorsThreshold: 0.5
 --- !u!23 &313519806
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8696,6 +8710,8 @@ MonoBehaviour:
   topicText: {fileID: 546797787}
   questionText: {fileID: 1051867727}
   choicePanel: {fileID: 630969291}
+  _feedbackPlaceholder: Elige la respuesta correcta.
+  _stageTrivias: []
   _hudElementsToHide:
   - {fileID: 109263085}
   - {fileID: 1023373254}
@@ -9420,6 +9436,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Geospatial.GeospatialDiagnostics
   _earthManager: {fileID: 596133974}
   _logInterval: 5
+  _vpsCheckAttempts: 3
+  _vpsRetryDelay: 10
 --- !u!4 &467740855
 Transform:
   m_ObjectHideFlags: 0
@@ -12745,17 +12763,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1716106760466442780, guid: ea08100814d374941a3d82a1576e67ce, type: 3}
   m_PrefabInstance: {fileID: 629642550}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &629642552 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 824006592009776731, guid: ea08100814d374941a3d82a1576e67ce, type: 3}
-  m_PrefabInstance: {fileID: 629642550}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &630969289
 GameObject:
   m_ObjectHideFlags: 0
@@ -20856,35 +20863,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f3df60257a967f4c95bb415b1ee0a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.UI.RiskLevelIndicator
-  stageRiskDefaults:
-  - stage: 0
-    defaultRiskLevel: 0
-  - stage: 1
-    defaultRiskLevel: 1
-  - stage: 2
-    defaultRiskLevel: 2
-  - stage: 3
-    defaultRiskLevel: 3
-  - stage: 4
-    defaultRiskLevel: 4
   indicatorRoot: {fileID: 151113665}
-  levelImage: {fileID: 1205527562}
-  fondoBtn: {fileID: 1205527561}
-  btnN1: {fileID: 1779231034}
-  btnN2: {fileID: 1947303059}
-  btnN3: {fileID: 829738638}
-  btnN4: {fileID: 1416660976}
-  panelRoot: {fileID: 1670585006}
-  panelImage: {fileID: 655371894}
-  panelExitButton: {fileID: 629642552}
-  spriteN1: {fileID: 21300000, guid: e0d95811562c691ffaa0c80d03f999b8, type: 3}
-  spriteN2: {fileID: 21300000, guid: 0ae09c6b6f77b01fa80c0614947b7460, type: 3}
-  spriteN3: {fileID: 21300000, guid: f250508fe196b1257819e35169198fe2, type: 3}
-  spriteN4: {fileID: 21300000, guid: b15c40efc501ed779850d869fe2431c7, type: 3}
-  panelSpriteN1: {fileID: 21300000, guid: 12def1b4f3a8ecfe8b6e9b2a3a55b664, type: 3}
-  panelSpriteN2: {fileID: 21300000, guid: aaec9a2f2bd3da9699a9c440e7116981, type: 3}
-  panelSpriteN3: {fileID: 21300000, guid: 85056f4a9d9a6b4a4837a44c2179ffc6, type: 3}
-  panelSpriteN4: {fileID: 21300000, guid: 54e7d9a7ea8e47b6794613cf40b36ec6, type: 3}
+  btnsN: []
+  btnsPanel: []
+  bg: {fileID: 0}
+  description: {fileID: 0}
+  descriptionText: {fileID: 0}
+  riskTexts: []
   pulseSpeedN3: 1.5
   pulseSpeedN4: 2.5
   pulseAmplitude: 0.07
@@ -38847,6 +38832,7 @@ MonoBehaviour:
   _messageText: {fileID: 1520497107}
   _maxHorizontalAccuracy: 15
   _maxYawAccuracy: 25
+  _maxVerticalAccuracy: 5
   _showDelay: 1.5
   _hideDelay: 1
   _hideInEditor: 1
@@ -38857,6 +38843,8 @@ MonoBehaviour:
     para mejorarla."
   _msgUnavailable: "La ubicaci\xF3n RA no est\xE1 disponible. Revisa tu conexi\xF3n
     a internet y el GPS."
+  _msgPlacingPoints: "Afinando tu ubicaci\xF3n para colocar los puntos. Camina unos
+    pasos y apunta a las fachadas."
 --- !u!222 &1949433361
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -42602,6 +42590,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 569233391}
     - target: {fileID: 6169024265861012582, guid: c01953915d86b2042b40e356131176fc, type: 3}
+      propertyPath: riverLoft
+      value: 
+      objectReference: {fileID: 7390732089197708071}
+    - target: {fileID: 6169024265861012582, guid: c01953915d86b2042b40e356131176fc, type: 3}
       propertyPath: fogTransform
       value: 
       objectReference: {fileID: 334032084}
@@ -42715,6 +42707,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eeeedfb4c93c0f54ab75370ed258a49c, type: 3}
+--- !u!114 &7390732089197708071 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1317406887272202247, guid: eeeedfb4c93c0f54ab75370ed258a49c, type: 3}
+  m_PrefabInstance: {fileID: 7390732089197708070}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3f00a79918dc4a18a050534219a9842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Splines.Examples::Unity.Splines.Examples.LoftRoadBehaviour
 --- !u!1001 &8495057168417754611
 PrefabInstance:
   m_ObjectHideFlags: 0

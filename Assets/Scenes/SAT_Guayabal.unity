@@ -504,6 +504,18 @@ Transform:
   - {fileID: 2074323953}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &144330442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574645732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48df59ac2399ef343a95b2b49e9941d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Environment.RouteWaypoint
 --- !u!1 &167239150
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,7 +770,7 @@ MonoBehaviour:
   _altitudeOffset: NaN
   _latitude: 6.206477
   _longitude: -75.613326
-  _altitude: 1723.0
+  _altitude: 1723
   _altitudeType: 1
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -877,6 +889,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &249429438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030394768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48df59ac2399ef343a95b2b49e9941d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Environment.RouteWaypoint
 --- !u!1 &251239518
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,6 +1051,21 @@ Transform:
   - {fileID: 13387046}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 3.008, z: 0}
+--- !u!4 &269652500
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030394768}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 57.5646, y: -12.7003, z: 21.7916}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &275380238
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1093,6 +1132,48 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1064805304693677970, guid: 2f3b62b87b855124190d18f9f5b5dd94, type: 3}
   m_PrefabInstance: {fileID: 275380238}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &283112237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574645732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b3d0e3f52dfe4243aceaba16f9cd0c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
+  _altitudeOffset: NaN
+  _latitude: 6.206477
+  _longitude: -75.613326
+  _altitude: 1723
+  _altitudeType: 0
+  _useEditorAltitudeOverride: 0
+  _editorAltitudeOverride: 0
+  _anchorManager: {fileID: 596133976}
+  Origin: {fileID: 692865340}
+--- !u!114 &292256249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450856051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b3d0e3f52dfe4243aceaba16f9cd0c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
+  _altitudeOffset: NaN
+  _latitude: 6.206525
+  _longitude: -75.613312
+  _altitude: 1724.35
+  _altitudeType: 0
+  _useEditorAltitudeOverride: 0
+  _editorAltitudeOverride: 0
+  _anchorManager: {fileID: 596133976}
+  Origin: {fileID: 692865340}
 --- !u!1 &313519804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,6 +1531,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6691520476842585154, guid: eeeedfb4c93c0f54ab75370ed258a49c, type: 3}
   m_PrefabInstance: {fileID: 7390732089197708070}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &347511711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798482222}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 63.0997, y: -11.8404, z: 40.5966}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &352252986
 GameObject:
   m_ObjectHideFlags: 0
@@ -1631,6 +1727,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9f1461b93b7394f9be7c39d520c37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.UI.HotspotUIPanel
+--- !u!1 &450856051
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1115732201}
+  - component: {fileID: 292256249}
+  - component: {fileID: 467797194}
+  m_Layer: 0
+  m_Name: WP_RutaA_05
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &467740853
 GameObject:
   m_ObjectHideFlags: 0
@@ -1662,6 +1776,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Geospatial.GeospatialDiagnostics
   _earthManager: {fileID: 596133974}
   _logInterval: 5
+  _vpsCheckAttempts: 3
+  _vpsRetryDelay: 10
 --- !u!4 &467740855
 Transform:
   m_ObjectHideFlags: 0
@@ -1677,6 +1793,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &467797194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450856051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48df59ac2399ef343a95b2b49e9941d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Environment.RouteWaypoint
+--- !u!114 &520324942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585969420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b3d0e3f52dfe4243aceaba16f9cd0c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
+  _altitudeOffset: NaN
+  _latitude: 6.206084
+  _longitude: -75.613605
+  _altitude: 1715.96
+  _altitudeType: 0
+  _useEditorAltitudeOverride: 0
+  _editorAltitudeOverride: 0
+  _anchorManager: {fileID: 596133976}
+  Origin: {fileID: 692865340}
 --- !u!198 &556970237 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 788108366894626214, guid: eeeedfb4c93c0f54ab75370ed258a49c, type: 3}
@@ -1824,6 +1973,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Utils.HDRLightEstimation
   m_CameraManager: {fileID: 791148985}
   m_Light: {fileID: 569233391}
+--- !u!1 &574645732
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 873824800}
+  - component: {fileID: 283112237}
+  - component: {fileID: 144330442}
+  m_Layer: 0
+  m_Name: WP_RutaA_04
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &582981026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1967,7 +2134,7 @@ Transform:
   m_GameObject: {fileID: 582981026}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0, y: -0.43, z: 0.0}
+  m_LocalPosition: {x: 0, y: -0.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2012,6 +2179,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5858064494718143441, guid: 7961f7502b016d745affa0660185a90b, type: 3}
   m_PrefabInstance: {fileID: 8495057168417754611}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &608586625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030394768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b3d0e3f52dfe4243aceaba16f9cd0c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
+  _altitudeOffset: NaN
+  _latitude: 6.206147
+  _longitude: -75.613556
+  _altitude: 1716.3
+  _altitudeType: 0
+  _useEditorAltitudeOverride: 0
+  _editorAltitudeOverride: 0
+  _anchorManager: {fileID: 596133976}
+  Origin: {fileID: 692865340}
 --- !u!114 &613754628 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8631920369751935585, guid: 91c3cf727cb649e4caa1f9553c79956e, type: 3}
@@ -2086,10 +2274,10 @@ MonoBehaviour:
   _originAuthority: 0
   _latitude: 6.20595
   _longitude: -75.614076
-  _height: 1729.0
-  _ecefX: 1575862.5825827143
-  _ecefY: -6143845.304213678
-  _ecefZ: 685091.1310435969
+  _height: 1729
+  _ecefX: 1575862.5825827161
+  _ecefY: -6143845.3042136775
+  _ecefZ: 685091.131043597
   _scale: 1
 --- !u!4 &692865343
 Transform:
@@ -2184,6 +2372,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 74087336771765925, guid: 7961f7502b016d745affa0660185a90b, type: 3}
   m_PrefabInstance: {fileID: 8495057168417754611}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &803329760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798482222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48df59ac2399ef343a95b2b49e9941d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Environment.RouteWaypoint
 --- !u!1 &806053702
 GameObject:
   m_ObjectHideFlags: 0
@@ -2562,6 +2762,66 @@ Transform:
   - {fileID: 1746172489}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 3.008, z: 0}
+--- !u!114 &850565283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585969420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48df59ac2399ef343a95b2b49e9941d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Environment.RouteWaypoint
+--- !u!4 &873824800
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574645732}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 83.0259, y: -6.0008, z: 58.2954}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1030394768
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 269652500}
+  - component: {fileID: 608586625}
+  - component: {fileID: 249429438}
+  m_Layer: 0
+  m_Name: WP_RutaA_02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1115732201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450856051}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 84.5758, y: -4.6509, z: 63.605}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1126923715
 GameObject:
   m_ObjectHideFlags: 0
@@ -2897,6 +3157,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1406539727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798482222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b3d0e3f52dfe4243aceaba16f9cd0c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
+  _altitudeOffset: NaN
+  _latitude: 6.206317
+  _longitude: -75.613506
+  _altitude: 1717.16
+  _altitudeType: 0
+  _useEditorAltitudeOverride: 0
+  _editorAltitudeOverride: 0
+  _anchorManager: {fileID: 596133976}
+  Origin: {fileID: 692865340}
 --- !u!1 &1476232294
 GameObject:
   m_ObjectHideFlags: 0
@@ -2946,17 +3227,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1514679254 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3426698248847682558, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
-  m_PrefabInstance: {fileID: 3152001825135072179}
+--- !u!1 &1585969420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f9f1461b93b7394f9be7c39d520c37b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.UI.HotspotUIPanel
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1813390613}
+  - component: {fileID: 520324942}
+  - component: {fileID: 850565283}
+  m_Layer: 0
+  m_Name: WP_RutaA_01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1001 &1588341506
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3099,7 +3387,7 @@ Transform:
   m_GameObject: {fileID: 1647742810}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.8800069, z: -0, w: 0.4749609}
-  m_LocalPosition: {x: 0.0, y: -0.43, z: 0.0}
+  m_LocalPosition: {x: 0, y: -0.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3184,17 +3472,39 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1bd3199cb1763714399f28ba8c80dcc3, type: 3}
   m_PrefabInstance: {fileID: 1746172488}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1838341724 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3793126942745561339, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
-  m_PrefabInstance: {fileID: 3152001825135072179}
+--- !u!1 &1798482222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f9f1461b93b7394f9be7c39d520c37b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.UI.HotspotUIPanel
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 347511711}
+  - component: {fileID: 1406539727}
+  - component: {fileID: 803329760}
+  m_Layer: 0
+  m_Name: WP_RutaA_03
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1813390613
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585969420}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 52.1403, y: -13.0402, z: 14.8227}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1981437417 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 6352008540324496872, guid: 2f3b62b87b855124190d18f9f5b5dd94, type: 3}
@@ -8489,6 +8799,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 569233391}
     - target: {fileID: 6169024265861012582, guid: c01953915d86b2042b40e356131176fc, type: 3}
+      propertyPath: riverLoft
+      value: 
+      objectReference: {fileID: 7390732089197708071}
+    - target: {fileID: 6169024265861012582, guid: c01953915d86b2042b40e356131176fc, type: 3}
       propertyPath: fogTransform
       value: 
       objectReference: {fileID: 334032084}
@@ -8602,6 +8916,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eeeedfb4c93c0f54ab75370ed258a49c, type: 3}
+--- !u!114 &7390732089197708071 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1317406887272202247, guid: eeeedfb4c93c0f54ab75370ed258a49c, type: 3}
+  m_PrefabInstance: {fileID: 7390732089197708070}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3f00a79918dc4a18a050534219a9842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Splines.Examples::Unity.Splines.Examples.LoftRoadBehaviour
 --- !u!1001 &8495057168417754611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8659,336 +8984,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7961f7502b016d745affa0660185a90b, type: 3}
---- !u!1 &1585969420
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1813390613}
-  - component: {fileID: 520324942}
-  - component: {fileID: 850565283}
-  m_Layer: 0
-  m_Name: WP_RutaA_01
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1813390613
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1585969420}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 52.1403, y: -13.0402, z: 14.8227}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &520324942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1585969420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b3d0e3f52dfe4243aceaba16f9cd0c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
-  _altitudeOffset: NaN
-  _latitude: 6.206084
-  _longitude: -75.613605
-  _altitude: 1715.96
-  _altitudeType: 0
-  _useEditorAltitudeOverride: 0
-  _editorAltitudeOverride: 0
-  _anchorManager: {fileID: 596133976}
-  Origin: {fileID: 692865340}
---- !u!114 &850565283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1585969420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48df59ac2399ef343a95b2b49e9941d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Environment.RouteWaypoint
---- !u!1 &1030394768
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 269652500}
-  - component: {fileID: 608586625}
-  - component: {fileID: 249429438}
-  m_Layer: 0
-  m_Name: WP_RutaA_02
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &269652500
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1030394768}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 57.5646, y: -12.7003, z: 21.7916}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &608586625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1030394768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b3d0e3f52dfe4243aceaba16f9cd0c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
-  _altitudeOffset: NaN
-  _latitude: 6.206147
-  _longitude: -75.613556
-  _altitude: 1716.3
-  _altitudeType: 0
-  _useEditorAltitudeOverride: 0
-  _editorAltitudeOverride: 0
-  _anchorManager: {fileID: 596133976}
-  Origin: {fileID: 692865340}
---- !u!114 &249429438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1030394768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48df59ac2399ef343a95b2b49e9941d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Environment.RouteWaypoint
---- !u!1 &1798482222
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 347511711}
-  - component: {fileID: 1406539727}
-  - component: {fileID: 803329760}
-  m_Layer: 0
-  m_Name: WP_RutaA_03
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &347511711
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1798482222}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 63.0997, y: -11.8404, z: 40.5966}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1406539727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1798482222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b3d0e3f52dfe4243aceaba16f9cd0c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
-  _altitudeOffset: NaN
-  _latitude: 6.206317
-  _longitude: -75.613506
-  _altitude: 1717.16
-  _altitudeType: 0
-  _useEditorAltitudeOverride: 0
-  _editorAltitudeOverride: 0
-  _anchorManager: {fileID: 596133976}
-  Origin: {fileID: 692865340}
---- !u!114 &803329760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1798482222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48df59ac2399ef343a95b2b49e9941d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Environment.RouteWaypoint
---- !u!1 &574645732
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 873824800}
-  - component: {fileID: 283112237}
-  - component: {fileID: 144330442}
-  m_Layer: 0
-  m_Name: WP_RutaA_04
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &873824800
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 574645732}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 83.0259, y: -6.0008, z: 58.2954}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &283112237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 574645732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b3d0e3f52dfe4243aceaba16f9cd0c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
-  _altitudeOffset: NaN
-  _latitude: 6.206477
-  _longitude: -75.613326
-  _altitude: 1723.0
-  _altitudeType: 0
-  _useEditorAltitudeOverride: 0
-  _editorAltitudeOverride: 0
-  _anchorManager: {fileID: 596133976}
-  Origin: {fileID: 692865340}
---- !u!114 &144330442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 574645732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48df59ac2399ef343a95b2b49e9941d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Environment.RouteWaypoint
---- !u!1 &450856051
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1115732201}
-  - component: {fileID: 292256249}
-  - component: {fileID: 467797194}
-  m_Layer: 0
-  m_Name: WP_RutaA_05
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1115732201
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450856051}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 84.5758, y: -4.6509, z: 63.605}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &292256249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450856051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b3d0e3f52dfe4243aceaba16f9cd0c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Google.XR.ARCoreExtensions.GeospatialCreator::Google.XR.ARCoreExtensions.GeospatialCreator.ARGeospatialCreatorAnchor
-  _altitudeOffset: NaN
-  _latitude: 6.206525
-  _longitude: -75.613312
-  _altitude: 1724.35
-  _altitudeType: 0
-  _useEditorAltitudeOverride: 0
-  _editorAltitudeOverride: 0
-  _anchorManager: {fileID: 596133976}
-  Origin: {fileID: 692865340}
---- !u!114 &467797194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450856051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48df59ac2399ef343a95b2b49e9941d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Environment.RouteWaypoint
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

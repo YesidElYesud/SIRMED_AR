@@ -172,7 +172,7 @@ PlayerSettings:
   androidMinAspectRatio: 1
   applicationIdentifier:
     Android: com.SIRMED.ViveSAT
-    iPhone: com.SIRMED.Experiencia-Interactiva-SAT
+    iPhone: com.SIRMED.ViveSAT
   buildNumber:
     Standalone: 0
     VisionOS: 0

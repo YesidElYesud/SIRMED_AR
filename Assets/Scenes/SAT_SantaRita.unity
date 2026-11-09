@@ -9292,6 +9292,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 569233391}
     - target: {fileID: 6169024265861012582, guid: c01953915d86b2042b40e356131176fc, type: 3}
+      propertyPath: riverLoft
+      value: 
+      objectReference: {fileID: 7390732089197708071}
+    - target: {fileID: 6169024265861012582, guid: c01953915d86b2042b40e356131176fc, type: 3}
       propertyPath: fogTransform
       value: 
       objectReference: {fileID: 334032084}
@@ -9453,6 +9457,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eeeedfb4c93c0f54ab75370ed258a49c, type: 3}
+--- !u!114 &7390732089197708071 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1317406887272202247, guid: eeeedfb4c93c0f54ab75370ed258a49c, type: 3}
+  m_PrefabInstance: {fileID: 7390732089197708070}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3f00a79918dc4a18a050534219a9842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Splines.Examples::Unity.Splines.Examples.LoftRoadBehaviour
 --- !u!1001 &8495057168417754611
 PrefabInstance:
   m_ObjectHideFlags: 0
