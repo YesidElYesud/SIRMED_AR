@@ -1032,6 +1032,14 @@ MonoBehaviour:
   tint: {r: 0.15, g: 0.95, b: 0.35, a: 0.85}
   fadeInDuration: 0.8
   fadeOutDuration: 0.5
+  minSegmentLength: 2
+  stableSeconds: 1
+  stableTolerance: 0.3
+  distanceTolerance: 2
+  distanceToleranceRatio: 0.25
+  altitudeTolerance: 2
+  maxWaitForAllWaypoints: 20
+  followAnchorsThreshold: 0.5
 --- !u!23 &313519806
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1543,6 +1551,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Geospatial.GeospatialDiagnostics
   _earthManager: {fileID: 596133974}
   _logInterval: 5
+  _vpsCheckAttempts: 3
+  _vpsRetryDelay: 10
 --- !u!4 &467740855
 Transform:
   m_ObjectHideFlags: 0
@@ -5924,6 +5934,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2883822925790583178, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
+      propertyPath: mapData
+      value: 
+      objectReference: {fileID: 11400000, guid: 5f2b116b12534248a2252d4b1df99d7d, type: 2}
     - target: {fileID: 2925010727186453328, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

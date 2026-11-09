@@ -1,0 +1,9 @@
+{
+  "name": "YesidCasa_CoreTest",
+  "centerLatitude": 7.037896,
+  "centerLongitude": -73.837729,
+  "metersPerPixel": 0.390625,
+  "sizeMeters": 800.0,
+  "pixels": 2048,
+  "attribution": "© OpenStreetMap contributors"
+}
