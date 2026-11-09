@@ -80,6 +80,15 @@ MonoBehaviour:
     wetFloorRipples: 0
     wetFloorWaves: 0
     wetFlootColor: {r: 1, g: 1, b: 1, a: 1}
+    riverPower: 1.5
+    riverSpeed: {x: 0.25, y: -1}
+    riverDetailsSpeed: {x: -0.1, y: -0.4}
+    riverScale: 4
+    riverDetailsScale: 2
+    riverColor: {r: 0.1764706, g: 0.28235295, b: 0.5019608, a: 0.8509804}
+    riverSpecular: 0.5
+    riverTiling: {x: 2, y: 0.5}
+    loftMulty: 0.5
     transitionDuration: 1
   - stageName: Etapa1
     ambientMode: 0
@@ -115,6 +124,15 @@ MonoBehaviour:
     wetFloorRipples: 0
     wetFloorWaves: 0
     wetFlootColor: {r: 1, g: 1, b: 1, a: 1}
+    riverPower: 1.5
+    riverSpeed: {x: 0.25, y: -1}
+    riverDetailsSpeed: {x: -0.1, y: -0.4}
+    riverScale: 4
+    riverDetailsScale: 2
+    riverColor: {r: 0.1764706, g: 0.28235295, b: 0.5019608, a: 0.8509804}
+    riverSpecular: 0.5
+    riverTiling: {x: 2, y: 0.5}
+    loftMulty: 0.5
     transitionDuration: 1.5
   - stageName: Etapa2
     ambientMode: 0
@@ -151,9 +169,18 @@ MonoBehaviour:
     cloudLayerG: 0
     cloudLayerB: 0
     cloudLayerA: 0
-    wetFloorRipples: 0.015
+    wetFloorRipples: 0.01
     wetFloorWaves: 0.005
-    wetFlootColor: {r: 0.9, g: 0.93235296, b: 1, a: 1}
+    wetFlootColor: {r: 0.875, g: 0.9160156, b: 1, a: 1}
+    riverPower: 2.75
+    riverSpeed: {x: 0.35, y: -1.5}
+    riverDetailsSpeed: {x: -0.2, y: -0.6}
+    riverScale: 4.25
+    riverDetailsScale: 2
+    riverColor: {r: 0.37647063, g: 0.41721416, b: 0.5019608, a: 0.7490196}
+    riverSpecular: 0.4
+    riverTiling: {x: 2.6666663, y: 0.5}
+    loftMulty: 0.6666666
     transitionDuration: 2
   - stageName: Etapa3
     ambientMode: 0
@@ -190,9 +217,18 @@ MonoBehaviour:
     cloudLayerG: 1
     cloudLayerB: 0
     cloudLayerA: 0
-    wetFloorRipples: 0.1
+    wetFloorRipples: 0.15
     wetFloorWaves: 0.02
-    wetFlootColor: {r: 0.7396079, g: 0.7921338, b: 0.9019608, a: 1}
+    wetFlootColor: {r: 0.5625, g: 0.6219512, b: 0.75, a: 1}
+    riverPower: 3.3
+    riverSpeed: {x: 0.35, y: -1.8}
+    riverDetailsSpeed: {x: -0.4, y: -0.8}
+    riverScale: 4.8
+    riverDetailsScale: 2.2
+    riverColor: {r: 1, g: 0.87401575, b: 0.75, a: 0.6509804}
+    riverSpecular: 0.25
+    riverTiling: {x: 3.3333333, y: 0.5}
+    loftMulty: 0.8333333
     transitionDuration: 1
   - stageName: Etapa4
     ambientMode: 0
@@ -229,16 +265,27 @@ MonoBehaviour:
     cloudLayerG: 0
     cloudLayerB: 0
     cloudLayerA: 1
-    wetFloorRipples: 0.25
+    wetFloorRipples: 0.3
     wetFloorWaves: 0.035
-    wetFlootColor: {r: 0.7490196, g: 0.654902, b: 0.5254902, a: 1}
+    wetFlootColor: {r: 0.5, g: 0.43717277, b: 0.35078534, a: 1}
+    riverPower: 5
+    riverSpeed: {x: 0.5, y: -2.5}
+    riverDetailsSpeed: {x: -0.5, y: -1}
+    riverScale: 5
+    riverDetailsScale: 2.25
+    riverColor: {r: 1, g: 0.6509804, b: 0.4, a: 0.6509804}
+    riverSpecular: 0.1
+    riverTiling: {x: 4, y: 0.5}
+    loftMulty: 1
     transitionDuration: 0.8
   sunLight: {fileID: 0}
   clouds: {fileID: 2100000, guid: 4c8faad00fb9c9745af321ee770f031e, type: 2}
-  wetFloor: {fileID: 2100000, guid: 8349e6fd801ad8544886578e7fa291cb, type: 2}
   fogSphere: {fileID: 2100000, guid: bd035913e51ace443942afe17c1e2427, type: 2}
-  rain: {fileID: 2100000, guid: cf8d8b29c50897146ab28e05a3456f05, type: 2}
   fogTransform: {fileID: 0}
+  rain: {fileID: 2100000, guid: cf8d8b29c50897146ab28e05a3456f05, type: 2}
+  wetFloor: {fileID: 2100000, guid: 8349e6fd801ad8544886578e7fa291cb, type: 2}
+  river: {fileID: 2100000, guid: 6e6fc63909e016f4bacfb7eaf5bd2958, type: 2}
+  riverLoft: {fileID: 0}
   volumePriority: 10
   debugLogs: 0
 --- !u!114 &6146727907208788699
@@ -664,10 +711,13 @@ MonoBehaviour:
   _anchorManager: {fileID: 0}
   _maxHorizontalAccuracy: 8
   _maxYawAccuracy: 25
+  _maxVerticalAccuracy: 5
+  _recalibrationMinImprovement: 0.2
   _stableSeconds: 1
   _initialFallbackSeconds: 30
   _recalibrationTimeout: 60
   _recalibrationCooldown: 20
+  _autoReanchorAfterFallback: 1
 --- !u!1 &9036412375442688160
 GameObject:
   m_ObjectHideFlags: 0

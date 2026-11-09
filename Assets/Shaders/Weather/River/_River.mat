@@ -12,7 +12,9 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _RECEIVE_SHADOWS_OFF
+  - _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -38,19 +40,65 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Borders: 10
+    - _AlphaClip: 0
+    - _AlphaToMask: 0
+    - _Blend: 0
+    - _BlendModePreserveSpecular: 0
+    - _Borders: 5
+    - _CastShadows: 0
+    - _Cull: 2
+    - _DstBlend: 10
+    - _DstBlendAlpha: 10
+    - _ENVIRONMENTREFLECTIONS_OFF: 0
+    - _Far_plane_fade: 4
+    - _Float: 0.5
+    - _Float_1: 0
+    - _Metallic: 0
+    - _Normal: 0.8
+    - _NormalOffset: 0.125
+    - _Power: 1.5
     - _Power_1: 1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ReceiveShadows: 0
+    - _SPECULARHIGHLIGHTS_OFF: 0
+    - _Scale: 4
+    - _Scale2: 2
     - _Scale_1: 4
+    - _Smoothness: 1
+    - _Specular: 0.5
     - _Speed_1: -1
+    - _SrcBlend: 5
+    - _SrcBlendAlpha: 1
+    - _Surface: 1
+    - _WorkflowMode: 0
     - _XRMotionVectorsPass: 1
+    - _ZTest: 4
+    - _ZWrite: 0
+    - _ZWriteControl: 0
+    - _alfa: 1
+    - _alphaM: 2.25
+    - _ambient: 49.16
+    - _emision: 46
+    - _fogAdd: 1.52
+    - _fogAdd_1: 0.02
+    - _fogMulti: 10
+    - _norSub: 0.125
     m_Colors:
-    - _Color: {r: 0, g: 0.1333332, b: 1, a: 1}
-    - _Color_1: {r: 1, g: 0.8819765, b: 0.582, a: 1}
+    - _Color: {r: 0.1764706, g: 0.28235295, b: 0.5019608, a: 0.8509804}
+    - _Color_1: {r: 1, g: 1, b: 1, a: 1}
     - _Color_2: {r: 0, g: 0.1333333, b: 1, a: 1}
-    - _Vector2: {r: 4, g: 1, b: 0, a: 0}
+    - _Spec: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _Specular: {r: 0.085, g: 0.085, b: 0.085, a: 1}
+    - _Speed: {r: 0.25, g: -1, b: 0, a: 0}
+    - _Speed2: {r: -0.1, g: -0.4, b: 0, a: 0}
+    - _Tiling: {r: 2, g: 0.5, b: 0, a: 0}
+    - _Tiling2: {r: 4, g: 0.5, b: 0, a: 0}
+    - _Vector2: {r: 4, g: 0.5, b: 0, a: 0}
     - _Vector2_1: {r: -1, g: 0, b: 0, a: 0}
+    - _emision: {r: 0, g: 0, b: 0, a: 1}
+    - _spe: {r: 0, g: 0, b: 0, a: 1}
+    - _specu: {r: 0.002925858, g: 0.002925858, b: 0.002925858, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &7398657367153631287

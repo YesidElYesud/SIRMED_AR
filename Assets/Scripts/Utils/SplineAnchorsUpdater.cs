@@ -2,6 +2,9 @@ using SIRMED.Gameplay.Environment;
 using SIRMED.Managers;
 using System.Collections.Generic;
 using Unity.Mathematics;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -9,7 +12,6 @@ using UnityEngine.Splines;
 public class SplineAnchorsUpdater : MonoBehaviour
 {
     [SerializeField] private bool forceReady;
-    [SerializeField] private SplineExtrude splineExtrude;
     private SplineContainer spline;
     private RouteWaypoint[] waypoints;
     private bool _built;
@@ -67,7 +69,8 @@ public class SplineAnchorsUpdater : MonoBehaviour
         spline.Spline = new Spline(positions, TangentMode.AutoSmooth);
         _built = true;
 
-        if (splineExtrude != null)
-            splineExtrude.Rebuild();
+#if UNITY_EDITOR
+        EditorUtility.SetDirty(spline);
+#endif
     }
 }

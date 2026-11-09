@@ -4,6 +4,7 @@ namespace SIRMED.Managers
     using SIRMED.Utils;
     using System;
     using System.Threading;
+    using Unity.Splines.Examples;
     using UnityEngine;
     using UnityEngine.Rendering;
     using UnityEngine.Rendering.Universal;
@@ -172,7 +173,19 @@ namespace SIRMED.Managers
             [Header("Wet Floot")]
             public float wetFloorRipples;
             public float wetFloorWaves;
-            public Color wetFlootColor;
+            [ColorUsage(false)] public Color wetFlootColor;
+
+            // ── River ─────────────────────────────────────────────────────────────
+            [Header("River")]
+            public float riverPower;
+            public Vector2 riverSpeed;
+            public Vector2 riverDetailsSpeed;
+            public float riverScale;
+            public float riverDetailsScale;
+            [ColorUsage(true, true)] public Color riverColor;
+            public float riverSpecular;
+            public Vector2 riverTiling;
+            public float loftMulty;
 
             // ── Transición ────────────────────────────────────────────────────────
             [Header("Transición")]
@@ -197,10 +210,12 @@ namespace SIRMED.Managers
         [Tooltip("Directional Light de la escena. Se busca automáticamente si queda vacío.")]
         public Light sunLight;
         public Material clouds;
-        public Material wetFloor;
         public Material fogSphere;
-        public Material rain;
         public Transform fogTransform;
+        public Material rain;
+        public Material wetFloor;
+        public Material river;
+        public LoftRoadBehaviour riverLoft;
 
         [Header("Post-processing")]
         [Tooltip("Prioridad de los Volumes por etapa (por encima de cualquier Volume global de la escena).")]
@@ -318,6 +333,9 @@ namespace SIRMED.Managers
 
             // ── Rain ──────────────────────────────────────────────────────────────
             RainRoutine(config).Forget();
+
+            // ── River ─────────────────────────────────────────────────────────────
+            RiverRoutine(config).Forget();
 
             _currentStageIndex = stageIndex;
         }
@@ -641,6 +659,38 @@ namespace SIRMED.Managers
                 float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(elapsed / target.transitionDuration));
 
                 rain.SetFloat("_Fog", Mathf.Lerp(startFog, target.rainFog, t));
+
+                await UniTask.Yield(cancellationToken: _cts.Token);
+            }
+        }
+
+        private async UniTaskVoid RiverRoutine(StageVisualConfig target)
+        {
+            float startPower = river.GetFloat("_Power");
+            Vector2 startSpeed = river.GetVector("_Speed");
+            Vector2 startSpeed2 = river.GetVector("_Speed2");
+            float startScale = river.GetFloat("_Scale");
+            float startScale2 = river.GetFloat("_Scale2");
+            Color startColor = river.GetColor("_Color");
+            float startSpeculat = river.GetFloat("_Specular");
+            Vector2 startTiling = river.GetVector("_Tiling");
+            float startRiverLoftMulty = riverLoft.WidthMultiplier;
+
+            float elapsed = 0f;
+            while (elapsed < target.transitionDuration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(elapsed / target.transitionDuration));
+
+                river.SetFloat("_Power", Mathf.Lerp(startPower, target.riverPower, t));
+                river.SetVector("_Speed", Vector2.Lerp(startSpeed, target.riverSpeed, t));
+                river.SetVector("_Speed2", Vector2.Lerp(startSpeed2, target.riverDetailsSpeed, t));
+                river.SetFloat("_Scale", Mathf.Lerp(startScale, target.riverScale, t));
+                river.SetFloat("_Scale2", Mathf.Lerp(startScale2, target.riverDetailsScale, t));
+                river.SetColor("_Color", Color.Lerp(startColor, target.riverColor, t));
+                river.SetFloat("_Specular", Mathf.Lerp(startSpeculat, target.riverSpecular, t));
+                river.SetVector("_Tiling", Vector2.Lerp(startTiling, target.riverTiling, t));
+                riverLoft.WidthMultiplier = Mathf.Lerp(startRiverLoftMulty, target.loftMulty, t);
 
                 await UniTask.Yield(cancellationToken: _cts.Token);
             }
