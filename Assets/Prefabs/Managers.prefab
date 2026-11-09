@@ -80,6 +80,15 @@ MonoBehaviour:
     wetFloorRipples: 0
     wetFloorWaves: 0
     wetFlootColor: {r: 1, g: 1, b: 1, a: 1}
+    riverPower: 1.5
+    riverSpeed: {x: 0.25, y: -1}
+    riverDetailsSpeed: {x: -0.1, y: -0.4}
+    riverScale: 4
+    riverDetailsScale: 2
+    riverColor: {r: 0.1764706, g: 0.28235295, b: 0.5019608, a: 0.8509804}
+    riverSpecular: 0.5
+    riverTiling: {x: 2, y: 0.5}
+    loftMulty: 0.5
     transitionDuration: 1
   - stageName: Etapa1
     ambientMode: 0
@@ -115,6 +124,15 @@ MonoBehaviour:
     wetFloorRipples: 0
     wetFloorWaves: 0
     wetFlootColor: {r: 1, g: 1, b: 1, a: 1}
+    riverPower: 1.5
+    riverSpeed: {x: 0.25, y: -1}
+    riverDetailsSpeed: {x: -0.1, y: -0.4}
+    riverScale: 4
+    riverDetailsScale: 2
+    riverColor: {r: 0.1764706, g: 0.28235295, b: 0.5019608, a: 0.8509804}
+    riverSpecular: 0.5
+    riverTiling: {x: 2, y: 0.5}
+    loftMulty: 0.5
     transitionDuration: 1.5
   - stageName: Etapa2
     ambientMode: 0
@@ -127,7 +145,7 @@ MonoBehaviour:
     sunIntensity: 0.7
     enableFog: 1
     fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    fogDensity: 0.01
+    fogDensity: 0.02
     fogSphere: 0.33333334
     rainFog: 0.25
     postProcessProfile: {fileID: 11400000, guid: 8ee2a598b7719b34a9d124c523022c9b, type: 2}
@@ -151,9 +169,18 @@ MonoBehaviour:
     cloudLayerG: 0
     cloudLayerB: 0
     cloudLayerA: 0
-    wetFloorRipples: 0.015
+    wetFloorRipples: 0.01
     wetFloorWaves: 0.005
-    wetFlootColor: {r: 0.9, g: 0.93235296, b: 1, a: 1}
+    wetFlootColor: {r: 0.875, g: 0.9160156, b: 1, a: 1}
+    riverPower: 2.75
+    riverSpeed: {x: 0.35, y: -1.5}
+    riverDetailsSpeed: {x: -0.2, y: -0.6}
+    riverScale: 4.25
+    riverDetailsScale: 2
+    riverColor: {r: 0.37647063, g: 0.41721416, b: 0.5019608, a: 0.7490196}
+    riverSpecular: 0.4
+    riverTiling: {x: 2.6666663, y: 0.5}
+    loftMulty: 0.6666666
     transitionDuration: 2
   - stageName: Etapa3
     ambientMode: 0
@@ -166,7 +193,7 @@ MonoBehaviour:
     sunIntensity: 0.4
     enableFog: 1
     fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    fogDensity: 0.025
+    fogDensity: 0.04
     fogSphere: 0.8
     rainFog: 0.5
     postProcessProfile: {fileID: 11400000, guid: 627d7307e9509cb4e81ed8f399b65b68, type: 2}
@@ -190,9 +217,18 @@ MonoBehaviour:
     cloudLayerG: 1
     cloudLayerB: 0
     cloudLayerA: 0
-    wetFloorRipples: 0.1
+    wetFloorRipples: 0.15
     wetFloorWaves: 0.02
-    wetFlootColor: {r: 0.7396079, g: 0.7921338, b: 0.9019608, a: 1}
+    wetFlootColor: {r: 0.5625, g: 0.6219512, b: 0.75, a: 1}
+    riverPower: 3.3
+    riverSpeed: {x: 0.35, y: -1.8}
+    riverDetailsSpeed: {x: -0.4, y: -0.8}
+    riverScale: 4.8
+    riverDetailsScale: 2.2
+    riverColor: {r: 1, g: 0.87401575, b: 0.75, a: 0.6509804}
+    riverSpecular: 0.25
+    riverTiling: {x: 3.3333333, y: 0.5}
+    loftMulty: 0.8333333
     transitionDuration: 1
   - stageName: Etapa4
     ambientMode: 0
@@ -205,7 +241,7 @@ MonoBehaviour:
     sunIntensity: 0.25
     enableFog: 1
     fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    fogDensity: 0.05
+    fogDensity: 0.1
     fogSphere: 1
     rainFog: 0.75
     postProcessProfile: {fileID: 11400000, guid: 8a9875fcefd325b40ba79bd0615a8e04, type: 2}
@@ -229,16 +265,27 @@ MonoBehaviour:
     cloudLayerG: 0
     cloudLayerB: 0
     cloudLayerA: 1
-    wetFloorRipples: 0.25
+    wetFloorRipples: 0.3
     wetFloorWaves: 0.035
-    wetFlootColor: {r: 0.7490196, g: 0.654902, b: 0.5254902, a: 1}
+    wetFlootColor: {r: 0.5, g: 0.43717277, b: 0.35078534, a: 1}
+    riverPower: 5
+    riverSpeed: {x: 0.5, y: -2.5}
+    riverDetailsSpeed: {x: -0.5, y: -1}
+    riverScale: 5
+    riverDetailsScale: 2.25
+    riverColor: {r: 1, g: 0.6509804, b: 0.4, a: 0.6509804}
+    riverSpecular: 0.1
+    riverTiling: {x: 4, y: 0.5}
+    loftMulty: 1
     transitionDuration: 0.8
   sunLight: {fileID: 0}
   clouds: {fileID: 2100000, guid: 4c8faad00fb9c9745af321ee770f031e, type: 2}
-  wetFloor: {fileID: 2100000, guid: 8349e6fd801ad8544886578e7fa291cb, type: 2}
   fogSphere: {fileID: 2100000, guid: bd035913e51ace443942afe17c1e2427, type: 2}
-  rain: {fileID: 2100000, guid: cf8d8b29c50897146ab28e05a3456f05, type: 2}
   fogTransform: {fileID: 0}
+  rain: {fileID: 2100000, guid: cf8d8b29c50897146ab28e05a3456f05, type: 2}
+  wetFloor: {fileID: 2100000, guid: 8349e6fd801ad8544886578e7fa291cb, type: 2}
+  river: {fileID: 2100000, guid: 6e6fc63909e016f4bacfb7eaf5bd2958, type: 2}
+  riverLoft: {fileID: 0}
   volumePriority: 10
   debugLogs: 0
 --- !u!114 &6146727907208788699
@@ -365,6 +412,81 @@ MonoBehaviour:
   renderWidth: 1280
   renderHeight: 720
   skipIfNoContent: 1
+--- !u!1 &2054251663060931669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4061804612285332477}
+  - component: {fileID: 8409750370730406559}
+  - component: {fileID: 5052785729033652898}
+  m_Layer: 0
+  m_Name: Black
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4061804612285332477
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054251663060931669}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 7709617869535709288}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8409750370730406559
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054251663060931669}
+  m_CullTransparentMesh: 1
+--- !u!114 &5052785729033652898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054251663060931669}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5019608}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3382581864106950513
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,7 +634,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3567654600318729271}
-  - component: {fileID: 3891611590920654031}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -539,20 +660,9 @@ Transform:
   - {fileID: 5548323965353862293}
   - {fileID: 116356726909297805}
   - {fileID: 3904200970393874876}
+  - {fileID: 7709617869535709288}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3891611590920654031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4635060345867713210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d339ac5900ca8184a8af7c295f675ddf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HotspotsActivator
 --- !u!1 &6744246929999280922
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,7 +711,127 @@ MonoBehaviour:
   _anchorManager: {fileID: 0}
   _maxHorizontalAccuracy: 8
   _maxYawAccuracy: 25
+  _maxVerticalAccuracy: 5
+  _recalibrationMinImprovement: 0.2
   _stableSeconds: 1
   _initialFallbackSeconds: 30
   _recalibrationTimeout: 60
   _recalibrationCooldown: 20
+  _autoReanchorAfterFallback: 1
+--- !u!1 &9036412375442688160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7709617869535709288}
+  - component: {fileID: 6244032752927202933}
+  - component: {fileID: 2360901679809066657}
+  - component: {fileID: 3189914334691752583}
+  - component: {fileID: 259346079359503950}
+  m_Layer: 0
+  m_Name: World Canvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7709617869535709288
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9036412375442688160}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4061804612285332477}
+  m_Father: {fileID: 3567654600318729271}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &6244032752927202933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9036412375442688160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d339ac5900ca8184a8af7c295f675ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HotspotsActivator
+  blackImage: {fileID: 5052785729033652898}
+--- !u!223 &2360901679809066657
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9036412375442688160}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 1
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 25
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 1
+  m_UseReflectionProbes: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: -1
+  m_TargetDisplay: 0
+--- !u!114 &3189914334691752583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9036412375442688160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 1280, y: 720}
+  m_ScreenMatchMode: 1
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!114 &259346079359503950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9036412375442688160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295

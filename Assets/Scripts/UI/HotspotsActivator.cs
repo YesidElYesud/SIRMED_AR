@@ -1,9 +1,15 @@
 using SIRMED.Gameplay.Hotspots;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(Canvas))]
 public class HotspotsActivator : MonoBehaviour
 {
+    public static HotspotsActivator Instance;
+
+    [SerializeField] private Graphic blackImage;
+
     private Camera mainCamera;
     private Vector2 screenPosition;
     private Ray ray;
@@ -11,7 +17,16 @@ public class HotspotsActivator : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
+
         mainCamera = Camera.main;
+
+        Canvas canvas = GetComponent<Canvas>();
+        canvas.worldCamera = mainCamera;
+        canvas.planeDistance = 25;
+
+        blackImage.enabled = true;
+        blackImage.CrossFadeAlpha(0, 0, false);
     }
 
     private void Update()
@@ -51,6 +66,8 @@ public class HotspotsActivator : MonoBehaviour
 
                 if (lastHotspot != controller)
                 {
+                    blackImage.CrossFadeAlpha(1, 0.5f, false);
+
                     lastHotspot = controller;
                     lastHotspot.SwitchState();
 
@@ -58,6 +75,7 @@ public class HotspotsActivator : MonoBehaviour
                 }
                 else
                 {
+                    blackImage.CrossFadeAlpha(0, 0.5f, false);
                     lastHotspot.Activated -= Check;
                     lastHotspot = null;
                 }
@@ -65,6 +83,18 @@ public class HotspotsActivator : MonoBehaviour
         }
         else if (lastHotspot != null)
         {
+            blackImage.CrossFadeAlpha(0, 0.5f, false);
+            lastHotspot.Activated -= Check;
+            lastHotspot.SwitchState();
+            lastHotspot = null;
+        }
+    }
+
+    public void DeactivateLastHotspot()
+    {
+        if (lastHotspot != null)
+        {
+            blackImage.CrossFadeAlpha(0, 0.2f, false);
             lastHotspot.Activated -= Check;
             lastHotspot.SwitchState();
             lastHotspot = null;
