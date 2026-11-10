@@ -2,6 +2,8 @@ using SIRMED.Gameplay.Environment;
 using SIRMED.Managers;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.Splines.Examples;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -14,6 +16,7 @@ public class SplineAnchorsUpdater : MonoBehaviour
     [SerializeField] private bool forceReady;
     private SplineContainer spline;
     private RouteWaypoint[] waypoints;
+    private LoftRoadBehaviour loftBehaviour;
     private bool _built;
     private List<float3> positions;
 
@@ -22,6 +25,7 @@ public class SplineAnchorsUpdater : MonoBehaviour
     {
         spline = GetComponent<SplineContainer>();
         waypoints = GetComponentsInChildren<RouteWaypoint>();
+        loftBehaviour = GetComponent<LoftRoadBehaviour>();
     }
 
     private void OnEnable()
@@ -72,5 +76,10 @@ public class SplineAnchorsUpdater : MonoBehaviour
 #if UNITY_EDITOR
         EditorUtility.SetDirty(spline);
 #endif
+
+        if (loftBehaviour != null)
+        {
+            loftBehaviour.LoftAllRoads();
+        }
     }
 }

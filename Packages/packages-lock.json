@@ -35,15 +35,6 @@
         "com.unity.xr.arkit": "4.1.5"
       }
     },
-    "com.unify.unified-universal-blur": {
-      "version": "https://github.com/lukakldiashvili/Unified-Universal-Blur.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.unity.render-pipelines.universal": "14.0.9"
-      },
-      "hash": "4a22db964018243833698286cc1ffef5925d8ae5"
-    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
@@ -51,8 +42,8 @@
       "dependencies": {}
     },
     "com.unity.burst": {
-      "version": "1.8.30",
-      "depth": 2,
+      "version": "1.8.31",
+      "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
@@ -92,12 +83,10 @@
       "dependencies": {}
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.28",
+      "version": "2.0.29",
       "depth": 0,
       "source": "registry",
-      "dependencies": {
-        "com.unity.test-framework": "1.1.33"
-      },
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.inputsystem": {
@@ -182,7 +171,7 @@
       }
     },
     "com.unity.splines": {
-      "version": "2.9.1",
+      "version": "2.9.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {

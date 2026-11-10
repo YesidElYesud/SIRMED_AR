@@ -59,6 +59,7 @@ public class MapController : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     private const string urlMaps = "https://maps.googleapis.com/maps/api/staticmap?center={0},{1}" +
         "&zoom={2}" +
         "&size=640x640" +
+        "&format=jpg" +
         //"&scale=2" +
         "&maptype=hybrid" +
         "&style=feature:administrative|visibility:off" +
@@ -134,6 +135,7 @@ public class MapController : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         else
         {
             raw.texture = DownloadHandlerTexture.GetContent(request);
+
             rect.localScale = Vector2.one;
             rect.localPosition = Vector3.zero;
 

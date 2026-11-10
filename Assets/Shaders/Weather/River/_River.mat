@@ -56,7 +56,7 @@ Material:
     - _Metallic: 0
     - _Normal: 0.8
     - _NormalOffset: 0.125
-    - _Power: 1.5
+    - _Power: 1
     - _Power_1: 1
     - _QueueControl: 0
     - _QueueOffset: 0
