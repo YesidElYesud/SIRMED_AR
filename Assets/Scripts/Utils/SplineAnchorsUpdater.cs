@@ -13,20 +13,14 @@ using UnityEngine.Splines;
 [RequireComponent(typeof(SplineContainer))]
 public class SplineAnchorsUpdater : MonoBehaviour
 {
-    [SerializeField] private bool forceReady;
-    private SplineContainer spline;
-    private RouteWaypoint[] waypoints;
-    private LoftRoadBehaviour loftBehaviour;
+    [SerializeField] private SplineContainer spline;
+    [SerializeField] private LoftRoadBehaviour loftBehaviour;
+
+    [Space]
+    [SerializeField] private RouteWaypoint[] waypoints;
+
     private bool _built;
     private List<float3> positions;
-
-    [ContextMenu("Awake")]
-    private void Awake()
-    {
-        spline = GetComponent<SplineContainer>();
-        waypoints = GetComponentsInChildren<RouteWaypoint>();
-        loftBehaviour = GetComponent<LoftRoadBehaviour>();
-    }
 
     private void OnEnable()
     {
@@ -53,8 +47,6 @@ public class SplineAnchorsUpdater : MonoBehaviour
 
     private bool AllWaypointsReady()
     {
-        if (forceReady) return true;
-
         foreach (RouteWaypoint wp in waypoints)
             if (!wp.IsAnchorReady())
                 return false;
@@ -71,15 +63,13 @@ public class SplineAnchorsUpdater : MonoBehaviour
             positions.Add(waypoints[i].transform.position);
 
         spline.Spline = new Spline(positions, TangentMode.AutoSmooth);
-        _built = true;
+
+        loftBehaviour.LoftAllRoads();
 
 #if UNITY_EDITOR
         EditorUtility.SetDirty(spline);
 #endif
 
-        if (loftBehaviour != null)
-        {
-            loftBehaviour.LoftAllRoads();
-        }
+        _built = true;
     }
 }
