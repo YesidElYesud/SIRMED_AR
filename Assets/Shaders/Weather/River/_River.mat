@@ -46,16 +46,17 @@ Material:
     - _BlendModePreserveSpecular: 0
     - _Borders: 5
     - _CastShadows: 0
+    - _Color_Flat: 0.75
     - _Cull: 2
     - _DstBlend: 10
     - _DstBlendAlpha: 10
     - _ENVIRONMENTREFLECTIONS_OFF: 0
     - _Far_plane_fade: 4
-    - _Float: 0.5
+    - _Float: 0.75
     - _Float_1: 0
     - _Metallic: 0
     - _Normal: 0.8
-    - _NormalOffset: 0.125
+    - _NormalOffset: 0.18
     - _Power: 1
     - _Power_1: 1
     - _QueueControl: 0

@@ -1,3 +1,4 @@
+using Google.XR.ARCoreExtensions;
 using SIRMED.Gameplay.Environment;
 using SIRMED.Managers;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using UnityEditor;
 #endif
 using UnityEngine;
 using UnityEngine.Splines;
+using UnityEngine.XR.ARSubsystems;
 
 [RequireComponent(typeof(SplineContainer))]
 public class SplineAnchorsUpdater : MonoBehaviour
@@ -34,7 +36,7 @@ public class SplineAnchorsUpdater : MonoBehaviour
             GeoAnchorManager.Instance.RecalibrationStart -= Rebuild;
     }
 
-    private void Rebuild()
+    public void Rebuild()
     {
         _built = false;
     }
@@ -48,8 +50,16 @@ public class SplineAnchorsUpdater : MonoBehaviour
     private bool AllWaypointsReady()
     {
         foreach (RouteWaypoint wp in waypoints)
-            if (!wp.IsAnchorReady())
+        {
+            if (wp == null || !wp.IsAnchorReady())
                 return false;
+
+            if (!Application.isEditor)
+            {
+                ARGeospatialAnchor anchor = wp.GetComponentInParent<ARGeospatialAnchor>();
+                return anchor != null && anchor.trackingState == TrackingState.Tracking;
+            }
+        }
 
         return true;
     }
@@ -60,7 +70,9 @@ public class SplineAnchorsUpdater : MonoBehaviour
         positions = new(waypoints.Length);
 
         for (int i = 0; i < waypoints.Length; i++)
+        {
             positions.Add(waypoints[i].transform.position);
+        }
 
         spline.Spline = new Spline(positions, TangentMode.AutoSmooth);
 
@@ -70,6 +82,7 @@ public class SplineAnchorsUpdater : MonoBehaviour
         EditorUtility.SetDirty(spline);
 #endif
 
-        _built = true;
+        if (spline.Spline.GetLength() > 1)
+            _built = true;
     }
 }
