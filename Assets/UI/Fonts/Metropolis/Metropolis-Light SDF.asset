@@ -6,7 +6,7 @@ Texture2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Metropolis-Light Atlas
+  m_Name: Metropolis-Light SDF Atlas
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -63,24 +63,24 @@ MonoBehaviour:
     m_FaceIndex: 0
     m_FamilyName: Metropolis
     m_StyleName: Light
-    m_PointSize: 90
+    m_PointSize: 137
     m_Scale: 1
     m_UnitsPerEM: 1000
-    m_LineHeight: 90
-    m_AscentLine: 71.55
-    m_CapLine: 62
-    m_MeanLine: 47
+    m_LineHeight: 137
+    m_AscentLine: 108.915
+    m_CapLine: 94
+    m_MeanLine: 71
     m_Baseline: 0
-    m_DescentLine: -18.45
-    m_SuperscriptOffset: 71.55
+    m_DescentLine: -28.085
+    m_SuperscriptOffset: 108.915
     m_SuperscriptSize: 0.5
-    m_SubscriptOffset: -18.45
+    m_SubscriptOffset: -28.085
     m_SubscriptSize: 0.5
-    m_UnderlineOffset: -11.97
-    m_UnderlineThickness: 1.8000001
-    m_StrikethroughOffset: 18.8
-    m_StrikethroughThickness: 1.8000001
-    m_TabWidth: 26
+    m_UnderlineOffset: -18.221
+    m_UnderlineThickness: 2.74
+    m_StrikethroughOffset: 28.4
+    m_StrikethroughThickness: 2.74
+    m_TabWidth: 40
   m_Material: {fileID: 9152362842041680357}
   m_SourceFontFileGUID: b7a8d680b8b130940b7cf4f51d5ce6b9
   m_CreationSettings:
@@ -88,15 +88,15 @@ MonoBehaviour:
     sourceFontFileGUID: b7a8d680b8b130940b7cf4f51d5ce6b9
     faceIndex: 0
     pointSizeSamplingMode: 0
-    pointSize: 90
+    pointSize: 137
     padding: 9
     paddingMode: 2
-    packingMode: 0
+    packingMode: 4
     atlasWidth: 1024
     atlasHeight: 1024
-    characterSetSelectionMode: 7
-    characterSequence: 
-    referencedFontAssetGUID: 
+    characterSetSelectionMode: 6
+    characterSequence: 20-7E,A0,A1,A9,AA,AB,B0,B7,BA,BB,BF,C1,C9,CD,D1,D3,DA,DC,E1,E9,ED,F1,F3,FA,FC,2013,2014,2018,2019,201C,201D,2022,2026,2192
+    referencedFontAssetGUID: b6fc8e4d611b65645beb6de28cf4cc55
     referencedTextAssetGUID: 
     fontStyle: 0
     fontStyleModifier: 0
@@ -677,6 +677,66 @@ MonoBehaviour:
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
         m_GlyphIndex: 11
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: 0
+          m_YAdvance: 0
+      m_FeatureLookupFlags: 0
+    - m_FirstAdjustmentRecord:
+        m_GlyphIndex: 48
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: -2.43
+          m_YAdvance: 0
+      m_SecondAdjustmentRecord:
+        m_GlyphIndex: 79
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: 0
+          m_YAdvance: 0
+      m_FeatureLookupFlags: 0
+    - m_FirstAdjustmentRecord:
+        m_GlyphIndex: 48
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: -2.43
+          m_YAdvance: 0
+      m_SecondAdjustmentRecord:
+        m_GlyphIndex: 80
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: 0
+          m_YAdvance: 0
+      m_FeatureLookupFlags: 0
+    - m_FirstAdjustmentRecord:
+        m_GlyphIndex: 48
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: -2.43
+          m_YAdvance: 0
+      m_SecondAdjustmentRecord:
+        m_GlyphIndex: 81
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: 0
+          m_YAdvance: 0
+      m_FeatureLookupFlags: 0
+    - m_FirstAdjustmentRecord:
+        m_GlyphIndex: 48
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: -9.81
+          m_YAdvance: 0
+      m_SecondAdjustmentRecord:
+        m_GlyphIndex: 91
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -3338,66 +3398,6 @@ MonoBehaviour:
           m_XAdvance: 0
           m_YAdvance: 0
       m_FeatureLookupFlags: 0
-    - m_FirstAdjustmentRecord:
-        m_GlyphIndex: 48
-        m_GlyphValueRecord:
-          m_XPlacement: 0
-          m_YPlacement: 0
-          m_XAdvance: -2.43
-          m_YAdvance: 0
-      m_SecondAdjustmentRecord:
-        m_GlyphIndex: 79
-        m_GlyphValueRecord:
-          m_XPlacement: 0
-          m_YPlacement: 0
-          m_XAdvance: 0
-          m_YAdvance: 0
-      m_FeatureLookupFlags: 0
-    - m_FirstAdjustmentRecord:
-        m_GlyphIndex: 48
-        m_GlyphValueRecord:
-          m_XPlacement: 0
-          m_YPlacement: 0
-          m_XAdvance: -2.43
-          m_YAdvance: 0
-      m_SecondAdjustmentRecord:
-        m_GlyphIndex: 80
-        m_GlyphValueRecord:
-          m_XPlacement: 0
-          m_YPlacement: 0
-          m_XAdvance: 0
-          m_YAdvance: 0
-      m_FeatureLookupFlags: 0
-    - m_FirstAdjustmentRecord:
-        m_GlyphIndex: 48
-        m_GlyphValueRecord:
-          m_XPlacement: 0
-          m_YPlacement: 0
-          m_XAdvance: -2.43
-          m_YAdvance: 0
-      m_SecondAdjustmentRecord:
-        m_GlyphIndex: 81
-        m_GlyphValueRecord:
-          m_XPlacement: 0
-          m_YPlacement: 0
-          m_XAdvance: 0
-          m_YAdvance: 0
-      m_FeatureLookupFlags: 0
-    - m_FirstAdjustmentRecord:
-        m_GlyphIndex: 48
-        m_GlyphValueRecord:
-          m_XPlacement: 0
-          m_YPlacement: 0
-          m_XAdvance: -9.81
-          m_YAdvance: 0
-      m_SecondAdjustmentRecord:
-        m_GlyphIndex: 91
-        m_GlyphValueRecord:
-          m_XPlacement: 0
-          m_YPlacement: 0
-          m_XAdvance: 0
-          m_YAdvance: 0
-      m_FeatureLookupFlags: 0
     m_MarkToBaseAdjustmentRecords:
     - m_BaseGlyphID: 1
       m_BaseGlyphAnchorPoint:
@@ -3442,6 +3442,14 @@ MonoBehaviour:
     - m_BaseGlyphID: 37
       m_BaseGlyphAnchorPoint:
         m_XCoordinate: 9.990001
+        m_YCoordinate: 61.83
+      m_MarkGlyphID: 284
+      m_MarkPositionAdjustment:
+        m_XPositionAdjustment: -10.9800005
+        m_YPositionAdjustment: 46.530003
+    - m_BaseGlyphID: 48
+      m_BaseGlyphAnchorPoint:
+        m_XCoordinate: 13.500001
         m_YCoordinate: 61.83
       m_MarkGlyphID: 284
       m_MarkPositionAdjustment:
@@ -3611,14 +3619,6 @@ MonoBehaviour:
       m_BaseGlyphAnchorPoint:
         m_XCoordinate: 26.01
         m_YCoordinate: 46.530003
-      m_MarkGlyphID: 284
-      m_MarkPositionAdjustment:
-        m_XPositionAdjustment: -10.9800005
-        m_YPositionAdjustment: 46.530003
-    - m_BaseGlyphID: 48
-      m_BaseGlyphAnchorPoint:
-        m_XCoordinate: 13.500001
-        m_YCoordinate: 61.83
       m_MarkGlyphID: 284
       m_MarkPositionAdjustment:
         m_XPositionAdjustment: -10.9800005

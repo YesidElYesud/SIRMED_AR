@@ -17,24 +17,24 @@ MonoBehaviour:
     m_FaceIndex: 0
     m_FamilyName: Metropolis
     m_StyleName: Regular
-    m_PointSize: 90
+    m_PointSize: 136
     m_Scale: 1
     m_UnitsPerEM: 1000
-    m_LineHeight: 90
-    m_AscentLine: 71.55
-    m_CapLine: 62
-    m_MeanLine: 47
+    m_LineHeight: 136
+    m_AscentLine: 108.12
+    m_CapLine: 93
+    m_MeanLine: 70
     m_Baseline: 0
-    m_DescentLine: -18.45
-    m_SuperscriptOffset: 71.55
+    m_DescentLine: -27.880001
+    m_SuperscriptOffset: 108.12
     m_SuperscriptSize: 0.5
-    m_SubscriptOffset: -18.45
+    m_SubscriptOffset: -27.880001
     m_SubscriptSize: 0.5
-    m_UnderlineOffset: -11.97
-    m_UnderlineThickness: 1.8000001
-    m_StrikethroughOffset: 18.8
-    m_StrikethroughThickness: 1.8000001
-    m_TabWidth: 26
+    m_UnderlineOffset: -18.088001
+    m_UnderlineThickness: 2.72
+    m_StrikethroughOffset: 28
+    m_StrikethroughThickness: 2.72
+    m_TabWidth: 39
   m_Material: {fileID: 2111711870232921493}
   m_SourceFontFileGUID: 5b0b9a7d77721cc4d8eae9b1c28af0f4
   m_CreationSettings:
@@ -42,15 +42,15 @@ MonoBehaviour:
     sourceFontFileGUID: 5b0b9a7d77721cc4d8eae9b1c28af0f4
     faceIndex: 0
     pointSizeSamplingMode: 0
-    pointSize: 90
+    pointSize: 136
     padding: 9
     paddingMode: 2
-    packingMode: 0
+    packingMode: 4
     atlasWidth: 1024
     atlasHeight: 1024
-    characterSetSelectionMode: 7
-    characterSequence: 
-    referencedFontAssetGUID: 
+    characterSetSelectionMode: 6
+    characterSequence: 20-7E,A0,A1,A9,AA,AB,B0,B7,BA,BB,BF,C1,C9,CD,D1,D3,DA,DC,E1,E9,ED,F1,F3,FA,FC,2013,2014,2018,2019,201C,201D,2022,2026,2192
+    referencedFontAssetGUID: 5810066574caee844b111d84f44652c9
     referencedTextAssetGUID: 
     fontStyle: 0
     fontStyleModifier: 0
@@ -691,6 +691,81 @@ MonoBehaviour:
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
         m_GlyphIndex: 91
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: 0
+          m_YAdvance: 0
+      m_FeatureLookupFlags: 0
+    - m_FirstAdjustmentRecord:
+        m_GlyphIndex: 58
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: -2.25
+          m_YAdvance: 0
+      m_SecondAdjustmentRecord:
+        m_GlyphIndex: 92
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: 0
+          m_YAdvance: 0
+      m_FeatureLookupFlags: 0
+    - m_FirstAdjustmentRecord:
+        m_GlyphIndex: 58
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: -2.25
+          m_YAdvance: 0
+      m_SecondAdjustmentRecord:
+        m_GlyphIndex: 93
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: 0
+          m_YAdvance: 0
+      m_FeatureLookupFlags: 0
+    - m_FirstAdjustmentRecord:
+        m_GlyphIndex: 58
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: -2.25
+          m_YAdvance: 0
+      m_SecondAdjustmentRecord:
+        m_GlyphIndex: 94
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: 0
+          m_YAdvance: 0
+      m_FeatureLookupFlags: 0
+    - m_FirstAdjustmentRecord:
+        m_GlyphIndex: 58
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: -2.25
+          m_YAdvance: 0
+      m_SecondAdjustmentRecord:
+        m_GlyphIndex: 95
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: 0
+          m_YAdvance: 0
+      m_FeatureLookupFlags: 0
+    - m_FirstAdjustmentRecord:
+        m_GlyphIndex: 58
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: -2.25
+          m_YAdvance: 0
+      m_SecondAdjustmentRecord:
+        m_GlyphIndex: 96
         m_GlyphValueRecord:
           m_XPlacement: 0
           m_YPlacement: 0
@@ -4597,81 +4672,6 @@ MonoBehaviour:
           m_XAdvance: 0
           m_YAdvance: 0
       m_FeatureLookupFlags: 0
-    - m_FirstAdjustmentRecord:
-        m_GlyphIndex: 58
-        m_GlyphValueRecord:
-          m_XPlacement: 0
-          m_YPlacement: 0
-          m_XAdvance: -2.25
-          m_YAdvance: 0
-      m_SecondAdjustmentRecord:
-        m_GlyphIndex: 92
-        m_GlyphValueRecord:
-          m_XPlacement: 0
-          m_YPlacement: 0
-          m_XAdvance: 0
-          m_YAdvance: 0
-      m_FeatureLookupFlags: 0
-    - m_FirstAdjustmentRecord:
-        m_GlyphIndex: 58
-        m_GlyphValueRecord:
-          m_XPlacement: 0
-          m_YPlacement: 0
-          m_XAdvance: -2.25
-          m_YAdvance: 0
-      m_SecondAdjustmentRecord:
-        m_GlyphIndex: 93
-        m_GlyphValueRecord:
-          m_XPlacement: 0
-          m_YPlacement: 0
-          m_XAdvance: 0
-          m_YAdvance: 0
-      m_FeatureLookupFlags: 0
-    - m_FirstAdjustmentRecord:
-        m_GlyphIndex: 58
-        m_GlyphValueRecord:
-          m_XPlacement: 0
-          m_YPlacement: 0
-          m_XAdvance: -2.25
-          m_YAdvance: 0
-      m_SecondAdjustmentRecord:
-        m_GlyphIndex: 94
-        m_GlyphValueRecord:
-          m_XPlacement: 0
-          m_YPlacement: 0
-          m_XAdvance: 0
-          m_YAdvance: 0
-      m_FeatureLookupFlags: 0
-    - m_FirstAdjustmentRecord:
-        m_GlyphIndex: 58
-        m_GlyphValueRecord:
-          m_XPlacement: 0
-          m_YPlacement: 0
-          m_XAdvance: -2.25
-          m_YAdvance: 0
-      m_SecondAdjustmentRecord:
-        m_GlyphIndex: 95
-        m_GlyphValueRecord:
-          m_XPlacement: 0
-          m_YPlacement: 0
-          m_XAdvance: 0
-          m_YAdvance: 0
-      m_FeatureLookupFlags: 0
-    - m_FirstAdjustmentRecord:
-        m_GlyphIndex: 58
-        m_GlyphValueRecord:
-          m_XPlacement: 0
-          m_YPlacement: 0
-          m_XAdvance: -2.25
-          m_YAdvance: 0
-      m_SecondAdjustmentRecord:
-        m_GlyphIndex: 96
-        m_GlyphValueRecord:
-          m_XPlacement: 0
-          m_YPlacement: 0
-          m_XAdvance: 0
-          m_YAdvance: 0
-      m_FeatureLookupFlags: 0
     m_MarkToBaseAdjustmentRecords:
     - m_BaseGlyphID: 1
       m_BaseGlyphAnchorPoint:
@@ -4732,6 +4732,14 @@ MonoBehaviour:
     - m_BaseGlyphID: 53
       m_BaseGlyphAnchorPoint:
         m_XCoordinate: 34.65
+        m_YCoordinate: 61.83
+      m_MarkGlyphID: 284
+      m_MarkPositionAdjustment:
+        m_XPositionAdjustment: -11.610001
+        m_YPositionAdjustment: 46.530003
+    - m_BaseGlyphID: 58
+      m_BaseGlyphAnchorPoint:
+        m_XCoordinate: 36.36
         m_YCoordinate: 61.83
       m_MarkGlyphID: 284
       m_MarkPositionAdjustment:
@@ -4945,14 +4953,6 @@ MonoBehaviour:
       m_MarkPositionAdjustment:
         m_XPositionAdjustment: -11.610001
         m_YPositionAdjustment: 46.530003
-    - m_BaseGlyphID: 58
-      m_BaseGlyphAnchorPoint:
-        m_XCoordinate: 36.36
-        m_YCoordinate: 61.83
-      m_MarkGlyphID: 284
-      m_MarkPositionAdjustment:
-        m_XPositionAdjustment: -11.610001
-        m_YPositionAdjustment: 46.530003
     m_MarkToMarkAdjustmentRecords: []
   m_ShouldReimportFontFeatures: 0
   m_FallbackFontAssetTable: []
@@ -5126,7 +5126,7 @@ Texture2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Metropolis-Regular Atlas
+  m_Name: Metropolis-Regular SDF Atlas
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000

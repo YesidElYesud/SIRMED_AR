@@ -115,7 +115,7 @@ Texture2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Metropolis-Bold Atlas
+  m_Name: Metropolis-Bold SDF Atlas
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -172,24 +172,24 @@ MonoBehaviour:
     m_FaceIndex: 0
     m_FamilyName: Metropolis
     m_StyleName: Bold
-    m_PointSize: 90
+    m_PointSize: 128
     m_Scale: 1
     m_UnitsPerEM: 1000
-    m_LineHeight: 90
-    m_AscentLine: 71.55
-    m_CapLine: 62
-    m_MeanLine: 47
+    m_LineHeight: 128
+    m_AscentLine: 101.76
+    m_CapLine: 88
+    m_MeanLine: 66
     m_Baseline: 0
-    m_DescentLine: -18.45
-    m_SuperscriptOffset: 71.55
+    m_DescentLine: -26.24
+    m_SuperscriptOffset: 101.76
     m_SuperscriptSize: 0.5
-    m_SubscriptOffset: -18.45
+    m_SubscriptOffset: -26.24
     m_SubscriptSize: 0.5
-    m_UnderlineOffset: -11.97
-    m_UnderlineThickness: 1.8000001
-    m_StrikethroughOffset: 18.8
-    m_StrikethroughThickness: 1.8000001
-    m_TabWidth: 25
+    m_UnderlineOffset: -17.024
+    m_UnderlineThickness: 2.56
+    m_StrikethroughOffset: 26.4
+    m_StrikethroughThickness: 2.56
+    m_TabWidth: 36
   m_Material: {fileID: -6423259412365563852}
   m_SourceFontFileGUID: 4b1eb6354d2b627488b9230382c46546
   m_CreationSettings:
@@ -197,15 +197,15 @@ MonoBehaviour:
     sourceFontFileGUID: 4b1eb6354d2b627488b9230382c46546
     faceIndex: 0
     pointSizeSamplingMode: 0
-    pointSize: 90
+    pointSize: 128
     padding: 9
     paddingMode: 2
-    packingMode: 0
+    packingMode: 4
     atlasWidth: 1024
     atlasHeight: 1024
-    characterSetSelectionMode: 7
-    characterSequence: 
-    referencedFontAssetGUID: 
+    characterSetSelectionMode: 6
+    characterSequence: 20-7E,A0,A1,A9,AA,AB,B0,B7,BA,BB,BF,C1,C9,CD,D1,D3,DA,DC,E1,E9,ED,F1,F3,FA,FC,2013,2014,2018,2019,201C,201D,2022,2026,2192
+    referencedFontAssetGUID: 0b76916557e086c42afb7b17a59bf4a3
     referencedTextAssetGUID: 
     fontStyle: 0
     fontStyleModifier: 0
