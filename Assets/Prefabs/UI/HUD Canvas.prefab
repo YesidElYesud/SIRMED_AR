@@ -94,7 +94,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.15
+  m_fontSize: 37.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4192,14 +4192,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.10588236, g: 0.14901961, b: 0.29803923, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f22992b87fb0956429b4d033b5651654, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6826,16 +6826,19 @@ MonoBehaviour:
   _messageText: {fileID: 4661528206979399827}
   _maxHorizontalAccuracy: 15
   _maxYawAccuracy: 25
+  _maxVerticalAccuracy: 5
   _showDelay: 1.5
   _hideDelay: 1
   _hideInEditor: 1
   _msgStartingCamera: "Iniciando la c\xE1mara\u2026 mueve el tel\xE9fono lentamente."
   _msgLocating: "Buscando tu ubicaci\xF3n. Apunta la c\xE1mara a fachadas y calles
     cercanas."
-  _msgLowAccuracy: "Ubicaci\xF3n imprecisa. Camina unos pasos despacio y apunta la c\xE1mara a las casas y la calle."
+  _msgLowAccuracy: "Ubicaci\xF3n imprecisa. Camina unos pasos despacio y apunta la
+    c\xE1mara a las casas y la calle."
   _msgUnavailable: "La ubicaci\xF3n RA no est\xE1 disponible. Revisa tu conexi\xF3n
     a internet y el GPS."
-  _msgPlacingPoints: "Afinando tu ubicaci\xF3n para colocar los puntos. Camina unos pasos y apunta a las fachadas."
+  _msgPlacingPoints: "Afinando tu ubicaci\xF3n para colocar los puntos. Camina unos
+    pasos y apunta a las fachadas."
 --- !u!1 &1077720559976497962
 GameObject:
   m_ObjectHideFlags: 0
@@ -12371,7 +12374,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31
+  m_fontSize: 30.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -16030,6 +16033,7 @@ MonoBehaviour:
   northUp: 1
   alignmentInterval: 1
   minAnchorSpread: 8
+  maxAnchorDistance: 2000
   routeDotPrefab: {fileID: 8620593047557653380, guid: 0c67dd5042e06b5408e37588459eaee1, type: 3}
   routeDotSpacing: 4
   showRouteFromLevel: 2
@@ -19040,16 +19044,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.105882354, g: 0.14901961, b: 0.29803923, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: cbb49014bec8aba41af03314d5213900, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -22537,16 +22541,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.105882354, g: 0.14901961, b: 0.29803923, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: f22992b87fb0956429b4d033b5651654, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -26106,7 +26110,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.15
+  m_fontSize: 37.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -32796,7 +32800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.10588236, g: 0.15294118, b: 0.3019608, a: 1}
+  m_Color: {r: 0.10588236, g: 0.15294118, b: 0.3019608, a: 0.75686276}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -36958,7 +36962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.10588236, g: 0.15294118, b: 0.3019608, a: 1}
+  m_Color: {r: 0.10588236, g: 0.15294118, b: 0.3019608, a: 0.63529414}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -41302,12 +41306,14 @@ MonoBehaviour:
   - {fileID: 5400003566735068547}
   - {fileID: 2746317715867435771}
   _resultSeconds: 2.5
-  _msgWaiting: "Camina despacio y apunta la c\xE1mara a fachadas y calles cercanas.\nPrecisi\xF3n actual: {0:F1} m"
+  _msgWaiting: "Camina despacio y apunta la c\xE1mara a fachadas y calles cercanas.\nPrecisi\xF3n
+    actual: {0:F1} m"
   _msgWaitingNoTracking: "Buscando tu ubicaci\xF3n\u2026 apunta la c\xE1mara a fachadas
     y calles cercanas."
   _msgAnchoring: "Reubicando los puntos\u2026"
   _msgSuccess: "\xA1Listo! Los puntos se reubicaron."
-  _msgFailed: "No se logr\xF3 mejorar la ubicaci\xF3n: los puntos se quedan donde estaban. Intenta de nuevo con m\xE1s casas a la vista."
+  _msgFailed: "No se logr\xF3 mejorar la ubicaci\xF3n: los puntos se quedan donde
+    estaban. Intenta de nuevo con m\xE1s casas a la vista."
   _msgCooldown: "Podr\xE1s recalibrar de nuevo en {0:F0} s."
   _msgInitialPending: "Los puntos a\xFAn se est\xE1n ubicando por primera vez."
   _msgUnavailable: "La recalibraci\xF3n no est\xE1 disponible en esta escena."
@@ -49513,7 +49519,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.15
+  m_fontSize: 37.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -52000,7 +52006,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10061742033206098, guid: ea08100814d374941a3d82a1576e67ce, type: 3}
       propertyPath: m_fontSize
-      value: 60.2
+      value: 50.2
       objectReference: {fileID: 0}
     - target: {fileID: 10061742033206098, guid: ea08100814d374941a3d82a1576e67ce, type: 3}
       propertyPath: m_fontSizeMax
