@@ -80,6 +80,7 @@ namespace SIRMED.UI
         private IHotspotInteractable _sourceHotspot;
         private System.Action _onCorrectCallback;
         private System.Action _onIncorrectCallback;
+        private System.Action _onClosedCallback;
         private string[] _lines;
         private AudioClip[] _lineAudios; // paralelo a _lines; puede ser null
         private int _lineIndex;
@@ -117,7 +118,10 @@ namespace SIRMED.UI
         /// Abre el panel con el diálogo indicado.
         /// Llamado desde HotspotController (o cualquier IHotspotInteractable).
         /// </summary>
-        public void Show(NpcDialogueData data, IHotspotInteractable source, System.Action onCorrect = null, System.Action onIncorrect = null)
+        /// <param name="onClosed">Se llama al cerrarse el panel (por cualquier motivo). Lo usan los NPC
+        /// que abren diálogos sin hotspot de origen (source = null).</param>
+        public void Show(NpcDialogueData data, IHotspotInteractable source, System.Action onCorrect = null,
+                         System.Action onIncorrect = null, System.Action onClosed = null)
         {
             if (data == null)
             {
@@ -125,10 +129,33 @@ namespace SIRMED.UI
                 return;
             }
 
-            _currentData = data;
             _sourceHotspot = source;
             _onCorrectCallback = onCorrect;
             _onIncorrectCallback = onIncorrect;
+            _onClosedCallback = onClosed;
+
+            LoadDialogue(data);
+
+            SaveAndHideHud();
+            ScreenBackground.Instance?.SetSuppressed(true);
+
+            // Activar el GO ANTES de ShowLine: AudioSource.Play() es ignorado en GOs inactivos,
+            // por lo que el clip de la primera línea no sonaría si SetActive(true) va después.
+            gameObject.SetActive(true);
+            BlockInput(true);
+
+            // Bajar el volumen del ambiente para que la voz del NPC se oiga claramente
+            AudioStageManager.Instance?.DuckAmbient(_ambientDuckVolume, _duckFadeDuration);
+
+            ShowLine(0);
+        }
+
+        /// <summary>True mientras el panel está abierto (los NPC esperan a que se libere para hablar).</summary>
+        public bool IsOpen => gameObject.activeSelf;
+
+        private void LoadDialogue(NpcDialogueData data)
+        {
+            _currentData = data;
 
             // Prioridad: dialogueEntries (texto + audio) → dialogueLines (solo texto) → npcText
             bool hasEntries = data.dialogueEntries != null && data.dialogueEntries.Length > 0;
@@ -153,18 +180,6 @@ namespace SIRMED.UI
             _lineIndex = 0;
 
             PopulateNpcInfo();
-            SaveAndHideHud();
-            ScreenBackground.Instance?.SetSuppressed(true);
-
-            // Activar el GO ANTES de ShowLine: AudioSource.Play() es ignorado en GOs inactivos,
-            // por lo que el clip de la primera línea no sonaría si SetActive(true) va después.
-            gameObject.SetActive(true);
-            BlockInput(true);
-
-            // Bajar el volumen del ambiente para que la voz del NPC se oiga claramente
-            AudioStageManager.Instance?.DuckAmbient(_ambientDuckVolume, _duckFadeDuration);
-
-            ShowLine(0);
         }
 
         /// <summary>Cierra el panel y desbloquea el input.</summary>
@@ -196,6 +211,11 @@ namespace SIRMED.UI
             _onIncorrectCallback = null;
             _lineAudios = null;
             gameObject.SetActive(false);
+
+            // Al final: el callback puede abrir otro diálogo en este mismo panel.
+            System.Action onClosed = _onClosedCallback;
+            _onClosedCallback = null;
+            onClosed?.Invoke();
         }
 
         // ── Paginación ────────────────────────────────────────────────────────────
@@ -320,12 +340,24 @@ namespace SIRMED.UI
 
         private IEnumerator CorrectAnswerRoutine(float wait)
         {
-            _onCorrectCallback?.Invoke();
+            NpcDialogueData next = _currentData != null ? _currentData.nextOnCorrect : null;
+
+            // En una cadena, los avisos de "correcto" solo salen en el último diálogo.
+            if (next == null) _onCorrectCallback?.Invoke();
 
             yield return new WaitForSeconds(wait);
 
             if (_currentData != null && _currentData.advancesStageOnCorrect)
                 StageManager.Instance?.NextStage();
+
+            if (next != null)
+            {
+                _feedbackRoutine = null;
+                ResetOptionColors();
+                LoadDialogue(next);
+                ShowLine(0);
+                yield break;
+            }
 
             Hide();
         }

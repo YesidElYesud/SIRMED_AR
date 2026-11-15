@@ -92,5 +92,14 @@ namespace SIRMED.Gameplay.Dialogue
         [Tooltip("Situación de ayuda comunitaria: al responder bien, el Director da el consejo\n" +
                  "'Buena decisión…' (situación 5 del documento de validación del DAGRD).")]
         public bool isCommunityHelp = false;
+
+        [Tooltip("Ayuda comunitaria en varios pasos: el Director NO da el consejo al responder bien aquí,\n" +
+                 "sino el NPC al terminar su recorrido (p. ej. Don Aurelio al llegar al punto de encuentro).")]
+        public bool deferDirectorAdvice = false;
+
+        [Header("Encadenado")]
+        [Tooltip("Diálogo que se abre enseguida, en el mismo panel, tras responder bien este.\n" +
+                 "Los avisos de respuesta correcta (NPC, Director) solo salen al final de la cadena.")]
+        public NpcDialogueData nextOnCorrect;
     }
 }

@@ -125,6 +125,13 @@ namespace SIRMED.Gameplay.Hotspots
         public Action incorrectNpcDialogue;
 
         /// <summary>
+        /// Si es true, el cambio de nivel ya no oculta este hotspot. Lo activa un NPC de ayuda
+        /// comunitaria mientras acompaña al jugador: su script vive en este GameObject y se
+        /// detendría a mitad de camino si el hotspot se desactiva (p. ej. Don Aurelio, solo N3).
+        /// </summary>
+        [NonSerialized] public bool KeepVisible;
+
+        /// <summary>
         /// Se dispara al activar el hotspot (el jugador pulsó el botón del HUD), antes de abrir
         /// su panel. Lo usa p. ej. LeaderNpcController para que la líder aparezca de inmediato.
         /// </summary>
@@ -294,7 +301,7 @@ namespace SIRMED.Gameplay.Hotspots
         /// </summary>
         private void RefreshStageVisibility()
         {
-            if (data == null) return;
+            if (data == null || KeepVisible) return;
             bool hasSequence = !string.IsNullOrEmpty(sequenceId);
             int requiredStage = requiredStageOverride >= 0 ? requiredStageOverride : data.requiredStage;
             if (requiredStage < 0 && !hasSequence) return;
@@ -454,7 +461,8 @@ namespace SIRMED.Gameplay.Hotspots
                         {
                             onCorrect = () =>
                             {
-                                Director.DirectorAdviceController.Instance?.NotifyCommunityHelpCorrect();
+                                if (!dialogue.deferDirectorAdvice)
+                                    Director.DirectorAdviceController.Instance?.NotifyCommunityHelpCorrect();
                                 correctNpcDialogue?.Invoke();
                             };
                             onIncorrect = () =>

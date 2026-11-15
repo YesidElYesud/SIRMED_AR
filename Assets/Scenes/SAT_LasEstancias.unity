@@ -679,7 +679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df253ad9783f5fb4681a919eaa56b0e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df253ad9783f5fb4681a919eaa56b0e7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1223,7 +1223,7 @@ MonoBehaviour:
   minCheckpointsForArrival: 1
   autoShowFromLevel: 3
   ribbonWidth: 0.5
-  heightOffset: 0.15
+  heightOffset: -1.25
   ribbonMaterial: {fileID: 2100000, guid: 56c3d870b107d514f90a8e3a953008c4, type: 2}
   tint: {r: 0.15, g: 0.95, b: 0.35, a: 0.85}
   fadeInDuration: 0.8
@@ -1682,6 +1682,8 @@ MonoBehaviour:
   poins:
   - {fileID: 325194089}
   walkSpeed: 1.15
+  walkingDialogue: {fileID: 11400000, guid: 84d0b04d56db42279b56c772c07e451a, type: 2}
+  arrivalDialogue: {fileID: 11400000, guid: 55c90b7504ed47738801b2171ba9f80b, type: 2}
 --- !u!136 &352252993
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4535,6 +4537,7 @@ MonoBehaviour:
   controller: {fileID: 2090281927}
   animator: {fileID: 1981437417}
   leader: {fileID: 167239151}
+  leaderDialogue: {fileID: 11400000, guid: 036016c1490b42fea68d16cc6a0b4696, type: 2}
 --- !u!136 &2090281933
 CapsuleCollider:
   m_ObjectHideFlags: 0

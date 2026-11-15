@@ -75,6 +75,34 @@ namespace SIRMED.Gameplay.NPCs
 
         public bool IsSpawned => _spawned;
 
+        private bool _externallyControlled;
+        private bool _stageChangedWhileControlled;
+
+        /// <summary>
+        /// Mientras sea true otro script mueve a la líder (p. ej. ChildSeparatedNPC la lleva con el
+        /// niño al punto de encuentro): no gira hacia el jugador ni camina a la parada del nivel.
+        /// Al soltarla, si hubo cambio de nivel mientras tanto, va a la parada que corresponde.
+        /// </summary>
+        public bool ExternallyControlled
+        {
+            get => _externallyControlled;
+            set
+            {
+                if (_externallyControlled == value) return;
+                _externallyControlled = value;
+                if (value)
+                {
+                    if (_moveRoutine != null) { StopCoroutine(_moveRoutine); _moveRoutine = null; }
+                    _stageChangedWhileControlled = false;
+                }
+                else if (_stageChangedWhileControlled && _spawned)
+                {
+                    _stageChangedWhileControlled = false;
+                    StartCoroutine(MoveToActiveStopNextFrame());
+                }
+            }
+        }
+
         // ── Lifecycle ─────────────────────────────────────────────────────────────
         private void Awake()
         {
@@ -115,7 +143,7 @@ namespace SIRMED.Gameplay.NPCs
 
         private void Update()
         {
-            if (!_spawned || _moveRoutine != null || !facePlayerWhenIdle || _playerCamera == null) return;
+            if (!_spawned || _externallyControlled || _moveRoutine != null || !facePlayerWhenIdle || _playerCamera == null) return;
             TurnTowards(_playerCamera.position);
         }
 
@@ -129,6 +157,7 @@ namespace SIRMED.Gameplay.NPCs
         private void OnStageChanged(StageManager.Stage previous, StageManager.Stage current)
         {
             if (!_spawned) return;
+            if (_externallyControlled) { _stageChangedWhileControlled = true; return; }
             // Los hotspots refrescan su visibilidad en este mismo evento; esperar un frame
             // para que ya esté activa la parada del nuevo nivel.
             StartCoroutine(MoveToActiveStopNextFrame());

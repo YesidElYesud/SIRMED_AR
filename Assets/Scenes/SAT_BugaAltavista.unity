@@ -243,7 +243,7 @@ MonoBehaviour:
   _altitudeOffset: NaN
   _latitude: 7.040330210281151
   _longitude: -73.839698446414
-  _altitude: 100.15188642498106
+  _altitude: 98.0733
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -258,7 +258,7 @@ Transform:
   m_GameObject: {fileID: 86078352}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -469.4, y: 0.11, z: 558.5185}
+  m_LocalPosition: {x: -469.4, y: -1.96854, z: 558.5185}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -715,7 +715,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df253ad9783f5fb4681a919eaa56b0e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df253ad9783f5fb4681a919eaa56b0e7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1203,7 +1203,7 @@ MonoBehaviour:
   minCheckpointsForArrival: 1
   autoShowFromLevel: 3
   ribbonWidth: 0.5
-  heightOffset: 0.15
+  heightOffset: -1.25
   ribbonMaterial: {fileID: 2100000, guid: 56c3d870b107d514f90a8e3a953008c4, type: 2}
   tint: {r: 0.15, g: 0.95, b: 0.35, a: 0.85}
   fadeInDuration: 0.8
@@ -1662,6 +1662,8 @@ MonoBehaviour:
   poins:
   - {fileID: 325194089}
   walkSpeed: 1.15
+  walkingDialogue: {fileID: 11400000, guid: 84d0b04d56db42279b56c772c07e451a, type: 2}
+  arrivalDialogue: {fileID: 11400000, guid: 55c90b7504ed47738801b2171ba9f80b, type: 2}
 --- !u!136 &352252993
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3048,7 +3050,7 @@ MonoBehaviour:
   _altitudeOffset: NaN
   _latitude: 7.040248211110834
   _longitude: -73.83976200041869
-  _altitude: 99.74161419644952
+  _altitude: 99.2918
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -3063,7 +3065,7 @@ Transform:
   m_GameObject: {fileID: 793803397}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -476.42197, y: -0.3, z: 549.45}
+  m_LocalPosition: {x: -476.42197, y: -0.74984, z: 549.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3575,7 +3577,7 @@ MonoBehaviour:
   _altitudeOffset: NaN
   _latitude: 7.0404082105940775
   _longitude: -73.83964595296794
-  _altitude: 99.55222844332457
+  _altitude: 98.0695
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -3590,7 +3592,7 @@ Transform:
   m_GameObject: {fileID: 850151904}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -463.6, y: -0.49, z: 567.14465}
+  m_LocalPosition: {x: -463.6, y: -1.97276, z: 567.14465}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5015,7 +5017,7 @@ MonoBehaviour:
   _altitudeOffset: NaN
   _latitude: 7.040488210800134
   _longitude: -73.83960151450849
-  _altitude: 99.07267150748521
+  _altitude: 98.0696
   _altitudeType: 0
   _useEditorAltitudeOverride: 0
   _editorAltitudeOverride: 0
@@ -5030,7 +5032,7 @@ Transform:
   m_GameObject: {fileID: 1897917795}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -458.69, y: -0.97, z: 575.992}
+  m_LocalPosition: {x: -458.69, y: -1.97303, z: 575.992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5569,6 +5571,7 @@ MonoBehaviour:
   controller: {fileID: 2090281927}
   animator: {fileID: 1981437417}
   leader: {fileID: 167239151}
+  leaderDialogue: {fileID: 11400000, guid: 036016c1490b42fea68d16cc6a0b4696, type: 2}
 --- !u!136 &2090281933
 CapsuleCollider:
   m_ObjectHideFlags: 0

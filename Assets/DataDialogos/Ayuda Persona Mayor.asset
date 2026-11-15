@@ -12,25 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64322bcf911b1bc41a2a521643cb8e77, type: 3}
   m_Name: Ayuda Persona Mayor
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Dialogue.NpcDialogueData
-  npcName: "Vecino mayor"
+  npcName: "Don Aurelio"
   npcPhoto: {fileID: 0}
   dialogueEntries:
-  - text: "Disculpa... escuch\xE9 la sirena y me confund\xED con tanta gente. No s\xE9 para d\xF3nde ir."
-    audio: {fileID: 0}
-  - text: "\xBFQu\xE9 haces?"
+  - text: "Hijo\u2026 no s\xE9 para d\xF3nde coger. Llevo a\xF1os viviendo aqu\xED, pero con tanta agua me perd\xED. \xBFUsted sabe por d\xF3nde es la salida?"
+    audio: {fileID: 8300000, guid: d031fe1e0cd04a26882dc32ec75de190, type: 3}
+  - text: "\xBFQu\xE9 le respondes?"
     audio: {fileID: 0}
   dialogueLines: []
   npcText: 
   options:
-  - optionText: "Le digo que espere aqu\xED mientras voy a mirar la quebrada"
+  - optionText: "Corra r\xE1pido por donde pueda."
     isCorrect: 0
-    feedbackText: "No. Acercarte al cauce te expone al peligro y lo deja solo. Ori\xE9ntalo con calma hacia el punto de encuentro."
-  - optionText: "Le indico con calma la direcci\xF3n del punto de encuentro y lo acompa\xF1o por la ruta"
+    feedbackText: "No. Una persona mayor desorientada no debe quedarse sola ni sin gu\xEDa. Ori\xE9ntala y acomp\xE1\xF1ala por la ruta."
+  - optionText: "Tranquilo, yo le ayudo. Venga conmigo, sigamos juntos la ruta hacia el punto de encuentro."
     isCorrect: 1
     feedbackText: "\xA1Bien hecho! Orientar con calma y no dejar sola a una persona vulnerable es la forma segura de ayudar."
-  - optionText: "Sigo mi camino; seguro alguien m\xE1s lo ayudar\xE1"
+  - optionText: "No s\xE9, yo tambi\xE9n estoy buscando la salida."
     isCorrect: 0
-    feedbackText: "No. Una persona mayor desorientada no debe quedarse sola. Ind\xEDcale la ruta y, si puedes, acomp\xE1\xF1ala."
+    feedbackText: "No. Busca la ruta de evacuaci\xF3n y acomp\xE1\xF1alo hasta el punto de encuentro: no lo dejes solo ni sin gu\xEDa."
   advancesStageOnCorrect: 0
   correctAnswerDelay: 1.5
   isCommunityHelp: 1
+  deferDirectorAdvice: 1
+  nextOnCorrect: {fileID: 0}

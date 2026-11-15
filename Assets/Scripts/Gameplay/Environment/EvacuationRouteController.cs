@@ -391,6 +391,10 @@ namespace SIRMED.Gameplay.Environment
         // ── Visibilidad por nivel ─────────────────────────────────────────────────
         private void UpdateLevelVisibility()
         {
+            // El hotspot de Ruta la pidió antes de que la cinta estuviera construida (Show() no
+            // pudo mostrarla): mostrarla apenas se construya, en cualquier nivel.
+            if (_shownByHotspot && !_isVisible && !_arrived) ShowInternal();
+
             if (autoShowFromLevel == RiskLevel.None) return;
 
             RiskLevel level = RiskLevelIndicator.Instance != null
@@ -536,11 +540,25 @@ namespace SIRMED.Gameplay.Environment
         {
             if (indices.Count < 2) return false;
 
-            var positions = new List<float3>(indices.Count);
+            var positions = new List<float3>(indices.Count + 1);
             foreach (int i in indices)
             {
                 Vector3 local = transform.InverseTransformPoint(waypoints[i].transform.position);
                 positions.Add(new float3(local.x, local.y, local.z));
+            }
+
+            // La cinta siempre termina en el punto de encuentro: si el último waypoint quedó
+            // lejos de él (en varias escenas a 5–14 m), se agrega el hotspot como punto final.
+            int lastIndex = indices[indices.Count - 1];
+            if (lastIndex == waypoints.Length - 1 && IsMeetingPointUsable())
+            {
+                Vector3 pe = puntoDeEncuentro.position;
+                Vector3 d = pe - waypoints[lastIndex].transform.position;
+                if (new Vector2(d.x, d.z).magnitude >= minSegmentLength)
+                {
+                    Vector3 local = transform.InverseTransformPoint(pe);
+                    positions.Add(new float3(local.x, local.y, local.z));
+                }
             }
 
             var spline = new Spline(positions, TangentMode.AutoSmooth);
@@ -561,6 +579,69 @@ namespace SIRMED.Gameplay.Environment
             _sampledPoints.Clear();
             return true;
         }
+
+        private bool IsMeetingPointUsable()
+        {
+            if (puntoDeEncuentro == null) return false;
+            if (Application.isEditor) return true;
+            ARGeospatialAnchor anchor = puntoDeEncuentro.parent != null
+                ? puntoDeEncuentro.parent.GetComponent<ARGeospatialAnchor>()
+                : null;
+            return anchor != null && anchor.trackingState == TrackingState.Tracking;
+        }
+
+        /// <summary>
+        /// Camino (posiciones de mundo, a la altura de las anclas) desde 'from' hasta el punto
+        /// de encuentro siguiendo los waypoints de la ruta: arranca en el waypoint más cercano
+        /// (o en el siguiente si 'from' ya lo pasó) y termina en el punto de encuentro. Lo usan
+        /// los NPC de ayuda comunitaria para acompañar al jugador. false si no hay nada anclado.
+        /// </summary>
+        public bool TryGetPathToMeetingPoint(Vector3 from, List<Vector3> path)
+        {
+            path.Clear();
+            int start = -1;
+            float best = float.MaxValue;
+            for (int i = 0; i < (waypoints?.Length ?? 0); i++)
+            {
+                if (waypoints[i] == null || !waypoints[i].IsAnchorReady()) continue;
+                float d = FlatDistance(from, waypoints[i].transform.position);
+                if (d < best) { best = d; start = i; }
+            }
+
+            if (start >= 0)
+            {
+                // Si 'from' queda entre el más cercano y el siguiente, no devolverse.
+                int next = NextReady(start);
+                if (next >= 0 &&
+                    FlatDistance(from, waypoints[next].transform.position) <
+                    FlatDistance(waypoints[start].transform.position, waypoints[next].transform.position))
+                    start = next;
+
+                for (int i = start; i >= 0; i = NextReady(i))
+                    path.Add(waypoints[i].transform.position);
+            }
+
+            if (puntoDeEncuentro != null && (Application.isEditor || IsAnchorReady(puntoDeEncuentro)))
+            {
+                Vector3 pe = puntoDeEncuentro.position;
+                if (path.Count == 0 || FlatDistance(path[path.Count - 1], pe) >= minSegmentLength)
+                    path.Add(pe);
+            }
+            return path.Count > 0;
+        }
+
+        private int NextReady(int i)
+        {
+            for (int j = i + 1; j < waypoints.Length; j++)
+                if (waypoints[j] != null && waypoints[j].IsAnchorReady()) return j;
+            return -1;
+        }
+
+        private static bool IsAnchorReady(Transform t) =>
+            t.parent != null && t.parent.GetComponent<ARGeospatialAnchor>() != null;
+
+        private static float FlatDistance(Vector3 a, Vector3 b) =>
+            new Vector2(a.x - b.x, a.z - b.z).magnitude;
 
         // ── Validación de waypoints ───────────────────────────────────────────────
         private bool IsWaypointUsable(int i)

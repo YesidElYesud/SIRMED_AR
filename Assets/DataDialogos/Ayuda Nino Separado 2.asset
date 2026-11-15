@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64322bcf911b1bc41a2a521643cb8e77, type: 3}
+  m_Name: Ayuda Nino Separado 2
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Dialogue.NpcDialogueData
+  npcName: "Samuel"
+  npcPhoto: {fileID: 0}
+  dialogueEntries:
+  - text: "\xBFY si no la encuentran?"
+    audio: {fileID: 8300000, guid: 9b05b3d2af6941f4916b9ee8087e14e3, type: 3}
+  - text: "\xBFQu\xE9 le respondes?"
+    audio: {fileID: 0}
+  dialogueLines: []
+  npcText: 
+  options:
+  - optionText: "La van a buscar las personas que saben. T\xFA ayudas m\xE1s si te quedas tranquilo aqu\xED conmigo."
+    isCorrect: 1
+    feedbackText: "\xA1Bien! Transmitir calma y seguridad lo ayuda a no angustiarse."
+  - optionText: "Puede ser\u2026 toca esperar a ver qu\xE9 pasa."
+    isCorrect: 0
+    feedbackText: "No. Esa respuesta aumenta su angustia. Transm\xEDtele calma y seguridad."
+  advancesStageOnCorrect: 0
+  correctAnswerDelay: 1.5
+  isCommunityHelp: 1
+  deferDirectorAdvice: 1
+  nextOnCorrect: {fileID: 0}

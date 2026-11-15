@@ -12,25 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64322bcf911b1bc41a2a521643cb8e77, type: 3}
   m_Name: Ayuda Nino Separado
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Dialogue.NpcDialogueData
-  npcName: "Ni\xF1o"
+  npcName: "Samuel"
   npcPhoto: {fileID: 0}
   dialogueEntries:
-  - text: "No encuentro a mi mam\xE1... est\xE1bamos juntos y ahora no s\xE9 d\xF3nde est\xE1."
-    audio: {fileID: 0}
-  - text: "\xBFQu\xE9 haces?"
+  - text: "\xA1No encuentro a mi mam\xE1! Est\xE1bamos juntos y ya no la veo\u2026 \xBFqu\xE9 hago?"
+    audio: {fileID: 8300000, guid: 1256052367e74e28ac46221f965eddcb, type: 3}
+  - text: "\xBFQu\xE9 le respondes?"
     audio: {fileID: 0}
   dialogueLines: []
   npcText: 
   options:
-  - optionText: "Lo llevo a su casa a buscar a su mam\xE1"
+  - optionText: "Corre a buscarla, de pronto est\xE1 cerca de la quebrada."
     isCorrect: 0
-    feedbackText: "No. Regresar a la zona de riesgo los pone en peligro a los dos. Mantenlo en una zona segura y avisa al l\xEDder."
-  - optionText: "Le digo que la busque solo por el barrio"
-    isCorrect: 0
-    feedbackText: "No. Un ni\xF1o solo es muy vulnerable. Qu\xE9date con \xE9l en una zona segura y avisa al l\xEDder o a las autoridades."
-  - optionText: "Lo mantengo en una zona segura y aviso al l\xEDder comunitario o a las autoridades"
+    feedbackText: "No. Acercarse a la quebrada lo pone en peligro. Mantenlo contigo en una zona segura y avisa al l\xEDder."
+  - optionText: "Tranquilo, no est\xE1s solo. Qu\xE9date conmigo en esta zona segura mientras avisamos al l\xEDder para encontrar a tu mam\xE1."
     isCorrect: 1
     feedbackText: "\xA1Muy bien! Protegerlo en un lugar seguro y pedir ayuda al l\xEDder o a los organismos de socorro es lo correcto."
+  - optionText: "Yo te llevo r\xE1pido por el camino corto."
+    isCorrect: 0
+    feedbackText: "No. Improvisar rutas los expone a los dos. Qu\xE9date con \xE9l en una zona segura y avisa al l\xEDder."
   advancesStageOnCorrect: 0
   correctAnswerDelay: 1.5
   isCommunityHelp: 1
+  deferDirectorAdvice: 1
+  nextOnCorrect: {fileID: 11400000, guid: 084811d04bc8404a8fed4f56199d23ad, type: 2}
