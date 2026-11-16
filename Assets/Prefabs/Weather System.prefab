@@ -10194,7 +10194,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6e6fc63909e016f4bacfb7eaf5bd2958, type: 2}
+  - {fileID: 2100000, guid: 53764f87e0caf24468c536c1471995e3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10243,9 +10243,9 @@ MonoBehaviour:
     m_DefaultValue: 2
     m_DataPoints: []
   m_WidthMultiplier: 1
-  m_Material: {fileID: 2100000, guid: 6e6fc63909e016f4bacfb7eaf5bd2958, type: 2}
+  m_Material: {fileID: 2100000, guid: 53764f87e0caf24468c536c1471995e3, type: 2}
   m_Spline: {fileID: 7310026326597826738}
-  m_SegmentsPerMeter: 2
+  m_SegmentsPerMeter: 1
   m_WidthSegments: 15
   m_Mesh: {fileID: 0}
-  m_TextureScale: 100
+  m_TextureScale: 10
