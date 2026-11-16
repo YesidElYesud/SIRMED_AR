@@ -99,7 +99,7 @@ Material:
     - _LOD: 5
     - _MOVE: 1
     - _Metallic: 0
-    - _Multi: 2
+    - _Multi: 4
     - _Normal1: 0.4
     - _Normal2: 0.5
     - _QueueControl: 0
@@ -119,6 +119,6 @@ Material:
     - _Color2: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
     - _Speed1: {r: 0.017, g: -0.1, b: 0, a: 0}
     - _Speed2: {r: 0.01, g: -0.13, b: 0, a: 0}
-    - _Tiling: {r: 0.25, g: 0.75, b: 0, a: 0}
+    - _Tiling: {r: 0.5, g: 0.75, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
