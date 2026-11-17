@@ -64,7 +64,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.15
     characterRim: 0
-    cameraFarPlane: 100
+    cameraFarPlane: 50
     particlesToPlay: []
     particlesToStop:
     - particle: {fileID: 0}
@@ -108,7 +108,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.1
     characterRim: 0
-    cameraFarPlane: 100
+    cameraFarPlane: 50
     particlesToPlay: []
     particlesToStop:
     - particle: {fileID: 0}
@@ -152,7 +152,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.15
     characterRim: 0.1
-    cameraFarPlane: 75
+    cameraFarPlane: 40
     particlesToPlay:
     - particle: {fileID: 0}
       rateOverTime: 216
@@ -200,7 +200,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.25
     characterRim: 0.25
-    cameraFarPlane: 50
+    cameraFarPlane: 30
     particlesToPlay:
     - particle: {fileID: 0}
       rateOverTime: 433
@@ -248,7 +248,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.4
     characterRim: 0.5
-    cameraFarPlane: 25
+    cameraFarPlane: 20
     particlesToPlay:
     - particle: {fileID: 0}
       rateOverTime: 650
