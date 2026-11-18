@@ -883,6 +883,8 @@ MonoBehaviour:
   animator: {fileID: 1184378912}
   mainCamera: {fileID: 801526768}
   safeSpace: {fileID: 808337800}
+  walkSpeed: 1.3
+  turnSpeed: 240
 --- !u!1 &193207845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1662,8 +1664,11 @@ MonoBehaviour:
   poins:
   - {fileID: 325194089}
   walkSpeed: 1.15
+  slowWalkSpeed: 0.75
+  turnSpeed: 180
   walkingDialogue: {fileID: 11400000, guid: 84d0b04d56db42279b56c772c07e451a, type: 2}
   arrivalDialogue: {fileID: 11400000, guid: 55c90b7504ed47738801b2171ba9f80b, type: 2}
+  talkDistance: 5
 --- !u!136 &352252993
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5571,7 +5576,13 @@ MonoBehaviour:
   controller: {fileID: 2090281927}
   animator: {fileID: 1981437417}
   leader: {fileID: 167239151}
+  runIfCloserThan: 8
+  leaderSideOffset: 1
   leaderDialogue: {fileID: 11400000, guid: 036016c1490b42fea68d16cc6a0b4696, type: 2}
+  talkDistance: 5
+  walkSpeed: 1.1
+  followDistance: 1.2
+  turnSpeed: 240
 --- !u!136 &2090281933
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5929,7 +5940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 524811159975544110, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
       propertyPath: m_fontSize
-      value: 37.15
+      value: 37.1
       objectReference: {fileID: 0}
     - target: {fileID: 536220457341494146, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
       propertyPath: m_AnchorMax.y
@@ -7051,6 +7062,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2577744669933094798, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2577744669933094798, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2644648443346813077, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7281,7 +7300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2937288064314755586, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
       propertyPath: m_fontSize
-      value: 37.15
+      value: 37.1
       objectReference: {fileID: 0}
     - target: {fileID: 2959184490715083308, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
       propertyPath: m_AnchorMax.y
@@ -8703,6 +8722,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5961954735491162140, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
+      propertyPath: earthManager
+      value: 
+      objectReference: {fileID: 596133974}
     - target: {fileID: 5994116009177739874, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -10342,6 +10365,10 @@ PrefabInstance:
     - target: {fileID: 8765527634027212442, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8784719780360474932, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
+      propertyPath: m_fontSize
+      value: 30.95
       objectReference: {fileID: 0}
     - target: {fileID: 8860507259081779354, guid: b644c49b5bc5d4041b17395be4d725ef, type: 3}
       propertyPath: m_AnchorMax.y
