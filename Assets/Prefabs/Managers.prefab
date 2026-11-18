@@ -64,7 +64,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.15
     characterRim: 0
-    cameraFarPlane: 100
+    cameraFarPlane: 50
     particlesToPlay: []
     particlesToStop:
     - particle: {fileID: 0}
@@ -80,14 +80,14 @@ MonoBehaviour:
     wetFloorRipples: 0
     wetFloorWaves: 0
     wetFlootColor: {r: 1, g: 1, b: 1, a: 1}
-    riverPower: 1.5
-    riverSpeed: {x: 0.25, y: -1}
-    riverDetailsSpeed: {x: -0.1, y: -0.4}
-    riverScale: 4
-    riverDetailsScale: 2
-    riverColor: {r: 0.1764706, g: 0.28235295, b: 0.5019608, a: 0.8509804}
-    riverSpecular: 0.5
-    riverTiling: {x: 2, y: 0.5}
+    riverMulti: 4
+    riverSmoothness: 0.7
+    riverSpeed1: {x: 0.017, y: -0.1}
+    riverSpeed2: {x: 0.01, y: -0.13}
+    riverTiling: {x: 0.25, y: 0.75}
+    riverAlpha: 0.525
+    riverLOD: 5
+    riverFlatLerp: 0
     loftMulty: 0.5
     transitionDuration: 1
   - stageName: Etapa1
@@ -108,7 +108,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.1
     characterRim: 0
-    cameraFarPlane: 100
+    cameraFarPlane: 50
     particlesToPlay: []
     particlesToStop:
     - particle: {fileID: 0}
@@ -124,14 +124,14 @@ MonoBehaviour:
     wetFloorRipples: 0
     wetFloorWaves: 0
     wetFlootColor: {r: 1, g: 1, b: 1, a: 1}
-    riverPower: 1.5
-    riverSpeed: {x: 0.25, y: -1}
-    riverDetailsSpeed: {x: -0.1, y: -0.4}
-    riverScale: 4
-    riverDetailsScale: 2
-    riverColor: {r: 0.1764706, g: 0.28235295, b: 0.5019608, a: 0.8509804}
-    riverSpecular: 0.5
-    riverTiling: {x: 2, y: 0.5}
+    riverMulti: 4
+    riverSmoothness: 0.7
+    riverSpeed1: {x: 0.017, y: -0.1}
+    riverSpeed2: {x: 0.01, y: -0.13}
+    riverTiling: {x: 0.25, y: 0.75}
+    riverAlpha: 0.525
+    riverLOD: 5
+    riverFlatLerp: 0
     loftMulty: 0.5
     transitionDuration: 1.5
   - stageName: Etapa2
@@ -152,7 +152,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.15
     characterRim: 0.1
-    cameraFarPlane: 75
+    cameraFarPlane: 40
     particlesToPlay:
     - particle: {fileID: 0}
       rateOverTime: 216
@@ -172,14 +172,14 @@ MonoBehaviour:
     wetFloorRipples: 0.01
     wetFloorWaves: 0.005
     wetFlootColor: {r: 0.875, g: 0.9160156, b: 1, a: 1}
-    riverPower: 2.75
-    riverSpeed: {x: 0.35, y: -1.5}
-    riverDetailsSpeed: {x: -0.2, y: -1}
-    riverScale: 4.25
-    riverDetailsScale: 2
-    riverColor: {r: 0.37647063, g: 0.41721416, b: 0.5019608, a: 0.7490196}
-    riverSpecular: 0.4
-    riverTiling: {x: 2.6666663, y: 0.5}
+    riverMulti: 8
+    riverSmoothness: 0.8
+    riverSpeed1: {x: 0.017, y: -0.15}
+    riverSpeed2: {x: 0.01, y: -0.18}
+    riverTiling: {x: 0.3333333, y: 0.5833333}
+    riverAlpha: 0.65
+    riverLOD: 5.1666665
+    riverFlatLerp: 0.1
     loftMulty: 0.6666666
     transitionDuration: 2
   - stageName: Etapa3
@@ -200,7 +200,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.25
     characterRim: 0.25
-    cameraFarPlane: 50
+    cameraFarPlane: 30
     particlesToPlay:
     - particle: {fileID: 0}
       rateOverTime: 433
@@ -220,14 +220,14 @@ MonoBehaviour:
     wetFloorRipples: 0.15
     wetFloorWaves: 0.02
     wetFlootColor: {r: 0.5625, g: 0.6219512, b: 0.75, a: 1}
-    riverPower: 3.3
-    riverSpeed: {x: 0.35, y: -3.5}
-    riverDetailsSpeed: {x: -0.4, y: -3.3}
-    riverScale: 4.8
-    riverDetailsScale: 2.2
-    riverColor: {r: 0.9, g: 0.87401575, b: 0.75, a: 0.69803923}
-    riverSpecular: 0.25
-    riverTiling: {x: 3.3333333, y: 0.5}
+    riverMulti: 18
+    riverSmoothness: 0.9
+    riverSpeed1: {x: 0.017, y: -0.2}
+    riverSpeed2: {x: 0.01, y: -0.23}
+    riverTiling: {x: 0.41666666, y: 0.41666663}
+    riverAlpha: 0.775
+    riverLOD: 5.4
+    riverFlatLerp: 0.25
     loftMulty: 0.8333333
     transitionDuration: 1
   - stageName: Etapa4
@@ -248,7 +248,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.4
     characterRim: 0.5
-    cameraFarPlane: 25
+    cameraFarPlane: 20
     particlesToPlay:
     - particle: {fileID: 0}
       rateOverTime: 650
@@ -268,14 +268,14 @@ MonoBehaviour:
     wetFloorRipples: 0.3
     wetFloorWaves: 0.035
     wetFlootColor: {r: 0.5, g: 0.43717277, b: 0.35078534, a: 1}
-    riverPower: 5
-    riverSpeed: {x: 0.5, y: -5}
-    riverDetailsSpeed: {x: -0.5, y: -4}
-    riverScale: 5
-    riverDetailsScale: 2.25
-    riverColor: {r: 0.75, g: 0.7091503, b: 0.5, a: 0.69803923}
-    riverSpecular: 0.1
-    riverTiling: {x: 4, y: 0.5}
+    riverMulti: 30
+    riverSmoothness: 1
+    riverSpeed1: {x: 0.017, y: -0.25}
+    riverSpeed2: {x: 0.01, y: -0.28}
+    riverTiling: {x: 0.5, y: 0.25}
+    riverAlpha: 0.9
+    riverLOD: 5.5
+    riverFlatLerp: 0.5
     loftMulty: 1
     transitionDuration: 0.8
   sunLight: {fileID: 0}
@@ -284,7 +284,7 @@ MonoBehaviour:
   fogTransform: {fileID: 0}
   rain: {fileID: 2100000, guid: cf8d8b29c50897146ab28e05a3456f05, type: 2}
   wetFloor: {fileID: 2100000, guid: 8349e6fd801ad8544886578e7fa291cb, type: 2}
-  river: {fileID: 2100000, guid: 6e6fc63909e016f4bacfb7eaf5bd2958, type: 2}
+  river: {fileID: 2100000, guid: 53764f87e0caf24468c536c1471995e3, type: 2}
   riverLoft: {fileID: 0}
   volumePriority: 10
   debugLogs: 0
@@ -718,6 +718,11 @@ MonoBehaviour:
   _recalibrationTimeout: 60
   _recalibrationCooldown: 20
   _autoReanchorAfterFallback: 1
+  _altitudeCorrection: 1
+  _altitudeReferenceRadius: 20
+  _maxAltitudeCorrection: 10
+  _lockAnchorHeight: 1
+  _diagnosticLogInterval: 5
 --- !u!1 &9036412375442688160
 GameObject:
   m_ObjectHideFlags: 0
