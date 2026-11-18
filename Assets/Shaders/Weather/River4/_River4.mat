@@ -99,7 +99,7 @@ Material:
     - _LOD: 5
     - _MOVE: 1
     - _Metallic: 0
-    - _Multi: 1.3333334
+    - _Multi: 2
     - _Normal1: 0.4
     - _Normal2: 0.5
     - _QueueControl: 0
