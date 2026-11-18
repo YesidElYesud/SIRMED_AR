@@ -179,8 +179,7 @@ namespace SIRMED.Managers
             [Header("River")]
             public float riverMulti;
             [Range(0, 1)] public float riverSmoothness;
-            public Vector2 riverSpeed1;
-            public Vector2 riverSpeed2;
+            public float riverTargetSpeed;
             public Vector2 riverTiling;
             public float riverAlpha;
             [Range(0, 8)] public float riverLOD;
@@ -248,6 +247,10 @@ namespace SIRMED.Managers
         private float _stageCharacterFill;
         private float _stageCharacterRim;
 
+        private float targetSpeedMultiplier = 1f;
+        private float accumulatedTime;
+        private readonly int _RiverTime = Shader.PropertyToID("_RiverTime");
+
         // ── Lifecycle ─────────────────────────────────────────────────────────────
         private void Awake()
         {
@@ -277,6 +280,12 @@ namespace SIRMED.Managers
         {
             if (StageManager.Instance != null)
                 StageManager.Instance.OnStageChanged -= OnStageChanged;
+        }
+        private void Update()
+        {
+            // ── River ─────────────────────────────────────────────────────────────
+            accumulatedTime += Time.deltaTime * targetSpeedMultiplier;
+            river.SetFloat(_RiverTime, accumulatedTime);
         }
 
         // ── Reacción al cambio de etapa ───────────────────────────────────────────
@@ -669,12 +678,11 @@ namespace SIRMED.Managers
             float startMulti = river.GetFloat("_Multi");
             float startSmoothness = river.GetFloat("_Smoothness");
             float startAlpha = river.GetFloat("_Alpha");
-            Vector2 startSpeed1 = river.GetVector("_Speed1");
-            Vector2 startSpeed2 = river.GetVector("_Speed2");
             Vector2 startTiling = river.GetVector("_Tiling");
             float startLOD = river.GetFloat("_LOD");
             float startFlat_Lerp = river.GetFloat("_Flat_Lerp");
             float startRiverLoftMulty = riverLoft.WidthMultiplier;
+            float startTargetSpeedMultiplier = targetSpeedMultiplier;
 
             float elapsed = 0f;
             while (elapsed < target.transitionDuration)
@@ -685,12 +693,11 @@ namespace SIRMED.Managers
                 river.SetFloat("_Multi", Mathf.Lerp(startMulti, target.riverMulti, t));
                 river.SetFloat("_Smoothness", Mathf.Lerp(startSmoothness, target.riverSmoothness, t));
                 river.SetFloat("_Alpha", Mathf.Lerp(startAlpha, target.riverAlpha, t));
-                river.SetVector("_Speed1", Vector2.Lerp(startSpeed1, target.riverSpeed1, t));
-                river.SetVector("_Speed2", Vector2.Lerp(startSpeed2, target.riverSpeed2, t));
                 river.SetVector("_Tiling", Vector2.Lerp(startTiling, target.riverTiling, t));
                 river.SetFloat("_LOD", Mathf.Lerp(startLOD, target.riverLOD, t));
                 river.SetFloat("_Flat_Lerp", Mathf.Lerp(startFlat_Lerp, target.riverFlatLerp, t));
                 riverLoft.WidthMultiplier = Mathf.Lerp(startRiverLoftMulty, target.loftMulty, t);
+                targetSpeedMultiplier = Mathf.Lerp(startTargetSpeedMultiplier, target.riverTargetSpeed, t);
 
                 await UniTask.Yield(cancellationToken: _cts.Token);
             }

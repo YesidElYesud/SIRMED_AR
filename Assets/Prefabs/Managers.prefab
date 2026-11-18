@@ -82,8 +82,7 @@ MonoBehaviour:
     wetFlootColor: {r: 1, g: 1, b: 1, a: 1}
     riverMulti: 4
     riverSmoothness: 0.7
-    riverSpeed1: {x: 0.017, y: -0.1}
-    riverSpeed2: {x: 0.01, y: -0.13}
+    riverTargetSpeed: 1
     riverTiling: {x: 0.25, y: 0.75}
     riverAlpha: 0.525
     riverLOD: 5
@@ -126,8 +125,7 @@ MonoBehaviour:
     wetFlootColor: {r: 1, g: 1, b: 1, a: 1}
     riverMulti: 4
     riverSmoothness: 0.7
-    riverSpeed1: {x: 0.017, y: -0.1}
-    riverSpeed2: {x: 0.01, y: -0.13}
+    riverTargetSpeed: 1
     riverTiling: {x: 0.25, y: 0.75}
     riverAlpha: 0.525
     riverLOD: 5
@@ -174,9 +172,8 @@ MonoBehaviour:
     wetFlootColor: {r: 0.875, g: 0.9160156, b: 1, a: 1}
     riverMulti: 8
     riverSmoothness: 0.8
-    riverSpeed1: {x: 0.017, y: -0.15}
-    riverSpeed2: {x: 0.01, y: -0.18}
-    riverTiling: {x: 0.3333333, y: 0.5833333}
+    riverTargetSpeed: 2
+    riverTiling: {x: 0.3333333, y: 0.75}
     riverAlpha: 0.65
     riverLOD: 5.1666665
     riverFlatLerp: 0.1
@@ -222,9 +219,8 @@ MonoBehaviour:
     wetFlootColor: {r: 0.5625, g: 0.6219512, b: 0.75, a: 1}
     riverMulti: 18
     riverSmoothness: 0.9
-    riverSpeed1: {x: 0.017, y: -0.2}
-    riverSpeed2: {x: 0.01, y: -0.23}
-    riverTiling: {x: 0.41666666, y: 0.41666663}
+    riverTargetSpeed: 3
+    riverTiling: {x: 0.41666666, y: 0.75}
     riverAlpha: 0.775
     riverLOD: 5.4
     riverFlatLerp: 0.25
@@ -270,11 +266,10 @@ MonoBehaviour:
     wetFlootColor: {r: 0.5, g: 0.43717277, b: 0.35078534, a: 1}
     riverMulti: 30
     riverSmoothness: 1
-    riverSpeed1: {x: 0.017, y: -0.25}
-    riverSpeed2: {x: 0.01, y: -0.28}
-    riverTiling: {x: 0.5, y: 0.25}
+    riverTargetSpeed: 4
+    riverTiling: {x: 0.5, y: 0.75}
     riverAlpha: 0.9
-    riverLOD: 5.5
+    riverLOD: 5.55
     riverFlatLerp: 0.5
     loftMulty: 1
     transitionDuration: 0.8
