@@ -95,7 +95,9 @@ namespace SIRMED.Gameplay.NPCs
                     if (_moveRoutine != null) { StopCoroutine(_moveRoutine); _moveRoutine = null; }
                     _stageChangedWhileControlled = false;
                 }
-                else if (_stageChangedWhileControlled && _spawned)
+                // _currentStop == null: apareció por MarkSpawnedByEscort y nunca ha estado en una
+                // parada; al soltarla va a la del nivel activo, igual que tras un cambio de nivel.
+                else if ((_stageChangedWhileControlled || _currentStop == null) && _spawned)
                 {
                     _stageChangedWhileControlled = false;
                     StartCoroutine(MoveToActiveStopNextFrame());
@@ -192,6 +194,23 @@ namespace SIRMED.Gameplay.NPCs
             AttachToAnchor(stop);
             if (fader != null) fader.FadeIn();
             else visualRoot.gameObject.SetActive(true);
+        }
+
+        /// <summary>
+        /// Otro script (ChildSeparatedNPC) la trae a escena sin que el jugador la haya llamado.
+        /// Desde ahí cuenta como aparecida: tocar una de sus monedas ya no la teletransporta
+        /// (OnStopActivated ignora el Spawn) y la moneda del nivel activo se oculta, porque ella
+        /// ya está en escena. Llamar con ExternallyControlled = true.
+        /// </summary>
+        public void MarkSpawnedByEscort()
+        {
+            if (_spawned) return;
+            _spawned = true;
+            _currentStop = null;
+            if (stops == null) return;
+            foreach (HotspotController stop in stops)
+                if (stop != null && stop.gameObject.activeInHierarchy)
+                    stop.SetMarkerVisible(false);
         }
 
         // ── Movimiento ────────────────────────────────────────────────────────────
