@@ -320,7 +320,10 @@ namespace SIRMED.Gameplay.Hotspots
         {
             if (meshTransform == null || rotationSpeed == 0 || _isNearby || _isPanelOpen) return;
 
-            meshTransform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime, Space.Self);
+            // Gira sobre el eje vertical del hotspot, no sobre el Y local de la malla: algunos
+            // FBX (p. ej. Icono_Sensor) vienen con -90° en X y su Y local queda horizontal,
+            // lo que hacía rodar el ícono como una moneda. Para mallas sin rotación es idéntico.
+            meshTransform.Rotate(transform.up, rotationSpeed * Time.deltaTime, Space.World);
         }
 
         // ── Proximidad ────────────────────────────────────────────────────────────

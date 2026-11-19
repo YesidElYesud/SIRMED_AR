@@ -10,8 +10,8 @@ using UnityEngine;
 ///   2. Respondidas bien → el niño se alegra y llega la líder: si está cerca (≤ runIfCloserThan)
 ///      corre hasta él; si está lejos (en varias escenas a 40–200 m) desaparece con un fundido
 ///      y reaparece junto al niño, del lado visible para el jugador.
-///   3. Con el jugador cerca, la líder dice leaderDialogue ("Yo me encargo…"); al cerrarlo el
-///      Director da el consejo S5.
+///   3. En cuanto el panel queda libre, la líder dice leaderDialogue ("Yo me encargo…"); al
+///      cerrarlo el Director da el consejo S5.
 ///   4. Niño y líder caminan juntos por la ruta hasta el punto de encuentro.
 /// </summary>
 [RequireComponent(typeof(HotspotController))]
@@ -31,10 +31,10 @@ public class ChildSeparatedNPC : MonoBehaviour
     [SerializeField] private float leaderSideOffset = 1f;
 
     [Header("Cierre y camino al punto de encuentro")]
-    [Tooltip("Línea de la líder al llegar (\"Yo me encargo, ya estamos ubicando a tu mamá…\").")]
+    [Tooltip("Línea de la líder al llegar (\"Yo me encargo, ya estamos ubicando a tu mamá…\").\n" +
+             "Sale apenas se cierra el diálogo del niño, sin importar la distancia: desde el 29-oct los\n" +
+             "hotspots se activan tocándolos hasta a 25 m (HotspotsActivator), no por cercanía.")]
     [SerializeField] private NpcDialogueData leaderDialogue;
-    [Tooltip("Distancia horizontal (m) a la que el jugador tiene que estar para que la líder hable.")]
-    [SerializeField] private float talkDistance = 5f;
     [SerializeField] private float walkSpeed = 1.1f;
     [Tooltip("Distancia (m) a la que la líder camina detrás del niño.")]
     [SerializeField] private float followDistance = 1.2f;
@@ -67,8 +67,13 @@ public class ChildSeparatedNPC : MonoBehaviour
 
     private void OnCorrectDialogue()
     {
+        // Ya ayudado: tocarlo otra vez reabría el diálogo y reiniciaba todo el flujo.
+        if (_state != State.Idle) return;
+
         controller.enabled = false;
         controller.KeepVisible = true;
+        // HotspotsActivator activa por raycast contra el Collider, aunque el controller esté deshabilitado.
+        if (controller.TryGetComponent(out Collider tapCollider)) tapCollider.enabled = false;
 
         animator.SetTrigger(_Happy);
 
@@ -76,6 +81,9 @@ public class ChildSeparatedNPC : MonoBehaviour
 
         _state = State.LeaderComing;
         leader.ExternallyControlled = true;
+        // Si el jugador no la había llamado, desde ahora cuenta como aparecida: su moneda no
+        // debe seguir activa (al tocarla se teletransportaba a la parada y dejaba solo al niño).
+        leader.MarkSpawnedByEscort();
 
         Transform root = leader.visualRoot;
         bool visible = root.gameObject.activeInHierarchy;
@@ -165,12 +173,6 @@ public class ChildSeparatedNPC : MonoBehaviour
 
     private void UpdateWaitingToTalk()
     {
-        if (_camera == null && Camera.main != null) _camera = Camera.main.transform;
-        if (_camera == null) return;
-
-        Vector3 d = _camera.position - animator.transform.position;
-        if (new Vector2(d.x, d.z).magnitude > talkDistance) return;
-
         NpcDialoguePanel panel = NpcDialoguePanel.Instance;
         if (panel != null && !MeetingPointPath.CanTalkNow(panel)) return;
 
