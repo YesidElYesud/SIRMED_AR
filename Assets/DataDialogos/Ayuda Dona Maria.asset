@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64322bcf911b1bc41a2a521643cb8e77, type: 3}
+  m_Name: Ayuda Dona Maria
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Dialogue.NpcDialogueData
+  npcName: "Do\xF1a Mar\xEDa"
+  npcPhoto: {fileID: 0}
+  dialogueEntries:
+  - text: "Se me qued\xF3 el televisor y unos papeles importantes. Alcanzo a devolverme por ellos, es aqu\xED no m\xE1s."
+    audio: {fileID: 8300000, guid: 5dc2f1bc27384317823feb9b78ecc88c, type: 3}
+  - text: "\xBFQu\xE9 le respondes?"
+    audio: {fileID: 0}
+  dialogueLines: []
+  npcText: 
+  options:
+  - optionText: "Listo, yo la acompa\xF1o r\xE1pido."
+    isCorrect: 0
+    feedbackText: "No. Acompa\xF1arla a devolverse premia una conducta peligrosa y los expone a los dos. La prioridad es evacuar."
+  - optionText: "No se devuelva. En N4 el agua sube muy r\xE1pido; lo material se reemplaza, la vida no. Sigamos a la zona segura."
+    isCorrect: 1
+    feedbackText: "\xA1Muy bien! No regresar: la prioridad es evacuar."
+  - optionText: "Pues si es r\xE1pido\u2026"
+    isCorrect: 0
+    feedbackText: "No. En N4 no hay regreso r\xE1pido: el agua sube en segundos. Sigan hacia la zona segura."
+  advancesStageOnCorrect: 0
+  correctAnswerDelay: 1.5
+  isCommunityHelp: 1
+  deferDirectorAdvice: 0
+  nextOnCorrect: {fileID: 11400000, guid: 80cd7eea3e6542e889c469fb90f9c828, type: 2}
