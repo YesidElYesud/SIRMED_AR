@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64322bcf911b1bc41a2a521643cb8e77, type: 3}
+  m_Name: Ayuda Dona Maria 2
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Dialogue.NpcDialogueData
+  npcName: "Do\xF1a Mar\xEDa"
+  npcPhoto: {fileID: 0}
+  dialogueEntries:
+  - text: "Pero es el esfuerzo de a\xF1os, me duele dejarlo."
+    audio: {fileID: 8300000, guid: 4253e65286584e7b9dc7ab8e41341146, type: 3}
+  - text: "\xBFQu\xE9 le respondes?"
+    audio: {fileID: 0}
+  dialogueLines: []
+  npcText: 
+  options:
+  - optionText: "Lo entiendo, pero ahora lo importante es usted. Esas cosas se recuperan despu\xE9s; su vida no."
+    isCorrect: 1
+    feedbackText: "\xA1Bien! Validar lo que siente sin ceder: la vida est\xE1 por encima de los bienes materiales."
+  - optionText: "Tiene raz\xF3n, vaya por ellas antes de que suba m\xE1s."
+    isCorrect: 0
+    feedbackText: "No. Devolverse por objetos en N4 puede costarle la vida. La vida tiene prioridad sobre los bienes."
+  advancesStageOnCorrect: 0
+  correctAnswerDelay: 1.5
+  isCommunityHelp: 1
+  deferDirectorAdvice: 0
+  nextOnCorrect: {fileID: 0}
