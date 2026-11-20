@@ -3,14 +3,16 @@ using SIRMED.Gameplay.NPCs;
 using UnityEngine;
 
 /// <summary>
-/// Perro (ayuda comunitaria). Al responder bien en su hotspot camina solo por la ruta de
-/// evacuación hasta el punto de encuentro (MeetingPointPath) y allí se queda mirando al jugador.
+/// Perro o gato (ayuda comunitaria; HP_Perro y HP_Gato usan este mismo componente). Al responder
+/// bien en su hotspot va solo por la ruta de evacuación hasta el punto de encuentro
+/// (MeetingPointPath) y allí se queda mirando al jugador.
 ///
 /// Antes seguía al teléfono con un desfase fijo: subía y bajaba con el teléfono y giraba con
 /// Lerp sobre ángulos de Euler (vuelta completa al pasar de 359° a 0°).
 ///
-/// El modelo no tiene animaciones (Perro.fbx sin clips, Animator sin controller): si se le
-/// asigna un controller con un float "Speed", se pone a 1 al caminar y a 0 al detenerse.
+/// Animación: AC_Perro (Perro_alerta por defecto → Perro_run con Speed > 0.1 → Perro_idle con
+/// Speed &lt; 0.1). Speed se pone a 1 al caminar y a 0 al llegar. El gato usa AC_Gato (Idle_Alert →
+/// Run → Idle) y en escena tiene walkSpeed 2.5 m/s: corre en vez de caminar.
 /// </summary>
 public class DogNPC : MonoBehaviour
 {
@@ -52,6 +54,9 @@ public class DogNPC : MonoBehaviour
         if (_state != State.Idle) return;
         controller.enabled = false;
         controller.KeepVisible = true; // que el cambio de nivel no lo esconda a mitad de camino
+        // HotspotsActivator activa por raycast contra el Collider aunque el controller esté
+        // deshabilitado: sin esto, tocarlo otra vez reabría el diálogo.
+        if (controller.TryGetComponent(out Collider tapCollider)) tapCollider.enabled = false;
 
         Transform model = animator.transform;
         float groundOffset = model.position.y - controller.transform.position.y;
@@ -59,12 +64,12 @@ public class DogNPC : MonoBehaviour
 
         if (!_path.Build(model.position, groundOffset, fallback))
         {
-            Debug.Log("[Perro] Sin ruta ni punto de encuentro anclados: se queda donde está.", this);
+            Debug.Log($"[{name}] Sin ruta ni punto de encuentro anclados: se queda donde está.", this);
             _state = State.Arrived;
             return;
         }
 
-        Debug.Log($"[Perro] Camino al punto de encuentro: {_path.Count} puntos.", this);
+        Debug.Log($"[{name}] Camino al punto de encuentro: {_path.Count} puntos.", this);
         _state = State.Walking;
         SetSpeed(1f);
     }
