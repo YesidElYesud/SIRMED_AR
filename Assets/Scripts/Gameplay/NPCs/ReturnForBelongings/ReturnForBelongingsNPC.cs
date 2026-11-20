@@ -14,6 +14,14 @@ using UnityEngine;
 ///
 /// Animator (AC_DonaMaria): Float "Speed" (1 caminando, 0 detenida), Trigger "Yes", Trigger "Incorrect".
 /// Sin controller asignado no anima, pero el flujo funciona igual.
+///
+/// También lo usa Carlos (vecino que se acerca a la quebrada, N3; modelo VecinoDos): mismo flujo con tres
+/// preguntas encadenadas ("Ayuda Carlos" → 2 → 3) y su propio controller (AC_Carlos) con los mismos parámetros.
+///
+/// Con escort asignado (Doña María → bombero): al responder bien la cadena el bombero llega a su lado
+/// (FirefighterNPC.BeginEscort), dice "Hizo lo correcto quedándose en la ruta…", y al cerrarlo el Director
+/// da S5 (el primer diálogo debe tener deferDirectorAdvice) y ella camina al punto de encuentro con el
+/// bombero detrás. Sin escort (Carlos) el flujo es el de arriba.
 /// </summary>
 [RequireComponent(typeof(HotspotController))]
 public class ReturnForBelongingsNPC : MonoBehaviour
@@ -28,7 +36,14 @@ public class ReturnForBelongingsNPC : MonoBehaviour
     [Tooltip("Segundos entre el gesto de \"sí\" y el primer paso hacia el punto de encuentro.")]
     [SerializeField] private float agreeDelay = 2f;
 
-    private enum State { Idle, Agreeing, Walking, Arrived }
+    [Header("Bombero (opcional)")]
+    [Tooltip("Si se asigna, el bombero llega, dice su línea y la acompaña al punto de encuentro.\n" +
+             "El primer diálogo debe tener deferDirectorAdvice: S5 sale después de la línea del bombero.")]
+    [SerializeField] private FirefighterNPC escort;
+    [Tooltip("Segundos entre la línea del bombero y el primer paso.")]
+    [SerializeField] private float afterEscortDelay = 0.5f;
+
+    private enum State { Idle, WaitingEscort, Agreeing, Walking, Arrived }
     private State _state = State.Idle;
     private float _timer;
     private Transform _camera;
@@ -60,8 +75,21 @@ public class ReturnForBelongingsNPC : MonoBehaviour
         if (controller.TryGetComponent(out Collider tapCollider)) tapCollider.enabled = false;
 
         Trigger(YesParam);
+        if (escort != null)
+        {
+            _state = State.WaitingEscort;
+            escort.BeginEscort(animator.transform, controller.transform.parent, OnEscortLineDone);
+            return;
+        }
         _state = State.Agreeing;
         _timer = agreeDelay;
+    }
+
+    private void OnEscortLineDone()
+    {
+        SIRMED.Gameplay.Director.DirectorAdviceController.Instance?.NotifyCommunityHelpCorrect();
+        _state = State.Agreeing;
+        _timer = afterEscortDelay;
     }
 
     private void OnIncorrectDialogue()
@@ -73,6 +101,10 @@ public class ReturnForBelongingsNPC : MonoBehaviour
     {
         switch (_state)
         {
+            case State.WaitingEscort:
+                FacePlayer();
+                break;
+
             case State.Agreeing:
                 FacePlayer();
                 _timer -= Time.deltaTime;
@@ -86,6 +118,7 @@ public class ReturnForBelongingsNPC : MonoBehaviour
                     _state = State.Arrived;
                     _path.Unsubscribe();
                     SetSpeed(0f);
+                    if (escort != null) escort.EndEscort();
                 }
                 break;
 
@@ -101,12 +134,13 @@ public class ReturnForBelongingsNPC : MonoBehaviour
         float groundOffset = model.position.y - controller.transform.position.y;
         if (!_path.Build(model.position, groundOffset))
         {
-            Debug.Log("[DonaMaria] Sin ruta ni punto de encuentro anclados: se queda donde está.", this);
+            Debug.Log($"[{name}] Sin ruta ni punto de encuentro anclados: se queda donde está.", this);
             _state = State.Arrived;
+            if (escort != null) escort.EndEscort();
             return;
         }
 
-        Debug.Log($"[DonaMaria] Camino al punto de encuentro: {_path.Count} puntos.", this);
+        Debug.Log($"[{name}] Camino al punto de encuentro: {_path.Count} puntos.", this);
         _state = State.Walking;
         SetSpeed(1f);
     }
