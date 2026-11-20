@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64322bcf911b1bc41a2a521643cb8e77, type: 3}
+  m_Name: Ayuda Carlos 2
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Dialogue.NpcDialogueData
+  npcName: Carlos
+  npcPhoto: {fileID: 0}
+  dialogueEntries:
+  - text: "Pero si me quedo en la orilla no me pasa nada..."
+    audio: {fileID: 8300000, guid: 74937c648b9e450b91a9c4f324ee52ca, type: 3}
+  - text: "\xBFQu\xE9 le respondes?"
+    audio: {fileID: 0}
+  dialogueLines: []
+  npcText: 
+  options:
+  - optionText: "La orilla es lo primero que se lleva el agua. Venga, subamos a un terreno m\xE1s alto."
+    isCorrect: 1
+    feedbackText: "\xA1Bien! La distancia segura no es negociable: el riesgo cambia en segundos."
+  - optionText: "Bueno, un ratico y nos vamos."
+    isCorrect: 0
+    feedbackText: "No. En la orilla el riesgo cambia en segundos; no hay \"un ratico\" seguro junto al cauce."
+  advancesStageOnCorrect: 0
+  correctAnswerDelay: 1.5
+  isCommunityHelp: 1
+  deferDirectorAdvice: 0
+  nextOnCorrect: {fileID: 11400000, guid: d2a234d5ec1a4ee8b73be2e517343f86, type: 2}

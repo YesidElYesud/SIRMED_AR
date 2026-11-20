@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64322bcf911b1bc41a2a521643cb8e77, type: 3}
+  m_Name: Ayuda Carlos 3
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Dialogue.NpcDialogueData
+  npcName: Carlos
+  npcPhoto: {fileID: 0}
+  dialogueEntries:
+  - text: "Por esta calle con ag\xFCita cruzo m\xE1s r\xE1pido y le gano tiempo a la evacuaci\xF3n."
+    audio: {fileID: 8300000, guid: 2becbc6d6ff144cc857eea5037940582, type: 3}
+  - text: "\xBFQu\xE9 le respondes?"
+    audio: {fileID: 0}
+  dialogueLines: []
+  npcText: 
+  options:
+  - optionText: "Listo, crucemos r\xE1pido."
+    isCorrect: 0
+    feedbackText: "No. Un flujo bajo puede arrastrar a una persona. Nunca caminen por una calle con agua en movimiento."
+  - optionText: "Nunca cruce agua en movimiento, aunque parezca poca. Busquemos terreno elevado y sigamos la ruta."
+    isCorrect: 1
+    feedbackText: "\xA1Muy bien! Nunca caminar ni conducir por una inundaci\xF3n: sigan la ruta por terreno elevado."
+  advancesStageOnCorrect: 0
+  correctAnswerDelay: 1.5
+  isCommunityHelp: 1
+  deferDirectorAdvice: 0
+  nextOnCorrect: {fileID: 0}

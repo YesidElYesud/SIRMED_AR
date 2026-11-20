@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64322bcf911b1bc41a2a521643cb8e77, type: 3}
+  m_Name: Ayuda Carlos
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Dialogue.NpcDialogueData
+  npcName: Carlos
+  npcPhoto: {fileID: 0}
+  dialogueEntries:
+  - text: "\xA1Mire c\xF3mo baj\xF3 de crecida la quebrada! Voy a acercarme a grabar un video, que esto no se ve todos los d\xEDas."
+    audio: {fileID: 8300000, guid: a2ce71dc8a51423485d3a551723afcd9, type: 3}
+  - text: "\xBFQu\xE9 le respondes?"
+    audio: {fileID: 0}
+  dialogueLines: []
+  npcText: 
+  options:
+  - optionText: "H\xE1gale, pero r\xE1pido."
+    isCorrect: 0
+    feedbackText: "No. Ninguna foto o video vale el riesgo: una creciente sube sin avisar. La distancia segura del cauce no es negociable."
+  - optionText: "Mejor no se acerque. Una creciente sube sin avisar y arrastra todo. Alej\xE9monos del cauce."
+    isCorrect: 1
+    feedbackText: "\xA1Muy bien! Mantener distancia segura del cauce: no exponerse por curiosidad."
+  - optionText: "Yo tambi\xE9n quiero ver."
+    isCorrect: 0
+    feedbackText: "No. Acercarse por curiosidad los expone a los dos. Al\xE9jense del cauce."
+  advancesStageOnCorrect: 0
+  correctAnswerDelay: 1.5
+  isCommunityHelp: 1
+  deferDirectorAdvice: 0
+  nextOnCorrect: {fileID: 11400000, guid: d9397e835241489a8946dc431a1a7f10, type: 2}
