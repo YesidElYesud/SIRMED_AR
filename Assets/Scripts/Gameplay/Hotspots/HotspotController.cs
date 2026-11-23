@@ -576,7 +576,7 @@ namespace SIRMED.Gameplay.Hotspots
             if (uiPanel != null) uiPanel.Hide();
 
             if (data != null && data.activatesEvacuationRoute)
-                SIRMED.Gameplay.Environment.EvacuationRouteController.Instance?.Show();
+                SIRMED.Gameplay.Environment.EvacuationRouteController.Active?.Show();
 
             if (data != null && data.advancesStageOnClose)
                 StageManager.Instance?.NextStage();

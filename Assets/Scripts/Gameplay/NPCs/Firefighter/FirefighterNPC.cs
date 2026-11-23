@@ -15,7 +15,8 @@ using UnityEngine;
 /// En el punto de encuentro:
 ///   - Oculto hasta visibleFromStage (por defecto N3, cuando aparece la cinta de la ruta); una vez visible
 ///     ya no se oculta. En N4 grita una vez (trigger "Yell"). Mira al jugador a menos de lookDistance.
-///   - Al llegar el jugador al punto de encuentro (EvacuationRouteController.OnArrivalAtPuntoDeEncuentro)
+///   - Al llegar el jugador al punto de encuentro (EvacuationRouteController.ArrivedAtAnyMeetingPoint, solo
+///     si el punto de esa ruta está a menos de meetingPointRadius: con varias rutas hay un bombero por punto)
 ///     saluda ("Wave") y, cuando el Director termina S7/S9 y el panel está libre, dice line ("Hizo lo
 ///     correcto quedándose en la ruta…"). Al cerrarlo aplaude ("Clap"). Si ya la dijo con Doña María,
 ///     solo saluda.
@@ -68,7 +69,10 @@ public class FirefighterNPC : MonoBehaviour
     private bool _lineSaid;
     private float _freeSince = -1f;
     private Transform _camera;
-    private EvacuationRouteController _route;
+    private bool _subscribedToArrival;
+
+    [Tooltip("Solo reacciona a la llegada a un punto de encuentro a menos de esta distancia (m) de él.")]
+    [SerializeField] private float meetingPointRadius = 15f;
 
     private Transform _companion;
     private Transform _companionAnchor;
@@ -95,7 +99,7 @@ public class FirefighterNPC : MonoBehaviour
     private void OnDestroy()
     {
         if (StageManager.Instance != null) StageManager.Instance.OnStageChanged -= OnStageChanged;
-        if (_route != null) _route.OnArrivalAtPuntoDeEncuentro -= OnArrival;
+        if (_subscribedToArrival) EvacuationRouteController.ArrivedAtAnyMeetingPoint -= OnArrival;
     }
 
     private void OnStageChanged(StageManager.Stage previous, StageManager.Stage current) => ApplyStage(current);
@@ -233,11 +237,10 @@ public class FirefighterNPC : MonoBehaviour
     // ── Bucle ──────────────────────────────────────────────────────────────────
     private void Update()
     {
-        // La ruta puede registrarse después de este Start: suscribirse en cuanto exista.
-        if (_route == null && EvacuationRouteController.Instance != null)
+        if (!_subscribedToArrival)
         {
-            _route = EvacuationRouteController.Instance;
-            _route.OnArrivalAtPuntoDeEncuentro += OnArrival;
+            _subscribedToArrival = true;
+            EvacuationRouteController.ArrivedAtAnyMeetingPoint += OnArrival;
         }
 
         if (!_shown) return;
@@ -273,9 +276,17 @@ public class FirefighterNPC : MonoBehaviour
         return Time.time - _freeSince >= freeSecondsBeforeTalking;
     }
 
-    private void OnArrival()
+    private void OnArrival(EvacuationRouteController route)
     {
         if (_state != State.Waiting && _state != State.Done) return;
+        // Otro punto de encuentro (escena con varias rutas): ese tiene su propio bombero.
+        Transform meeting = route != null ? route.puntoDeEncuentro : null;
+        if (meeting != null)
+        {
+            Vector3 d = meeting.position - transform.position;
+            d.y = 0f;
+            if (d.sqrMagnitude > meetingPointRadius * meetingPointRadius) return;
+        }
         Show();
         Trigger(WaveParam);
         if (!_lineSaid && arrivalDialogue != null && NpcDialoguePanel.Instance != null)

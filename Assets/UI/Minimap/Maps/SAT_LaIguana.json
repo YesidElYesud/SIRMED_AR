@@ -1,0 +1,9 @@
+{
+  "name": "SAT_LaIguana",
+  "centerLatitude": 6.260122,
+  "centerLongitude": -75.581373,
+  "metersPerPixel": 0.29296875,
+  "sizeMeters": 600.0,
+  "pixels": 2048,
+  "attribution": "© OpenStreetMap contributors"
+}

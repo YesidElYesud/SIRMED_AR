@@ -46,7 +46,8 @@ namespace SIRMED.Gameplay.NPCs
             _index = 0;
             _points.Clear();
 
-            EvacuationRouteController route = EvacuationRouteController.Instance;
+            // Con varias rutas, la de su calle (la más cercana): termina en su punto de encuentro.
+            EvacuationRouteController route = EvacuationRouteController.NearestTo(from);
             if (route == null || !route.TryGetPathToMeetingPoint(from, _points))
             {
                 _points.Clear();
@@ -103,7 +104,7 @@ namespace SIRMED.Gameplay.NPCs
         {
             if (_repathAt < 0f || Time.time < _repathAt || Finished) return;
 
-            EvacuationRouteController route = EvacuationRouteController.Instance;
+            EvacuationRouteController route = EvacuationRouteController.NearestTo(from);
             if (route == null || !route.TryGetPathToMeetingPoint(from, _scratch))
             {
                 _repathAt = Time.time + RepathDelay; // anclas aún sin resolver: reintentar

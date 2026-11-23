@@ -433,7 +433,7 @@ namespace SIRMED.UI
         // ── Ruta + punto de encuentro ─────────────────────────────────────────────
         private void RefreshRoute(bool show)
         {
-            EvacuationRouteController route = EvacuationRouteController.Instance;
+            EvacuationRouteController route = EvacuationRouteController.Active;
             IReadOnlyList<Vector3> points = null;
             bool hasRoute = show && route != null && routeDotPrefab != null && dotsContainer != null &&
                             route.TryGetSampledPoints(routeDotSpacing, out points);

@@ -1,0 +1,9 @@
+{
+  "name": "SAT_ManzanaresAltavista",
+  "centerLatitude": 6.223116,
+  "centerLongitude": -75.631637,
+  "metersPerPixel": 0.29296875,
+  "sizeMeters": 600.0,
+  "pixels": 2048,
+  "attribution": "© OpenStreetMap contributors"
+}

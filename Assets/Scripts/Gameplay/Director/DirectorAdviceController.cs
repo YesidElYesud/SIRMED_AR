@@ -120,9 +120,10 @@ namespace SIRMED.Gameplay.Director
         {
             // Los singletons pueden no existir todavía por orden de carga de escena —
             // Update() reintenta hasta que aparezcan.
-            if (!_subscribedToArrival && EvacuationRouteController.Instance != null)
+            if (!_subscribedToArrival)
             {
-                EvacuationRouteController.Instance.OnArrivalAtPuntoDeEncuentro += HandleArrival;
+                // Evento estático: vale para cualquiera de las rutas de la escena.
+                EvacuationRouteController.ArrivedAtAnyMeetingPoint += HandleArrival;
                 _subscribedToArrival = true;
             }
             if (!_subscribedToStage && StageManager.Instance != null)
@@ -134,8 +135,8 @@ namespace SIRMED.Gameplay.Director
 
         private void Unsubscribe()
         {
-            if (_subscribedToArrival && EvacuationRouteController.Instance != null)
-                EvacuationRouteController.Instance.OnArrivalAtPuntoDeEncuentro -= HandleArrival;
+            if (_subscribedToArrival)
+                EvacuationRouteController.ArrivedAtAnyMeetingPoint -= HandleArrival;
             _subscribedToArrival = false;
 
             if (_subscribedToStage && StageManager.Instance != null)
@@ -217,7 +218,7 @@ namespace SIRMED.Gameplay.Director
         // el jugador se está alejando en vez de progresar.
         private void CheckDesvio(bool evaluate)
         {
-            EvacuationRouteController route = EvacuationRouteController.Instance;
+            EvacuationRouteController route = EvacuationRouteController.Active;
             if (!evaluate || route == null || !route.IsVisible)
             {
                 _minRouteDistanceSeen = float.PositiveInfinity;
@@ -324,7 +325,7 @@ namespace SIRMED.Gameplay.Director
         }
 
         // ── S7 + S9: llegada al punto de encuentro ────────────────────────────────
-        private void HandleArrival()
+        private void HandleArrival(EvacuationRouteController route)
         {
             TryTrigger(adviceLlegada, urgent: true);
             TryTrigger(adviceZonaSegura, urgent: true);

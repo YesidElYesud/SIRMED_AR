@@ -33,6 +33,18 @@ EditorBuildSettings:
     path: Assets/Scenes/SAT_Guayabal.unity
     guid: c2f8be47854844bd8012d4872048e8b4
   - enabled: 1
+    path: Assets/Scenes/SAT_BugaAltavista.unity
+    guid: 89c66e809fe50d44586c825aa73e6898
+  - enabled: 1
+    path: Assets/Scenes/SAT_LaIguana.unity
+    guid: 60c1c0854b81405bae06372658f38bcd
+  - enabled: 1
+    path: Assets/Scenes/SAT_GuamoAltavista.unity
+    guid: 08048382a5214483b8bb8d71f2b53650
+  - enabled: 1
+    path: Assets/Scenes/SAT_ManzanaresAltavista.unity
+    guid: ccfbd03540814d9eae9619b6fa7ff4de
+  - enabled: 1
     path: Assets/Scenes/YesidCasa_CoreTest.unity
     guid: 55b98dabc4beed547945cb3581ee2fa7
   - enabled: 1

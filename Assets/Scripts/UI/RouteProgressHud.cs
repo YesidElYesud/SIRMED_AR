@@ -38,7 +38,7 @@ namespace SIRMED.UI
         [Tooltip("Segundos tras la llegada antes de abrir el cierre (además de esperar al Director).")]
         [SerializeField] private float endGameDelay = 1.5f;
 
-        private EvacuationRouteController _route;
+        private bool _subscribed;
         private Coroutine _toastRoutine;
         private bool _closing;
 
@@ -47,28 +47,26 @@ namespace SIRMED.UI
             if (toastRoot != null) toastRoot.SetActive(false);
         }
 
-        private void OnDestroy() => Unsubscribe();
-
-        private void Update()
+        private void OnEnable()
         {
-            // El singleton de la ruta puede aparecer después (orden de carga de escena).
-            if (_route == null && EvacuationRouteController.Instance != null)
-            {
-                _route = EvacuationRouteController.Instance;
-                _route.OnCheckpointReached += HandleCheckpoint;
-                _route.OnArrivalAtPuntoDeEncuentro += HandleArrival;
-            }
+            // Eventos estáticos: valen para cualquiera de las rutas de la escena.
+            if (_subscribed) return;
+            _subscribed = true;
+            EvacuationRouteController.AnyCheckpointReached += HandleCheckpoint;
+            EvacuationRouteController.ArrivedAtAnyMeetingPoint += HandleArrival;
         }
+
+        private void OnDestroy() => Unsubscribe();
 
         private void Unsubscribe()
         {
-            if (_route == null) return;
-            _route.OnCheckpointReached -= HandleCheckpoint;
-            _route.OnArrivalAtPuntoDeEncuentro -= HandleArrival;
-            _route = null;
+            if (!_subscribed) return;
+            _subscribed = false;
+            EvacuationRouteController.AnyCheckpointReached -= HandleCheckpoint;
+            EvacuationRouteController.ArrivedAtAnyMeetingPoint -= HandleArrival;
         }
 
-        private void HandleCheckpoint(int reached, int total)
+        private void HandleCheckpoint(EvacuationRouteController route, int reached, int total)
         {
             if (toastRoot == null) return;
             if (toastText != null) toastText.text = string.Format(toastFormat, reached, total);
@@ -84,7 +82,7 @@ namespace SIRMED.UI
             _toastRoutine = null;
         }
 
-        private void HandleArrival()
+        private void HandleArrival(EvacuationRouteController route)
         {
             if (!endGameOnArrival || !EndGamePanel.Enabled || _closing) return;
             StartCoroutine(CloseRoutine());

@@ -61,8 +61,12 @@ namespace SIRMED.Gameplay.Environment
     /// recalibración); si el rearme no valida, se conserva la malla anterior.
     /// En el Editor nada de esto aplica: se usan todos los waypoints como antes.
     ///
-    /// Varias rutas por escena: cada instancia valida y construye la suya; Instance es
-    /// la primera registrada (la que usan hotspots, minimapa y Director) y All las lista.
+    /// Varias rutas por escena (una cinta por calle/callejón, cada una hasta su punto de
+    /// encuentro): cada instancia valida y construye la suya. Solo se ve la ruta Active, la
+    /// más cercana al jugador (cambia cuando otra queda activeSwitchMargin m más cerca, así
+    /// que en un tramo compartido no salta). Instance es la primera registrada; All las lista.
+    /// La llegada y el pedido del hotspot de Ruta valen para todas (ArrivedAtAnyMeetingPoint,
+    /// Show()); los NPC usan NearestTo(su posición) para ir al punto de encuentro de su calle.
     /// </summary>
     [RequireComponent(typeof(SplineContainer))]
     [RequireComponent(typeof(MeshFilter))]
@@ -75,6 +79,129 @@ namespace SIRMED.Gameplay.Environment
 
         /// <summary>Todas las rutas de la escena (una por cada cinta).</summary>
         public static IReadOnlyList<EvacuationRouteController> All => _all;
+
+        /// <summary>Llegada al punto de encuentro de cualquier ruta (Director S7/S9, cierre, bombero).</summary>
+        public static event System.Action<EvacuationRouteController> ArrivedAtAnyMeetingPoint;
+
+        /// <summary>Punto de control alcanzado en cualquier ruta: (ruta, alcanzados, total).</summary>
+        public static event System.Action<EvacuationRouteController, int, int> AnyCheckpointReached;
+
+        /// <summary>Metros que otra ruta debe quedar más cerca del jugador para pasar a ser la activa.</summary>
+        public const float ActiveSwitchMargin = 8f;
+
+        // Estado compartido entre rutas: la cinta es una sola experiencia aunque haya varias.
+        private static bool s_shownByHotspot;
+        private static bool s_arrived;
+        private static EvacuationRouteController s_active;
+        private static int s_activeFrame = -1;
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetStatics()
+        {
+            _all.Clear();
+            Instance = null;
+            ArrivedAtAnyMeetingPoint = null;
+            AnyCheckpointReached = null;
+            s_shownByHotspot = false;
+            s_arrived = false;
+            s_active = null;
+            s_activeFrame = -1;
+        }
+
+        /// <summary>
+        /// La ruta que se muestra: la más cercana a la cámara, con margen (ActiveSwitchMargin)
+        /// para no saltar entre rutas que comparten tramo. Con una sola ruta es esa.
+        /// </summary>
+        public static EvacuationRouteController Active
+        {
+            get
+            {
+                if (s_activeFrame == Time.frameCount) return s_active;
+                s_activeFrame = Time.frameCount;
+
+                if (s_active != null && !_all.Contains(s_active)) s_active = null;
+                if (_all.Count <= 1)
+                {
+                    s_active = _all.Count == 1 ? _all[0] : null;
+                    return s_active;
+                }
+
+                Camera cam = Camera.main;
+                if (cam == null)
+                {
+                    if (s_active == null) s_active = Instance;
+                    return s_active;
+                }
+
+                Vector3 player = cam.transform.position;
+                EvacuationRouteController best = Closest(player, out float bestDistance);
+                if (best == null)
+                {
+                    if (s_active == null) s_active = Instance;
+                    return s_active;
+                }
+                if (s_active == null || best == s_active)
+                {
+                    s_active = best;
+                    return s_active;
+                }
+
+                float current = s_active.SelectionDistance(player);
+                if (bestDistance + ActiveSwitchMargin < current)
+                {
+                    Debug.Log($"[EvacRoute] Ruta activa: {best.name} a {bestDistance:F1} m (antes {s_active.name}, a {current:F1} m).", best);
+                    s_active = best;
+                }
+                return s_active;
+            }
+        }
+
+        /// <summary>
+        /// La ruta más cercana a una posición de mundo (sin margen). La usan los NPC para ir al
+        /// punto de encuentro de su propia calle. null si no hay rutas.
+        /// </summary>
+        public static EvacuationRouteController NearestTo(Vector3 position)
+        {
+            if (_all.Count <= 1) return _all.Count == 1 ? _all[0] : null;
+            EvacuationRouteController best = Closest(position, out _);
+            return best != null ? best : Instance;
+        }
+
+        private static EvacuationRouteController Closest(Vector3 position, out float distance)
+        {
+            EvacuationRouteController best = null;
+            distance = float.PositiveInfinity;
+            foreach (EvacuationRouteController route in _all)
+            {
+                float d = route.SelectionDistance(position);
+                if (d < distance) { distance = d; best = route; }
+            }
+            return best;
+        }
+
+        // Distancia horizontal de 'p' a la ruta: a la cinta si ya está construida; si no, al
+        // waypoint anclado más cercano. Infinito si nada está anclado todavía.
+        private float SelectionDistance(Vector3 p)
+        {
+            float best = float.PositiveInfinity;
+            if (_built && TryGetSampledPoints(SelectionSpacing, out IReadOnlyList<Vector3> samples))
+            {
+                foreach (Vector3 s in samples) best = Mathf.Min(best, FlatDistance(p, s));
+                return best;
+            }
+
+            for (int i = 0; i < (waypoints?.Length ?? 0); i++)
+            {
+                RouteWaypoint wp = waypoints[i];
+                if (wp == null || (!Application.isEditor && !wp.IsAnchorReady())) continue;
+                best = Mathf.Min(best, FlatDistance(p, wp.transform.position));
+            }
+            return best;
+        }
+
+        // Muestreo para elegir la ruta activa: el mismo que el minimapa, para no rehacer la
+        // lista de puntos cada frame (TryGetSampledPoints la recalcula si cambia el espaciado).
+        private float SelectionSpacing => _sampledSpacing > 0f ? _sampledSpacing : 2f;
 
         /// <summary>Se dispara justo antes del auto-ocultamiento por proximidad al punto de encuentro (ver Update). Usado por DirectorAdviceController para la regla "llegada" (GDD Tabla 15/Anexo A).</summary>
         public event System.Action OnArrivalAtPuntoDeEncuentro;
@@ -165,8 +292,6 @@ namespace SIRMED.Gameplay.Environment
         private float _currentAlpha;
         private bool _isVisible;
         private bool _built;
-        private bool _shownByHotspot;
-        private bool _arrived;
         private readonly List<Vector3> _sampledPoints = new List<Vector3>();
         private float _sampledSpacing = -1f;
 
@@ -275,9 +400,10 @@ namespace SIRMED.Gameplay.Environment
             int required = Mathf.Min(minCheckpointsForArrival, CheckpointCount);
             if ((nearMeetingPoint || nearRouteEnd) && CheckpointsReached >= required)
             {
-                _arrived = true;
-                Debug.Log($"[EvacRoute] Llegada al punto de encuentro ({CheckpointsReached} checkpoints): se oculta la cinta.", this);
+                s_arrived = true;
+                Debug.Log($"[EvacRoute] Llegada al punto de encuentro de {name} ({CheckpointsReached} checkpoints): se oculta la cinta.", this);
                 OnArrivalAtPuntoDeEncuentro?.Invoke();
+                ArrivedAtAnyMeetingPoint?.Invoke(this);
                 Hide();
             }
         }
@@ -358,10 +484,16 @@ namespace SIRMED.Gameplay.Environment
             return true;
         }
 
+        /// <summary>
+        /// Pedido del hotspot de Ruta: deja visible la cinta en cualquier nivel hasta la llegada.
+        /// Vale para todas las rutas (se ve la activa), así que da lo mismo sobre cuál se llame.
+        /// </summary>
         public void Show()
         {
-            _shownByHotspot = true;
-            ShowInternal();
+            s_shownByHotspot = true;
+            s_arrived = false;
+            EvacuationRouteController active = Active;
+            if (active != null) active.ShowInternal();
         }
 
         private void ShowInternal()
@@ -373,7 +505,7 @@ namespace SIRMED.Gameplay.Environment
             }
             if (_isVisible) return;
             _isVisible = true;
-            Debug.Log($"[EvacRoute] Mostrando cinta (por hotspot: {_shownByHotspot}).", this);
+            Debug.Log($"[EvacRoute] Mostrando cinta {name} (por hotspot: {s_shownByHotspot}).", this);
             _meshRenderer.enabled = true;
             if (_fadeRoutine != null) StopCoroutine(_fadeRoutine);
             _fadeRoutine = StartCoroutine(FadeRoutine(_currentAlpha, 1f, fadeInDuration));
@@ -381,7 +513,12 @@ namespace SIRMED.Gameplay.Environment
 
         public void Hide()
         {
-            _shownByHotspot = false;
+            s_shownByHotspot = false;
+            HideInternal();
+        }
+
+        private void HideInternal()
+        {
             if (!_isVisible) return;
             _isVisible = false;
             if (_fadeRoutine != null) StopCoroutine(_fadeRoutine);
@@ -389,28 +526,29 @@ namespace SIRMED.Gameplay.Environment
         }
 
         // ── Visibilidad por nivel ─────────────────────────────────────────────────
+        // Se ve si el hotspot de Ruta la pidió (en cualquier nivel, también si la pidió antes de
+        // que la cinta estuviera construida) o si el nivel llegó a autoShowFromLevel; nunca tras
+        // llegar a un punto de encuentro (hasta bajar de nivel), y con varias rutas solo la activa.
         private void UpdateLevelVisibility()
         {
-            // El hotspot de Ruta la pidió antes de que la cinta estuviera construida (Show() no
-            // pudo mostrarla): mostrarla apenas se construya, en cualquier nivel.
-            if (_shownByHotspot && !_isVisible && !_arrived) ShowInternal();
-
-            if (autoShowFromLevel == RiskLevel.None) return;
-
-            RiskLevel level = RiskLevelIndicator.Instance != null
-                ? RiskLevelIndicator.Instance.CurrentLevel
-                : RiskLevel.None;
-            bool wanted = level != RiskLevel.None && level >= autoShowFromLevel;
-
-            if (!wanted)
+            bool levelWants = false;
+            if (autoShowFromLevel != RiskLevel.None)
             {
-                _arrived = false;
-                if (!_shownByHotspot) ResetCheckpoints(); // ruta abierta por hotspot en N1/N2: conservar progreso
-                if (_isVisible && !_shownByHotspot) Hide();
-                return;
+                RiskLevel level = RiskLevelIndicator.Instance != null
+                    ? RiskLevelIndicator.Instance.CurrentLevel
+                    : RiskLevel.None;
+                levelWants = level != RiskLevel.None && level >= autoShowFromLevel;
+
+                if (!levelWants)
+                {
+                    s_arrived = false;
+                    if (!s_shownByHotspot) ResetCheckpoints(); // ruta abierta por hotspot en N1/N2: conservar progreso
+                }
             }
 
-            if (!_isVisible && !_arrived) ShowInternal();
+            bool wanted = !s_arrived && (s_shownByHotspot || levelWants) && Active == this;
+            if (wanted && !_isVisible) ShowInternal();
+            else if (!wanted && _isVisible) HideInternal();
         }
 
         // ── Puntos de control ─────────────────────────────────────────────────────
@@ -437,6 +575,7 @@ namespace SIRMED.Gameplay.Environment
                 _checkpointHit[i] = true;
                 CheckpointsReached++;
                 OnCheckpointReached?.Invoke(CheckpointsReached, count);
+                AnyCheckpointReached?.Invoke(this, CheckpointsReached, count);
             }
         }
 
