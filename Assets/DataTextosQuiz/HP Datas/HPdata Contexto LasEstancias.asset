@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caccdb802bd40ce42a70a8fa140c26d2, type: 3}
+  m_Name: HPdata Contexto LasEstancias
+  m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Hotspots.HotspotData
+  title: "Contexto histórico — SAT Las Estancias"
+  description: "Informaci\xF3n del hotspot."
+  icon: {fileID: 0}
+  actionType: 4
+  cinematicClip: {fileID: 0}
+  cinematicUrl: 
+  cinematicAdvancesStage: 1
+  dialogueData: {fileID: 0}
+  siataSequence: {fileID: 0}
+  infoSlides:
+  - title: 
+    body: 
+    image: {fileID: 21300000, guid: 1b833b8daa634ef09dc0741d4190d8f7, type: 3}
+  - title: 
+    body: 
+    image: {fileID: 21300000, guid: 25341421030a4ed28c0da14f708ca6a9, type: 3}
+  - title: 
+    body: 
+    image: {fileID: 21300000, guid: 1d11089bd44f46019b5ad2aa5c5856ad, type: 3}
+  - title: 
+    body: 
+    image: {fileID: 21300000, guid: 20c91a1665e74558abc8a5015434c0cf, type: 3}
+  - title: 
+    body: 
+    image: {fileID: 21300000, guid: bf709d6e0eb5436d89b612b2bb867677, type: 3}
+  infoSlideAdvancesStage: 0
+  triggerRadius: 3
+  requiredStage: -1
+  headerImage: {fileID: 0}
+  riskLevel: 0
+  trivia: {fileID: 0}
+  triviaPool: []
+  advancesStageOnClose: 0
+  activatesEvacuationRoute: 0
+  activatesEndGame: 0
+  endGameRequiredStage: -1
+  isBlinking: 1
+  blinkSpeed: 1.5
