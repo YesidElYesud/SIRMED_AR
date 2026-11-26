@@ -606,7 +606,7 @@ MonoBehaviour:
   visualRoot: {fileID: 1588341508}
   animator: {fileID: 1588341507}
   fader: {fileID: 613754628}
-  heightOffset: -1.4
+  heightOffset: -2
   moveSpeed: 2.3
   arrivalThreshold: 0.05
   turnSpeed: 240
@@ -3772,6 +3772,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Perro
       objectReference: {fileID: 0}
+    - target: {fileID: 5347690344100660502, guid: df253ad9783f5fb4681a919eaa56b0e7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b2ea11680445ddc488c73bbac9092aaa, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3922,15 +3926,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4052286756018108675, guid: 91c3cf727cb649e4caa1f9553c79956e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.84
+      value: 1.47
       objectReference: {fileID: 0}
     - target: {fileID: 4052286756018108675, guid: 91c3cf727cb649e4caa1f9553c79956e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.84
+      value: 1.47
       objectReference: {fileID: 0}
     - target: {fileID: 4052286756018108675, guid: 91c3cf727cb649e4caa1f9553c79956e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.84
+      value: 1.47
       objectReference: {fileID: 0}
     - target: {fileID: 4052286756018108675, guid: 91c3cf727cb649e4caa1f9553c79956e, type: 3}
       propertyPath: m_LocalRotation.w
