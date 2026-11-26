@@ -185,6 +185,8 @@ namespace SIRMED.Managers
             [Range(0, 8)] public float riverLOD;
             [Range(0, 1)] public float riverFlatLerp;
             public float loftMulty;
+            public float loftCurveDepth;
+            [Range(1, 10)] public float loftCurvePower;
 
             // ── Transición ────────────────────────────────────────────────────────
             [Header("Transición")]
@@ -681,8 +683,11 @@ namespace SIRMED.Managers
             Vector2 startTiling = river.GetVector("_Tiling");
             float startLOD = river.GetFloat("_LOD");
             float startFlat_Lerp = river.GetFloat("_Flat_Lerp");
-            float startRiverLoftMulty = riverLoft.WidthMultiplier;
+
             float startTargetSpeedMultiplier = targetSpeedMultiplier;
+            float startRiverLoftMulty = riverLoft.WidthMultiplier;
+            float startLoftCurveDepth = riverLoft.CurveDepth;
+            float startLoftCurvePower = riverLoft.CurvePower;
 
             float elapsed = 0f;
             while (elapsed < target.transitionDuration)
@@ -696,8 +701,11 @@ namespace SIRMED.Managers
                 river.SetVector("_Tiling", Vector2.Lerp(startTiling, target.riverTiling, t));
                 river.SetFloat("_LOD", Mathf.Lerp(startLOD, target.riverLOD, t));
                 river.SetFloat("_Flat_Lerp", Mathf.Lerp(startFlat_Lerp, target.riverFlatLerp, t));
-                riverLoft.WidthMultiplier = Mathf.Lerp(startRiverLoftMulty, target.loftMulty, t);
+
                 targetSpeedMultiplier = Mathf.Lerp(startTargetSpeedMultiplier, target.riverTargetSpeed, t);
+                riverLoft.WidthMultiplier = Mathf.Lerp(startRiverLoftMulty, target.loftMulty, t);
+                riverLoft.CurveDepth = Mathf.Lerp(startLoftCurveDepth, target.loftCurveDepth, t);
+                riverLoft.CurvePower = Mathf.Lerp(startLoftCurvePower, target.loftCurvePower, t);
 
                 await UniTask.Yield(cancellationToken: _cts.Token);
             }

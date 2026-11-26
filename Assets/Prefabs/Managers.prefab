@@ -53,7 +53,7 @@ MonoBehaviour:
     ambientSkyColor: {r: 0.5, g: 0.7, b: 1, a: 1}
     ambientEquatorColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
     ambientGroundColor: {r: 0.2, g: 0.2, b: 0.1, a: 1}
-    sunColor: {r: 1, g: 0.95, b: 0.85, a: 1}
+    sunColor: {r: 1, g: 0.9490196, b: 0.8509804, a: 1}
     sunIntensity: 1
     enableFog: 0
     fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -64,7 +64,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.15
     characterRim: 0
-    cameraFarPlane: 50
+    cameraFarPlane: 55
     particlesToPlay: []
     particlesToStop:
     - particle: {fileID: 0}
@@ -88,6 +88,8 @@ MonoBehaviour:
     riverLOD: 5
     riverFlatLerp: 0
     loftMulty: 0.5
+    loftCurveDepth: 1
+    loftCurvePower: 10
     transitionDuration: 1
   - stageName: Etapa1
     ambientMode: 0
@@ -107,7 +109,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.1
     characterRim: 0
-    cameraFarPlane: 50
+    cameraFarPlane: 55
     particlesToPlay: []
     particlesToStop:
     - particle: {fileID: 0}
@@ -131,6 +133,8 @@ MonoBehaviour:
     riverLOD: 5
     riverFlatLerp: 0
     loftMulty: 0.5
+    loftCurveDepth: 1
+    loftCurvePower: 10
     transitionDuration: 1.5
   - stageName: Etapa2
     ambientMode: 0
@@ -139,8 +143,8 @@ MonoBehaviour:
     ambientSkyColor: {r: 0.5, g: 0.7, b: 1, a: 1}
     ambientEquatorColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
     ambientGroundColor: {r: 0.2, g: 0.2, b: 0.1, a: 1}
-    sunColor: {r: 0.9, g: 0.9, b: 0.95, a: 1}
-    sunIntensity: 0.7
+    sunColor: {r: 0.9490196, g: 0.9490196, b: 0.9490196, a: 1}
+    sunIntensity: 0.8
     enableFog: 1
     fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     fogDensity: 0.02
@@ -150,7 +154,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.15
     characterRim: 0.1
-    cameraFarPlane: 40
+    cameraFarPlane: 45
     particlesToPlay:
     - particle: {fileID: 0}
       rateOverTime: 216
@@ -178,6 +182,8 @@ MonoBehaviour:
     riverLOD: 5.1666665
     riverFlatLerp: 0.1
     loftMulty: 0.6666666
+    loftCurveDepth: 2
+    loftCurvePower: 10
     transitionDuration: 2
   - stageName: Etapa3
     ambientMode: 0
@@ -186,8 +192,8 @@ MonoBehaviour:
     ambientSkyColor: {r: 0.5, g: 0.7, b: 1, a: 1}
     ambientEquatorColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
     ambientGroundColor: {r: 0.2, g: 0.2, b: 0.1, a: 1}
-    sunColor: {r: 0.7, g: 0.75, b: 0.9, a: 1}
-    sunIntensity: 0.4
+    sunColor: {r: 0.7490196, g: 0.7456209, b: 0.69803923, a: 1}
+    sunIntensity: 0.6
     enableFog: 1
     fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     fogDensity: 0.04
@@ -197,7 +203,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.25
     characterRim: 0.25
-    cameraFarPlane: 30
+    cameraFarPlane: 35
     particlesToPlay:
     - particle: {fileID: 0}
       rateOverTime: 433
@@ -225,6 +231,8 @@ MonoBehaviour:
     riverLOD: 5.4
     riverFlatLerp: 0.25
     loftMulty: 0.8333333
+    loftCurveDepth: 3
+    loftCurvePower: 10
     transitionDuration: 1
   - stageName: Etapa4
     ambientMode: 0
@@ -233,8 +241,8 @@ MonoBehaviour:
     ambientSkyColor: {r: 0.5, g: 0.7, b: 1, a: 1}
     ambientEquatorColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
     ambientGroundColor: {r: 0.2, g: 0.2, b: 0.1, a: 1}
-    sunColor: {r: 0.5, g: 0.55, b: 0.7, a: 1}
-    sunIntensity: 0.25
+    sunColor: {r: 0.54901963, g: 0.54444444, b: 0.49411768, a: 1}
+    sunIntensity: 0.4
     enableFog: 1
     fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     fogDensity: 0.1
@@ -244,7 +252,7 @@ MonoBehaviour:
     ppFadeDuration: 1
     characterFill: 0.4
     characterRim: 0.5
-    cameraFarPlane: 20
+    cameraFarPlane: 25
     particlesToPlay:
     - particle: {fileID: 0}
       rateOverTime: 650
@@ -272,6 +280,8 @@ MonoBehaviour:
     riverLOD: 5.55
     riverFlatLerp: 0.5
     loftMulty: 1
+    loftCurveDepth: 4
+    loftCurvePower: 10
     transitionDuration: 0.8
   sunLight: {fileID: 0}
   clouds: {fileID: 2100000, guid: 4c8faad00fb9c9745af321ee770f031e, type: 2}

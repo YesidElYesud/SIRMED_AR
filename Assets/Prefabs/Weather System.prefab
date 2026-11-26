@@ -10242,9 +10242,11 @@ MonoBehaviour:
   - m_IndexUnit: 0
     m_DefaultValue: 2
     m_DataPoints: []
-  m_WidthMultiplier: 1
   m_Material: {fileID: 2100000, guid: 53764f87e0caf24468c536c1471995e3, type: 2}
   m_Spline: {fileID: 7310026326597826738}
+  m_WidthMultiplier: 1
+  m_CurveDepth: 2
+  m_CurvePower: 10
   m_SegmentsPerMeter: 1
   m_WidthSegments: 15
   m_Mesh: {fileID: 0}

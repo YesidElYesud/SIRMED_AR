@@ -34,6 +34,12 @@ namespace Unity.Splines.Examples
             }
         }
 
+        [SerializeField]
+        Material m_Material;
+
+        [SerializeField]
+        SplineContainer m_Spline;
+
         [SerializeField, Min(0f)]
         float m_WidthMultiplier = 1f;
 
@@ -47,11 +53,36 @@ namespace Unity.Splines.Examples
             }
         }
 
-        [SerializeField]
-        Material m_Material;
+        [SerializeField, Min(0f)]
+        float m_CurveDepth = 0f;
 
-        [SerializeField]
-        SplineContainer m_Spline;
+        public float CurveDepth
+        {
+            get => m_CurveDepth;
+            set
+            {
+                m_CurveDepth = Mathf.Max(0f, value);
+                m_LoftRoadsRequested = true;
+            }
+        }
+
+        [SerializeField, Range(1f, 10f)]
+        float m_CurvePower = 2f;
+
+        public float CurvePower
+        {
+            get => m_CurvePower;
+            set
+            {
+                value = Mathf.Clamp(value, 1f, 10f);
+
+                if (Mathf.Approximately(m_CurvePower, value))
+                    return;
+
+                m_CurvePower = value;
+                m_LoftRoadsRequested = true;
+            }
+        }
 
         public SplineContainer Container
         {
@@ -117,7 +148,7 @@ namespace Unity.Splines.Examples
         public int SegmentsPerMeter => Mathf.Min(10, Mathf.Max(1, m_SegmentsPerMeter));
 
         List<Vector3> m_Positions = new List<Vector3>();
-        List<Vector3> m_Normals = new List<Vector3>();
+        //List<Vector3> m_Normals = new List<Vector3>();
         List<Vector2> m_Textures = new List<Vector2>();
         List<int> m_Indices = new List<int>();
         bool m_LoftRoadsRequested = false;
@@ -258,11 +289,11 @@ namespace Unity.Splines.Examples
         {
             LoftMesh.Clear();
             m_Positions.Clear();
-            m_Normals.Clear();
+            //m_Normals.Clear();
             m_Textures.Clear();
             m_Indices.Clear();
             m_Positions.Capacity = 0;
-            m_Normals.Capacity = 0;
+            //m_Normals.Capacity = 0;
             m_Textures.Capacity = 0;
             m_Indices.Capacity = 0;
 
@@ -270,10 +301,14 @@ namespace Unity.Splines.Examples
                 Loft(LoftSplines[i], i);
 
             LoftMesh.SetVertices(m_Positions);
-            LoftMesh.SetNormals(m_Normals);
+            //LoftMesh.SetNormals(m_Normals);
             LoftMesh.SetUVs(0, m_Textures);
             LoftMesh.subMeshCount = 1;
             LoftMesh.SetIndices(m_Indices, MeshTopology.Triangles, 0);
+
+            LoftMesh.RecalculateNormals();
+            LoftMesh.RecalculateTangents();
+
             LoftMesh.UploadMeshData(false);
 
             GetComponent<MeshFilter>().sharedMesh = m_Mesh;
@@ -304,7 +339,7 @@ namespace Unity.Splines.Examples
             var prevVertexCount = m_Positions.Count;
 
             m_Positions.Capacity += vertexCount;
-            m_Normals.Capacity += vertexCount;
+            //m_Normals.Capacity += vertexCount;
             m_Textures.Capacity += vertexCount;
             m_Indices.Capacity += triangleCount;
 
@@ -359,11 +394,15 @@ namespace Unity.Splines.Examples
                 for (int j = 0; j <= widthSegments; j++)
                 {
                     float u = (float)j / widthSegments;
+                    float x = u * 2f - 1f;
+                    //float curve = 1f - math.sqrt(math.max(0f, 1f - x * x));
+                    float curve = math.pow(math.abs(x), m_CurvePower);
 
                     var vertex = math.lerp(left, right, u);
+                    vertex -= up * (curve * m_CurveDepth);
 
                     m_Positions.Add(vertex);
-                    m_Normals.Add(up);
+                    //m_Normals.Add(up);
                     m_Textures.Add(new Vector2(u, t * m_TextureScale));
                 }
 
