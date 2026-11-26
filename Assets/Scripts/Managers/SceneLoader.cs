@@ -14,7 +14,7 @@ public class SceneLoader : MonoBehaviour
     {
         btnInitial.gameObject.SetActive(false);
 
-        for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++)
+        for (int i = 2; i < SceneManager.sceneCountInBuildSettings; i++)
         {
             btn = Instantiate(btnInitial, btnInitial.transform.parent);
 

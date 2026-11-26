@@ -6,8 +6,23 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Geovisor.unity
+    guid: 4aeea8081c65ad34c81fac5d8fdbd903
+  - enabled: 1
     path: Assets/Scenes/Loader.unity
     guid: 055449ecd62091b479c9c1f1bca42de1
+  - enabled: 1
+    path: Assets/Scenes/YesidCasa_CoreTest.unity
+    guid: 55b98dabc4beed547945cb3581ee2fa7
+  - enabled: 1
+    path: Assets/Scenes/AzulCasa.unity
+    guid: 89e0265697f942caaf6d5ac6e59c402d
+  - enabled: 1
+    path: Assets/Scenes/UrregoCasa_CoreTest.unity
+    guid: c076cf0e36dfea04c83d1aa2104932b7
+  - enabled: 1
+    path: Assets/Scenes/Legacy/HotspotSurvey.unity
+    guid: eb432f203391d89e860ef8de232bd122
   - enabled: 1
     path: Assets/Scenes/SAT_PlazaLibertad.unity
     guid: 733b8db046e147bf8afb8afacc070694
@@ -44,21 +59,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SAT_ManzanaresAltavista.unity
     guid: ccfbd03540814d9eae9619b6fa7ff4de
-  - enabled: 1
-    path: Assets/Scenes/YesidCasa_CoreTest.unity
-    guid: 55b98dabc4beed547945cb3581ee2fa7
-  - enabled: 1
-    path: Assets/Scenes/UrregoCasa_CoreTest.unity
-    guid: c076cf0e36dfea04c83d1aa2104932b7
-  - enabled: 1
-    path: Assets/Scenes/AzulCasa.unity
-    guid: 89e0265697f942caaf6d5ac6e59c402d
-  - enabled: 0
-    path: Assets/Scenes/Legacy/HotspotSurvey.unity
-    guid: eb432f203391d89e860ef8de232bd122
-  - enabled: 0
-    path: Assets/Scenes/Tests/Geovisor Test/GeovisorTest.unity
-    guid: 4aeea8081c65ad34c81fac5d8fdbd903
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 9ef37b6f075f1007a8c8ed48d2f5770b, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: c93f3394cd008cb95a529f7dc76d60f0, type: 2}
