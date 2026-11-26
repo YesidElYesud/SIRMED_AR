@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caccdb802bd40ce42a70a8fa140c26d2, type: 3}
   m_Name: HPdata Ayuda Carlos
   m_EditorClassIdentifier: Assembly-CSharp::SIRMED.Gameplay.Hotspots.HotspotData
-  title: "Vecino que se acerca a la quebrada"
+  title: Vecino que se acerca a la quebrada
   description: 'Ayuda comunitaria. (Texto temporal: requiere NpcDialoguePanel en
     la escena.)'
   descriptionByLevel: []
@@ -28,9 +28,15 @@ MonoBehaviour:
   infoSlides: []
   infoSlideAdvancesStage: 1
   triggerRadius: 3
-  requiredStage: 3
+  requiredStage: 1
   headerImage: {fileID: 0}
   riskLevel: 0
+  useInfoCard: 0
+  infoCard:
+    title: 
+    intro: 
+    background: {fileID: 0}
+    rows: []
   trivia: {fileID: 0}
   triviaPool: []
   triviaAfterContent: 0
